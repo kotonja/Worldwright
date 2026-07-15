@@ -6,3 +6,5 @@ pnpm-lock.yaml
 # Deterministic artifacts have their own generators and byte-for-byte checks.
 packages/worldspec/schema/*.json
 packages/worldspec/fixtures/**/*.json
+packages/roblox-compiler/schema/*.json
+packages/roblox-compiler/fixtures/**/*.json

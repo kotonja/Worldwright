@@ -1,0 +1,161 @@
+{
+  "compilerVersion": "0.1.0",
+  "operations": [
+    {
+      "after": {
+        "attributes": {
+          "WorldwrightCompilerVersion": "0.1.0",
+          "WorldwrightEntityId": "plaza-floor",
+          "WorldwrightEntityKind": "object",
+          "WorldwrightManaged": true,
+          "WorldwrightProjectId": "project-primitive-courtyard"
+        },
+        "className": "Part",
+        "entityKind": "object",
+        "id": "plaza-floor",
+        "name": "Granite Plaza Floor",
+        "parentId": "courtyard-floor",
+        "properties": {
+          "anchored": true,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true,
+          "color": {
+            "b": 124,
+            "g": 118,
+            "r": 112
+          },
+          "material": "Granite",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotationEulerDegreesXYZ": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "shape": "Block",
+          "size": {
+            "x": 48,
+            "y": 1,
+            "z": 48
+          },
+          "transparency": 0
+        }
+      },
+      "before": {
+        "attributes": {
+          "WorldwrightCompilerVersion": "0.1.0",
+          "WorldwrightEntityId": "plaza-floor",
+          "WorldwrightEntityKind": "object",
+          "WorldwrightManaged": true,
+          "WorldwrightProjectId": "project-primitive-courtyard"
+        },
+        "className": "Part",
+        "entityKind": "object",
+        "id": "plaza-floor",
+        "name": "Legacy Concrete Plaza Floor",
+        "parentId": "courtyard-floor",
+        "properties": {
+          "anchored": true,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true,
+          "color": {
+            "b": 124,
+            "g": 118,
+            "r": 112
+          },
+          "material": "Concrete",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotationEulerDegreesXYZ": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "shape": "Block",
+          "size": {
+            "x": 48,
+            "y": 1,
+            "z": 48
+          },
+          "transparency": 0
+        }
+      },
+      "id": "update:plaza-floor",
+      "type": "update"
+    },
+    {
+      "before": {
+        "attributes": {
+          "WorldwrightCompilerVersion": "0.1.0",
+          "WorldwrightEntityId": "obsolete-courtyard-marker",
+          "WorldwrightEntityKind": "object",
+          "WorldwrightManaged": true,
+          "WorldwrightProjectId": "project-primitive-courtyard"
+        },
+        "className": "Part",
+        "entityKind": "object",
+        "id": "obsolete-courtyard-marker",
+        "name": "Obsolete Courtyard Marker",
+        "parentId": "courtyard-details",
+        "properties": {
+          "anchored": true,
+          "canCollide": false,
+          "canQuery": true,
+          "canTouch": false,
+          "castShadow": false,
+          "color": {
+            "b": 48,
+            "g": 176,
+            "r": 255
+          },
+          "material": "Neon",
+          "position": {
+            "x": 8,
+            "y": 1,
+            "z": 8
+          },
+          "rotationEulerDegreesXYZ": {
+            "x": 15,
+            "y": 30,
+            "z": 45
+          },
+          "shape": "Ball",
+          "size": {
+            "x": 3,
+            "y": 3,
+            "z": 3
+          },
+          "transparency": 0.1
+        }
+      },
+      "id": "delete:obsolete-courtyard-marker",
+      "type": "delete"
+    }
+  ],
+  "preconditions": {
+    "baseSnapshotHash": "c485c373ab134eaf0a56b6f145eb770e063517250cc3be76dafcee1904837ab8",
+    "desiredManifestHash": "6253aa8c404642f93e7cc472dc695b184c7d60072ab40d649dee78198d14ac90",
+    "projectId": "project-primitive-courtyard",
+    "resultSnapshotHash": "f1315cb0708bca7b0b433c395830f9dfc92f2dd8583ce83386c4fc8cab8b424a",
+    "target": {
+      "service": "Workspace"
+    }
+  },
+  "schemaVersion": "0.1.0",
+  "summary": {
+    "creates": 0,
+    "deletes": 1,
+    "total": 2,
+    "updates": 1
+  }
+}

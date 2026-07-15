@@ -1,0 +1,465 @@
+{
+  "$id": "urn:worldwright:roblox-directive:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "mode": {
+          "const": "container",
+          "type": "string"
+        },
+        "className": {
+          "anyOf": [
+            {
+              "const": "Folder",
+              "type": "string"
+            },
+            {
+              "const": "Model",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "mode",
+        "className"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "mode": {
+          "const": "primitive",
+          "type": "string"
+        },
+        "material": {
+          "anyOf": [
+            {
+              "const": "SmoothPlastic",
+              "type": "string"
+            },
+            {
+              "const": "Concrete",
+              "type": "string"
+            },
+            {
+              "const": "Brick",
+              "type": "string"
+            },
+            {
+              "const": "Wood",
+              "type": "string"
+            },
+            {
+              "const": "WoodPlanks",
+              "type": "string"
+            },
+            {
+              "const": "Slate",
+              "type": "string"
+            },
+            {
+              "const": "Cobblestone",
+              "type": "string"
+            },
+            {
+              "const": "Metal",
+              "type": "string"
+            },
+            {
+              "const": "Glass",
+              "type": "string"
+            },
+            {
+              "const": "Neon",
+              "type": "string"
+            },
+            {
+              "const": "Grass",
+              "type": "string"
+            },
+            {
+              "const": "Sand",
+              "type": "string"
+            },
+            {
+              "const": "Rock",
+              "type": "string"
+            },
+            {
+              "const": "Marble",
+              "type": "string"
+            },
+            {
+              "const": "Granite",
+              "type": "string"
+            }
+          ]
+        },
+        "color": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "r": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            },
+            "g": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            },
+            "b": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "r",
+            "g",
+            "b"
+          ]
+        },
+        "transparency": {
+          "minimum": 0,
+          "maximum": 1,
+          "type": "number"
+        },
+        "canCollide": {
+          "type": "boolean"
+        },
+        "canQuery": {
+          "type": "boolean"
+        },
+        "canTouch": {
+          "type": "boolean"
+        },
+        "castShadow": {
+          "type": "boolean"
+        },
+        "className": {
+          "const": "Part",
+          "type": "string"
+        },
+        "shape": {
+          "anyOf": [
+            {
+              "const": "Block",
+              "type": "string"
+            },
+            {
+              "const": "Ball",
+              "type": "string"
+            },
+            {
+              "const": "Cylinder",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "mode",
+        "material",
+        "color",
+        "transparency",
+        "canCollide",
+        "canQuery",
+        "canTouch",
+        "castShadow",
+        "className",
+        "shape"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "mode": {
+          "const": "primitive",
+          "type": "string"
+        },
+        "material": {
+          "anyOf": [
+            {
+              "const": "SmoothPlastic",
+              "type": "string"
+            },
+            {
+              "const": "Concrete",
+              "type": "string"
+            },
+            {
+              "const": "Brick",
+              "type": "string"
+            },
+            {
+              "const": "Wood",
+              "type": "string"
+            },
+            {
+              "const": "WoodPlanks",
+              "type": "string"
+            },
+            {
+              "const": "Slate",
+              "type": "string"
+            },
+            {
+              "const": "Cobblestone",
+              "type": "string"
+            },
+            {
+              "const": "Metal",
+              "type": "string"
+            },
+            {
+              "const": "Glass",
+              "type": "string"
+            },
+            {
+              "const": "Neon",
+              "type": "string"
+            },
+            {
+              "const": "Grass",
+              "type": "string"
+            },
+            {
+              "const": "Sand",
+              "type": "string"
+            },
+            {
+              "const": "Rock",
+              "type": "string"
+            },
+            {
+              "const": "Marble",
+              "type": "string"
+            },
+            {
+              "const": "Granite",
+              "type": "string"
+            }
+          ]
+        },
+        "color": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "r": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            },
+            "g": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            },
+            "b": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "r",
+            "g",
+            "b"
+          ]
+        },
+        "transparency": {
+          "minimum": 0,
+          "maximum": 1,
+          "type": "number"
+        },
+        "canCollide": {
+          "type": "boolean"
+        },
+        "canQuery": {
+          "type": "boolean"
+        },
+        "canTouch": {
+          "type": "boolean"
+        },
+        "castShadow": {
+          "type": "boolean"
+        },
+        "className": {
+          "const": "WedgePart",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "mode",
+        "material",
+        "color",
+        "transparency",
+        "canCollide",
+        "canQuery",
+        "canTouch",
+        "castShadow",
+        "className"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "mode": {
+          "const": "primitive",
+          "type": "string"
+        },
+        "material": {
+          "anyOf": [
+            {
+              "const": "SmoothPlastic",
+              "type": "string"
+            },
+            {
+              "const": "Concrete",
+              "type": "string"
+            },
+            {
+              "const": "Brick",
+              "type": "string"
+            },
+            {
+              "const": "Wood",
+              "type": "string"
+            },
+            {
+              "const": "WoodPlanks",
+              "type": "string"
+            },
+            {
+              "const": "Slate",
+              "type": "string"
+            },
+            {
+              "const": "Cobblestone",
+              "type": "string"
+            },
+            {
+              "const": "Metal",
+              "type": "string"
+            },
+            {
+              "const": "Glass",
+              "type": "string"
+            },
+            {
+              "const": "Neon",
+              "type": "string"
+            },
+            {
+              "const": "Grass",
+              "type": "string"
+            },
+            {
+              "const": "Sand",
+              "type": "string"
+            },
+            {
+              "const": "Rock",
+              "type": "string"
+            },
+            {
+              "const": "Marble",
+              "type": "string"
+            },
+            {
+              "const": "Granite",
+              "type": "string"
+            }
+          ]
+        },
+        "color": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "r": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            },
+            "g": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            },
+            "b": {
+              "minimum": 0,
+              "maximum": 255,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "r",
+            "g",
+            "b"
+          ]
+        },
+        "transparency": {
+          "minimum": 0,
+          "maximum": 1,
+          "type": "number"
+        },
+        "canCollide": {
+          "type": "boolean"
+        },
+        "canQuery": {
+          "type": "boolean"
+        },
+        "canTouch": {
+          "type": "boolean"
+        },
+        "castShadow": {
+          "type": "boolean"
+        },
+        "className": {
+          "const": "CornerWedgePart",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "mode",
+        "material",
+        "color",
+        "transparency",
+        "canCollide",
+        "canQuery",
+        "canTouch",
+        "castShadow",
+        "className"
+      ]
+    }
+  ]
+}

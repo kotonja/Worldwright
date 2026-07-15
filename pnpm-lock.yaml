@@ -27,6 +27,28 @@ importers:
         specifier: 8.38.0
         version: 8.38.0(eslint@9.31.0)(typescript@5.8.3)
 
+  packages/roblox-compiler:
+    dependencies:
+      '@sinclair/typebox':
+        specifier: 0.34.38
+        version: 0.34.38
+      '@worldwright/worldspec':
+        specifier: workspace:*
+        version: link:../worldspec
+      ajv:
+        specifier: 8.17.1
+        version: 8.17.1
+    devDependencies:
+      '@types/node':
+        specifier: 22.15.30
+        version: 22.15.30
+      tsx:
+        specifier: 4.20.3
+        version: 4.20.3
+      vitest:
+        specifier: 3.2.4
+        version: 3.2.4(@types/node@22.15.30)(tsx@4.20.3)
+
   packages/worldspec:
     dependencies:
       '@sinclair/typebox':

@@ -1,0 +1,1170 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "id": "project-primitive-courtyard",
+    "name": "Primitive Courtyard",
+    "description": "A deterministic Roblox-native architectural blockout used to exercise the Milestone 1 compiler.",
+    "seed": 1701,
+    "units": "studs",
+    "upAxis": "Y"
+  },
+  "intent": {
+    "summary": "Compile a small editable courtyard from containers and anchored Roblox primitives.",
+    "mustHave": [
+      "A bounded plaza with four walls",
+      "A central fountain",
+      "A readable entrance assembled from primitive parts"
+    ],
+    "mustNotHave": [
+      "Scripts or executable behavior",
+      "External assets",
+      "Unanchored geometry"
+    ],
+    "preferences": [
+      "Keep the blockout deliberately simple",
+      "Use contrasting collision and query settings"
+    ]
+  },
+  "references": [
+    {
+      "id": "reference-courtyard-brief",
+      "kind": "text",
+      "role": "Authored primitive-blockout dimensions and material brief",
+      "influence": 1,
+      "notes": "The fixture encodes only locally authored dimensions and contains no private reference content."
+    }
+  ],
+  "style": {
+    "architecture": [
+      "compact civic courtyard",
+      "primitive architectural blockout"
+    ],
+    "shapeLanguage": [
+      "orthogonal enclosure",
+      "low central cylinder",
+      "single sloped roof accent"
+    ],
+    "materialFamilies": [
+      "granite paving",
+      "warm brick",
+      "dark metal",
+      "clear glass"
+    ],
+    "palette": [
+      "warm red",
+      "cool gray",
+      "muted blue",
+      "amber accent"
+    ],
+    "detailDensity": "low",
+    "aging": "pristine",
+    "lighting": [
+      "neutral daylight"
+    ],
+    "exclusions": [
+      "mesh assets",
+      "surface textures",
+      "scripted effects"
+    ]
+  },
+  "rootEntityId": "courtyard-world",
+  "entities": [
+    {
+      "id": "courtyard-world",
+      "kind": "world",
+      "name": "Primitive Courtyard World",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 1,
+        "notes": "The root provides a stable Workspace organization boundary."
+      },
+      "tags": [
+        "compiler-fixture",
+        "root"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "container",
+          "className": "Folder"
+        }
+      }
+    },
+    {
+      "id": "courtyard-region",
+      "kind": "region",
+      "name": "Courtyard Region",
+      "parentId": "courtyard-world",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.98,
+        "notes": "The authored brief establishes the courtyard extent."
+      },
+      "transform": {
+        "position": {
+          "x": 250,
+          "y": 40,
+          "z": -125
+        },
+        "rotationEulerDegrees": {
+          "x": 10,
+          "y": 35,
+          "z": 0
+        },
+        "scale": {
+          "x": 2,
+          "y": 1.5,
+          "z": 0.75
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 64,
+          "y": 24,
+          "z": 64
+        }
+      },
+      "tags": [
+        "organizational-transform",
+        "region"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "container",
+          "className": "Model"
+        }
+      }
+    },
+    {
+      "id": "courtyard-structure",
+      "kind": "structure",
+      "name": "Courtyard Blockout",
+      "parentId": "courtyard-region",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.94,
+        "notes": "The exact blockout composition is invented from the authored requirements."
+      },
+      "transform": {
+        "position": {
+          "x": -80,
+          "y": 16,
+          "z": 200
+        },
+        "rotationEulerDegrees": {
+          "x": -5,
+          "y": -20,
+          "z": 3
+        },
+        "scale": {
+          "x": 0.6,
+          "y": 2,
+          "z": 1.25
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 56,
+          "y": 18,
+          "z": 56
+        }
+      },
+      "tags": [
+        "blockout",
+        "organizational-transform"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "container",
+          "className": "Model"
+        }
+      }
+    },
+    {
+      "id": "courtyard-floor",
+      "kind": "floor",
+      "name": "Courtyard Floor Container",
+      "parentId": "courtyard-structure",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.96,
+        "notes": "The floor container separates organizational ownership from the plaza primitive."
+      },
+      "tags": [
+        "floor",
+        "organizational-container"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "container",
+          "className": "Folder"
+        }
+      }
+    },
+    {
+      "id": "architectural-shell",
+      "kind": "structure",
+      "name": "Architectural Shell",
+      "parentId": "courtyard-structure",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.92
+      },
+      "transform": {
+        "position": {
+          "x": 900,
+          "y": -60,
+          "z": 450
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 90,
+          "z": 12
+        },
+        "scale": {
+          "x": 3,
+          "y": 0.5,
+          "z": 2
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 52,
+          "y": 16,
+          "z": 52
+        }
+      },
+      "tags": [
+        "nested-container",
+        "organizational-transform"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "container",
+          "className": "Folder"
+        }
+      }
+    },
+    {
+      "id": "courtyard-details",
+      "kind": "room",
+      "name": "Courtyard Details",
+      "parentId": "courtyard-floor",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": {
+          "x": -300,
+          "y": 75,
+          "z": -600
+        },
+        "rotationEulerDegrees": {
+          "x": 25,
+          "y": 0,
+          "z": -15
+        },
+        "scale": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.5
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 20,
+          "y": 12,
+          "z": 20
+        }
+      },
+      "tags": [
+        "nested-container",
+        "organizational-transform"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "container",
+          "className": "Folder"
+        }
+      }
+    },
+    {
+      "id": "plaza-floor",
+      "kind": "object",
+      "name": "Granite Plaza Floor",
+      "parentId": "courtyard-floor",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 1
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 48,
+          "y": 1,
+          "z": 48
+        }
+      },
+      "tags": [
+        "floor",
+        "primitive"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Block",
+          "material": "Granite",
+          "color": {
+            "r": 112,
+            "g": 118,
+            "b": 124
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "north-wall",
+      "kind": "object",
+      "name": "North Brick Wall",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.99
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 5,
+          "z": -24
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 48,
+          "y": 10,
+          "z": 2
+        }
+      },
+      "tags": [
+        "enclosure",
+        "wall"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Block",
+          "material": "Brick",
+          "color": {
+            "r": 156,
+            "g": 88,
+            "b": 66
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "east-wall",
+      "kind": "object",
+      "name": "East Brick Wall",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.97
+      },
+      "transform": {
+        "position": {
+          "x": 24,
+          "y": 5,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 90,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.9,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 48,
+          "y": 10,
+          "z": 2
+        }
+      },
+      "tags": [
+        "enclosure",
+        "wall"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Block",
+          "material": "Brick",
+          "color": {
+            "r": 168,
+            "g": 96,
+            "b": 72
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "south-wall",
+      "kind": "object",
+      "name": "South Brick Wall",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.97
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 5,
+          "z": 24
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 180,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 48,
+          "y": 10,
+          "z": 2
+        }
+      },
+      "tags": [
+        "enclosure",
+        "wall"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Block",
+          "material": "Brick",
+          "color": {
+            "r": 148,
+            "g": 82,
+            "b": 62
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "west-wall",
+      "kind": "object",
+      "name": "West Brick Wall",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.95
+      },
+      "transform": {
+        "position": {
+          "x": -24,
+          "y": 5,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": -90,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1.1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 48,
+          "y": 10,
+          "z": 2
+        }
+      },
+      "tags": [
+        "enclosure",
+        "wall"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Block",
+          "material": "Brick",
+          "color": {
+            "r": 160,
+            "g": 92,
+            "b": 68
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "entry-left-pier",
+      "kind": "object",
+      "name": "Entry Left Pier",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": {
+          "x": -5,
+          "y": 4,
+          "z": 22.5
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 4,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 2,
+          "y": 8,
+          "z": 3
+        }
+      },
+      "tags": [
+        "entrance",
+        "pier"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Block",
+          "material": "Marble",
+          "color": {
+            "r": 214,
+            "g": 207,
+            "b": 194
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "entry-right-pier",
+      "kind": "object",
+      "name": "Entry Right Pier",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": {
+          "x": 5,
+          "y": 4,
+          "z": 22.5
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": -4,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 2,
+          "y": 8,
+          "z": 3
+        }
+      },
+      "tags": [
+        "entrance",
+        "pier"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Block",
+          "material": "Marble",
+          "color": {
+            "r": 214,
+            "g": 207,
+            "b": 194
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "entry-lintel",
+      "kind": "object",
+      "name": "Entry Wood Lintel",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.88
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 8.5,
+          "z": 22.5
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 2
+        },
+        "scale": {
+          "x": 1.2,
+          "y": 0.75,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 12,
+          "y": 2,
+          "z": 3
+        }
+      },
+      "tags": [
+        "entrance",
+        "lintel"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Block",
+          "material": "WoodPlanks",
+          "color": {
+            "r": 112,
+            "g": 78,
+            "b": 48
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": false,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "entry-roof-ramp",
+      "kind": "object",
+      "name": "Entry Slate Roof Ramp",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.86
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 10.5,
+          "z": 22
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 180,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1.25,
+          "z": 0.8
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 14,
+          "y": 3,
+          "z": 6
+        }
+      },
+      "tags": [
+        "entrance",
+        "roof"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "WedgePart",
+          "material": "Slate",
+          "color": {
+            "r": 64,
+            "g": 70,
+            "b": 82
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "northwest-buttress",
+      "kind": "object",
+      "name": "Northwest Corner Buttress",
+      "parentId": "architectural-shell",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.84
+      },
+      "transform": {
+        "position": {
+          "x": -23,
+          "y": 4,
+          "z": -23
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 45,
+          "z": 0
+        },
+        "scale": {
+          "x": 1.1,
+          "y": 1.5,
+          "z": 0.9
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 5,
+          "y": 6,
+          "z": 5
+        }
+      },
+      "tags": [
+        "buttress",
+        "corner"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "CornerWedgePart",
+          "material": "Concrete",
+          "color": {
+            "r": 144,
+            "g": 146,
+            "b": 142
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": false,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "fountain-basin",
+      "kind": "object",
+      "name": "Cobblestone Fountain Basin",
+      "parentId": "courtyard-details",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.96
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 1.25,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 90
+        },
+        "scale": {
+          "x": 1.1,
+          "y": 1,
+          "z": 1.1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 2.5,
+          "y": 12,
+          "z": 12
+        }
+      },
+      "tags": [
+        "fountain",
+        "water-feature"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Cylinder",
+          "material": "Cobblestone",
+          "color": {
+            "r": 104,
+            "g": 108,
+            "b": 110
+          },
+          "transparency": 0,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "fountain-water",
+      "kind": "object",
+      "name": "Glass Fountain Water",
+      "parentId": "courtyard-details",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.92
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 2.35,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 90
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 0.5,
+          "y": 10,
+          "z": 10
+        }
+      },
+      "tags": [
+        "fountain",
+        "non-collidable"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Cylinder",
+          "material": "Glass",
+          "color": {
+            "r": 92,
+            "g": 170,
+            "b": 214
+          },
+          "transparency": 0.45,
+          "canCollide": false,
+          "canQuery": false,
+          "canTouch": false,
+          "castShadow": false
+        }
+      }
+    },
+    {
+      "id": "fountain-column",
+      "kind": "landmark",
+      "name": "Metal Fountain Column",
+      "parentId": "courtyard-details",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.89
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 4.5,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 90
+        },
+        "scale": {
+          "x": 1,
+          "y": 0.8,
+          "z": 0.8
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 6,
+          "y": 2,
+          "z": 2
+        }
+      },
+      "tags": [
+        "fountain",
+        "touchable"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Cylinder",
+          "material": "Metal",
+          "color": {
+            "r": 74,
+            "g": 78,
+            "b": 84
+          },
+          "transparency": 0,
+          "canCollide": false,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true
+        }
+      }
+    },
+    {
+      "id": "courtyard-guide-orb",
+      "kind": "landmark",
+      "name": "Amber Guide Orb",
+      "parentId": "courtyard-details",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "reference-courtyard-brief"
+        ],
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 9,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 15,
+          "y": 30,
+          "z": 45
+        },
+        "scale": {
+          "x": 0.75,
+          "y": 0.75,
+          "z": 0.75
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 4,
+          "y": 4,
+          "z": 4
+        }
+      },
+      "tags": [
+        "accent",
+        "queryable"
+      ],
+      "attributes": {
+        "worldwright.roblox": {
+          "schemaVersion": "0.1.0",
+          "mode": "primitive",
+          "className": "Part",
+          "shape": "Ball",
+          "material": "Neon",
+          "color": {
+            "r": 255,
+            "g": 176,
+            "b": 48
+          },
+          "transparency": 0.1,
+          "canCollide": false,
+          "canQuery": true,
+          "canTouch": false,
+          "castShadow": false
+        }
+      }
+    }
+  ],
+  "relationships": [],
+  "constraints": [],
+  "locks": [],
+  "budgets": {
+    "targetDevices": [
+      "desktop",
+      "mobile"
+    ],
+    "qualityTier": "draft",
+    "streaming": "disabled",
+    "limits": {
+      "instances": 24,
+      "triangles": 50000,
+      "textureMemoryMegabytes": 32
+    }
+  }
+}

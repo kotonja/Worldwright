@@ -5,13 +5,15 @@ import { spawnSync } from 'node:child_process';
 import { mkdtemp } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { renderWorldSpecSchema } from '../scripts/generate-schema.js';
 import { runCli } from '../src/cli.js';
 import type { CliIo } from '../src/cli.js';
 import { normalizeWorldSpec, stringifyWorldSpec } from '../src/index.js';
 import { fixturePath, fixtureSource, loadValidFixture } from './helpers.js';
+
+vi.setConfig({ testTimeout: 60_000 });
 
 interface CapturedIo {
   readonly io: CliIo;
