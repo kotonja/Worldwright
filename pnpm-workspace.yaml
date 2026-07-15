@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+
+# Keep script stdout owned by the invoked tool (not pnpm lifecycle banners),
+# which makes `pnpm worldspec ... --json` safe for machine consumers.
+reporter: silent
+
+allowBuilds:
+  esbuild: true

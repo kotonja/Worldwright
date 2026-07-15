@@ -1,0 +1,31 @@
+{
+  "name": "worldwright",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Repository foundation for the Worldwright AI world architect.",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "pnpm --recursive build",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm schema:check && pnpm build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "schema:check": "pnpm --filter @worldwright/worldspec schema:check",
+    "schema:generate": "pnpm --filter @worldwright/worldspec schema:generate",
+    "test": "pnpm --recursive test",
+    "typecheck": "pnpm --recursive typecheck",
+    "worldspec": "tsx packages/worldspec/src/cli.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.31.0",
+    "eslint": "9.31.0",
+    "prettier": "3.6.2",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.38.0"
+  }
+}
