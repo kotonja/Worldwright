@@ -181,7 +181,7 @@ export interface RollbackFailed {
   readonly attempted: true;
   readonly succeeded: false;
   readonly diagnostics: readonly RobloxDiagnostic[];
-  readonly observedSnapshotHash?: string;
+  readonly observedAfterRollbackSnapshotHash?: string;
 }
 
 export type RollbackResult = RollbackNotAttempted | RollbackSucceeded | RollbackFailed;
@@ -203,7 +203,7 @@ export interface ApplyFailure {
   readonly operationsAttempted: number;
   readonly rollback: RollbackResult;
   readonly initialSnapshotHash?: string;
-  readonly observedFinalSnapshotHash?: string;
+  readonly observedFailureSnapshotHash?: string;
 }
 
 export type ApplyResult = ApplySuccess | ApplyFailure;

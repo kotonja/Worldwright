@@ -173,6 +173,7 @@ export class InMemoryRobloxAdapter implements RobloxAdapter {
   readonly #faults = new Map<number, InMemoryRobloxFault>();
   readonly #mutationLog: MutableMutationAttempt[] = [];
   #mutationAttempts = 0;
+  #snapshotReads = 0;
 
   public constructor(options: Readonly<InMemoryRobloxAdapterOptions> = {}) {
     for (const snapshot of options.initialSnapshots ?? []) {
@@ -211,7 +212,22 @@ export class InMemoryRobloxAdapter implements RobloxAdapter {
     return this.#mutationAttempts;
   }
 
+  public get snapshotReads(): number {
+    return this.#snapshotReads;
+  }
+
+  /** Replaces one scope without recording a Worldwright mutation, for deterministic concurrency tests. */
+  public replaceSnapshotForTesting(snapshot: Readonly<RobloxSnapshot>): void {
+    const validation = validateRobloxSnapshot(snapshot);
+    if (!validation.valid) {
+      throw new TypeError('A replacement in-memory adapter snapshot is invalid.');
+    }
+    const state = stateFromSnapshot(validation.value);
+    this.#states.set(scopeKey(state), state);
+  }
+
   public async readSnapshot(scope: Readonly<RobloxAdapterScope>): Promise<unknown> {
+    this.#snapshotReads += 1;
     const state = this.#states.get(scopeKey(scope));
     if (state !== undefined) return snapshotFromState(state);
     return normalizeRobloxSnapshot({

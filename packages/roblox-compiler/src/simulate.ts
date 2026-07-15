@@ -1,11 +1,14 @@
 import { diagnostic, sortDiagnostics, type RobloxDiagnostic } from './diagnostics.js';
+import { deriveRobloxManifestFromDesiredSnapshot } from './desired-manifest.js';
 import { jsonValuesEqual } from './json.js';
 import {
+  hashRobloxManifest,
   hashRobloxSnapshot,
   normalizeRobloxChangeSet,
   normalizeRobloxManagedNode,
   normalizeRobloxSnapshot,
 } from './normalize.js';
+import { analyzeRobloxSnapshotOwnership } from './ownership.js';
 import { planRobloxSnapshotTransition } from './reconcile.js';
 import { validateRobloxChangeSet, validateRobloxSnapshot } from './contract-validation.js';
 import type {
@@ -64,6 +67,41 @@ function createResultSnapshot(
     nodes: [...nodes],
     unmanagedRoots: [...base.unmanagedRoots],
   });
+}
+
+function unmanagedOwnershipDiagnostics(
+  snapshot: Readonly<RobloxSnapshot>,
+  operations: readonly RobloxChangeOperation[],
+): RobloxDiagnostic[] {
+  const { protectedWitnessByNodeId } = analyzeRobloxSnapshotOwnership(snapshot);
+  const diagnostics: RobloxDiagnostic[] = [];
+  operations.forEach((operation, operationIndex) => {
+    if (operation.type === 'create') return;
+    const witness = protectedWitnessByNodeId.get(operation.before.id);
+    if (witness === undefined) return;
+    if (operation.type === 'delete') {
+      diagnostics.push(
+        diagnostic(
+          'simulation.unmanaged_descendant_conflict',
+          `/operations/${operationIndex}/before`,
+          `Managed node "${operation.before.id}" cannot be deleted because its subtree contains unmanaged content.`,
+          witness,
+        ),
+      );
+      return;
+    }
+    if (operation.before.parentId !== operation.after.parentId) {
+      diagnostics.push(
+        diagnostic(
+          'simulation.unmanaged_descendant_conflict',
+          `/operations/${operationIndex}/after/parentId`,
+          `Managed node "${operation.before.id}" cannot be reparented because its subtree contains unmanaged content.`,
+          witness,
+        ),
+      );
+    }
+  });
+  return sortDiagnostics(diagnostics);
 }
 
 /** Purely applies and verifies a complete change set against an independent snapshot value. */
@@ -126,6 +164,11 @@ export function simulateRobloxChangeSet(
         ),
       ],
     };
+  }
+
+  const ownershipDiagnostics = unmanagedOwnershipDiagnostics(snapshot, changeSet.operations);
+  if (ownershipDiagnostics.length > 0) {
+    return { success: false, diagnostics: ownershipDiagnostics };
   }
 
   const byId = new Map(snapshot.nodes.map((node) => [node.id, node]));
@@ -237,18 +280,44 @@ export function simulateRobloxChangeSet(
     };
   }
 
+  const integrityDiagnostics: RobloxDiagnostic[] = [];
+  const desiredManifest = deriveRobloxManifestFromDesiredSnapshot(normalizedResult);
+  if (!desiredManifest.success) {
+    integrityDiagnostics.push(
+      ...desiredManifest.diagnostics.map((entry) =>
+        diagnostic(
+          'simulation.desired_manifest_invalid',
+          entry.path,
+          `${entry.code}: ${entry.message}`,
+          entry.relatedId,
+        ),
+      ),
+    );
+  } else if (
+    hashRobloxManifest(desiredManifest.manifest) !== changeSet.preconditions.desiredManifestHash
+  ) {
+    integrityDiagnostics.push(
+      diagnostic(
+        'simulation.desired_manifest_hash_mismatch',
+        '/preconditions/desiredManifestHash',
+        'The simulated managed result does not match the desired manifest hash.',
+        normalizedResult.rootNodeId,
+      ),
+    );
+  }
+
   const actualResultHash = hashRobloxSnapshot(normalizedResult);
   if (actualResultHash !== changeSet.preconditions.resultSnapshotHash) {
-    return {
-      success: false,
-      diagnostics: [
-        diagnostic(
-          'simulation.result_hash_mismatch',
-          '/preconditions/resultSnapshotHash',
-          'The simulated complete result snapshot does not match the expected hash.',
-        ),
-      ],
-    };
+    integrityDiagnostics.push(
+      diagnostic(
+        'simulation.result_hash_mismatch',
+        '/preconditions/resultSnapshotHash',
+        'The simulated complete result snapshot does not match the expected hash.',
+      ),
+    );
+  }
+  if (integrityDiagnostics.length > 0) {
+    return { success: false, diagnostics: sortDiagnostics(integrityDiagnostics) };
   }
 
   return { success: true, snapshot: normalizedResult, diagnostics: [] };

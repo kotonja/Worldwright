@@ -12,6 +12,7 @@ import {
   normalizeRobloxManifest,
   normalizeRobloxSnapshot,
 } from './normalize.js';
+import { analyzeRobloxSnapshotOwnership, managedNodeDepths } from './ownership.js';
 import { validateRobloxManifest, validateRobloxSnapshot } from './contract-validation.js';
 import type {
   PlanResult,
@@ -38,65 +39,6 @@ function nodeMap(nodes: readonly RobloxManagedNode[]): Map<string, RobloxManaged
 
 function nodeIndexMap(nodes: readonly RobloxManagedNode[]): Map<string, number> {
   return new Map(nodes.map((node, index) => [node.id, index]));
-}
-
-function depthsById(
-  nodes: readonly RobloxManagedNode[],
-  rootNodeId: string | undefined,
-): Map<string, number> {
-  const depths = new Map<string, number>();
-  if (rootNodeId === undefined) return depths;
-
-  const children = new Map<string, string[]>();
-  for (const node of nodes) {
-    if (node.parentId !== undefined) {
-      const siblings = children.get(node.parentId) ?? [];
-      siblings.push(node.id);
-      children.set(node.parentId, siblings);
-    }
-  }
-  for (const siblings of children.values()) siblings.sort(compareCodePoints);
-
-  depths.set(rootNodeId, 0);
-  const queue = [rootNodeId];
-  for (let cursor = 0; cursor < queue.length; cursor += 1) {
-    const parentId = queue[cursor]!;
-    const parentDepth = depths.get(parentId)!;
-    for (const childId of children.get(parentId) ?? []) {
-      if (!depths.has(childId)) {
-        depths.set(childId, parentDepth + 1);
-        queue.push(childId);
-      }
-    }
-  }
-  return depths;
-}
-
-function protectedWitnessById(
-  snapshot: Readonly<RobloxSnapshot>,
-  depths: ReadonlyMap<string, number>,
-): Map<string, string> {
-  const witnessById = new Map<string, string>();
-  for (const unmanaged of snapshot.unmanagedRoots) {
-    const current = witnessById.get(unmanaged.parentNodeId);
-    if (current === undefined || compareCodePoints(unmanaged.snapshotId, current) < 0) {
-      witnessById.set(unmanaged.parentNodeId, unmanaged.snapshotId);
-    }
-  }
-
-  const byDescendingDepth = [...snapshot.nodes].sort((left, right) => {
-    const byDepth = (depths.get(right.id) ?? 0) - (depths.get(left.id) ?? 0);
-    return byDepth !== 0 ? byDepth : compareCodePoints(left.id, right.id);
-  });
-  for (const node of byDescendingDepth) {
-    const witness = witnessById.get(node.id);
-    if (witness === undefined || node.parentId === undefined) continue;
-    const parentWitness = witnessById.get(node.parentId);
-    if (parentWitness === undefined || compareCodePoints(witness, parentWitness) < 0) {
-      witnessById.set(node.parentId, witness);
-    }
-  }
-  return witnessById;
 }
 
 function operationNodeId(operation: Readonly<RobloxChangeOperation>): string {
@@ -191,9 +133,9 @@ export function planRobloxSnapshotTransition(
   const currentById = nodeMap(current.nodes);
   const desiredById = nodeMap(desired.nodes);
   const desiredIndexById = desiredInputIndexById ?? nodeIndexMap(desired.nodes);
-  const currentDepths = depthsById(current.nodes, current.rootNodeId);
-  const desiredDepths = depthsById(desired.nodes, desired.rootNodeId);
-  const protectedById = protectedWitnessById(current, currentDepths);
+  const currentDepths = managedNodeDepths(current.nodes, current.rootNodeId);
+  const desiredDepths = managedNodeDepths(desired.nodes, desired.rootNodeId);
+  const { protectedWitnessByNodeId: protectedById } = analyzeRobloxSnapshotOwnership(current);
   const operations: RobloxChangeOperation[] = [];
   const allIds = new Set([...currentById.keys(), ...desiredById.keys()]);
 

@@ -23,21 +23,28 @@ flowchart TD
     Snapshot["Canonical Scene Snapshot<br/>observed managed state and unmanaged roots"]
     Planner["Pure deterministic planner"]
     ChangeSet["Roblox Change Set<br/>dry-run operations and hashes"]
-    Simulator["Pure preflight simulation"]
+    Simulator["Pure preflight simulation<br/>manifest and result hash verification"]
     Executor["Transaction executor"]
     Adapter["Allowlisted adapter interface"]
     Verified["Verified expected snapshot"]
+    Noop["Immediate verified no-op"]
+    RollbackGuard["Rollback admissibility guard"]
     Rollback["Snapshot-based compensating plan"]
     Restored["Verified initial snapshot"]
+    Unsafe["Rollback failure without compensation"]
 
     Input --> WSValidation --> DirectiveValidation --> Compiler --> Manifest
     Read --> Snapshot
     Manifest --> Planner
-    Snapshot --> Planner --> ChangeSet --> Simulator --> Executor
+    Snapshot --> Planner --> ChangeSet --> Simulator
+    Simulator -->|"operations exist"| Executor
+    Simulator -->|"zero operations"| Noop
     Executor --> Adapter
     Adapter --> Read
     Executor -->|"result hash matches"| Verified
-    Executor -->|"apply or verification failure"| Rollback --> Adapter
+    Executor -->|"apply or verification failure"| RollbackGuard
+    RollbackGuard -->|"within attempted-operation envelope"| Rollback --> Adapter
+    RollbackGuard -->|"unrelated or uncertain change"| Unsafe
     Rollback -->|"initial hash matches"| Restored
 ```
 
@@ -100,7 +107,8 @@ flowchart LR
 - A manifest file is not authority to mutate a scene; it must be reconciled with a validated
   snapshot to produce a change set.
 - A change-set file is not authority to mutate arbitrary state; its project, target, and complete
-  base snapshot hash must match a fresh adapter observation.
+  base snapshot hash must match a fresh adapter observation, and simulation must prove that its
+  result reconstructs the manifest named by `desiredManifestHash`.
 - Adapter output is treated as untrusted. Snapshots are validated both before mutation and after
   forward or compensating operations.
 - Adapter methods expose only supported node operations. They do not expose arbitrary class
@@ -124,8 +132,23 @@ Hashes are lowercase hexadecimal SHA-256 values over canonical serialized data:
 - the change-set hash covers its complete normalized contract; and
 - hashes are external preconditions rather than self-referential fields in the value being hashed.
 
-The base snapshot hash is an optimistic concurrency guard. A newly observed unmanaged root changes
-that hash, so a previously planned destructive operation cannot proceed on stale ownership evidence.
+The three change-set hashes protect distinct claims:
+
+- `baseSnapshotHash` binds the transaction boundary before mutation. A newly observed unmanaged root
+  changes it, so a stale plan cannot proceed on changed ownership evidence.
+- `desiredManifestHash` binds the simulated managed result to a valid, non-empty desired manifest.
+  It is an enforced provenance and integrity precondition, not descriptive metadata.
+- `resultSnapshotHash` independently binds the complete expected result, including preserved
+  unmanaged-root observations.
+
+To verify `desiredManifestHash`, simulation derives a manifest from the validated result snapshot.
+The fixed schema/compiler versions and supported WorldSpec version are used; project and target come
+from the snapshot; `worldSpecHash` comes only from the root's `WorldwrightSourceHash`; root and
+nodes come from managed state; and measurements are recomputed from node classes. Unmanaged roots
+are observed ownership evidence and are excluded. The derived manifest must validate before its
+canonical hash is compared. Consequently, a delete-all result, a missing or invalid root, or an
+absent root source hash cannot pass as a forward manifest even if a caller recomputes
+`resultSnapshotHash`.
 
 ## Identity and ownership
 
@@ -166,9 +189,13 @@ counts. Planning an already converged snapshot produces a valid no-op change set
 with the same normalized inputs is byte-identical.
 
 Pure simulation revalidates the snapshot and change set, checks the base hash and each complete
-before-state precondition, enforces parent and acyclic hierarchy rules, applies operations to an
-independent value, preserves unmanaged roots, and verifies the expected result hash. The transaction
-executor uses the same simulation as preflight.
+before-state precondition, and uses the same deterministic ownership analysis as planning to reject
+deleting or reparenting a protected lineage before generic graph validation can obscure the cause.
+Its `simulation.unmanaged_descendant_conflict` points to the responsible operation and carries the
+deterministically selected unmanaged-root witness as `relatedId`. Simulation then enforces parent
+and acyclic hierarchy rules, applies operations to an independent value, preserves unmanaged roots,
+derives and verifies the desired manifest hash, and independently verifies the expected complete
+result hash. The transaction executor uses this same simulation as preflight.
 
 ## Transaction stages
 
@@ -180,13 +207,16 @@ stateDiagram-v2
     ValidateAndHashInitial --> StaleFailure: base hash differs
     ValidateAndHashInitial --> Simulate: base hash matches
     Simulate --> PreflightFailure: invalid transition
+    Simulate --> NoopSuccess: zero operations
     Simulate --> ApplySequentially: expected result verified
     ApplySequentially --> ReadFinal
     ReadFinal --> VerifyFinal
     VerifyFinal --> Success: complete result hash matches
-    ApplySequentially --> Rollback: operation failure
-    ReadFinal --> Rollback: unreadable or invalid result
-    VerifyFinal --> Rollback: result hash differs
+    ApplySequentially --> CheckRollbackAdmissibility: operation failure
+    ReadFinal --> CheckRollbackAdmissibility: unreadable or invalid result
+    VerifyFinal --> CheckRollbackAdmissibility: result hash differs
+    CheckRollbackAdmissibility --> FailedUnsafe: outside attempted-operation envelope
+    CheckRollbackAdmissibility --> Rollback: admissible observed state
     Rollback --> VerifyRestored
     VerifyRestored --> FailedRestored: initial hash matches
     VerifyRestored --> FailedUnrestored: rollback fails or hash differs
@@ -198,27 +228,64 @@ The detailed stages are:
 2. Read, validate, normalize, and hash the current adapter snapshot.
 3. Compare the complete hash with the change-set base precondition. A stale failure performs zero
    mutations.
-4. Simulate the complete transition and verify its expected result.
-5. Apply ordered operations sequentially through the adapter.
-6. Read, validate, normalize, and hash final state.
-7. Return `applied` or `noop` success only when the final hash equals the expected result hash.
+4. Simulate the complete transition, including desired-manifest and result-snapshot hash checks.
+5. If the operation list is empty, return `noop` immediately with the verified preflight snapshot
+   and hash. This path performs exactly one read, zero mutations, no second read, and no rollback.
+6. Otherwise apply ordered operations sequentially through the adapter.
+7. Read, validate, normalize, and hash final state.
+8. Return `applied` success only when the final hash equals the expected result hash.
 
-The result reports a stable failure stage and diagnostics, operations attempted, initial hash, an
-observed final hash when available, and rollback attempt and success status. Expected data,
-concurrency, adapter, and verification failures are results rather than thrown success-path
-exceptions.
+The result reports a stable failure stage and diagnostics, operations attempted, and hashes with
+unambiguous meanings. `observedFailureSnapshotHash` is a valid state observed before compensation. A
+successful rollback reports `restoredSnapshotHash`, which equals the initial hash. A failed rollback
+may report `observedAfterRollbackSnapshotHash`, the latest valid observation after its attempt. The
+restored hash is never substituted for the failure observation. Expected data, concurrency, adapter,
+and verification failures are results rather than thrown success-path exceptions. Transaction
+wrappers retain the cause diagnostic's path and `relatedId`, and include the underlying stable code
+in their sanitized message.
 
 ## Snapshot-based rollback
 
 If application or verification fails, the executor does not assume which mutations took effect. It
-reads the currently observable state and plans a compensating transition from that state to the
-exact initial snapshot. It applies that plan, reads again, and compares the complete snapshot hash
-with the initial hash.
+reads a fresh validated snapshot and first checks whether the observation is admissible for
+compensation. The check considers only the prefix of forward operations whose adapter calls were
+attempted:
 
-This handles an adapter operation that mutates and then throws, as long as its resulting state is
-observable and still reconcilable. Rollback can also fail; that outcome is explicit and is never
-reported as restored state. The transaction does not claim atomic engine behavior. It provides a
-verified compensating protocol over an adapter.
+- every managed node not targeted by that prefix must exactly equal its initial state, and an
+  initially absent unrelated ID must remain absent;
+- an attempted create target may be absent or exactly equal the normalized created node;
+- an attempted update target may exactly equal its normalized `before` or `after` node;
+- an attempted delete target may exactly equal its normalized `before` node or be absent;
+- the complete normalized `unmanagedRoots` collection must exactly equal the initial collection; and
+- root presence and identity may differ only when explained by an attempted root create or delete.
+
+An unrelated addition, deletion, or property edit, changed unmanaged-root record, or third state at
+an attempted target produces `transaction.rollback_unsafe_observed_state`. No compensating adapter
+mutation is called, and the observed state is preserved. When the observation is admissible, the
+executor plans from it to the exact initial snapshot, applies that compensation, reads again, and
+compares the complete hash with the initial hash.
+
+For an admissibility rejection, the valid hash is reported only as the pre-compensation failure
+state. There is no post-rollback observation because the guard deliberately permits no intervening
+mutation.
+
+This handles an adapter operation that mutates and then throws, as long as its resulting state stays
+inside the attempted-operation envelope. Rollback can also fail; that outcome is explicit and is
+never reported as restored state. The transaction does not claim atomic engine behavior. It provides
+a verified compensating protocol over an adapter and chooses failure over overwriting a change whose
+cause is uncertain.
+
+## Concurrency model
+
+`baseSnapshotHash` protects the complete state boundary before mutation. Full `before` node checks
+protect targeted operations as they execute. The rollback admissibility guard prevents compensation
+from overwriting detected unrelated managed or unmanaged-root changes.
+
+These checks do not provide engine-level atomicity or transaction isolation. A future live adapter
+should serialize Worldwright transactions within one project scope and must treat creator edits
+during an asynchronous transaction as a concurrency hazard. If causality cannot be established from
+the attempted-operation envelope, Worldwright reports rollback failure and leaves the unrelated
+state untouched.
 
 ## Adapter boundary
 
@@ -242,8 +309,9 @@ transforms remain organizational in contract v0.1.
 
 That adapter is not implemented. A future use of
 [ChangeHistoryService](https://create.roblox.com/docs/reference/engine/classes/ChangeHistoryService)
-may complement creator undo, but it cannot replace snapshot preconditions, post-apply verification,
-or verified compensation in this protocol.
+may complement creator undo, but it does not provide transaction isolation and cannot replace
+project-scoped serialization, snapshot preconditions, post-apply verification, rollback
+admissibility, or verified compensation in this protocol.
 
 Forge remains the future creator-facing Studio interface. It may present manifests and dry-run
 change sets, explain conflicts, request explicit approval, and call a separately implemented live

@@ -40,6 +40,8 @@ export type RobloxDiagnosticCode =
   | 'simulation.operation_order_invalid'
   | 'simulation.parent_missing'
   | 'simulation.parent_cycle'
+  | 'simulation.desired_manifest_invalid'
+  | 'simulation.desired_manifest_hash_mismatch'
   | 'simulation.result_hash_mismatch'
   | 'simulation.unmanaged_descendant_conflict'
   | 'transaction.change_set_invalid'
@@ -48,7 +50,8 @@ export type RobloxDiagnosticCode =
   | 'transaction.preflight_failed'
   | 'transaction.apply_failed'
   | 'transaction.verification_failed'
-  | 'transaction.rollback_failed';
+  | 'transaction.rollback_failed'
+  | 'transaction.rollback_unsafe_observed_state';
 
 export interface RobloxDiagnostic {
   readonly code: RobloxDiagnosticCode;

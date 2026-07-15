@@ -1,8 +1,10 @@
 import { validateRobloxChangeSet, validateRobloxSnapshot } from './contract-validation.js';
-import { diagnostic, type RobloxDiagnostic } from './diagnostics.js';
+import { diagnostic, sortDiagnostics, type RobloxDiagnostic } from './diagnostics.js';
+import { compareCodePoints, jsonValuesEqual } from './json.js';
 import {
   hashRobloxSnapshot,
   normalizeRobloxChangeSet,
+  normalizeRobloxManagedNode,
   normalizeRobloxSnapshot,
 } from './normalize.js';
 import { planRobloxSnapshotTransition } from './reconcile.js';
@@ -15,6 +17,7 @@ import type {
   RobloxAdapterScope,
   RobloxChangeOperation,
   RobloxChangeSet,
+  RobloxManagedNode,
   RobloxSnapshot,
   RollbackResult,
 } from './types.js';
@@ -31,7 +34,8 @@ function transactionDiagnostic(
     | 'transaction.preflight_failed'
     | 'transaction.apply_failed'
     | 'transaction.verification_failed'
-    | 'transaction.rollback_failed',
+    | 'transaction.rollback_failed'
+    | 'transaction.rollback_unsafe_observed_state',
   path: string,
   message: string,
   relatedId?: string,
@@ -45,7 +49,7 @@ function failure(
   operationsAttempted: number,
   rollback: RollbackResult,
   initialSnapshotHash?: string,
-  observedFinalSnapshotHash?: string,
+  observedFailureSnapshotHash?: string,
 ): ApplyFailure {
   return {
     success: false,
@@ -54,7 +58,37 @@ function failure(
     operationsAttempted,
     rollback,
     ...(initialSnapshotHash === undefined ? {} : { initialSnapshotHash }),
-    ...(observedFinalSnapshotHash === undefined ? {} : { observedFinalSnapshotHash }),
+    ...(observedFailureSnapshotHash === undefined ? {} : { observedFailureSnapshotHash }),
+  };
+}
+
+function wrapDiagnostics(
+  code:
+    | 'transaction.change_set_invalid'
+    | 'transaction.snapshot_invalid'
+    | 'transaction.preflight_failed'
+    | 'transaction.verification_failed'
+    | 'transaction.rollback_failed',
+  diagnostics: readonly RobloxDiagnostic[],
+): RobloxDiagnostic[] {
+  return sortDiagnostics(
+    diagnostics.map((entry) =>
+      diagnostic(code, entry.path, `${entry.code}: ${entry.message}`, entry.relatedId),
+    ),
+  );
+}
+
+function rollbackValidationFailure(
+  diagnostics: readonly RobloxDiagnostic[],
+  observedFailureSnapshotHash?: string,
+): RollbackAttempt {
+  return {
+    result: {
+      attempted: true,
+      succeeded: false,
+      diagnostics: wrapDiagnostics('transaction.rollback_failed', diagnostics),
+    },
+    ...(observedFailureSnapshotHash === undefined ? {} : { observedFailureSnapshotHash }),
   };
 }
 
@@ -77,18 +111,27 @@ async function applyOperation(
 
 interface RollbackAttempt {
   readonly result: RollbackResult;
-  readonly observedSnapshotHash?: string;
+  readonly observedFailureSnapshotHash?: string;
 }
 
-function rollbackFailure(message: string, observedSnapshotHash?: string): RollbackAttempt {
+function rollbackFailure(
+  code: 'transaction.rollback_failed' | 'transaction.rollback_unsafe_observed_state',
+  message: string,
+  observedFailureSnapshotHash?: string,
+  observedAfterRollbackSnapshotHash?: string,
+  path = '',
+  relatedId?: string,
+): RollbackAttempt {
   return {
     result: {
       attempted: true,
       succeeded: false,
-      diagnostics: transactionDiagnostic('transaction.rollback_failed', '', message),
-      ...(observedSnapshotHash === undefined ? {} : { observedSnapshotHash }),
+      diagnostics: transactionDiagnostic(code, path, message, relatedId),
+      ...(observedAfterRollbackSnapshotHash === undefined
+        ? {}
+        : { observedAfterRollbackSnapshotHash }),
     },
-    ...(observedSnapshotHash === undefined ? {} : { observedSnapshotHash }),
+    ...(observedFailureSnapshotHash === undefined ? {} : { observedFailureSnapshotHash }),
   };
 }
 
@@ -106,6 +149,133 @@ async function readValidatedSnapshotHash(
   }
 }
 
+function operationNodeId(operation: Readonly<RobloxChangeOperation>): string {
+  switch (operation.type) {
+    case 'create':
+      return operation.node.id;
+    case 'update':
+      return operation.before.id;
+    case 'delete':
+      return operation.before.id;
+  }
+}
+
+function nodeMatches(
+  actual: Readonly<RobloxManagedNode> | undefined,
+  expected: Readonly<RobloxManagedNode>,
+): boolean {
+  return (
+    actual !== undefined &&
+    jsonValuesEqual(normalizeRobloxManagedNode(actual), normalizeRobloxManagedNode(expected))
+  );
+}
+
+function attemptedTargetIsAdmissible(
+  observed: Readonly<RobloxManagedNode> | undefined,
+  operation: Readonly<RobloxChangeOperation>,
+): boolean {
+  switch (operation.type) {
+    case 'create':
+      return observed === undefined || nodeMatches(observed, operation.node);
+    case 'update':
+      return nodeMatches(observed, operation.before) || nodeMatches(observed, operation.after);
+    case 'delete':
+      return observed === undefined || nodeMatches(observed, operation.before);
+  }
+}
+
+function rootChangeIsAdmissible(
+  initialRootNodeId: string | undefined,
+  observedRootNodeId: string | undefined,
+  attemptedByNodeId: ReadonlyMap<string, RobloxChangeOperation>,
+): boolean {
+  if (initialRootNodeId === observedRootNodeId) return true;
+  const initialRootOperation =
+    initialRootNodeId === undefined ? undefined : attemptedByNodeId.get(initialRootNodeId);
+  const observedRootOperation =
+    observedRootNodeId === undefined ? undefined : attemptedByNodeId.get(observedRootNodeId);
+  const removalIsExplained =
+    initialRootNodeId === undefined || initialRootOperation?.type === 'delete';
+  const additionIsExplained =
+    observedRootNodeId === undefined || observedRootOperation?.type === 'create';
+  return removalIsExplained && additionIsExplained;
+}
+
+function rollbackAdmissibilityDiagnostics(
+  initial: Readonly<RobloxSnapshot>,
+  observed: Readonly<RobloxSnapshot>,
+  attemptedOperations: readonly RobloxChangeOperation[],
+): RobloxDiagnostic[] {
+  const diagnostics: RobloxDiagnostic[] = [];
+  const attemptedByNodeId = new Map(
+    attemptedOperations.map((operation) => [operationNodeId(operation), operation]),
+  );
+  const initialById = new Map(initial.nodes.map((node) => [node.id, node]));
+  const observedById = new Map(observed.nodes.map((node) => [node.id, node]));
+
+  if (
+    initial.schemaVersion !== observed.schemaVersion ||
+    initial.projectId !== observed.projectId ||
+    !jsonValuesEqual(initial.target, observed.target)
+  ) {
+    diagnostics.push(
+      diagnostic(
+        'transaction.rollback_unsafe_observed_state',
+        '',
+        'Rollback observed different snapshot scope metadata.',
+      ),
+    );
+  }
+
+  if (!jsonValuesEqual(initial.unmanagedRoots, observed.unmanagedRoots)) {
+    diagnostics.push(
+      diagnostic(
+        'transaction.rollback_unsafe_observed_state',
+        '/unmanagedRoots',
+        'Rollback observed an unmanaged-root change outside the forward operation envelope.',
+      ),
+    );
+  }
+
+  if (!rootChangeIsAdmissible(initial.rootNodeId, observed.rootNodeId, attemptedByNodeId)) {
+    diagnostics.push(
+      diagnostic(
+        'transaction.rollback_unsafe_observed_state',
+        '/rootNodeId',
+        'Rollback observed a root identity change not explained by an attempted create or delete.',
+        observed.rootNodeId ?? initial.rootNodeId,
+      ),
+    );
+  }
+
+  const nodeIds = [...new Set([...initialById.keys(), ...observedById.keys()])].sort(
+    compareCodePoints,
+  );
+  for (const nodeId of nodeIds) {
+    const initialNode = initialById.get(nodeId);
+    const observedNode = observedById.get(nodeId);
+    const attempted = attemptedByNodeId.get(nodeId);
+    const admissible =
+      attempted === undefined
+        ? (initialNode === undefined && observedNode === undefined) ||
+          (initialNode !== undefined && nodeMatches(observedNode, initialNode))
+        : attemptedTargetIsAdmissible(observedNode, attempted);
+    if (!admissible) {
+      diagnostics.push(
+        diagnostic(
+          'transaction.rollback_unsafe_observed_state',
+          `/nodes/${nodeId}`,
+          attempted === undefined
+            ? 'Rollback observed an unrelated managed-state change.'
+            : 'Rollback observed an attempted target in a state outside its allowed envelope.',
+          nodeId,
+        ),
+      );
+    }
+  }
+  return sortDiagnostics(diagnostics);
+}
+
 /**
  * Compensates from observable current state rather than assuming whether the failed
  * adapter operation mutated. Restoration is successful only after the complete
@@ -116,29 +286,44 @@ async function compensateToInitialSnapshot(
   scope: Readonly<RobloxAdapterScope>,
   initialSnapshot: Readonly<RobloxSnapshot>,
   initialSnapshotHash: string,
-  knownObservedSnapshot?: Readonly<RobloxSnapshot>,
+  attemptedOperations: readonly RobloxChangeOperation[],
 ): Promise<RollbackAttempt> {
-  let observed: RobloxSnapshot;
-  if (knownObservedSnapshot === undefined) {
-    let rawObserved: unknown;
-    try {
-      rawObserved = await adapter.readSnapshot(scope);
-    } catch {
-      return rollbackFailure('Rollback could not read observable adapter state.');
-    }
-    const validation = validateRobloxSnapshot(rawObserved);
-    if (!validation.valid) {
-      return rollbackFailure('Rollback observed an invalid scene snapshot.');
-    }
-    observed = normalizeRobloxSnapshot(validation.value);
-  } else {
-    observed = normalizeRobloxSnapshot(knownObservedSnapshot);
+  let rawObserved: unknown;
+  try {
+    rawObserved = await adapter.readSnapshot(scope);
+  } catch {
+    return rollbackFailure(
+      'transaction.rollback_failed',
+      'Rollback could not read observable adapter state.',
+    );
   }
+  const validation = validateRobloxSnapshot(rawObserved);
+  if (!validation.valid) {
+    return rollbackValidationFailure(validation.diagnostics);
+  }
+  const observed = normalizeRobloxSnapshot(validation.value);
 
   const observedSnapshotHash = hashRobloxSnapshot(observed);
+  const admissibilityDiagnostics = rollbackAdmissibilityDiagnostics(
+    initialSnapshot,
+    observed,
+    attemptedOperations,
+  );
+  if (admissibilityDiagnostics.length > 0) {
+    return {
+      result: {
+        attempted: true,
+        succeeded: false,
+        diagnostics: admissibilityDiagnostics,
+      },
+      observedFailureSnapshotHash: observedSnapshotHash,
+    };
+  }
+
   const transition = planRobloxSnapshotTransition(observed, initialSnapshot);
   if (!transition.success) {
     return rollbackFailure(
+      'transaction.rollback_failed',
       'Rollback could not plan a safe compensating transition.',
       observedSnapshotHash,
     );
@@ -149,7 +334,9 @@ async function compensateToInitialSnapshot(
       await applyOperation(adapter, scope, operation);
     } catch {
       return rollbackFailure(
+        'transaction.rollback_failed',
         'A compensating adapter operation failed.',
+        observedSnapshotHash,
         await readValidatedSnapshotHash(adapter, scope),
       );
     }
@@ -159,11 +346,15 @@ async function compensateToInitialSnapshot(
   try {
     rawRestored = await adapter.readSnapshot(scope);
   } catch {
-    return rollbackFailure('Rollback could not read state for restoration verification.');
+    return rollbackFailure(
+      'transaction.rollback_failed',
+      'Rollback could not read state for restoration verification.',
+      observedSnapshotHash,
+    );
   }
   const restoredValidation = validateRobloxSnapshot(rawRestored);
   if (!restoredValidation.valid) {
-    return rollbackFailure('Rollback restoration produced an invalid scene snapshot.');
+    return rollbackValidationFailure(restoredValidation.diagnostics, observedSnapshotHash);
   }
 
   const restoredSnapshotHash = hashRobloxSnapshot(
@@ -171,7 +362,9 @@ async function compensateToInitialSnapshot(
   );
   if (restoredSnapshotHash !== initialSnapshotHash) {
     return rollbackFailure(
+      'transaction.rollback_failed',
       'Rollback did not restore the complete initial snapshot hash.',
+      observedSnapshotHash,
       restoredSnapshotHash,
     );
   }
@@ -181,7 +374,7 @@ async function compensateToInitialSnapshot(
       succeeded: true,
       restoredSnapshotHash,
     },
-    observedSnapshotHash: restoredSnapshotHash,
+    observedFailureSnapshotHash: observedSnapshotHash,
   };
 }
 
@@ -198,11 +391,7 @@ export async function applyRobloxChangeSet(
   if (!changeSetValidation.valid) {
     return failure(
       'change-set-validation',
-      transactionDiagnostic(
-        'transaction.change_set_invalid',
-        '',
-        'The Roblox change set is invalid.',
-      ),
+      wrapDiagnostics('transaction.change_set_invalid', changeSetValidation.diagnostics),
       0,
       rollbackNotAttempted(),
     );
@@ -234,11 +423,7 @@ export async function applyRobloxChangeSet(
   if (!initialValidation.valid) {
     return failure(
       'snapshot-validation',
-      transactionDiagnostic(
-        'transaction.snapshot_invalid',
-        '',
-        'The adapter returned an invalid scene snapshot.',
-      ),
+      wrapDiagnostics('transaction.snapshot_invalid', initialValidation.diagnostics),
       0,
       rollbackNotAttempted(),
     );
@@ -263,15 +448,23 @@ export async function applyRobloxChangeSet(
   if (!preflight.success) {
     return failure(
       'preflight',
-      transactionDiagnostic(
-        'transaction.preflight_failed',
-        '',
-        'The change set failed complete pure simulation.',
-      ),
+      wrapDiagnostics('transaction.preflight_failed', preflight.diagnostics),
       0,
       rollbackNotAttempted(),
       initialSnapshotHash,
     );
+  }
+
+  if (changeSet.operations.length === 0) {
+    return {
+      success: true,
+      status: 'noop',
+      snapshot: initialSnapshot,
+      diagnostics: [],
+      operationsAttempted: 0,
+      initialSnapshotHash,
+      finalSnapshotHash: initialSnapshotHash,
+    };
   }
 
   let operationsAttempted = 0;
@@ -286,6 +479,7 @@ export async function applyRobloxChangeSet(
         scope,
         initialSnapshot,
         initialSnapshotHash,
+        changeSet.operations.slice(0, operationsAttempted),
       );
       return failure(
         'apply',
@@ -298,7 +492,7 @@ export async function applyRobloxChangeSet(
         operationsAttempted,
         rollback.result,
         initialSnapshotHash,
-        rollback.observedSnapshotHash,
+        rollback.observedFailureSnapshotHash,
       );
     }
   }
@@ -312,6 +506,7 @@ export async function applyRobloxChangeSet(
       scope,
       initialSnapshot,
       initialSnapshotHash,
+      changeSet.operations.slice(0, operationsAttempted),
     );
     return failure(
       'verification',
@@ -323,7 +518,7 @@ export async function applyRobloxChangeSet(
       operationsAttempted,
       rollback.result,
       initialSnapshotHash,
-      rollback.observedSnapshotHash,
+      rollback.observedFailureSnapshotHash,
     );
   }
 
@@ -334,18 +529,15 @@ export async function applyRobloxChangeSet(
       scope,
       initialSnapshot,
       initialSnapshotHash,
+      changeSet.operations.slice(0, operationsAttempted),
     );
     return failure(
       'verification',
-      transactionDiagnostic(
-        'transaction.verification_failed',
-        '',
-        'The adapter returned an invalid final scene snapshot.',
-      ),
+      wrapDiagnostics('transaction.verification_failed', finalValidation.diagnostics),
       operationsAttempted,
       rollback.result,
       initialSnapshotHash,
-      rollback.observedSnapshotHash,
+      rollback.observedFailureSnapshotHash,
     );
   }
 
@@ -357,7 +549,7 @@ export async function applyRobloxChangeSet(
       scope,
       initialSnapshot,
       initialSnapshotHash,
-      finalSnapshot,
+      changeSet.operations.slice(0, operationsAttempted),
     );
     return failure(
       'verification',
@@ -369,13 +561,13 @@ export async function applyRobloxChangeSet(
       operationsAttempted,
       rollback.result,
       initialSnapshotHash,
-      rollback.observedSnapshotHash,
+      rollback.observedFailureSnapshotHash,
     );
   }
 
   return {
     success: true,
-    status: changeSet.operations.length === 0 ? 'noop' : 'applied',
+    status: 'applied',
     snapshot: finalSnapshot,
     diagnostics: [],
     operationsAttempted,
