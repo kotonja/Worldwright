@@ -9,6 +9,10 @@ text-to-random-parts or text-to-mesh toy.
 - **Atlas** is the future reasoning and orchestration layer.
 - **WorldSpec** is the versioned, JSON-serializable semantic world contract. Its v0.1 foundation was
   implemented in Milestone 0.
+- **Architecture Directive** is the strict planner input stored in the open
+  `worldwright.architecture` WorldSpec entity or relationship attribute.
+- **Architecture Plan** is the separate, versioned, reviewable spatial contract produced by the
+  Milestone 2 offline planner. It is derived from, and integrity-bound to, a canonical WorldSpec.
 - **Roblox Manifest** is the complete desired Worldwright-managed Roblox state compiled from a
   WorldSpec document.
 - **Roblox Scene Snapshot** is observed managed state for one project and includes markers for
@@ -40,12 +44,25 @@ Do not describe future systems as implemented.
 - `packages/roblox-compiler/fixtures/worldspec/primitive-courtyard.worldspec.json` is the authored
   fixture input. The corresponding manifest, snapshot, and change-set artifacts are generated;
   update them with `pnpm fixture:generate` and verify them with `pnpm fixture:check`.
+- `packages/architecture-planner/src/entity-directive-schema.ts` and
+  `relationship-directive-schema.ts` are the sources for strict planner input directives.
+- `packages/architecture-planner/src/plan-schema.ts` is the source for the Architecture Plan schema
+  and schema-derived static types. The corresponding `packages/architecture-planner/schema/*.json`
+  files are generated and must never be hand-edited.
+- `packages/architecture-planner/src/source-profile.ts`, `solver.ts`, `walls.ts`, `openings.ts`,
+  `stairs.ts`, `circulation.ts`, and `evaluation.ts` define the supported profile, bounded solve,
+  geometry, navigation, and semantic invariants. Do not enforce those rules only in a CLI caller.
+- `packages/architecture-planner/fixtures/input/cliffwatch-mansion-program.worldspec.json` is the
+  authored Milestone 2 input. Its Architecture Plan, derived WorldSpec, manifest, empty snapshot,
+  and change set are generated artifacts; update and check them with the root fixture commands.
 - Semantic invariants and stable diagnostic behavior belong in the validation layer, not in callers
   or prose-only rules.
 - `docs/worldspec/0.1.0.md` documents the published WorldSpec v0.1 contract. Update it with every
   WorldSpec contract or behavior change.
 - `docs/roblox-compiler/0.1.0.md` documents the published compiler contracts and behavior. Update it
   with every compiler contract or behavior change.
+- `docs/architecture-planner/0.1.0.md` documents the published planner contracts and behavior.
+  Update it with every architecture directive, plan, solver, geometry, or emission change.
 - The root `package.json` `packageManager` field and `pnpm-lock.yaml` define the package-manager
   version and dependency resolution.
 
@@ -75,8 +92,10 @@ Use the root scripts:
 - `pnpm worldspec <command>` - run the WorldSpec CLI, for example `pnpm worldspec validate ...`.
 - `pnpm roblox-compiler <command>` - run the offline compiler CLI, for example
   `pnpm roblox-compiler compile ...`.
+- `pnpm architecture-planner <command>` - run the offline planner CLI, for example
+  `pnpm architecture-planner build ...`.
 - `pnpm check` - run formatting, linting, build, type checks, tests, schema and fixture drift
-  checks, and compiled-distribution smoke tests for both packages.
+  checks, and compiled-distribution smoke tests for all packages.
 
 ## Engineering standards
 
@@ -95,6 +114,29 @@ Use the root scripts:
   add timestamps, random IDs, machine paths, or locale-sensitive ordering to generated contracts.
 - Keep dependencies few and justified. Use plain `tsc`; do not add a bundler or monorepo task
   framework.
+
+## Architecture planner rules
+
+- Keep WorldSpec canonical. Planner directives live in its open attribute maps, while the derived
+  Architecture Plan remains a separate reviewable artifact and never replaces source semantics.
+- Reserve the `archgen-` prefix for planner-generated IDs. IDs must be deterministic, valid under
+  WorldSpec v0.1, at most 128 characters, collision-checked across the complete project namespace,
+  and stable under unrelated source array reordering.
+- Solve horizontal layout in safe integer grid cells. Define every candidate, expansion, pruning,
+  scoring, remainder, and final tie order explicitly with code-point string comparison.
+- Never use `Math.random`, random UUIDs, system time, locale-sensitive comparison, unbounded
+  permutation generation, or undocumented object iteration order in planning.
+- The v0.1 topology is the bounded `double_loaded_spine` only. Do not silently infer unsupported
+  layouts, basements, split levels, curved geometry, or arbitrary constraints.
+- Treat room rectangles as clear space, not wall volume. Generate canonical logical walls first,
+  place explicit openings second, and subtract those openings into non-overlapping physical panels.
+- Every navigation edge must come from an explicit door, open stair-hall connection, or stair run.
+  Mere rectangle contact is never proof of circulation.
+- Validate the canonical source hash again before emission, fully evaluate the plan, and compile the
+  derived WorldSpec through the public compiler API before reporting success.
+- Emit only the existing closed Roblox directive, class, material, shape, and property allowlists.
+  Do not introduce scripts, asset IDs, content URLs, arbitrary classes, or property escape hatches.
+- Keep planning and emission pure, bounded, non-mutating, offline, and free of network access.
 
 ## Roblox compiler and transaction rules
 
@@ -128,6 +170,12 @@ Use the root scripts:
 - Assert behavior and stable diagnostic codes directly; avoid large opaque snapshots.
 - Cover valid input, malformed input, semantic edge cases, non-mutation, deterministic output,
   schema and fixture drift, and CLI exit codes as applicable.
+- Planner behavior requires focused tests for source profiles, grid and capacity arithmetic,
+  candidate ordering, allocation, adjacency, walls, opening subtraction, slabs, aligned stairs,
+  explicit circulation, metric and score recomputation, stale-plan rejection, emission, and
+  generated-ID collisions.
+- Planner integration requires a complete source-to-plan-to-derived-WorldSpec-to-manifest-to-change-
+  set-to-simulated-snapshot test, including deterministic hashes and exact result verification.
 - Transaction behavior requires tests for success, no-op, stale rejection before mutation, failures
   before and after mutation, verification mismatch, verified rollback, rollback failure,
   unmanaged-descendant protection, and deterministic attempted-operation order.
@@ -147,6 +195,9 @@ Use the root scripts:
   or chain-of-thought fields.
 - Roblox compiler contracts are data only. Never introduce scripts, dynamic evaluation, arbitrary
   property setters, network calls, or mutation outside the selected managed project.
+- Architecture contracts are data only. Never accept executable source, provider credentials, unsafe
+  numeric values, unbounded user-controlled search, hidden source mutation, or emission against a
+  stale source hash.
 - Validate unknown external input before using it, and avoid exposing stack traces for expected user
   errors.
 
@@ -154,6 +205,7 @@ Use the root scripts:
 
 A change is done only when its implementation, tests, generated schemas, generated fixtures, and
 documentation agree; `pnpm check` passes; generated, normalized, and hashed output is deterministic;
-transaction changes include verified rollback coverage; the diff contains no unrelated files or
-secrets; and implemented versus future Studio scope is stated accurately. If any required check
-cannot run or fails, leave a clear record instead of declaring the work complete.
+transaction changes include verified rollback coverage; planner changes include complete geometry,
+circulation, and offline pipeline coverage; the diff contains no unrelated files or secrets; and
+implemented versus future Studio scope is stated accurately. If any required check cannot run or
+fails, leave a clear record instead of declaring the work complete.

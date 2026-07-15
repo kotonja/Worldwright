@@ -1,0 +1,9 @@
+{
+  "nodes": [],
+  "projectId": "project-cliffwatch-mansion",
+  "schemaVersion": "0.1.0",
+  "target": {
+    "service": "Workspace"
+  },
+  "unmanagedRoots": []
+}

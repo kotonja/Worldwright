@@ -9,6 +9,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "architecture-planner": "tsx packages/architecture-planner/src/cli.ts",
     "build": "pnpm --recursive build",
     "check": "pnpm format:check && pnpm lint && pnpm build && pnpm typecheck:packages && pnpm test:packages && pnpm schema:check && pnpm fixture:check:packages && pnpm test:dist:packages",
     "fixture:check": "pnpm build && pnpm fixture:check:packages",
