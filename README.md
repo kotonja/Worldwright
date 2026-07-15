@@ -156,12 +156,15 @@ version.
 | `pnpm test:dist`            | Build and smoke-test compiled CLIs and their documented exit codes.                                |
 | `pnpm schema:generate`      | Regenerate schemas for every package that owns schema artifacts.                                   |
 | `pnpm schema:check`         | Check all generated schemas for drift.                                                             |
-| `pnpm fixture:generate`     | Regenerate checked-in Roblox compiler fixture artifacts.                                           |
-| `pnpm fixture:check`        | Check generated fixture artifacts for drift.                                                       |
+| `pnpm fixture:generate`     | Regenerate deterministic artifacts for every fixture-owning package.                               |
+| `pnpm fixture:check`        | Fail when any generated fixture artifact differs from its deterministic generator output.          |
 | `pnpm worldspec`            | Run the WorldSpec CLI.                                                                             |
 | `pnpm roblox-compiler`      | Run the offline Roblox compiler CLI.                                                               |
 | `pnpm architecture-planner` | Run the offline architectural blockout planner CLI.                                                |
 | `pnpm check`                | Run formatting, lint, build, type, tests, schema and fixture drift, and distribution smoke checks. |
+
+The root fixture commands currently cover generated artifacts owned by the Roblox compiler and
+Architecture Planner. Authored fixture inputs remain unchanged and are never generated.
 
 CI runs `pnpm check` with Node.js 22 for pull requests, pushes to `main`, and manual dispatches.
 Generated `dist` directories remain uncommitted; deterministic schema and fixture artifacts are

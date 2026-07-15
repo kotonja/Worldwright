@@ -87,8 +87,11 @@ Use the root scripts:
 - `pnpm test:dist` - build and smoke-test every compiled CLI, including documented exit codes.
 - `pnpm schema:generate` - regenerate checked-in JSON Schemas for all schema-owning packages.
 - `pnpm schema:check` - fail if any generated schema artifact has drifted.
-- `pnpm fixture:generate` - regenerate deterministic Roblox compiler fixture artifacts.
-- `pnpm fixture:check` - fail if any generated fixture artifact has drifted.
+- `pnpm fixture:generate` - regenerate deterministic generated fixture artifacts for every package
+  that owns generated fixtures, currently the Roblox compiler and Architecture Planner; authored
+  fixture inputs remain unchanged.
+- `pnpm fixture:check` - fail when any generated fixture artifact differs from its deterministic
+  generator output.
 - `pnpm worldspec <command>` - run the WorldSpec CLI, for example `pnpm worldspec validate ...`.
 - `pnpm roblox-compiler <command>` - run the offline compiler CLI, for example
   `pnpm roblox-compiler compile ...`.
