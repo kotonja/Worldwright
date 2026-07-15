@@ -22,6 +22,7 @@
     "schema:check": "tsx scripts/check-schema.ts",
     "schema:generate": "tsx scripts/generate-schema.ts",
     "test": "vitest run",
+    "test:dist": "tsx scripts/check-dist.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "worldspec": "tsx src/cli.ts"
   },

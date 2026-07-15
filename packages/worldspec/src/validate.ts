@@ -272,6 +272,7 @@ function firstEntityMaps(worldSpec: WorldSpec): {
 function validateRootAndParents(
   worldSpec: WorldSpec,
   entitiesById: ReadonlyMap<string, WorldEntity>,
+  indexById: ReadonlyMap<string, number>,
   diagnostics: Diagnostic[],
 ): void {
   const root = entitiesById.get(worldSpec.rootEntityId);
@@ -285,11 +286,12 @@ function validateRootAndParents(
       ),
     );
   } else {
+    const rootIndex = indexById.get(root.id);
     if (root.kind !== 'world') {
       diagnostics.push(
         diagnostic(
           'entity.root_wrong_kind',
-          `/entities/${worldSpec.entities.indexOf(root)}/kind`,
+          rootIndex === undefined ? '/entities' : `/entities/${rootIndex}/kind`,
           'The root entity must have kind "world".',
           root.id,
         ),
@@ -299,7 +301,7 @@ function validateRootAndParents(
       diagnostics.push(
         diagnostic(
           'entity.root_has_parent',
-          `/entities/${worldSpec.entities.indexOf(root)}/parentId`,
+          rootIndex === undefined ? '/entities' : `/entities/${rootIndex}/parentId`,
           'The root entity must not have a parent.',
           root.id,
         ),
@@ -343,75 +345,91 @@ function validateRootAndParents(
   });
 }
 
-function validateParentCycles(
+type ParentGraphOutcome = 'reachable' | 'unreachable';
+
+function validateParentGraph(
+  worldSpec: WorldSpec,
   entitiesById: ReadonlyMap<string, WorldEntity>,
   indexById: ReadonlyMap<string, number>,
   diagnostics: Diagnostic[],
 ): void {
-  const processed = new Set<string>();
-  const entityIds = [...entitiesById.keys()].sort(compareCodePoints);
+  const outcomeById = new Map<string, ParentGraphOutcome>();
 
-  for (const startId of entityIds) {
-    if (processed.has(startId)) continue;
+  const analyzeFrom = (startId: string): void => {
     const chain: string[] = [];
     const chainPositions = new Map<string, number>();
-    let currentId: string | undefined = startId;
+    let currentId = startId;
+    let outcome: ParentGraphOutcome;
 
-    while (currentId !== undefined && entitiesById.has(currentId) && !processed.has(currentId)) {
+    while (true) {
+      const knownOutcome = outcomeById.get(currentId);
+      if (knownOutcome !== undefined) {
+        outcome = knownOutcome;
+        break;
+      }
+
       const cycleStart = chainPositions.get(currentId);
       if (cycleStart !== undefined) {
         const cycleIds = chain.slice(cycleStart);
-        const anchorId = [...cycleIds].sort(compareCodePoints)[0];
+        let anchorOffset = 0;
+        for (let offset = 1; offset < cycleIds.length; offset += 1) {
+          if (compareCodePoints(cycleIds[offset]!, cycleIds[anchorOffset]!) < 0) {
+            anchorOffset = offset;
+          }
+        }
+        const canonicalCycle = [
+          ...cycleIds.slice(anchorOffset),
+          ...cycleIds.slice(0, anchorOffset),
+        ];
+        const anchorId = canonicalCycle[0];
         if (anchorId !== undefined) {
           const anchorIndex = indexById.get(anchorId);
           diagnostics.push(
             diagnostic(
               'entity.parent_cycle',
               anchorIndex === undefined ? '/entities' : `/entities/${anchorIndex}/parentId`,
-              `Entity parent cycle detected: ${[...cycleIds, currentId].join(' -> ')}.`,
+              `Entity parent cycle detected: ${[...canonicalCycle, anchorId].join(' -> ')}.`,
               anchorId,
             ),
           );
         }
+        outcome = cycleIds.includes(worldSpec.rootEntityId) ? 'reachable' : 'unreachable';
+        break;
+      }
+
+      const entity = entitiesById.get(currentId);
+      if (entity === undefined) {
+        outcome = 'unreachable';
         break;
       }
 
       chainPositions.set(currentId, chain.length);
       chain.push(currentId);
-      currentId = entitiesById.get(currentId)?.parentId;
+      if (entity.parentId === undefined) {
+        outcome = 'unreachable';
+        break;
+      }
+      currentId = entity.parentId;
     }
 
-    for (const id of chain) processed.add(id);
-  }
-}
+    for (let index = chain.length - 1; index >= 0; index -= 1) {
+      outcomeById.set(chain[index]!, outcome);
+    }
+  };
 
-function reachesRoot(
-  entityId: string,
-  rootEntityId: string,
-  entitiesById: ReadonlyMap<string, WorldEntity>,
-): boolean {
-  const visited = new Set<string>();
-  let currentId = entityId;
-  while (currentId !== rootEntityId) {
-    if (visited.has(currentId)) return false;
-    visited.add(currentId);
-    const entity = entitiesById.get(currentId);
-    if (entity?.parentId === undefined) return false;
-    currentId = entity.parentId;
+  if (entitiesById.has(worldSpec.rootEntityId)) {
+    // Analyze the root first so an invalid parent edge on it can still expose a cycle. The root
+    // remains the reachability terminal even when that separate root-parent invariant is violated.
+    analyzeFrom(worldSpec.rootEntityId);
+    outcomeById.set(worldSpec.rootEntityId, 'reachable');
   }
-  return entitiesById.has(rootEntityId);
-}
 
-function validateReachability(
-  worldSpec: WorldSpec,
-  entitiesById: ReadonlyMap<string, WorldEntity>,
-  diagnostics: Diagnostic[],
-): void {
+  for (const entityId of entitiesById.keys()) {
+    if (!outcomeById.has(entityId)) analyzeFrom(entityId);
+  }
+
   worldSpec.entities.forEach((entity, index) => {
-    if (
-      entity.id !== worldSpec.rootEntityId &&
-      !reachesRoot(entity.id, worldSpec.rootEntityId, entitiesById)
-    ) {
+    if (entity.id !== worldSpec.rootEntityId && outcomeById.get(entity.id) !== 'reachable') {
       diagnostics.push(
         diagnostic(
           'entity.unreachable',
@@ -534,9 +552,8 @@ function semanticDiagnostics(worldSpec: WorldSpec): Diagnostic[] {
   const diagnostics: Diagnostic[] = [];
   validateUniqueIdentifiers(worldSpec, diagnostics);
   const { entitiesById, indexById } = firstEntityMaps(worldSpec);
-  validateRootAndParents(worldSpec, entitiesById, diagnostics);
-  validateParentCycles(entitiesById, indexById, diagnostics);
-  validateReachability(worldSpec, entitiesById, diagnostics);
+  validateRootAndParents(worldSpec, entitiesById, indexById, diagnostics);
+  validateParentGraph(worldSpec, entitiesById, indexById, diagnostics);
   validateReferencesAndEndpoints(worldSpec, entitiesById, diagnostics);
   return sortDiagnostics(diagnostics);
 }

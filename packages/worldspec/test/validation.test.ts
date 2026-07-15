@@ -4,6 +4,47 @@ import { parseWorldSpec, validateWorldSpec } from '../src/index.js';
 import type { WorldSpec } from '../src/index.js';
 import { diagnosticCodes, findEntity, loadValidFixture, validateFixture } from './helpers.js';
 
+const DEEP_HIERARCHY_ENTITY_COUNT = 4_096;
+
+function isolatedHierarchySpec(): WorldSpec {
+  const input = loadValidFixture();
+  input.entities = [structuredClone(findEntity(input, 'entity-world'))];
+  input.relationships = [];
+  input.constraints = [];
+  input.locks = [];
+  return input;
+}
+
+function hierarchyEntity(id: string, parentId: string): WorldSpec['entities'][number] {
+  return {
+    id,
+    kind: 'object',
+    name: id,
+    parentId,
+    provenance: {
+      classification: 'invented',
+      referenceIds: [],
+      confidence: 1,
+    },
+    tags: [],
+    attributes: {},
+  };
+}
+
+function chainEntityId(index: number): string {
+  return `entity-chain-${String(index).padStart(4, '0')}`;
+}
+
+function linearHierarchySpec(entityCount: number, firstParentId: string): WorldSpec {
+  const input = isolatedHierarchySpec();
+  for (let index = 0; index < entityCount; index += 1) {
+    input.entities.push(
+      hierarchyEntity(chainEntityId(index), index === 0 ? firstParentId : chainEntityId(index - 1)),
+    );
+  }
+  return input;
+}
+
 describe('semantic validation', () => {
   it.each([
     ['duplicate-id.worldspec.json', 'id.duplicate'],
@@ -73,6 +114,93 @@ describe('semantic validation', () => {
     const result = validateFixture('invalid/parent-cycle.worldspec.json');
 
     expect(diagnosticCodes(result)).toContain('entity.parent_cycle');
+  });
+
+  it('validates a several-thousand-entity hierarchy without recursive traversal', () => {
+    const input = linearHierarchySpec(DEEP_HIERARCHY_ENTITY_COUNT, 'entity-world');
+
+    expect(validateWorldSpec(input)).toEqual({ valid: true, value: input, diagnostics: [] });
+  });
+
+  it('reports every unreachable entity in a long hierarchy ending at a missing parent', () => {
+    const input = linearHierarchySpec(DEEP_HIERARCHY_ENTITY_COUNT, 'entity-not-present');
+
+    const result = validateWorldSpec(input);
+
+    expect(result.valid).toBe(false);
+    expect(
+      result.diagnostics.filter((candidate) => candidate.code === 'entity.parent_missing'),
+    ).toEqual([expect.objectContaining({ relatedId: 'entity-not-present' })]);
+    expect(
+      result.diagnostics.filter((candidate) => candidate.code === 'entity.unreachable'),
+    ).toHaveLength(DEEP_HIERARCHY_ENTITY_COUNT);
+  });
+
+  it('reports one cycle when another entity feeds into it', () => {
+    const input = isolatedHierarchySpec();
+    input.entities.push(
+      hierarchyEntity('entity-cycle-a', 'entity-cycle-b'),
+      hierarchyEntity('entity-cycle-b', 'entity-cycle-a'),
+      hierarchyEntity('entity-cycle-feeder', 'entity-cycle-a'),
+    );
+
+    const result = validateWorldSpec(input);
+
+    expect(
+      result.diagnostics.filter((candidate) => candidate.code === 'entity.parent_cycle'),
+    ).toEqual([expect.objectContaining({ relatedId: 'entity-cycle-a' })]);
+    expect(
+      result.diagnostics
+        .filter((candidate) => candidate.code === 'entity.unreachable')
+        .map((candidate) => candidate.relatedId),
+    ).toEqual(['entity-cycle-a', 'entity-cycle-b', 'entity-cycle-feeder']);
+  });
+
+  it('reports exactly one diagnostic for each distinct parent cycle', () => {
+    const input = isolatedHierarchySpec();
+    input.entities.push(
+      hierarchyEntity('entity-cycle-a', 'entity-cycle-b'),
+      hierarchyEntity('entity-cycle-b', 'entity-cycle-a'),
+      hierarchyEntity('entity-cycle-x', 'entity-cycle-y'),
+      hierarchyEntity('entity-cycle-y', 'entity-cycle-x'),
+    );
+
+    const result = validateWorldSpec(input);
+
+    expect(
+      result.diagnostics
+        .filter((candidate) => candidate.code === 'entity.parent_cycle')
+        .map((candidate) => candidate.relatedId),
+    ).toEqual(['entity-cycle-a', 'entity-cycle-x']);
+    expect(
+      result.diagnostics.filter((candidate) => candidate.code === 'entity.unreachable'),
+    ).toHaveLength(4);
+  });
+
+  it('returns identical graph diagnostics across repeated validation', () => {
+    const input = isolatedHierarchySpec();
+    input.entities.push(
+      hierarchyEntity('entity-cycle-b', 'entity-cycle-a'),
+      hierarchyEntity('entity-cycle-a', 'entity-cycle-b'),
+      hierarchyEntity('entity-cycle-feeder', 'entity-cycle-b'),
+      hierarchyEntity('entity-orphan', 'entity-not-present'),
+    );
+    const expected = validateWorldSpec(input).diagnostics;
+
+    for (let repetition = 0; repetition < 5; repetition += 1) {
+      expect(validateWorldSpec(input).diagnostics).toEqual(expected);
+    }
+  });
+
+  it('diagnoses duplicate entity IDs without throwing during graph analysis', () => {
+    const input = isolatedHierarchySpec();
+    input.entities.push(
+      hierarchyEntity('entity-duplicate', 'entity-world'),
+      hierarchyEntity('entity-duplicate', 'entity-not-present'),
+    );
+
+    expect(() => validateWorldSpec(input)).not.toThrow();
+    expect(diagnosticCodes(validateWorldSpec(input))).toContain('id.duplicate');
   });
 
   it('requires provenance references to resolve', () => {

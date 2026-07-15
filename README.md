@@ -87,18 +87,25 @@ version.
 
 ## Commands
 
-| Command                | Purpose                                                           |
-| ---------------------- | ----------------------------------------------------------------- |
-| `pnpm format`          | Format supported files with Prettier.                             |
-| `pnpm format:check`    | Check formatting without writing changes.                         |
-| `pnpm lint`            | Run ESLint.                                                       |
-| `pnpm typecheck`       | Type-check all workspace packages.                                |
-| `pnpm test`            | Run the Vitest suite.                                             |
-| `pnpm build`           | Compile packages with `tsc`.                                      |
-| `pnpm schema:generate` | Regenerate the checked-in WorldSpec JSON Schema.                  |
-| `pnpm schema:check`    | Check the generated schema for drift.                             |
-| `pnpm worldspec`       | Run the WorldSpec CLI.                                            |
-| `pnpm check`           | Run formatting, lint, type, test, schema-drift, and build checks. |
+| Command                | Purpose                                                                                |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| `pnpm format`          | Format supported files with Prettier.                                                  |
+| `pnpm format:check`    | Check formatting without writing changes.                                              |
+| `pnpm lint`            | Run ESLint.                                                                            |
+| `pnpm typecheck`       | Type-check all workspace packages.                                                     |
+| `pnpm test`            | Run the Vitest suite.                                                                  |
+| `pnpm build`           | Compile packages with `tsc`.                                                           |
+| `pnpm test:dist`       | Smoke-test the compiled WorldSpec CLI and its exit codes.                              |
+| `pnpm schema:generate` | Regenerate the checked-in WorldSpec JSON Schema.                                       |
+| `pnpm schema:check`    | Check the generated schema for drift.                                                  |
+| `pnpm worldspec`       | Run the WorldSpec CLI.                                                                 |
+| `pnpm check`           | Run format, lint, type, tests, schema drift, build, then the compiled-CLI smoke check. |
+
+`pnpm test:dist` launches the emitted `dist/cli.js` directly and verifies the documented valid,
+invalid, and usage exit paths. Run `pnpm build` first; `pnpm check` does so automatically.
+
+CI runs `pnpm check` with Node.js 22 for pull requests, pushes to `main`, and manual dispatches.
+Concurrency cancellation replaces superseded runs for the same pull request or branch.
 
 ## WorldSpec CLI
 

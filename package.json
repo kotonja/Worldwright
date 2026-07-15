@@ -10,13 +10,14 @@
   },
   "scripts": {
     "build": "pnpm --recursive build",
-    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm schema:check && pnpm build",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm schema:check && pnpm build && pnpm test:dist",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "schema:check": "pnpm --filter @worldwright/worldspec schema:check",
     "schema:generate": "pnpm --filter @worldwright/worldspec schema:generate",
     "test": "pnpm --recursive test",
+    "test:dist": "pnpm --filter @worldwright/worldspec test:dist",
     "typecheck": "pnpm --recursive typecheck",
     "worldspec": "tsx packages/worldspec/src/cli.ts"
   },

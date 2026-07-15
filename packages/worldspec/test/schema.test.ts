@@ -3,13 +3,14 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 import {
+  parseWorldSpec,
   WORLD_SPEC_SCHEMA_ID,
   WORLD_SPEC_VERSION,
   WorldSpecSchema,
   validateWorldSpec,
 } from '../src/index.js';
 import { renderWorldSpecSchema, schemaArtifactPath } from '../scripts/generate-schema.js';
-import { diagnosticCodes, loadValidFixture, validateFixture } from './helpers.js';
+import { diagnosticCodes, fixtureSource, loadValidFixture, validateFixture } from './helpers.js';
 
 describe('WorldSpec JSON Schema', () => {
   it('publishes the v0.1.0 draft 2020-12 identity', () => {
@@ -44,6 +45,59 @@ describe('WorldSpec JSON Schema', () => {
       expect(diagnosticCodes(validateWorldSpec(input))).toContain('schema.invalid');
     },
   );
+
+  it('accepts the maximum safe integer for seeds and integer budget limits', () => {
+    const input = loadValidFixture();
+    input.project.seed = Number.MAX_SAFE_INTEGER;
+    input.budgets.limits = {
+      ...input.budgets.limits,
+      instances: Number.MAX_SAFE_INTEGER,
+      triangles: Number.MAX_SAFE_INTEGER,
+    };
+
+    expect(validateWorldSpec(input).valid).toBe(true);
+  });
+
+  it.each([
+    [
+      'project.seed',
+      (input: ReturnType<typeof loadValidFixture>): void => {
+        input.project.seed = Number.MAX_SAFE_INTEGER + 1;
+      },
+    ],
+    [
+      'budgets.limits.instances',
+      (input: ReturnType<typeof loadValidFixture>): void => {
+        input.budgets.limits = {
+          ...input.budgets.limits,
+          instances: Number.MAX_SAFE_INTEGER + 1,
+        };
+      },
+    ],
+    [
+      'budgets.limits.triangles',
+      (input: ReturnType<typeof loadValidFixture>): void => {
+        input.budgets.limits = {
+          ...input.budgets.limits,
+          triangles: Number.MAX_SAFE_INTEGER + 1,
+        };
+      },
+    ],
+  ])('rejects values above the safe integer boundary for %s', (_field, mutate) => {
+    const input = loadValidFixture();
+    mutate(input);
+
+    expect(diagnosticCodes(validateWorldSpec(input))).toContain('schema.invalid');
+  });
+
+  it('rejects an unsafe integer written in JSON source after parsing', () => {
+    const source = fixtureSource('valid/reference-mansion.worldspec.json').replace(
+      '"seed": 1847',
+      '"seed": 9007199254740992',
+    );
+
+    expect(diagnosticCodes(parseWorldSpec(source))).toContain('schema.invalid');
+  });
 
   it.each([
     ['undefined', undefined],

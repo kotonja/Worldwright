@@ -45,11 +45,12 @@ Use the root scripts:
 - `pnpm typecheck` — run strict TypeScript checks.
 - `pnpm test` — run Vitest.
 - `pnpm build` — compile with `tsc`.
+- `pnpm test:dist` — smoke-test the compiled CLI, including its documented exit codes.
 - `pnpm schema:generate` — regenerate the checked-in JSON Schema.
 - `pnpm schema:check` — fail if the schema artifact has drifted.
 - `pnpm worldspec <command>` — run the WorldSpec CLI, for example `pnpm worldspec validate ...`.
-- `pnpm check` — run `format:check`, `lint`, `typecheck`, `test`, `schema:check`, and `build` in
-  that order.
+- `pnpm check` — run `format:check`, `lint`, `typecheck`, `test`, `schema:check`, `build`, and
+  `test:dist` in that order.
 
 ## Engineering standards
 

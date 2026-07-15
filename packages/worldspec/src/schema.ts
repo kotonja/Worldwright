@@ -6,6 +6,8 @@ export const WORLD_SPEC_SCHEMA_ID = 'urn:worldwright:worldspec:0.1.0' as const;
 export const WORLD_SPEC_IDENTIFIER_PATTERN = '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$';
 export const WORLD_SPEC_IDENTIFIER_MAX_LENGTH = 128;
 
+const WORLD_SPEC_MAX_SAFE_INTEGER = 9_007_199_254_740_991;
+
 export type JsonValue =
   | null
   | boolean
@@ -33,7 +35,7 @@ export const ProjectSchema = Type.Object(
     id: IdentifierSchema,
     name: TextSchema,
     description: Type.Optional(TextSchema),
-    seed: Type.Integer({ minimum: 0 }),
+    seed: Type.Integer({ minimum: 0, maximum: WORLD_SPEC_MAX_SAFE_INTEGER }),
     units: Type.Literal('studs'),
     upAxis: Type.Literal('Y'),
   },
@@ -234,8 +236,8 @@ export const LockSchema = Type.Object(
 
 const BudgetLimitsSchema = Type.Object(
   {
-    instances: Type.Optional(Type.Integer({ minimum: 1 })),
-    triangles: Type.Optional(Type.Integer({ minimum: 1 })),
+    instances: Type.Optional(Type.Integer({ minimum: 1, maximum: WORLD_SPEC_MAX_SAFE_INTEGER })),
+    triangles: Type.Optional(Type.Integer({ minimum: 1, maximum: WORLD_SPEC_MAX_SAFE_INTEGER })),
     textureMemoryMegabytes: Type.Optional(Type.Number({ exclusiveMinimum: 0 })),
   },
   { additionalProperties: false },
