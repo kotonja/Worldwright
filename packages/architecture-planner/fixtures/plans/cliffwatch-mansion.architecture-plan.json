@@ -1,0 +1,2388 @@
+{
+  "building": {
+    "colors": {
+      "exteriorWall": {
+        "b": 84,
+        "g": 78,
+        "r": 75
+      },
+      "floor": {
+        "b": 56,
+        "g": 76,
+        "r": 103
+      },
+      "interiorWall": {
+        "b": 167,
+        "g": 179,
+        "r": 184
+      },
+      "stair": {
+        "b": 42,
+        "g": 61,
+        "r": 89
+      },
+      "window": {
+        "b": 215,
+        "g": 191,
+        "r": 151
+      }
+    },
+    "corridorAxis": "x",
+    "corridorWidth": 10,
+    "defaultClearHeight": 17,
+    "defaultDoorHeight": 9,
+    "defaultDoorWidth": 5,
+    "defaultWindowHeight": 7,
+    "defaultWindowSillHeight": 4,
+    "defaultWindowWidth": 5,
+    "entranceEnd": "negative",
+    "exteriorWallThickness": 2,
+    "floorToFloorHeight": 20,
+    "gridSize": 1,
+    "interiorEnvelope": {
+      "depth": 86,
+      "width": 156,
+      "x": -78,
+      "z": -43
+    },
+    "interiorWallThickness": 1,
+    "localOrigin": "footprint_center",
+    "materials": {
+      "exteriorWall": "Slate",
+      "floor": "WoodPlanks",
+      "interiorWall": "SmoothPlastic",
+      "stair": "Wood",
+      "window": "Glass"
+    },
+    "openingEndClearance": 2,
+    "outerFootprint": {
+      "depth": 90,
+      "width": 160,
+      "x": -80,
+      "z": -45
+    },
+    "slabThickness": 1,
+    "topology": "double_loaded_spine",
+    "windowTransparency": 0.45,
+    "worldOrigin": {
+      "x": 320,
+      "y": 64,
+      "z": -180
+    },
+    "yawDegrees": 90
+  },
+  "circulationEdges": [
+    {
+      "fromNodeId": "ballroom",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-ballroom",
+      "sourceId": "archgen-opening-corridor-door-ballroom",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "dining-room",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "sourceId": "archgen-opening-corridor-door-dining-room",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "drawing-room",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-drawing-room",
+      "sourceId": "archgen-opening-corridor-door-drawing-room",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "east-bedroom",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-east-bedroom",
+      "sourceId": "archgen-opening-corridor-door-east-bedroom",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "foyer-grand",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-foyer-grand",
+      "sourceId": "archgen-opening-corridor-door-foyer-grand",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "guest-sitting-room",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-guest-sitting-room",
+      "sourceId": "archgen-opening-corridor-door-guest-sitting-room",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "kitchen-service",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "sourceId": "archgen-opening-corridor-door-kitchen-service",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "library-west",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-library-west",
+      "sourceId": "archgen-opening-corridor-door-library-west",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "primary-bath",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bath",
+      "sourceId": "archgen-opening-corridor-door-primary-bath",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "primary-bedroom",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bedroom",
+      "sourceId": "archgen-opening-corridor-door-primary-bedroom",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "study-ground",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-study-ground",
+      "sourceId": "archgen-opening-corridor-door-study-ground",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "upper-study",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "sourceId": "archgen-opening-corridor-door-upper-study",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "west-bedroom",
+      "id": "archgen-circulation-opening-archgen-opening-corridor-door-west-bedroom",
+      "sourceId": "archgen-opening-corridor-door-west-bedroom",
+      "sourceType": "opening",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "archgen-exterior-entrance-mansion-cliffwatch",
+      "id": "archgen-circulation-opening-archgen-opening-exterior-entrance-foyer-grand",
+      "sourceId": "archgen-opening-exterior-entrance-foyer-grand",
+      "sourceType": "opening",
+      "toNodeId": "foyer-grand",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "dining-room",
+      "id": "archgen-circulation-opening-archgen-opening-room-door-relationship-dining-kitchen",
+      "sourceId": "archgen-opening-room-door-relationship-dining-kitchen",
+      "sourceType": "opening",
+      "toNodeId": "kitchen-service",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "foyer-grand",
+      "id": "archgen-circulation-opening-archgen-opening-room-door-relationship-foyer-ballroom",
+      "sourceId": "archgen-opening-room-door-relationship-foyer-ballroom",
+      "sourceType": "opening",
+      "toNodeId": "ballroom",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "primary-bedroom",
+      "id": "archgen-circulation-opening-archgen-opening-room-door-relationship-primary-suite",
+      "sourceId": "archgen-opening-room-door-relationship-primary-suite",
+      "sourceType": "opening",
+      "toNodeId": "primary-bath",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "upper-study",
+      "id": "archgen-circulation-opening-archgen-opening-room-door-relationship-upper-study-sitting",
+      "sourceId": "archgen-opening-room-door-relationship-upper-study-sitting",
+      "sourceType": "opening",
+      "toNodeId": "guest-sitting-room",
+      "traversal": "door"
+    },
+    {
+      "fromNodeId": "archgen-corridor-floor-ground",
+      "id": "archgen-circulation-opening-archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+      "sourceId": "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+      "sourceType": "opening",
+      "toNodeId": "archgen-stair-hall-stair-main-floor-ground",
+      "traversal": "open"
+    },
+    {
+      "fromNodeId": "archgen-corridor-floor-upper",
+      "id": "archgen-circulation-opening-archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+      "sourceId": "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+      "sourceType": "opening",
+      "toNodeId": "archgen-stair-hall-stair-main-floor-upper",
+      "traversal": "open"
+    },
+    {
+      "fromNodeId": "archgen-stair-hall-stair-main-floor-ground",
+      "id": "archgen-circulation-stair-run-archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "sourceId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "sourceType": "stair_run",
+      "toNodeId": "archgen-stair-hall-stair-main-floor-upper",
+      "traversal": "stair"
+    }
+  ],
+  "floors": [
+    {
+      "clearHeight": 17,
+      "corridor": {
+        "depth": 10,
+        "width": 156,
+        "x": -78,
+        "z": -5
+      },
+      "finishedFloorElevation": 64,
+      "footprint": {
+        "depth": 90,
+        "width": 160,
+        "x": -80,
+        "z": -45
+      },
+      "id": "floor-ground",
+      "level": 0,
+      "openingIds": [
+        "archgen-opening-corridor-door-ballroom",
+        "archgen-opening-corridor-door-dining-room",
+        "archgen-opening-corridor-door-drawing-room",
+        "archgen-opening-corridor-door-foyer-grand",
+        "archgen-opening-corridor-door-kitchen-service",
+        "archgen-opening-corridor-door-library-west",
+        "archgen-opening-corridor-door-study-ground",
+        "archgen-opening-exterior-entrance-foyer-grand",
+        "archgen-opening-room-door-relationship-dining-kitchen",
+        "archgen-opening-room-door-relationship-foyer-ballroom",
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+        "archgen-opening-window-ballroom-1-721f51c0c15e3a5a",
+        "archgen-opening-window-ballroom-2-e4f4f9224e20449e",
+        "archgen-opening-window-ballroom-3-330ef095d664b12b",
+        "archgen-opening-window-ballroom-4-c2d7801ecada8c82",
+        "archgen-opening-window-dining-room-1-7f86875ca1433cb8",
+        "archgen-opening-window-dining-room-2-3a07fc8f0c0b7f8a",
+        "archgen-opening-window-dining-room-3-7b6a6b869dc62b34",
+        "archgen-opening-window-drawing-room-1-ecc5e4f88df5dc62",
+        "archgen-opening-window-drawing-room-2-bfdabc67b7c34d11",
+        "archgen-opening-window-drawing-room-3-b4f03971963e2a0b",
+        "archgen-opening-window-foyer-grand-1-bfabea36fa642f2e",
+        "archgen-opening-window-foyer-grand-2-92e1728ebceb13a4",
+        "archgen-opening-window-kitchen-service-1-007726943a1a7567",
+        "archgen-opening-window-kitchen-service-2-1303a7a56633227b",
+        "archgen-opening-window-library-west-1-5f5365ba5a2b31d0",
+        "archgen-opening-window-library-west-2-3a40ddff991f6e16",
+        "archgen-opening-window-library-west-3-8b7bd69741335153",
+        "archgen-opening-window-study-ground-1-d45185887d6cb0b9",
+        "archgen-opening-window-study-ground-2-a982ee6d783ae9a2"
+      ],
+      "spaceIds": [
+        "archgen-corridor-floor-ground",
+        "archgen-stair-hall-stair-main-floor-ground",
+        "ballroom",
+        "dining-room",
+        "drawing-room",
+        "foyer-grand",
+        "kitchen-service",
+        "library-west",
+        "study-ground"
+      ],
+      "stairCore": {
+        "depth": 14,
+        "width": 24,
+        "x": 54,
+        "z": 6
+      },
+      "stairRunIds": [
+        "archgen-stair-run-stair-main-floor-ground-floor-upper"
+      ],
+      "wallIds": [
+        "archgen-wall-floor-ground-corridor-x-5-5-12-53-archgen-corridor-floor-ground-library-west-e74db611fbd5c5b9",
+        "archgen-wall-floor-ground-corridor-x-5-5-3-43-archgen-corridor-floor-ground-drawing-room-516e712577356acc",
+        "archgen-wall-floor-ground-corridor-x-5-5-36-2-archgen-corridor-floor-ground-kitchen-service-5fb4a2a9f8b9ba14",
+        "archgen-wall-floor-ground-corridor-x-5-5-38-11-archgen-corridor-floor-ground-ballroom-d58bd5c71ee709aa",
+        "archgen-wall-floor-ground-corridor-x-5-5-44-78-archgen-corridor-floor-ground-study-ground-aebd2afeb2a4ea56",
+        "archgen-wall-floor-ground-corridor-x-5-5-78-37-archgen-corridor-floor-ground-dining-room-89d037bf376411a2",
+        "archgen-wall-floor-ground-corridor-x-5-5-78-39-archgen-corridor-floor-ground-foyer-grand-0365d8bbbd10e669",
+        "archgen-wall-floor-ground-divider-z-11-5-5-5-44-ballroom-library-west-52a4842ce1e4a7e8",
+        "archgen-wall-floor-ground-divider-z-2-5-44-5-5-drawing-room-kitchen-service-17fe0b960d49264d",
+        "archgen-wall-floor-ground-divider-z-36-5-44-5-5-dining-room-kitchen-service-e5a5b7efe6cad587",
+        "archgen-wall-floor-ground-divider-z-38-5-5-5-44-ballroom-foyer-grand-0d2c7169197dbc05",
+        "archgen-wall-floor-ground-divider-z-43-5-44-5-5-drawing-room-study-ground-767a801552d45593",
+        "archgen-wall-floor-ground-exterior-x-44-12-53-library-west-4bf195b2dcf2b45b",
+        "archgen-wall-floor-ground-exterior-x-44-3-43-drawing-room-0db20af6f31677ff",
+        "archgen-wall-floor-ground-exterior-x-44-36-2-kitchen-service-2fa2497dd350a98b",
+        "archgen-wall-floor-ground-exterior-x-44-38-11-ballroom-b987a5b243fe475f",
+        "archgen-wall-floor-ground-exterior-x-44-44-78-study-ground-a4b9f09739113f5d",
+        "archgen-wall-floor-ground-exterior-x-44-54-78-archgen-stair-hall-stair-main-floor-ground-4aa11b2505173eea",
+        "archgen-wall-floor-ground-exterior-x-44-78-37-dining-room-af77eba4194ae9fa",
+        "archgen-wall-floor-ground-exterior-x-44-78-39-foyer-grand-3518bf32775ea769",
+        "archgen-wall-floor-ground-exterior-z-79-44-5-5-dining-room-29675a4b1d628f8a",
+        "archgen-wall-floor-ground-exterior-z-79-44-5-5-study-ground-e608649975cb1020",
+        "archgen-wall-floor-ground-exterior-z-79-5-5-44-archgen-stair-hall-stair-main-floor-ground-4f8461903d0f3851",
+        "archgen-wall-floor-ground-exterior-z-79-5-5-44-foyer-grand-4019273347948333",
+        "archgen-wall-floor-ground-exterior-z-79-5-5-archgen-corridor-floor-ground-8458c5debdba0651",
+        "archgen-wall-floor-ground-exterior-z-79-5-5-archgen-corridor-floor-ground-a4fb67b00341161e",
+        "archgen-wall-floor-ground-stair-x-5-5-54-78-archgen-corridor-floor-ground-archgen-stair-hall-stair-main-floor-g-02ee3ead5a267344",
+        "archgen-wall-floor-ground-stair-z-53-5-5-5-44-archgen-stair-hall-stair-main-floor-ground-library-west-7341621972e74817"
+      ]
+    },
+    {
+      "clearHeight": 17,
+      "corridor": {
+        "depth": 10,
+        "width": 156,
+        "x": -78,
+        "z": -5
+      },
+      "finishedFloorElevation": 84,
+      "footprint": {
+        "depth": 90,
+        "width": 160,
+        "x": -80,
+        "z": -45
+      },
+      "id": "floor-upper",
+      "level": 1,
+      "openingIds": [
+        "archgen-opening-corridor-door-east-bedroom",
+        "archgen-opening-corridor-door-guest-sitting-room",
+        "archgen-opening-corridor-door-primary-bath",
+        "archgen-opening-corridor-door-primary-bedroom",
+        "archgen-opening-corridor-door-upper-study",
+        "archgen-opening-corridor-door-west-bedroom",
+        "archgen-opening-room-door-relationship-primary-suite",
+        "archgen-opening-room-door-relationship-upper-study-sitting",
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+        "archgen-opening-window-east-bedroom-1-3cc523998d54e259",
+        "archgen-opening-window-east-bedroom-2-28e8e8a91d75e808",
+        "archgen-opening-window-east-bedroom-3-b24999a31cc37776",
+        "archgen-opening-window-guest-sitting-room-1-67f308d6157ab290",
+        "archgen-opening-window-guest-sitting-room-2-4a91ff3c9016dc7b",
+        "archgen-opening-window-guest-sitting-room-3-38f2721184274540",
+        "archgen-opening-window-primary-bath-1-af2390fabde54498",
+        "archgen-opening-window-primary-bath-2-b2c1ded212e8f4af",
+        "archgen-opening-window-primary-bedroom-1-47f38e0a9e83f9f4",
+        "archgen-opening-window-primary-bedroom-2-00154f8fd6e692de",
+        "archgen-opening-window-primary-bedroom-3-776d2ecb0715e718",
+        "archgen-opening-window-primary-bedroom-4-4b7fd4094f5cb200",
+        "archgen-opening-window-upper-study-1-609a57f224b0a920",
+        "archgen-opening-window-upper-study-2-b0a399f4d5eb7f92",
+        "archgen-opening-window-west-bedroom-1-83934d19fd0b8b8f",
+        "archgen-opening-window-west-bedroom-2-af86881bb122ba2a",
+        "archgen-opening-window-west-bedroom-3-ed36c87ef629113b"
+      ],
+      "spaceIds": [
+        "archgen-corridor-floor-upper",
+        "archgen-stair-hall-stair-main-floor-upper",
+        "east-bedroom",
+        "guest-sitting-room",
+        "primary-bath",
+        "primary-bedroom",
+        "upper-study",
+        "west-bedroom"
+      ],
+      "stairCore": {
+        "depth": 14,
+        "width": 24,
+        "x": 54,
+        "z": 6
+      },
+      "stairRunIds": [
+        "archgen-stair-run-stair-main-floor-ground-floor-upper"
+      ],
+      "wallIds": [
+        "archgen-wall-floor-upper-corridor-x-5-5-14-53-archgen-corridor-floor-upper-upper-study-3dcf4e910799a358",
+        "archgen-wall-floor-upper-corridor-x-5-5-21-26-archgen-corridor-floor-upper-primary-bath-2aa099b962438dd2",
+        "archgen-wall-floor-upper-corridor-x-5-5-27-78-archgen-corridor-floor-upper-west-bedroom-a6ad7f74dd3942ea",
+        "archgen-wall-floor-upper-corridor-x-5-5-32-13-archgen-corridor-floor-upper-guest-sitting-room-74b86fe24062ad25",
+        "archgen-wall-floor-upper-corridor-x-5-5-78-22-archgen-corridor-floor-upper-primary-bedroom-c0d3e89226dd8a01",
+        "archgen-wall-floor-upper-corridor-x-5-5-78-33-archgen-corridor-floor-upper-east-bedroom-b1b8d610cf684869",
+        "archgen-wall-floor-upper-divider-z-13-5-5-5-44-guest-sitting-room-upper-study-b230439be4564a14",
+        "archgen-wall-floor-upper-divider-z-21-5-44-5-5-primary-bath-primary-bedroom-b0389315ebf9d522",
+        "archgen-wall-floor-upper-divider-z-26-5-44-5-5-primary-bath-west-bedroom-590e45122a371efd",
+        "archgen-wall-floor-upper-divider-z-32-5-5-5-44-east-bedroom-guest-sitting-room-b54862389bd48515",
+        "archgen-wall-floor-upper-exterior-x-44-14-53-upper-study-32afa0473fead42a",
+        "archgen-wall-floor-upper-exterior-x-44-21-26-primary-bath-86c40783dd99c486",
+        "archgen-wall-floor-upper-exterior-x-44-27-78-west-bedroom-e5a8e2631a4ab890",
+        "archgen-wall-floor-upper-exterior-x-44-32-13-guest-sitting-room-dcba395ca4aa9cb6",
+        "archgen-wall-floor-upper-exterior-x-44-54-78-archgen-stair-hall-stair-main-floor-upper-7cef874c1498eb2a",
+        "archgen-wall-floor-upper-exterior-x-44-78-22-primary-bedroom-ec1809e417250965",
+        "archgen-wall-floor-upper-exterior-x-44-78-33-east-bedroom-cbe08022df8f8e82",
+        "archgen-wall-floor-upper-exterior-z-79-44-5-5-primary-bedroom-610d7d9543e18df7",
+        "archgen-wall-floor-upper-exterior-z-79-44-5-5-west-bedroom-79b04e9ad6da3deb",
+        "archgen-wall-floor-upper-exterior-z-79-5-5-44-archgen-stair-hall-stair-main-floor-upper-33050f3d0003e49f",
+        "archgen-wall-floor-upper-exterior-z-79-5-5-44-east-bedroom-538dedc3bf54449f",
+        "archgen-wall-floor-upper-exterior-z-79-5-5-archgen-corridor-floor-upper-e2d6d5958e3e59d6",
+        "archgen-wall-floor-upper-exterior-z-79-5-5-archgen-corridor-floor-upper-f0ae7543b3f6b9e2",
+        "archgen-wall-floor-upper-stair-x-5-5-54-78-archgen-corridor-floor-upper-archgen-stair-hall-stair-main-floor-upp-54305c1fa0f8f934",
+        "archgen-wall-floor-upper-stair-z-53-5-5-5-44-archgen-stair-hall-stair-main-floor-upper-upper-study-b1692d4a88612c0e"
+      ]
+    }
+  ],
+  "metrics": {
+    "allRoomsReachable": true,
+    "avoidedAdjacencySatisfied": 1,
+    "avoidedAdjacencyTotal": 1,
+    "clearAreaEfficiency": 0.7258680555555556,
+    "clearRoomArea": 20905,
+    "corridorArea": 3120,
+    "doorCount": 20,
+    "estimatedGeneratedWorldSpecEntityCount": 400,
+    "estimatedPrimitiveCount": 264,
+    "floorCount": 2,
+    "grossOuterArea": 28800,
+    "maximumRoomAspectRatio": 1.5135135135135136,
+    "preferredAdjacencySatisfied": 2,
+    "preferredAdjacencyTotal": 4,
+    "requiredAdjacencySatisfied": 3,
+    "requiredAdjacencyTotal": 3,
+    "roomCount": 13,
+    "stairArea": 1776,
+    "stairRunCount": 1,
+    "windowCount": 36
+  },
+  "openings": [
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "ballroom",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-ballroom",
+      "offset": 21,
+      "sourceId": "ballroom",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-corridor-x-5-5-38-11-archgen-corridor-floor-ground-ballroom-d58bd5c71ee709aa",
+      "width": 7
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "dining-room",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-dining-room",
+      "offset": 18,
+      "sourceId": "dining-room",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-corridor-x-5-5-78-37-archgen-corridor-floor-ground-dining-room-89d037bf376411a2",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "drawing-room",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-drawing-room",
+      "offset": 17.5,
+      "sourceId": "drawing-room",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-corridor-x-5-5-3-43-archgen-corridor-floor-ground-drawing-room-516e712577356acc",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "east-bedroom",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-east-bedroom",
+      "offset": 20,
+      "sourceId": "east-bedroom",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-corridor-x-5-5-78-33-archgen-corridor-floor-upper-east-bedroom-b1b8d610cf684869",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "foyer-grand",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-foyer-grand",
+      "offset": 16,
+      "sourceId": "foyer-grand",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-corridor-x-5-5-78-39-archgen-corridor-floor-ground-foyer-grand-0365d8bbbd10e669",
+      "width": 7
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "guest-sitting-room",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-guest-sitting-room",
+      "offset": 20,
+      "sourceId": "guest-sitting-room",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-corridor-x-5-5-32-13-archgen-corridor-floor-upper-guest-sitting-room-74b86fe24062ad25",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "kitchen-service",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-kitchen-service",
+      "offset": 16,
+      "sourceId": "kitchen-service",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-corridor-x-5-5-36-2-archgen-corridor-floor-ground-kitchen-service-5fb4a2a9f8b9ba14",
+      "width": 6
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "library-west",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-library-west",
+      "offset": 18,
+      "sourceId": "library-west",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-corridor-x-5-5-12-53-archgen-corridor-floor-ground-library-west-e74db611fbd5c5b9",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bath",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-primary-bath",
+      "offset": 21,
+      "sourceId": "primary-bath",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-corridor-x-5-5-21-26-archgen-corridor-floor-upper-primary-bath-2aa099b962438dd2",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bedroom",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-primary-bedroom",
+      "offset": 25,
+      "sourceId": "primary-bedroom",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-corridor-x-5-5-78-22-archgen-corridor-floor-upper-primary-bedroom-c0d3e89226dd8a01",
+      "width": 6
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "study-ground",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-study-ground",
+      "offset": 14.5,
+      "sourceId": "study-ground",
+      "toNodeId": "archgen-corridor-floor-ground",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-corridor-x-5-5-44-78-archgen-corridor-floor-ground-study-ground-aebd2afeb2a4ea56",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "upper-study",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-upper-study",
+      "offset": 17,
+      "sourceId": "upper-study",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-corridor-x-5-5-14-53-archgen-corridor-floor-upper-upper-study-3dcf4e910799a358",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "west-bedroom",
+      "height": 9,
+      "id": "archgen-opening-corridor-door-west-bedroom",
+      "offset": 23,
+      "sourceId": "west-bedroom",
+      "toNodeId": "archgen-corridor-floor-upper",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-corridor-x-5-5-27-78-archgen-corridor-floor-upper-west-bedroom-a6ad7f74dd3942ea",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "archgen-exterior-entrance-mansion-cliffwatch",
+      "height": 9,
+      "id": "archgen-opening-exterior-entrance-foyer-grand",
+      "offset": 16.75,
+      "sourceId": "foyer-grand",
+      "toNodeId": "foyer-grand",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-exterior-z-79-5-5-44-foyer-grand-4019273347948333",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "dining-room",
+      "height": 9,
+      "id": "archgen-opening-room-door-relationship-dining-kitchen",
+      "offset": 16.75,
+      "sourceId": "relationship-dining-kitchen",
+      "toNodeId": "kitchen-service",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-divider-z-36-5-44-5-5-dining-room-kitchen-service-e5a5b7efe6cad587",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "foyer-grand",
+      "height": 9,
+      "id": "archgen-opening-room-door-relationship-foyer-ballroom",
+      "offset": 16.75,
+      "sourceId": "relationship-foyer-ballroom",
+      "toNodeId": "ballroom",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-divider-z-38-5-5-5-44-ballroom-foyer-grand-0d2c7169197dbc05",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bedroom",
+      "height": 9,
+      "id": "archgen-opening-room-door-relationship-primary-suite",
+      "offset": 16.75,
+      "sourceId": "relationship-primary-suite",
+      "toNodeId": "primary-bath",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-divider-z-21-5-44-5-5-primary-bath-primary-bedroom-b0389315ebf9d522",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "upper-study",
+      "height": 9,
+      "id": "archgen-opening-room-door-relationship-upper-study-sitting",
+      "offset": 16.75,
+      "sourceId": "relationship-upper-study-sitting",
+      "toNodeId": "guest-sitting-room",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-divider-z-13-5-5-5-44-guest-sitting-room-upper-study-b230439be4564a14",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-ground",
+      "fromNodeId": "archgen-corridor-floor-ground",
+      "height": 9,
+      "id": "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+      "offset": 9.5,
+      "sourceId": "stair-main",
+      "toNodeId": "archgen-stair-hall-stair-main-floor-ground",
+      "type": "door",
+      "wallId": "archgen-wall-floor-ground-stair-x-5-5-54-78-archgen-corridor-floor-ground-archgen-stair-hall-stair-main-floor-g-02ee3ead5a267344",
+      "width": 5
+    },
+    {
+      "bottom": 0,
+      "floorId": "floor-upper",
+      "fromNodeId": "archgen-corridor-floor-upper",
+      "height": 9,
+      "id": "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+      "offset": 9.5,
+      "sourceId": "stair-main",
+      "toNodeId": "archgen-stair-hall-stair-main-floor-upper",
+      "type": "door",
+      "wallId": "archgen-wall-floor-upper-stair-x-5-5-54-78-archgen-corridor-floor-upper-archgen-stair-hall-stair-main-floor-upp-54305c1fa0f8f934",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "ballroom",
+      "height": 7,
+      "id": "archgen-opening-window-ballroom-1-721f51c0c15e3a5a",
+      "offset": 7,
+      "sourceId": "ballroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-38-11-ballroom-b987a5b243fe475f",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "ballroom",
+      "height": 7,
+      "id": "archgen-opening-window-ballroom-2-e4f4f9224e20449e",
+      "offset": 17,
+      "sourceId": "ballroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-38-11-ballroom-b987a5b243fe475f",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "ballroom",
+      "height": 7,
+      "id": "archgen-opening-window-ballroom-3-330ef095d664b12b",
+      "offset": 27,
+      "sourceId": "ballroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-38-11-ballroom-b987a5b243fe475f",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "ballroom",
+      "height": 7,
+      "id": "archgen-opening-window-ballroom-4-c2d7801ecada8c82",
+      "offset": 37,
+      "sourceId": "ballroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-38-11-ballroom-b987a5b243fe475f",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "dining-room",
+      "height": 7,
+      "id": "archgen-opening-window-dining-room-1-7f86875ca1433cb8",
+      "offset": 7.5,
+      "sourceId": "dining-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-78-37-dining-room-af77eba4194ae9fa",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "dining-room",
+      "height": 7,
+      "id": "archgen-opening-window-dining-room-2-3a07fc8f0c0b7f8a",
+      "offset": 18,
+      "sourceId": "dining-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-78-37-dining-room-af77eba4194ae9fa",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "dining-room",
+      "height": 7,
+      "id": "archgen-opening-window-dining-room-3-7b6a6b869dc62b34",
+      "offset": 28.5,
+      "sourceId": "dining-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-78-37-dining-room-af77eba4194ae9fa",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "drawing-room",
+      "height": 7,
+      "id": "archgen-opening-window-drawing-room-1-ecc5e4f88df5dc62",
+      "offset": 7.25,
+      "sourceId": "drawing-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-3-43-drawing-room-0db20af6f31677ff",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "drawing-room",
+      "height": 7,
+      "id": "archgen-opening-window-drawing-room-2-bfdabc67b7c34d11",
+      "offset": 17.5,
+      "sourceId": "drawing-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-3-43-drawing-room-0db20af6f31677ff",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "drawing-room",
+      "height": 7,
+      "id": "archgen-opening-window-drawing-room-3-b4f03971963e2a0b",
+      "offset": 27.75,
+      "sourceId": "drawing-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-3-43-drawing-room-0db20af6f31677ff",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "east-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-east-bedroom-1-3cc523998d54e259",
+      "offset": 8.5,
+      "sourceId": "east-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-78-33-east-bedroom-cbe08022df8f8e82",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "east-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-east-bedroom-2-28e8e8a91d75e808",
+      "offset": 20,
+      "sourceId": "east-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-78-33-east-bedroom-cbe08022df8f8e82",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "east-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-east-bedroom-3-b24999a31cc37776",
+      "offset": 31.5,
+      "sourceId": "east-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-78-33-east-bedroom-cbe08022df8f8e82",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "foyer-grand",
+      "height": 7,
+      "id": "archgen-opening-window-foyer-grand-1-bfabea36fa642f2e",
+      "offset": 10.333333333333334,
+      "sourceId": "foyer-grand",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-78-39-foyer-grand-3518bf32775ea769",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "foyer-grand",
+      "height": 7,
+      "id": "archgen-opening-window-foyer-grand-2-92e1728ebceb13a4",
+      "offset": 23.666666666666668,
+      "sourceId": "foyer-grand",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-78-39-foyer-grand-3518bf32775ea769",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "guest-sitting-room",
+      "height": 7,
+      "id": "archgen-opening-window-guest-sitting-room-1-67f308d6157ab290",
+      "offset": 8.5,
+      "sourceId": "guest-sitting-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-32-13-guest-sitting-room-dcba395ca4aa9cb6",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "guest-sitting-room",
+      "height": 7,
+      "id": "archgen-opening-window-guest-sitting-room-2-4a91ff3c9016dc7b",
+      "offset": 20,
+      "sourceId": "guest-sitting-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-32-13-guest-sitting-room-dcba395ca4aa9cb6",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "guest-sitting-room",
+      "height": 7,
+      "id": "archgen-opening-window-guest-sitting-room-3-38f2721184274540",
+      "offset": 31.5,
+      "sourceId": "guest-sitting-room",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-32-13-guest-sitting-room-dcba395ca4aa9cb6",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "kitchen-service",
+      "height": 7,
+      "id": "archgen-opening-window-kitchen-service-1-007726943a1a7567",
+      "offset": 10,
+      "sourceId": "kitchen-service",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-36-2-kitchen-service-2fa2497dd350a98b",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "kitchen-service",
+      "height": 7,
+      "id": "archgen-opening-window-kitchen-service-2-1303a7a56633227b",
+      "offset": 23,
+      "sourceId": "kitchen-service",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-36-2-kitchen-service-2fa2497dd350a98b",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "library-west",
+      "height": 7,
+      "id": "archgen-opening-window-library-west-1-5f5365ba5a2b31d0",
+      "offset": 7.5,
+      "sourceId": "library-west",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-12-53-library-west-4bf195b2dcf2b45b",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "library-west",
+      "height": 7,
+      "id": "archgen-opening-window-library-west-2-3a40ddff991f6e16",
+      "offset": 18,
+      "sourceId": "library-west",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-12-53-library-west-4bf195b2dcf2b45b",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "library-west",
+      "height": 7,
+      "id": "archgen-opening-window-library-west-3-8b7bd69741335153",
+      "offset": 28.5,
+      "sourceId": "library-west",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-12-53-library-west-4bf195b2dcf2b45b",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bath",
+      "height": 7,
+      "id": "archgen-opening-window-primary-bath-1-af2390fabde54498",
+      "offset": 13,
+      "sourceId": "primary-bath",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-21-26-primary-bath-86c40783dd99c486",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bath",
+      "height": 7,
+      "id": "archgen-opening-window-primary-bath-2-b2c1ded212e8f4af",
+      "offset": 29,
+      "sourceId": "primary-bath",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-21-26-primary-bath-86c40783dd99c486",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-primary-bedroom-1-47f38e0a9e83f9f4",
+      "offset": 8.4,
+      "sourceId": "primary-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-78-22-primary-bedroom-ec1809e417250965",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-primary-bedroom-2-00154f8fd6e692de",
+      "offset": 19.8,
+      "sourceId": "primary-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-78-22-primary-bedroom-ec1809e417250965",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-primary-bedroom-3-776d2ecb0715e718",
+      "offset": 31.200000000000003,
+      "sourceId": "primary-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-78-22-primary-bedroom-ec1809e417250965",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "primary-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-primary-bedroom-4-4b7fd4094f5cb200",
+      "offset": 42.6,
+      "sourceId": "primary-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-78-22-primary-bedroom-ec1809e417250965",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "study-ground",
+      "height": 7,
+      "id": "archgen-opening-window-study-ground-1-d45185887d6cb0b9",
+      "offset": 8.666666666666668,
+      "sourceId": "study-ground",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-44-78-study-ground-a4b9f09739113f5d",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-ground",
+      "fromNodeId": "study-ground",
+      "height": 7,
+      "id": "archgen-opening-window-study-ground-2-a982ee6d783ae9a2",
+      "offset": 20.333333333333336,
+      "sourceId": "study-ground",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-ground-exterior-x-44-44-78-study-ground-a4b9f09739113f5d",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "upper-study",
+      "height": 7,
+      "id": "archgen-opening-window-upper-study-1-609a57f224b0a920",
+      "offset": 10.333333333333334,
+      "sourceId": "upper-study",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-14-53-upper-study-32afa0473fead42a",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "upper-study",
+      "height": 7,
+      "id": "archgen-opening-window-upper-study-2-b0a399f4d5eb7f92",
+      "offset": 23.666666666666668,
+      "sourceId": "upper-study",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-14-53-upper-study-32afa0473fead42a",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "west-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-west-bedroom-1-83934d19fd0b8b8f",
+      "offset": 10,
+      "sourceId": "west-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-27-78-west-bedroom-e5a8e2631a4ab890",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "west-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-west-bedroom-2-af86881bb122ba2a",
+      "offset": 23,
+      "sourceId": "west-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-27-78-west-bedroom-e5a8e2631a4ab890",
+      "width": 5
+    },
+    {
+      "bottom": 4,
+      "floorId": "floor-upper",
+      "fromNodeId": "west-bedroom",
+      "height": 7,
+      "id": "archgen-opening-window-west-bedroom-3-ed36c87ef629113b",
+      "offset": 36,
+      "sourceId": "west-bedroom",
+      "toNodeId": "exterior",
+      "type": "window",
+      "wallId": "archgen-wall-floor-upper-exterior-x-44-27-78-west-bedroom-e5a8e2631a4ab890",
+      "width": 5
+    }
+  ],
+  "plannerVersion": "0.1.0",
+  "schemaVersion": "0.1.0",
+  "score": {
+    "areaDeviation": 2205,
+    "aspectRatio": 2438,
+    "nearDistance": 12780,
+    "preferredAdjacency": 70,
+    "preferredWindows": 0,
+    "seedTieBreak": 42222917735399,
+    "total": 19338,
+    "zoneOrdering": 1845
+  },
+  "source": {
+    "buildingEntityId": "mansion-cliffwatch",
+    "projectId": "project-cliffwatch-mansion",
+    "worldSpecHash": "613c8dd7b39c0e13d9eb3d23c901c8bb5bc98d75a97452a1a5dbd32338964bbd",
+    "worldSpecSchemaVersion": "0.1.0"
+  },
+  "spaces": [
+    {
+      "floorId": "floor-ground",
+      "id": "archgen-corridor-floor-ground",
+      "rectangle": {
+        "depth": 10,
+        "width": 156,
+        "x": -78,
+        "z": -5
+      },
+      "type": "corridor"
+    },
+    {
+      "floorId": "floor-upper",
+      "id": "archgen-corridor-floor-upper",
+      "rectangle": {
+        "depth": 10,
+        "width": 156,
+        "x": -78,
+        "z": -5
+      },
+      "type": "corridor"
+    },
+    {
+      "floorId": "floor-ground",
+      "id": "archgen-stair-hall-stair-main-floor-ground",
+      "rectangle": {
+        "depth": 37,
+        "width": 24,
+        "x": 54,
+        "z": 6
+      },
+      "sourceStairRouteId": "stair-main",
+      "type": "stair_hall"
+    },
+    {
+      "floorId": "floor-upper",
+      "id": "archgen-stair-hall-stair-main-floor-upper",
+      "rectangle": {
+        "depth": 37,
+        "width": 24,
+        "x": 54,
+        "z": 6
+      },
+      "sourceStairRouteId": "stair-main",
+      "type": "stair_hall"
+    },
+    {
+      "aspectRatio": 1.3243243243243243,
+      "clearArea": 1813,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-ballroom",
+      "exteriorWallIds": [
+        "archgen-wall-floor-ground-exterior-x-44-38-11-ballroom-b987a5b243fe475f"
+      ],
+      "floorId": "floor-ground",
+      "id": "ballroom",
+      "isEntrance": false,
+      "provenance": "inferred",
+      "rectangle": {
+        "depth": 37,
+        "width": 49,
+        "x": -38,
+        "z": 6
+      },
+      "type": "room",
+      "zone": "public"
+    },
+    {
+      "aspectRatio": 1.1081081081081081,
+      "clearArea": 1517,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-dining-room",
+      "exteriorWallIds": [
+        "archgen-wall-floor-ground-exterior-x-44-78-37-dining-room-af77eba4194ae9fa",
+        "archgen-wall-floor-ground-exterior-z-79-44-5-5-dining-room-29675a4b1d628f8a"
+      ],
+      "floorId": "floor-ground",
+      "id": "dining-room",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 41,
+        "x": -78,
+        "z": -43
+      },
+      "type": "room",
+      "zone": "public"
+    },
+    {
+      "aspectRatio": 1.0810810810810811,
+      "clearArea": 1480,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-drawing-room",
+      "exteriorWallIds": [
+        "archgen-wall-floor-ground-exterior-x-44-3-43-drawing-room-0db20af6f31677ff"
+      ],
+      "floorId": "floor-ground",
+      "id": "drawing-room",
+      "isEntrance": false,
+      "provenance": "inferred",
+      "rectangle": {
+        "depth": 37,
+        "width": 40,
+        "x": 3,
+        "z": -43
+      },
+      "type": "room",
+      "zone": "public"
+    },
+    {
+      "aspectRatio": 1.2162162162162162,
+      "clearArea": 1665,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-east-bedroom",
+      "exteriorWallIds": [
+        "archgen-wall-floor-upper-exterior-x-44-78-33-east-bedroom-cbe08022df8f8e82",
+        "archgen-wall-floor-upper-exterior-z-79-5-5-44-east-bedroom-538dedc3bf54449f"
+      ],
+      "floorId": "floor-upper",
+      "id": "east-bedroom",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 45,
+        "x": -78,
+        "z": 6
+      },
+      "type": "room",
+      "zone": "private"
+    },
+    {
+      "aspectRatio": 1.054054054054054,
+      "clearArea": 1443,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-foyer-grand",
+      "exteriorWallIds": [
+        "archgen-wall-floor-ground-exterior-x-44-78-39-foyer-grand-3518bf32775ea769",
+        "archgen-wall-floor-ground-exterior-z-79-5-5-44-foyer-grand-4019273347948333"
+      ],
+      "floorId": "floor-ground",
+      "id": "foyer-grand",
+      "isEntrance": true,
+      "provenance": "inferred",
+      "rectangle": {
+        "depth": 37,
+        "width": 39,
+        "x": -78,
+        "z": 6
+      },
+      "type": "room",
+      "zone": "public"
+    },
+    {
+      "aspectRatio": 1.2162162162162162,
+      "clearArea": 1665,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-guest-sitting-room",
+      "exteriorWallIds": [
+        "archgen-wall-floor-upper-exterior-x-44-32-13-guest-sitting-room-dcba395ca4aa9cb6"
+      ],
+      "floorId": "floor-upper",
+      "id": "guest-sitting-room",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 45,
+        "x": -32,
+        "z": 6
+      },
+      "type": "room",
+      "zone": "private"
+    },
+    {
+      "aspectRatio": 1.027027027027027,
+      "clearArea": 1406,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-kitchen-service",
+      "exteriorWallIds": [
+        "archgen-wall-floor-ground-exterior-x-44-36-2-kitchen-service-2fa2497dd350a98b"
+      ],
+      "floorId": "floor-ground",
+      "id": "kitchen-service",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 38,
+        "x": -36,
+        "z": -43
+      },
+      "type": "room",
+      "zone": "service"
+    },
+    {
+      "aspectRatio": 1.1081081081081081,
+      "clearArea": 1517,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-library-west",
+      "exteriorWallIds": [
+        "archgen-wall-floor-ground-exterior-x-44-12-53-library-west-4bf195b2dcf2b45b"
+      ],
+      "floorId": "floor-ground",
+      "id": "library-west",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 41,
+        "x": 12,
+        "z": 6
+      },
+      "type": "room",
+      "zone": "public"
+    },
+    {
+      "aspectRatio": 1.2702702702702702,
+      "clearArea": 1739,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-primary-bath",
+      "exteriorWallIds": [
+        "archgen-wall-floor-upper-exterior-x-44-21-26-primary-bath-86c40783dd99c486"
+      ],
+      "floorId": "floor-upper",
+      "id": "primary-bath",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 47,
+        "x": -21,
+        "z": -43
+      },
+      "type": "room",
+      "zone": "private"
+    },
+    {
+      "aspectRatio": 1.5135135135135136,
+      "clearArea": 2072,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-primary-bedroom",
+      "exteriorWallIds": [
+        "archgen-wall-floor-upper-exterior-x-44-78-22-primary-bedroom-ec1809e417250965",
+        "archgen-wall-floor-upper-exterior-z-79-44-5-5-primary-bedroom-610d7d9543e18df7"
+      ],
+      "floorId": "floor-upper",
+      "id": "primary-bedroom",
+      "isEntrance": false,
+      "provenance": "inferred",
+      "rectangle": {
+        "depth": 37,
+        "width": 56,
+        "x": -78,
+        "z": -43
+      },
+      "type": "room",
+      "zone": "private"
+    },
+    {
+      "aspectRatio": 1.088235294117647,
+      "clearArea": 1258,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-study-ground",
+      "exteriorWallIds": [
+        "archgen-wall-floor-ground-exterior-x-44-44-78-study-ground-a4b9f09739113f5d",
+        "archgen-wall-floor-ground-exterior-z-79-44-5-5-study-ground-e608649975cb1020"
+      ],
+      "floorId": "floor-ground",
+      "id": "study-ground",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 34,
+        "x": 44,
+        "z": -43
+      },
+      "type": "room",
+      "zone": "private"
+    },
+    {
+      "aspectRatio": 1.054054054054054,
+      "clearArea": 1443,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-upper-study",
+      "exteriorWallIds": [
+        "archgen-wall-floor-upper-exterior-x-44-14-53-upper-study-32afa0473fead42a"
+      ],
+      "floorId": "floor-upper",
+      "id": "upper-study",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 39,
+        "x": 14,
+        "z": 6
+      },
+      "type": "room",
+      "zone": "private"
+    },
+    {
+      "aspectRatio": 1.3783783783783783,
+      "clearArea": 1887,
+      "corridorDoorOpeningId": "archgen-opening-corridor-door-west-bedroom",
+      "exteriorWallIds": [
+        "archgen-wall-floor-upper-exterior-x-44-27-78-west-bedroom-e5a8e2631a4ab890",
+        "archgen-wall-floor-upper-exterior-z-79-44-5-5-west-bedroom-79b04e9ad6da3deb"
+      ],
+      "floorId": "floor-upper",
+      "id": "west-bedroom",
+      "isEntrance": false,
+      "provenance": "invented",
+      "rectangle": {
+        "depth": 37,
+        "width": 51,
+        "x": 27,
+        "z": -43
+      },
+      "type": "room",
+      "zone": "private"
+    }
+  ],
+  "stairRuns": [
+    {
+      "clearWidth": 14,
+      "core": {
+        "depth": 14,
+        "width": 24,
+        "x": 54,
+        "z": 6
+      },
+      "direction": "positive_x",
+      "fromFloorId": "floor-ground",
+      "id": "archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "landing": {
+        "lower": {
+          "depth": 14,
+          "width": 2,
+          "x": 54,
+          "z": 6
+        },
+        "upper": {
+          "depth": 14,
+          "width": 2,
+          "x": 76,
+          "z": 6
+        }
+      },
+      "riserHeight": 1,
+      "sourceStairRouteId": "stair-main",
+      "stepCount": 20,
+      "toFloorId": "floor-upper",
+      "treadDepth": 1
+    }
+  ],
+  "walls": [
+    {
+      "axis": "x",
+      "constant": 5.5,
+      "end": 53,
+      "firstSpaceId": "library-west",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-corridor-x-5-5-12-53-archgen-corridor-floor-ground-library-west-e74db611fbd5c5b9",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-library-west"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-ground",
+      "start": 12,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": -5.5,
+      "end": 43,
+      "firstSpaceId": "drawing-room",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-corridor-x-5-5-3-43-archgen-corridor-floor-ground-drawing-room-516e712577356acc",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-drawing-room"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-ground",
+      "start": 3,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": -5.5,
+      "end": 2,
+      "firstSpaceId": "kitchen-service",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-corridor-x-5-5-36-2-archgen-corridor-floor-ground-kitchen-service-5fb4a2a9f8b9ba14",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-kitchen-service"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-ground",
+      "start": -36,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": 5.5,
+      "end": 11,
+      "firstSpaceId": "ballroom",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-corridor-x-5-5-38-11-archgen-corridor-floor-ground-ballroom-d58bd5c71ee709aa",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-ballroom"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-ground",
+      "start": -38,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": -5.5,
+      "end": 78,
+      "firstSpaceId": "study-ground",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-corridor-x-5-5-44-78-archgen-corridor-floor-ground-study-ground-aebd2afeb2a4ea56",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-study-ground"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-ground",
+      "start": 44,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": -5.5,
+      "end": -37,
+      "firstSpaceId": "dining-room",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-corridor-x-5-5-78-37-archgen-corridor-floor-ground-dining-room-89d037bf376411a2",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-dining-room"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-ground",
+      "start": -78,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": 5.5,
+      "end": -39,
+      "firstSpaceId": "foyer-grand",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-corridor-x-5-5-78-39-archgen-corridor-floor-ground-foyer-grand-0365d8bbbd10e669",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-foyer-grand"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-ground",
+      "start": -78,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": 11.5,
+      "end": 44,
+      "firstSpaceId": "ballroom",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-divider-z-11-5-5-5-44-ballroom-library-west-52a4842ce1e4a7e8",
+      "kind": "divider",
+      "openingIds": [],
+      "secondSpaceId": "library-west",
+      "start": 5.5,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": 2.5,
+      "end": -5.5,
+      "firstSpaceId": "kitchen-service",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-divider-z-2-5-44-5-5-drawing-room-kitchen-service-17fe0b960d49264d",
+      "kind": "divider",
+      "openingIds": [],
+      "secondSpaceId": "drawing-room",
+      "start": -44,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": -36.5,
+      "end": -5.5,
+      "firstSpaceId": "dining-room",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-divider-z-36-5-44-5-5-dining-room-kitchen-service-e5a5b7efe6cad587",
+      "kind": "divider",
+      "openingIds": [
+        "archgen-opening-room-door-relationship-dining-kitchen"
+      ],
+      "secondSpaceId": "kitchen-service",
+      "start": -44,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": -38.5,
+      "end": 44,
+      "firstSpaceId": "foyer-grand",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-divider-z-38-5-5-5-44-ballroom-foyer-grand-0d2c7169197dbc05",
+      "kind": "divider",
+      "openingIds": [
+        "archgen-opening-room-door-relationship-foyer-ballroom"
+      ],
+      "secondSpaceId": "ballroom",
+      "start": 5.5,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": 43.5,
+      "end": -5.5,
+      "firstSpaceId": "drawing-room",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-divider-z-43-5-44-5-5-drawing-room-study-ground-767a801552d45593",
+      "kind": "divider",
+      "openingIds": [],
+      "secondSpaceId": "study-ground",
+      "start": -44,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": 44,
+      "end": 53,
+      "exterior": true,
+      "firstSpaceId": "library-west",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-x-44-12-53-library-west-4bf195b2dcf2b45b",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-library-west-1-5f5365ba5a2b31d0",
+        "archgen-opening-window-library-west-2-3a40ddff991f6e16",
+        "archgen-opening-window-library-west-3-8b7bd69741335153"
+      ],
+      "start": 12,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": -44,
+      "end": 43,
+      "exterior": true,
+      "firstSpaceId": "drawing-room",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-x-44-3-43-drawing-room-0db20af6f31677ff",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-drawing-room-1-ecc5e4f88df5dc62",
+        "archgen-opening-window-drawing-room-2-bfdabc67b7c34d11",
+        "archgen-opening-window-drawing-room-3-b4f03971963e2a0b"
+      ],
+      "start": 3,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": -44,
+      "end": 2,
+      "exterior": true,
+      "firstSpaceId": "kitchen-service",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-x-44-36-2-kitchen-service-2fa2497dd350a98b",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-kitchen-service-1-007726943a1a7567",
+        "archgen-opening-window-kitchen-service-2-1303a7a56633227b"
+      ],
+      "start": -36,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": 44,
+      "end": 11,
+      "exterior": true,
+      "firstSpaceId": "ballroom",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-x-44-38-11-ballroom-b987a5b243fe475f",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-ballroom-1-721f51c0c15e3a5a",
+        "archgen-opening-window-ballroom-2-e4f4f9224e20449e",
+        "archgen-opening-window-ballroom-3-330ef095d664b12b",
+        "archgen-opening-window-ballroom-4-c2d7801ecada8c82"
+      ],
+      "start": -38,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": -44,
+      "end": 78,
+      "exterior": true,
+      "firstSpaceId": "study-ground",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-x-44-44-78-study-ground-a4b9f09739113f5d",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-study-ground-1-d45185887d6cb0b9",
+        "archgen-opening-window-study-ground-2-a982ee6d783ae9a2"
+      ],
+      "start": 44,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": 44,
+      "end": 78,
+      "exterior": true,
+      "firstSpaceId": "archgen-stair-hall-stair-main-floor-ground",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-x-44-54-78-archgen-stair-hall-stair-main-floor-ground-4aa11b2505173eea",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": 54,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": -44,
+      "end": -37,
+      "exterior": true,
+      "firstSpaceId": "dining-room",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-x-44-78-37-dining-room-af77eba4194ae9fa",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-dining-room-1-7f86875ca1433cb8",
+        "archgen-opening-window-dining-room-2-3a07fc8f0c0b7f8a",
+        "archgen-opening-window-dining-room-3-7b6a6b869dc62b34"
+      ],
+      "start": -78,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": 44,
+      "end": -39,
+      "exterior": true,
+      "firstSpaceId": "foyer-grand",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-x-44-78-39-foyer-grand-3518bf32775ea769",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-foyer-grand-1-bfabea36fa642f2e",
+        "archgen-opening-window-foyer-grand-2-92e1728ebceb13a4"
+      ],
+      "start": -78,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": -79,
+      "end": -5.5,
+      "exterior": true,
+      "firstSpaceId": "dining-room",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-z-79-44-5-5-dining-room-29675a4b1d628f8a",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": -44,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": 79,
+      "end": -5.5,
+      "exterior": true,
+      "firstSpaceId": "study-ground",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-z-79-44-5-5-study-ground-e608649975cb1020",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": -44,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": 79,
+      "end": 44,
+      "exterior": true,
+      "firstSpaceId": "archgen-stair-hall-stair-main-floor-ground",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-z-79-5-5-44-archgen-stair-hall-stair-main-floor-ground-4f8461903d0f3851",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": 5.5,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": -79,
+      "end": 44,
+      "exterior": true,
+      "firstSpaceId": "foyer-grand",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-z-79-5-5-44-foyer-grand-4019273347948333",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-exterior-entrance-foyer-grand"
+      ],
+      "start": 5.5,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": -79,
+      "end": 5,
+      "exterior": true,
+      "firstSpaceId": "archgen-corridor-floor-ground",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-z-79-5-5-archgen-corridor-floor-ground-8458c5debdba0651",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": -5,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": 79,
+      "end": 5,
+      "exterior": true,
+      "firstSpaceId": "archgen-corridor-floor-ground",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-exterior-z-79-5-5-archgen-corridor-floor-ground-a4fb67b00341161e",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": -5,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": 5.5,
+      "end": 78,
+      "firstSpaceId": "archgen-stair-hall-stair-main-floor-ground",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-stair-x-5-5-54-78-archgen-corridor-floor-ground-archgen-stair-hall-stair-main-floor-g-02ee3ead5a267344",
+      "kind": "stair",
+      "openingIds": [
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-ground",
+      "start": 54,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": 53.5,
+      "end": 44,
+      "firstSpaceId": "library-west",
+      "floorId": "floor-ground",
+      "height": 17,
+      "id": "archgen-wall-floor-ground-stair-z-53-5-5-5-44-archgen-stair-hall-stair-main-floor-ground-library-west-7341621972e74817",
+      "kind": "stair",
+      "openingIds": [],
+      "secondSpaceId": "archgen-stair-hall-stair-main-floor-ground",
+      "start": 5.5,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": 5.5,
+      "end": 53,
+      "firstSpaceId": "upper-study",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-corridor-x-5-5-14-53-archgen-corridor-floor-upper-upper-study-3dcf4e910799a358",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-upper-study"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-upper",
+      "start": 14,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": -5.5,
+      "end": 26,
+      "firstSpaceId": "primary-bath",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-corridor-x-5-5-21-26-archgen-corridor-floor-upper-primary-bath-2aa099b962438dd2",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-primary-bath"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-upper",
+      "start": -21,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": -5.5,
+      "end": 78,
+      "firstSpaceId": "west-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-corridor-x-5-5-27-78-archgen-corridor-floor-upper-west-bedroom-a6ad7f74dd3942ea",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-west-bedroom"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-upper",
+      "start": 27,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": 5.5,
+      "end": 13,
+      "firstSpaceId": "guest-sitting-room",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-corridor-x-5-5-32-13-archgen-corridor-floor-upper-guest-sitting-room-74b86fe24062ad25",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-guest-sitting-room"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-upper",
+      "start": -32,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": -5.5,
+      "end": -22,
+      "firstSpaceId": "primary-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-corridor-x-5-5-78-22-archgen-corridor-floor-upper-primary-bedroom-c0d3e89226dd8a01",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-primary-bedroom"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-upper",
+      "start": -78,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": 5.5,
+      "end": -33,
+      "firstSpaceId": "east-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-corridor-x-5-5-78-33-archgen-corridor-floor-upper-east-bedroom-b1b8d610cf684869",
+      "kind": "corridor",
+      "openingIds": [
+        "archgen-opening-corridor-door-east-bedroom"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-upper",
+      "start": -78,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": 13.5,
+      "end": 44,
+      "firstSpaceId": "guest-sitting-room",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-divider-z-13-5-5-5-44-guest-sitting-room-upper-study-b230439be4564a14",
+      "kind": "divider",
+      "openingIds": [
+        "archgen-opening-room-door-relationship-upper-study-sitting"
+      ],
+      "secondSpaceId": "upper-study",
+      "start": 5.5,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": -21.5,
+      "end": -5.5,
+      "firstSpaceId": "primary-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-divider-z-21-5-44-5-5-primary-bath-primary-bedroom-b0389315ebf9d522",
+      "kind": "divider",
+      "openingIds": [
+        "archgen-opening-room-door-relationship-primary-suite"
+      ],
+      "secondSpaceId": "primary-bath",
+      "start": -44,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": 26.5,
+      "end": -5.5,
+      "firstSpaceId": "primary-bath",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-divider-z-26-5-44-5-5-primary-bath-west-bedroom-590e45122a371efd",
+      "kind": "divider",
+      "openingIds": [],
+      "secondSpaceId": "west-bedroom",
+      "start": -44,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": -32.5,
+      "end": 44,
+      "firstSpaceId": "east-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-divider-z-32-5-5-5-44-east-bedroom-guest-sitting-room-b54862389bd48515",
+      "kind": "divider",
+      "openingIds": [],
+      "secondSpaceId": "guest-sitting-room",
+      "start": 5.5,
+      "thickness": 1
+    },
+    {
+      "axis": "x",
+      "constant": 44,
+      "end": 53,
+      "exterior": true,
+      "firstSpaceId": "upper-study",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-x-44-14-53-upper-study-32afa0473fead42a",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-upper-study-1-609a57f224b0a920",
+        "archgen-opening-window-upper-study-2-b0a399f4d5eb7f92"
+      ],
+      "start": 14,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": -44,
+      "end": 26,
+      "exterior": true,
+      "firstSpaceId": "primary-bath",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-x-44-21-26-primary-bath-86c40783dd99c486",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-primary-bath-1-af2390fabde54498",
+        "archgen-opening-window-primary-bath-2-b2c1ded212e8f4af"
+      ],
+      "start": -21,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": -44,
+      "end": 78,
+      "exterior": true,
+      "firstSpaceId": "west-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-x-44-27-78-west-bedroom-e5a8e2631a4ab890",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-west-bedroom-1-83934d19fd0b8b8f",
+        "archgen-opening-window-west-bedroom-2-af86881bb122ba2a",
+        "archgen-opening-window-west-bedroom-3-ed36c87ef629113b"
+      ],
+      "start": 27,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": 44,
+      "end": 13,
+      "exterior": true,
+      "firstSpaceId": "guest-sitting-room",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-x-44-32-13-guest-sitting-room-dcba395ca4aa9cb6",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-guest-sitting-room-1-67f308d6157ab290",
+        "archgen-opening-window-guest-sitting-room-2-4a91ff3c9016dc7b",
+        "archgen-opening-window-guest-sitting-room-3-38f2721184274540"
+      ],
+      "start": -32,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": 44,
+      "end": 78,
+      "exterior": true,
+      "firstSpaceId": "archgen-stair-hall-stair-main-floor-upper",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-x-44-54-78-archgen-stair-hall-stair-main-floor-upper-7cef874c1498eb2a",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": 54,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": -44,
+      "end": -22,
+      "exterior": true,
+      "firstSpaceId": "primary-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-x-44-78-22-primary-bedroom-ec1809e417250965",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-primary-bedroom-1-47f38e0a9e83f9f4",
+        "archgen-opening-window-primary-bedroom-2-00154f8fd6e692de",
+        "archgen-opening-window-primary-bedroom-3-776d2ecb0715e718",
+        "archgen-opening-window-primary-bedroom-4-4b7fd4094f5cb200"
+      ],
+      "start": -78,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": 44,
+      "end": -33,
+      "exterior": true,
+      "firstSpaceId": "east-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-x-44-78-33-east-bedroom-cbe08022df8f8e82",
+      "kind": "exterior",
+      "openingIds": [
+        "archgen-opening-window-east-bedroom-1-3cc523998d54e259",
+        "archgen-opening-window-east-bedroom-2-28e8e8a91d75e808",
+        "archgen-opening-window-east-bedroom-3-b24999a31cc37776"
+      ],
+      "start": -78,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": -79,
+      "end": -5.5,
+      "exterior": true,
+      "firstSpaceId": "primary-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-z-79-44-5-5-primary-bedroom-610d7d9543e18df7",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": -44,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": 79,
+      "end": -5.5,
+      "exterior": true,
+      "firstSpaceId": "west-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-z-79-44-5-5-west-bedroom-79b04e9ad6da3deb",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": -44,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": 79,
+      "end": 44,
+      "exterior": true,
+      "firstSpaceId": "archgen-stair-hall-stair-main-floor-upper",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-z-79-5-5-44-archgen-stair-hall-stair-main-floor-upper-33050f3d0003e49f",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": 5.5,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": -79,
+      "end": 44,
+      "exterior": true,
+      "firstSpaceId": "east-bedroom",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-z-79-5-5-44-east-bedroom-538dedc3bf54449f",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": 5.5,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": 79,
+      "end": 5,
+      "exterior": true,
+      "firstSpaceId": "archgen-corridor-floor-upper",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-z-79-5-5-archgen-corridor-floor-upper-e2d6d5958e3e59d6",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": -5,
+      "thickness": 2
+    },
+    {
+      "axis": "z",
+      "constant": -79,
+      "end": 5,
+      "exterior": true,
+      "firstSpaceId": "archgen-corridor-floor-upper",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-exterior-z-79-5-5-archgen-corridor-floor-upper-f0ae7543b3f6b9e2",
+      "kind": "exterior",
+      "openingIds": [],
+      "start": -5,
+      "thickness": 2
+    },
+    {
+      "axis": "x",
+      "constant": 5.5,
+      "end": 78,
+      "firstSpaceId": "archgen-stair-hall-stair-main-floor-upper",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-stair-x-5-5-54-78-archgen-corridor-floor-upper-archgen-stair-hall-stair-main-floor-upp-54305c1fa0f8f934",
+      "kind": "stair",
+      "openingIds": [
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper"
+      ],
+      "secondSpaceId": "archgen-corridor-floor-upper",
+      "start": 54,
+      "thickness": 1
+    },
+    {
+      "axis": "z",
+      "constant": 53.5,
+      "end": 44,
+      "firstSpaceId": "upper-study",
+      "floorId": "floor-upper",
+      "height": 17,
+      "id": "archgen-wall-floor-upper-stair-z-53-5-5-5-44-archgen-stair-hall-stair-main-floor-upper-upper-study-b1692d4a88612c0e",
+      "kind": "stair",
+      "openingIds": [],
+      "secondSpaceId": "archgen-stair-hall-stair-main-floor-upper",
+      "start": 5.5,
+      "thickness": 1
+    }
+  ]
+}

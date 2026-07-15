@@ -44,9 +44,12 @@ Worldwright is intended to operate as a repeated loop:
    targets, and budgets.
 7. **Repair** — make localized changes, respect locks, and return to observation and testing.
 
-The loop is a product direction. Milestone 0 implements its shared semantic data foundation, and
-Milestone 1 implements the offline desired-state and transaction boundary for a bounded primitive
-subset. Neither milestone implements the end-to-end loop or a live Studio connection.
+The loop is a product direction. Milestone 0 implements the WorldSpec and canonical semantic-data
+foundation. Milestone 1 implements the offline manifest, snapshot, change-set, simulation,
+transaction, and in-memory adapter boundary for a bounded primitive subset. Milestone 2 implements
+the offline deterministic architectural blockout planner. These three foundations still do not
+constitute the complete live loop: no Roblox Studio connection or observation, gameplay execution,
+visual critique, or automated repair has occurred.
 
 ## System vocabulary
 
@@ -63,7 +66,8 @@ budgets. It is the canonical contract between current and future Worldwright com
 
 Milestone 0 implements WorldSpec v0.1 schema generation, validation, normalization, serialization,
 diagnostics, a CLI, fixtures, and tests. WorldSpec v0.1 is a semantic plan, not a geometry or Roblox
-Instance format. The Milestone 1 compiler consumes it without changing its wire contract.
+Instance format. The Milestone 1 compiler and Milestone 2 Architecture Planner consume it through
+public package APIs without changing its `0.1.0` wire contract.
 
 ### Roblox Manifest, Scene Snapshot, and Change Set
 
@@ -76,6 +80,15 @@ Milestone 1 implements strict `0.1.0` contracts for these representations, an al
 compiler, pure planning and simulation, an abstract transaction executor, and an in-memory test
 adapter. These are safe offline foundations for future Studio integrations; they do not create or
 modify Roblox Instances in a live place.
+
+### Architecture Planner
+
+`@worldwright/architecture-planner` is the Milestone 2 offline deterministic blockout planner. It
+consumes a narrow, explicit WorldSpec architectural profile, produces a separate source-bound
+Architecture Plan, and emits a compiler-ready derived WorldSpec containing deterministic Roblox
+blockout primitives. Its implemented topology is bounded `double_loaded_spine` planning. It does not
+infer architecture from images or unconstrained prose and does not connect to or modify Roblox
+Studio.
 
 ### Forge
 
@@ -105,6 +118,13 @@ The checked-in reference mansion WorldSpec fixture demonstrates the shape of a s
 this future slice. It is not a generated mansion and does not imply that the vertical slice is
 implemented.
 
+The separate Cliffwatch mansion fixture is an implemented Milestone 2 architectural-program and
+blockout fixture. It begins with explicit architecture directives and proves the deterministic
+offline path through an Architecture Plan, derived WorldSpec, compiler output, reconciliation, and
+simulation. It does not understand reference media and does not include finished art, facade
+reconstruction, landscaping, lighting, interactions, gameplay validation, or live Studio
+observation.
+
 ## Non-negotiable qualities
 
 - **Editability:** output should remain Roblox-native and creator-owned, not an opaque terminal
@@ -127,30 +147,38 @@ Milestone 0, **WorldSpec v0.1 and the Worldwright repository foundation**, is co
 established the strict machine-readable semantic contract, validation, deterministic normalization,
 CLI tooling, fixtures, tests, documentation, and automated quality checks.
 
-Milestone 1, **the transactional Roblox primitive compiler**, is the current implementation. It
-compiles explicitly directed WorldSpec entities into a deterministic desired manifest, reconciles
-that manifest against an observed snapshot, produces and simulates a dry-run change set, and
-executes that plan through an abstract adapter with result verification and snapshot-based rollback.
-The implemented adapter is an in-memory test utility only.
+Milestone 1, **the transactional Roblox primitive compiler**, is complete. It compiles explicitly
+directed WorldSpec entities into a deterministic desired manifest, reconciles that manifest against
+an observed snapshot, produces and simulates a dry-run change set, and executes that plan through an
+abstract adapter with result verification and snapshot-based rollback.
 
-## Current non-goals
+Milestone 2, **the deterministic architectural blockout planner**, is the current implemented
+milestone on this branch. It adds deterministic integer-grid architectural planning, separate
+reviewable Architecture Plans, walls, doors, windows, aligned stairs, explicit circulation,
+compiler-ready WorldSpec emission, compiler verification, and offline reconciliation and simulation.
+Its output is a coherent architectural blockout, not finished visual art. The only implemented
+adapter remains the in-memory test adapter.
 
-Milestone 1 does not include:
+## Current repository non-goals
 
-- Atlas or AI orchestration;
-- calls to OpenAI or another AI or generation provider;
-- image, plan, sketch, heightmap, or existing-place understanding;
-- spatial planning or constraint solving;
+The implemented bounded Architecture Planner does not include:
+
+- arbitrary, broader, or learned architectural topology generation beyond its bounded
+  `double_loaded_spine` profile;
+- reference-image, plan, sketch, heightmap, unconstrained-prose, or existing-place understanding;
+- facade reconstruction, roofs, terrain, furnishings, lighting, landscaping, or polished art;
 - asset routing, asset generation, mesh generation, terrain editing, or asset insertion;
+- Atlas, AI orchestration, or calls to OpenAI or another generation provider;
 - arbitrary Roblox class or property support, Roblox Instance serialization, or executable Luau;
-- a live Roblox Studio adapter, Forge, a plugin, ChangeHistoryService integration, or Studio MCP
-  connectivity;
-- The Critic, visual inspection, gameplay testing, or automated repair;
-- the complete Reference-to-Mansion vertical slice;
-- a database, production service, web application, authentication, telemetry, or analytics; or
+- a live Roblox Studio adapter, Studio MCP connectivity, Forge, a Studio plugin, or
+  ChangeHistoryService integration;
+- live traversal, interaction, or gameplay testing;
+- The Critic, visual inspection, localized automated repair, or the complete Reference-to-Mansion
+  vertical slice;
+- databases, production services, web applications, authentication, deployment, telemetry, or
+  analytics; or
 - licensing or commercial packaging decisions.
 
-Those capabilities require explicit future milestones and must not be inferred from the presence of
-the offline compiler and transaction protocol. Milestone 1 proves deterministic contracts and
-failure recovery against an in-memory adapter; it makes no claim that Roblox Studio was connected
-to, observed, or modified.
+Those capabilities require later explicitly authorized milestones. The current repository proves
+deterministic offline semantic, planning, compiler, transaction, and simulation boundaries against
+an in-memory adapter; it makes no claim that Roblox Studio was connected to, observed, or modified.

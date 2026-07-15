@@ -1,0 +1,1743 @@
+{
+  "$id": "urn:worldwright:architecture-plan:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0",
+      "type": "string"
+    },
+    "plannerVersion": {
+      "const": "0.1.0",
+      "type": "string"
+    },
+    "source": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "worldSpecSchemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "projectId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "worldSpecHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "buildingEntityId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "worldSpecSchemaVersion",
+        "projectId",
+        "worldSpecHash",
+        "buildingEntityId"
+      ]
+    },
+    "building": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "topology": {
+          "const": "double_loaded_spine",
+          "type": "string"
+        },
+        "outerFootprint": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            },
+            "width": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "depth": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "z",
+            "width",
+            "depth"
+          ]
+        },
+        "interiorEnvelope": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            },
+            "width": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "depth": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "z",
+            "width",
+            "depth"
+          ]
+        },
+        "localOrigin": {
+          "const": "footprint_center",
+          "type": "string"
+        },
+        "worldOrigin": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        "yawDegrees": {
+          "anyOf": [
+            {
+              "const": 0,
+              "type": "number"
+            },
+            {
+              "const": 90,
+              "type": "number"
+            },
+            {
+              "const": 180,
+              "type": "number"
+            },
+            {
+              "const": 270,
+              "type": "number"
+            }
+          ]
+        },
+        "gridSize": {
+          "minimum": 1,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "corridorAxis": {
+          "anyOf": [
+            {
+              "const": "x",
+              "type": "string"
+            },
+            {
+              "const": "z",
+              "type": "string"
+            }
+          ]
+        },
+        "entranceEnd": {
+          "anyOf": [
+            {
+              "const": "negative",
+              "type": "string"
+            },
+            {
+              "const": "positive",
+              "type": "string"
+            }
+          ]
+        },
+        "floorToFloorHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultClearHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "exteriorWallThickness": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "interiorWallThickness": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "slabThickness": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "corridorWidth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultDoorWidth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultDoorHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultWindowWidth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultWindowHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultWindowSillHeight": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "openingEndClearance": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "materials": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "exteriorWall": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            },
+            "interiorWall": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            },
+            "floor": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            },
+            "stair": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            },
+            "window": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "required": [
+            "exteriorWall",
+            "interiorWall",
+            "floor",
+            "stair",
+            "window"
+          ]
+        },
+        "colors": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "exteriorWall": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            },
+            "interiorWall": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            },
+            "floor": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            },
+            "stair": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            },
+            "window": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            }
+          },
+          "required": [
+            "exteriorWall",
+            "interiorWall",
+            "floor",
+            "stair",
+            "window"
+          ]
+        },
+        "windowTransparency": {
+          "minimum": 0,
+          "maximum": 1,
+          "type": "number"
+        }
+      },
+      "required": [
+        "topology",
+        "outerFootprint",
+        "interiorEnvelope",
+        "localOrigin",
+        "worldOrigin",
+        "yawDegrees",
+        "gridSize",
+        "corridorAxis",
+        "entranceEnd",
+        "floorToFloorHeight",
+        "defaultClearHeight",
+        "exteriorWallThickness",
+        "interiorWallThickness",
+        "slabThickness",
+        "corridorWidth",
+        "defaultDoorWidth",
+        "defaultDoorHeight",
+        "defaultWindowWidth",
+        "defaultWindowHeight",
+        "defaultWindowSillHeight",
+        "openingEndClearance",
+        "materials",
+        "colors",
+        "windowTransparency"
+      ]
+    },
+    "floors": {
+      "minItems": 1,
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "level": {
+            "minimum": 0,
+            "maximum": 2,
+            "type": "integer"
+          },
+          "finishedFloorElevation": {
+            "type": "number"
+          },
+          "clearHeight": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "footprint": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              },
+              "width": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              "depth": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "z",
+              "width",
+              "depth"
+            ]
+          },
+          "corridor": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              },
+              "width": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              "depth": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "z",
+              "width",
+              "depth"
+            ]
+          },
+          "stairCore": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              },
+              "width": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              "depth": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "z",
+              "width",
+              "depth"
+            ]
+          },
+          "spaceIds": {
+            "minItems": 1,
+            "maxItems": 34,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          },
+          "wallIds": {
+            "maxItems": 103,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          },
+          "openingIds": {
+            "maxItems": 2594,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          },
+          "stairRunIds": {
+            "maxItems": 2,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "level",
+          "finishedFloorElevation",
+          "clearHeight",
+          "footprint",
+          "corridor",
+          "spaceIds",
+          "wallIds",
+          "openingIds",
+          "stairRunIds"
+        ]
+      }
+    },
+    "spaces": {
+      "minItems": 1,
+      "maxItems": 102,
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "floorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "rectangle": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  },
+                  "width": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  },
+                  "depth": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "z",
+                  "width",
+                  "depth"
+                ]
+              },
+              "type": {
+                "const": "room",
+                "type": "string"
+              },
+              "zone": {
+                "anyOf": [
+                  {
+                    "const": "public",
+                    "type": "string"
+                  },
+                  {
+                    "const": "private",
+                    "type": "string"
+                  },
+                  {
+                    "const": "service",
+                    "type": "string"
+                  }
+                ]
+              },
+              "isEntrance": {
+                "type": "boolean"
+              },
+              "provenance": {
+                "anyOf": [
+                  {
+                    "const": "observed",
+                    "type": "string"
+                  },
+                  {
+                    "const": "inferred",
+                    "type": "string"
+                  },
+                  {
+                    "const": "invented",
+                    "type": "string"
+                  }
+                ]
+              },
+              "corridorDoorOpeningId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "exteriorWallIds": {
+                "minItems": 1,
+                "maxItems": 3,
+                "uniqueItems": true,
+                "type": "array",
+                "items": {
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                }
+              },
+              "clearArea": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              "aspectRatio": {
+                "minimum": 1,
+                "type": "number"
+              }
+            },
+            "required": [
+              "id",
+              "floorId",
+              "rectangle",
+              "type",
+              "zone",
+              "isEntrance",
+              "provenance",
+              "corridorDoorOpeningId",
+              "exteriorWallIds",
+              "clearArea",
+              "aspectRatio"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "floorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "rectangle": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  },
+                  "width": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  },
+                  "depth": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "z",
+                  "width",
+                  "depth"
+                ]
+              },
+              "type": {
+                "const": "corridor",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "floorId",
+              "rectangle",
+              "type"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "floorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "rectangle": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  },
+                  "width": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  },
+                  "depth": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "z",
+                  "width",
+                  "depth"
+                ]
+              },
+              "type": {
+                "const": "stair_hall",
+                "type": "string"
+              },
+              "sourceStairRouteId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "floorId",
+              "rectangle",
+              "type",
+              "sourceStairRouteId"
+            ]
+          }
+        ]
+      }
+    },
+    "walls": {
+      "maxItems": 309,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "floorId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "kind": {
+            "anyOf": [
+              {
+                "const": "exterior",
+                "type": "string"
+              },
+              {
+                "const": "corridor",
+                "type": "string"
+              },
+              {
+                "const": "divider",
+                "type": "string"
+              },
+              {
+                "const": "stair",
+                "type": "string"
+              }
+            ]
+          },
+          "axis": {
+            "anyOf": [
+              {
+                "const": "x",
+                "type": "string"
+              },
+              {
+                "const": "z",
+                "type": "string"
+              }
+            ]
+          },
+          "constant": {
+            "type": "number"
+          },
+          "start": {
+            "type": "number"
+          },
+          "end": {
+            "type": "number"
+          },
+          "thickness": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "height": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "firstSpaceId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "secondSpaceId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "exterior": {
+            "const": true,
+            "type": "boolean"
+          },
+          "openingIds": {
+            "maxItems": 65,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "floorId",
+          "kind",
+          "axis",
+          "constant",
+          "start",
+          "end",
+          "thickness",
+          "height",
+          "openingIds"
+        ]
+      }
+    },
+    "openings": {
+      "maxItems": 6756,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "floorId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "wallId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "const": "door",
+                "type": "string"
+              },
+              {
+                "const": "window",
+                "type": "string"
+              }
+            ]
+          },
+          "offset": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "width": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "bottom": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "height": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "sourceId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "fromNodeId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "toNodeId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "floorId",
+          "wallId",
+          "type",
+          "offset",
+          "width",
+          "bottom",
+          "height",
+          "sourceId",
+          "fromNodeId",
+          "toNodeId"
+        ]
+      }
+    },
+    "stairRuns": {
+      "maxItems": 2,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "sourceStairRouteId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "fromFloorId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "toFloorId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "core": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              },
+              "width": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              "depth": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "z",
+              "width",
+              "depth"
+            ]
+          },
+          "direction": {
+            "anyOf": [
+              {
+                "const": "negative_x",
+                "type": "string"
+              },
+              {
+                "const": "positive_x",
+                "type": "string"
+              },
+              {
+                "const": "negative_z",
+                "type": "string"
+              },
+              {
+                "const": "positive_z",
+                "type": "string"
+              }
+            ]
+          },
+          "stepCount": {
+            "minimum": 1,
+            "maximum": 256,
+            "type": "integer"
+          },
+          "riserHeight": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "treadDepth": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "clearWidth": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "landing": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "lower": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  },
+                  "width": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  },
+                  "depth": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "z",
+                  "width",
+                  "depth"
+                ]
+              },
+              "upper": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  },
+                  "width": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  },
+                  "depth": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "z",
+                  "width",
+                  "depth"
+                ]
+              }
+            },
+            "required": [
+              "lower",
+              "upper"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "sourceStairRouteId",
+          "fromFloorId",
+          "toFloorId",
+          "core",
+          "direction",
+          "stepCount",
+          "riserHeight",
+          "treadDepth",
+          "clearWidth",
+          "landing"
+        ]
+      }
+    },
+    "circulationEdges": {
+      "maxItems": 614,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "sourceType": {
+            "anyOf": [
+              {
+                "const": "opening",
+                "type": "string"
+              },
+              {
+                "const": "stair_run",
+                "type": "string"
+              }
+            ]
+          },
+          "sourceId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "fromNodeId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "toNodeId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "traversal": {
+            "anyOf": [
+              {
+                "const": "door",
+                "type": "string"
+              },
+              {
+                "const": "open",
+                "type": "string"
+              },
+              {
+                "const": "stair",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "sourceType",
+          "sourceId",
+          "fromNodeId",
+          "toNodeId",
+          "traversal"
+        ]
+      }
+    },
+    "metrics": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "floorCount": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "roomCount": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "grossOuterArea": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "clearRoomArea": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "corridorArea": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "stairArea": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "clearAreaEfficiency": {
+          "minimum": 0,
+          "maximum": 1,
+          "type": "number"
+        },
+        "requiredAdjacencyTotal": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "requiredAdjacencySatisfied": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "preferredAdjacencyTotal": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "preferredAdjacencySatisfied": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "avoidedAdjacencyTotal": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "avoidedAdjacencySatisfied": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "maximumRoomAspectRatio": {
+          "minimum": 1,
+          "type": "number"
+        },
+        "doorCount": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "windowCount": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "stairRunCount": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "allRoomsReachable": {
+          "type": "boolean"
+        },
+        "estimatedGeneratedWorldSpecEntityCount": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "estimatedPrimitiveCount": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "floorCount",
+        "roomCount",
+        "grossOuterArea",
+        "clearRoomArea",
+        "corridorArea",
+        "stairArea",
+        "clearAreaEfficiency",
+        "requiredAdjacencyTotal",
+        "requiredAdjacencySatisfied",
+        "preferredAdjacencyTotal",
+        "preferredAdjacencySatisfied",
+        "avoidedAdjacencyTotal",
+        "avoidedAdjacencySatisfied",
+        "maximumRoomAspectRatio",
+        "doorCount",
+        "windowCount",
+        "stairRunCount",
+        "allRoomsReachable",
+        "estimatedGeneratedWorldSpecEntityCount",
+        "estimatedPrimitiveCount"
+      ]
+    },
+    "score": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "total": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "areaDeviation": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "aspectRatio": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "preferredAdjacency": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "preferredWindows": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "nearDistance": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "zoneOrdering": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "seedTieBreak": {
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "total",
+        "areaDeviation",
+        "aspectRatio",
+        "preferredAdjacency",
+        "preferredWindows",
+        "nearDistance",
+        "zoneOrdering",
+        "seedTieBreak"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "plannerVersion",
+    "source",
+    "building",
+    "floors",
+    "spaces",
+    "walls",
+    "openings",
+    "stairRuns",
+    "circulationEdges",
+    "metrics",
+    "score"
+  ]
+}

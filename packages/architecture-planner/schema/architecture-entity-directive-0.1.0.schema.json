@@ -1,0 +1,862 @@
+{
+  "$id": "urn:worldwright:architecture-entity-directive:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "mode": {
+          "const": "building",
+          "type": "string"
+        },
+        "topology": {
+          "const": "double_loaded_spine",
+          "type": "string"
+        },
+        "footprint": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "width": {
+              "minimum": 1,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            },
+            "depth": {
+              "minimum": 1,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "width",
+            "depth"
+          ]
+        },
+        "origin": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        "yawDegrees": {
+          "anyOf": [
+            {
+              "const": 0,
+              "type": "number"
+            },
+            {
+              "const": 90,
+              "type": "number"
+            },
+            {
+              "const": 180,
+              "type": "number"
+            },
+            {
+              "const": 270,
+              "type": "number"
+            }
+          ]
+        },
+        "gridSize": {
+          "minimum": 1,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "corridorAxis": {
+          "anyOf": [
+            {
+              "const": "auto",
+              "type": "string"
+            },
+            {
+              "const": "x",
+              "type": "string"
+            },
+            {
+              "const": "z",
+              "type": "string"
+            }
+          ]
+        },
+        "entranceEnd": {
+          "anyOf": [
+            {
+              "const": "negative",
+              "type": "string"
+            },
+            {
+              "const": "positive",
+              "type": "string"
+            }
+          ]
+        },
+        "floorToFloorHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultClearHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "exteriorWallThickness": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "interiorWallThickness": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "slabThickness": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "corridorWidth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultDoorWidth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultDoorHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultWindowWidth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultWindowHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "defaultWindowSillHeight": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "openingEndClearance": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "materials": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "exteriorWall": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            },
+            "interiorWall": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            },
+            "floor": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            },
+            "stair": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            },
+            "window": {
+              "anyOf": [
+                {
+                  "const": "SmoothPlastic",
+                  "type": "string"
+                },
+                {
+                  "const": "Concrete",
+                  "type": "string"
+                },
+                {
+                  "const": "Brick",
+                  "type": "string"
+                },
+                {
+                  "const": "Wood",
+                  "type": "string"
+                },
+                {
+                  "const": "WoodPlanks",
+                  "type": "string"
+                },
+                {
+                  "const": "Slate",
+                  "type": "string"
+                },
+                {
+                  "const": "Cobblestone",
+                  "type": "string"
+                },
+                {
+                  "const": "Metal",
+                  "type": "string"
+                },
+                {
+                  "const": "Glass",
+                  "type": "string"
+                },
+                {
+                  "const": "Neon",
+                  "type": "string"
+                },
+                {
+                  "const": "Grass",
+                  "type": "string"
+                },
+                {
+                  "const": "Sand",
+                  "type": "string"
+                },
+                {
+                  "const": "Rock",
+                  "type": "string"
+                },
+                {
+                  "const": "Marble",
+                  "type": "string"
+                },
+                {
+                  "const": "Granite",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "required": [
+            "exteriorWall",
+            "interiorWall",
+            "floor",
+            "stair",
+            "window"
+          ]
+        },
+        "colors": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "exteriorWall": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            },
+            "interiorWall": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            },
+            "floor": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            },
+            "stair": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            },
+            "window": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "r": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "g": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                },
+                "b": {
+                  "minimum": 0,
+                  "maximum": 255,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "r",
+                "g",
+                "b"
+              ]
+            }
+          },
+          "required": [
+            "exteriorWall",
+            "interiorWall",
+            "floor",
+            "stair",
+            "window"
+          ]
+        },
+        "windowTransparency": {
+          "minimum": 0,
+          "maximum": 1,
+          "type": "number"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "mode",
+        "topology",
+        "footprint",
+        "origin",
+        "yawDegrees",
+        "gridSize",
+        "corridorAxis",
+        "entranceEnd",
+        "floorToFloorHeight",
+        "defaultClearHeight",
+        "exteriorWallThickness",
+        "interiorWallThickness",
+        "slabThickness",
+        "corridorWidth",
+        "defaultDoorWidth",
+        "defaultDoorHeight",
+        "defaultWindowWidth",
+        "defaultWindowHeight",
+        "defaultWindowSillHeight",
+        "openingEndClearance",
+        "materials",
+        "colors",
+        "windowTransparency"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "mode": {
+          "const": "floor",
+          "type": "string"
+        },
+        "level": {
+          "minimum": 0,
+          "maximum": 2,
+          "type": "integer"
+        },
+        "clearHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "mode",
+        "level",
+        "clearHeight"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "mode": {
+          "const": "room",
+          "type": "string"
+        },
+        "minimumArea": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "preferredArea": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "maximumArea": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "minimumSpan": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "maximumAspectRatio": {
+          "minimum": 1,
+          "type": "number"
+        },
+        "zone": {
+          "anyOf": [
+            {
+              "const": "public",
+              "type": "string"
+            },
+            {
+              "const": "private",
+              "type": "string"
+            },
+            {
+              "const": "service",
+              "type": "string"
+            }
+          ]
+        },
+        "isEntrance": {
+          "type": "boolean"
+        },
+        "doorWidth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "windows": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "minimum": {
+              "minimum": 0,
+              "maximum": 64,
+              "type": "integer"
+            },
+            "preferred": {
+              "minimum": 0,
+              "maximum": 64,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "minimum",
+            "preferred"
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "mode",
+        "minimumArea",
+        "preferredArea",
+        "maximumArea",
+        "minimumSpan",
+        "maximumAspectRatio",
+        "zone",
+        "isEntrance",
+        "windows"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "mode": {
+          "const": "stair",
+          "type": "string"
+        },
+        "floorIds": {
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        },
+        "coreWidth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "coreLength": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "preferredSide": {
+          "anyOf": [
+            {
+              "const": "auto",
+              "type": "string"
+            },
+            {
+              "const": "negative",
+              "type": "string"
+            },
+            {
+              "const": "positive",
+              "type": "string"
+            }
+          ]
+        },
+        "position": {
+          "const": "rear",
+          "type": "string"
+        },
+        "maximumRiserHeight": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "minimumTreadDepth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "mode",
+        "floorIds",
+        "coreWidth",
+        "coreLength",
+        "preferredSide",
+        "position",
+        "maximumRiserHeight",
+        "minimumTreadDepth"
+      ]
+    }
+  ]
+}

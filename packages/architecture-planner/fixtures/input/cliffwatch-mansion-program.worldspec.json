@@ -1,0 +1,805 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "id": "project-cliffwatch-mansion",
+    "name": "Cliffwatch Mansion Architectural Program",
+    "description": "A two-floor neo-gothic mansion program for deterministic orthogonal blockout planning.",
+    "seed": 1847,
+    "units": "studs",
+    "upAxis": "Y"
+  },
+  "intent": {
+    "summary": "Plan a coherent, editable two-floor neo-gothic mansion blockout around a legible central spine and one aligned stair core.",
+    "mustHave": [
+      "A grand foyer with an exterior entrance and direct access to the ballroom",
+      "A formal dining room directly connected to the service kitchen",
+      "A private upper floor connected by one aligned stair",
+      "Every room explicitly reachable from the exterior entrance"
+    ],
+    "mustNotHave": [
+      "A direct kitchen-to-library divider",
+      "Inaccessible decorative-only rooms",
+      "Pre-authored Roblox geometry or executable behavior"
+    ],
+    "preferences": [
+      "Keep public rooms toward the entrance",
+      "Keep private rooms away from the entrance",
+      "Pair the library with the drawing room when capacity permits",
+      "Give every room useful exterior windows"
+    ]
+  },
+  "references": [
+    {
+      "id": "reference-cliffwatch-elevation",
+      "kind": "image",
+      "role": "Observed neo-gothic frontage, vertical rhythm, and coastal massing",
+      "influence": 0.9,
+      "notes": "The fixture records only an abstract authored observation; no private image or asset is included."
+    },
+    {
+      "id": "reference-cliffwatch-program",
+      "kind": "text",
+      "role": "Authored room program, circulation requirements, and adjacency brief",
+      "influence": 1,
+      "notes": "Defines the requested room uses and relationships without prescribing a floor plan."
+    },
+    {
+      "id": "reference-neo-gothic-style",
+      "kind": "text",
+      "role": "Style DNA for a restrained neo-gothic architectural blockout",
+      "influence": 0.72,
+      "notes": "Guides semantic material and shape language rather than exact hidden geometry."
+    }
+  ],
+  "style": {
+    "architecture": ["neo-gothic coastal mansion", "double-loaded country-house plan"],
+    "shapeLanguage": [
+      "long orthogonal frontage",
+      "pointed vertical openings",
+      "regular structural bays",
+      "restrained asymmetry"
+    ],
+    "materialFamilies": [
+      "dark slate masonry",
+      "aged oak floors and stairs",
+      "warm lime-plaster interiors",
+      "cool clear glass"
+    ],
+    "palette": ["charcoal slate", "weathered warm gray", "dark oak brown", "storm blue glass"],
+    "detailDensity": "low",
+    "aging": "moderate",
+    "lighting": ["cool coastal daylight", "warm interior ambient light"],
+    "exclusions": [
+      "contemporary curtain walls",
+      "finished ornamental art",
+      "external assets",
+      "scripted interactions"
+    ]
+  },
+  "rootEntityId": "world-cliffwatch",
+  "entities": [
+    {
+      "id": "ballroom",
+      "kind": "room",
+      "name": "Ocean Ballroom",
+      "parentId": "floor-ground",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": ["reference-cliffwatch-elevation", "reference-cliffwatch-program"],
+        "confidence": 0.78,
+        "notes": "A large public room is inferred from the frontage rhythm and required by the authored program."
+      },
+      "tags": ["entertaining", "public", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 1200,
+          "preferredArea": 1800,
+          "maximumArea": 2400,
+          "minimumSpan": 24,
+          "maximumAspectRatio": 2,
+          "zone": "public",
+          "isEntrance": false,
+          "doorWidth": 7,
+          "windows": {
+            "minimum": 2,
+            "preferred": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "dining-room",
+      "kind": "room",
+      "name": "Formal Dining Room",
+      "parentId": "floor-ground",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program"],
+        "confidence": 0.76,
+        "notes": "The exact room geometry is invented to realize the authored entertaining program."
+      },
+      "tags": ["dining", "public", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 900,
+          "preferredArea": 1500,
+          "maximumArea": 2200,
+          "minimumSpan": 22,
+          "maximumAspectRatio": 2,
+          "zone": "public",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 2,
+            "preferred": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "drawing-room",
+      "kind": "room",
+      "name": "Drawing Room",
+      "parentId": "floor-ground",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": ["reference-cliffwatch-elevation", "reference-cliffwatch-program"],
+        "confidence": 0.7,
+        "notes": "The public room is inferred from the observed facade bays; its interior placement remains a planning decision."
+      },
+      "tags": ["conversation", "public", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 900,
+          "preferredArea": 1450,
+          "maximumArea": 2200,
+          "minimumSpan": 22,
+          "maximumAspectRatio": 2,
+          "zone": "public",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 2,
+            "preferred": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "east-bedroom",
+      "kind": "room",
+      "name": "East Bedroom",
+      "parentId": "floor-upper",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program"],
+        "confidence": 0.7,
+        "notes": "The secondary bedroom is invented to complete the residential program."
+      },
+      "tags": ["bedroom", "private", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 900,
+          "preferredArea": 1450,
+          "maximumArea": 2200,
+          "minimumSpan": 22,
+          "maximumAspectRatio": 2,
+          "zone": "private",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 2,
+            "preferred": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "floor-ground",
+      "kind": "floor",
+      "name": "Ground Floor",
+      "parentId": "mansion-cliffwatch",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": ["reference-cliffwatch-elevation", "reference-cliffwatch-program"],
+        "confidence": 0.88,
+        "notes": "A principal public level is inferred from the observed entrance and the program."
+      },
+      "tags": ["floor", "public"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "floor",
+          "level": 0,
+          "clearHeight": 17
+        }
+      }
+    },
+    {
+      "id": "floor-upper",
+      "kind": "floor",
+      "name": "Upper Floor",
+      "parentId": "mansion-cliffwatch",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": ["reference-cliffwatch-elevation"],
+        "confidence": 0.84,
+        "notes": "The upper window course is directly evident, while its room division is not."
+      },
+      "tags": ["floor", "private"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "floor",
+          "level": 1,
+          "clearHeight": 17
+        }
+      }
+    },
+    {
+      "id": "foyer-grand",
+      "kind": "room",
+      "name": "Grand Foyer",
+      "parentId": "floor-ground",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": ["reference-cliffwatch-elevation", "reference-cliffwatch-program"],
+        "confidence": 0.9,
+        "notes": "The foyer follows the observed primary entrance, but its clear-space geometry is inferred."
+      },
+      "tags": ["entrance", "public", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 1000,
+          "preferredArea": 1400,
+          "maximumArea": 2200,
+          "minimumSpan": 24,
+          "maximumAspectRatio": 2,
+          "zone": "public",
+          "isEntrance": true,
+          "doorWidth": 7,
+          "windows": {
+            "minimum": 1,
+            "preferred": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "guest-sitting-room",
+      "kind": "room",
+      "name": "Guest Sitting Room",
+      "parentId": "floor-upper",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program", "reference-neo-gothic-style"],
+        "confidence": 0.66,
+        "notes": "The shared private sitting room is invented to make the upper program coherent."
+      },
+      "tags": ["private", "room", "sitting"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 900,
+          "preferredArea": 1450,
+          "maximumArea": 2200,
+          "minimumSpan": 22,
+          "maximumAspectRatio": 2,
+          "zone": "private",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 2,
+            "preferred": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "kitchen-service",
+      "kind": "room",
+      "name": "Service Kitchen",
+      "parentId": "floor-ground",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program"],
+        "confidence": 0.8,
+        "notes": "The service room is programmatically required but not visible in the elevation evidence."
+      },
+      "tags": ["kitchen", "room", "service"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 900,
+          "preferredArea": 1400,
+          "maximumArea": 2100,
+          "minimumSpan": 22,
+          "maximumAspectRatio": 2,
+          "zone": "service",
+          "isEntrance": false,
+          "doorWidth": 6,
+          "windows": {
+            "minimum": 1,
+            "preferred": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "library-west",
+      "kind": "room",
+      "name": "West Library",
+      "parentId": "floor-ground",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program", "reference-neo-gothic-style"],
+        "confidence": 0.72,
+        "notes": "The hidden room arrangement is invented; only its atmosphere follows the style brief."
+      },
+      "tags": ["library", "public", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 900,
+          "preferredArea": 1500,
+          "maximumArea": 2200,
+          "minimumSpan": 22,
+          "maximumAspectRatio": 2,
+          "zone": "public",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 2,
+            "preferred": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "mansion-cliffwatch",
+      "kind": "structure",
+      "name": "Cliffwatch Mansion",
+      "parentId": "parcel-cliffwatch",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": ["reference-cliffwatch-elevation"],
+        "confidence": 0.86,
+        "notes": "The overall two-story frontage is observed; the exact dimensions and hidden plan remain authored planning inputs."
+      },
+      "tags": ["architecture-program", "mansion", "structure"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "building",
+          "topology": "double_loaded_spine",
+          "footprint": {
+            "width": 160,
+            "depth": 90
+          },
+          "origin": {
+            "x": 320,
+            "y": 64,
+            "z": -180
+          },
+          "yawDegrees": 90,
+          "gridSize": 1,
+          "corridorAxis": "auto",
+          "entranceEnd": "negative",
+          "floorToFloorHeight": 20,
+          "defaultClearHeight": 17,
+          "exteriorWallThickness": 2,
+          "interiorWallThickness": 1,
+          "slabThickness": 1,
+          "corridorWidth": 10,
+          "defaultDoorWidth": 5,
+          "defaultDoorHeight": 9,
+          "defaultWindowWidth": 5,
+          "defaultWindowHeight": 7,
+          "defaultWindowSillHeight": 4,
+          "openingEndClearance": 2,
+          "materials": {
+            "exteriorWall": "Slate",
+            "interiorWall": "SmoothPlastic",
+            "floor": "WoodPlanks",
+            "stair": "Wood",
+            "window": "Glass"
+          },
+          "colors": {
+            "exteriorWall": {
+              "r": 75,
+              "g": 78,
+              "b": 84
+            },
+            "interiorWall": {
+              "r": 184,
+              "g": 179,
+              "b": 167
+            },
+            "floor": {
+              "r": 103,
+              "g": 76,
+              "b": 56
+            },
+            "stair": {
+              "r": 89,
+              "g": 61,
+              "b": 42
+            },
+            "window": {
+              "r": 151,
+              "g": 191,
+              "b": 215
+            }
+          },
+          "windowTransparency": 0.45
+        }
+      }
+    },
+    {
+      "id": "parcel-cliffwatch",
+      "kind": "parcel",
+      "name": "Cliffwatch House Parcel",
+      "parentId": "region-cliffwatch",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": ["reference-cliffwatch-elevation"],
+        "confidence": 0.7,
+        "notes": "A bounded house parcel is inferred around the observed mansion frontage."
+      },
+      "tags": ["cliffside", "parcel"],
+      "attributes": {}
+    },
+    {
+      "id": "primary-bath",
+      "kind": "room",
+      "name": "Primary Bath",
+      "parentId": "floor-upper",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program"],
+        "confidence": 0.72,
+        "notes": "The bath is invented to complete the requested primary suite."
+      },
+      "tags": ["bath", "private", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 800,
+          "preferredArea": 1200,
+          "maximumArea": 2000,
+          "minimumSpan": 20,
+          "maximumAspectRatio": 2,
+          "zone": "private",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 1,
+            "preferred": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "primary-bedroom",
+      "kind": "room",
+      "name": "Primary Bedroom",
+      "parentId": "floor-upper",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": ["reference-cliffwatch-elevation", "reference-cliffwatch-program"],
+        "confidence": 0.76,
+        "notes": "A principal upper room is inferred from the elevation hierarchy; its layout is planned."
+      },
+      "tags": ["bedroom", "private", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 1100,
+          "preferredArea": 1700,
+          "maximumArea": 2400,
+          "minimumSpan": 24,
+          "maximumAspectRatio": 2,
+          "zone": "private",
+          "isEntrance": false,
+          "doorWidth": 6,
+          "windows": {
+            "minimum": 2,
+            "preferred": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "region-cliffwatch",
+      "kind": "region",
+      "name": "Cliffwatch Coastal Estate",
+      "parentId": "world-cliffwatch",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": ["reference-cliffwatch-elevation"],
+        "confidence": 0.82,
+        "notes": "The coastal cliff setting is directly represented in the authored elevation observation."
+      },
+      "tags": ["coastal", "estate", "region"],
+      "attributes": {}
+    },
+    {
+      "id": "stair-main",
+      "kind": "route",
+      "name": "Main Stair",
+      "parentId": "mansion-cliffwatch",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program"],
+        "confidence": 0.82,
+        "notes": "A single aligned stair core is invented to satisfy explicit vertical circulation."
+      },
+      "tags": ["circulation", "route", "stair"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "stair",
+          "floorIds": ["floor-ground", "floor-upper"],
+          "coreWidth": 14,
+          "coreLength": 24,
+          "preferredSide": "auto",
+          "position": "rear",
+          "maximumRiserHeight": 1,
+          "minimumTreadDepth": 1
+        }
+      }
+    },
+    {
+      "id": "study-ground",
+      "kind": "room",
+      "name": "Ground-Floor Study",
+      "parentId": "floor-ground",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program"],
+        "confidence": 0.65,
+        "notes": "The compact study is invented as the final ground-floor program space."
+      },
+      "tags": ["private", "room", "study"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 800,
+          "preferredArea": 1200,
+          "maximumArea": 2000,
+          "minimumSpan": 20,
+          "maximumAspectRatio": 2,
+          "zone": "private",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 1,
+            "preferred": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "upper-study",
+      "kind": "room",
+      "name": "Upper Study",
+      "parentId": "floor-upper",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program", "reference-neo-gothic-style"],
+        "confidence": 0.64,
+        "notes": "The room is invented as a quiet upper-floor work and dressing space."
+      },
+      "tags": ["private", "room", "study"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 800,
+          "preferredArea": 1200,
+          "maximumArea": 2000,
+          "minimumSpan": 20,
+          "maximumAspectRatio": 2,
+          "zone": "private",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 1,
+            "preferred": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "west-bedroom",
+      "kind": "room",
+      "name": "West Bedroom",
+      "parentId": "floor-upper",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": ["reference-cliffwatch-program"],
+        "confidence": 0.7,
+        "notes": "The secondary bedroom is invented to complete the residential program."
+      },
+      "tags": ["bedroom", "private", "room"],
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "room",
+          "minimumArea": 900,
+          "preferredArea": 1450,
+          "maximumArea": 2200,
+          "minimumSpan": 22,
+          "maximumAspectRatio": 2,
+          "zone": "private",
+          "isEntrance": false,
+          "windows": {
+            "minimum": 2,
+            "preferred": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "world-cliffwatch",
+      "kind": "world",
+      "name": "Cliffwatch World",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": ["reference-cliffwatch-elevation", "reference-cliffwatch-program"],
+        "confidence": 0.9,
+        "notes": "The world boundary combines the observed estate context with the authored blockout scope."
+      },
+      "tags": ["planning-fixture", "root"],
+      "attributes": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "relationship-dining-kitchen",
+      "type": "adjacent_to",
+      "sourceId": "dining-room",
+      "targetId": "kitchen-service",
+      "directed": false,
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "adjacency",
+          "requirement": "required",
+          "connection": "door",
+          "weight": 100
+        }
+      }
+    },
+    {
+      "id": "relationship-foyer-ballroom",
+      "type": "adjacent_to",
+      "sourceId": "foyer-grand",
+      "targetId": "ballroom",
+      "directed": false,
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "adjacency",
+          "requirement": "required",
+          "connection": "door",
+          "weight": 100
+        }
+      }
+    },
+    {
+      "id": "relationship-foyer-dining-near",
+      "type": "adjacent_to",
+      "sourceId": "foyer-grand",
+      "targetId": "dining-room",
+      "directed": false,
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "adjacency",
+          "requirement": "preferred",
+          "connection": "near",
+          "weight": 55
+        }
+      }
+    },
+    {
+      "id": "relationship-foyer-library-near",
+      "type": "adjacent_to",
+      "sourceId": "foyer-grand",
+      "targetId": "library-west",
+      "directed": false,
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "adjacency",
+          "requirement": "preferred",
+          "connection": "near",
+          "weight": 40
+        }
+      }
+    },
+    {
+      "id": "relationship-kitchen-library-avoid",
+      "type": "adjacent_to",
+      "sourceId": "kitchen-service",
+      "targetId": "library-west",
+      "directed": false,
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "adjacency",
+          "requirement": "avoid",
+          "connection": "none",
+          "weight": 100
+        }
+      }
+    },
+    {
+      "id": "relationship-library-drawing",
+      "type": "adjacent_to",
+      "sourceId": "library-west",
+      "targetId": "drawing-room",
+      "directed": false,
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "adjacency",
+          "requirement": "preferred",
+          "connection": "door",
+          "weight": 70
+        }
+      }
+    },
+    {
+      "id": "relationship-primary-suite",
+      "type": "adjacent_to",
+      "sourceId": "primary-bedroom",
+      "targetId": "primary-bath",
+      "directed": false,
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "adjacency",
+          "requirement": "required",
+          "connection": "door",
+          "weight": 100
+        }
+      }
+    },
+    {
+      "id": "relationship-upper-study-sitting",
+      "type": "adjacent_to",
+      "sourceId": "upper-study",
+      "targetId": "guest-sitting-room",
+      "directed": false,
+      "attributes": {
+        "worldwright.architecture": {
+          "schemaVersion": "0.1.0",
+          "mode": "adjacency",
+          "requirement": "preferred",
+          "connection": "door",
+          "weight": 45
+        }
+      }
+    }
+  ],
+  "constraints": [],
+  "locks": [],
+  "budgets": {
+    "targetDevices": ["desktop", "mobile"],
+    "qualityTier": "draft",
+    "streaming": "preferred",
+    "limits": {
+      "instances": 5000
+    }
+  }
+}
