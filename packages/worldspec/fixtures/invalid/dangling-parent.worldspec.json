@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "id": "project-dangling-parent",
+    "name": "Dangling Parent Fixture",
+    "seed": 1,
+    "units": "studs",
+    "upAxis": "Y"
+  },
+  "intent": {
+    "summary": "Exercise parent reference validation.",
+    "mustHave": [],
+    "mustNotHave": [],
+    "preferences": []
+  },
+  "references": [],
+  "style": {
+    "architecture": ["test"],
+    "shapeLanguage": ["simple"],
+    "materialFamilies": ["stone"],
+    "palette": ["gray"],
+    "detailDensity": "low",
+    "aging": "pristine",
+    "lighting": ["daylight"],
+    "exclusions": []
+  },
+  "rootEntityId": "entity-world",
+  "entities": [
+    {
+      "id": "entity-room",
+      "kind": "room",
+      "name": "Orphaned Room",
+      "parentId": "entity-missing",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [],
+        "confidence": 1
+      },
+      "tags": [],
+      "attributes": {}
+    },
+    {
+      "id": "entity-world",
+      "kind": "world",
+      "name": "World",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [],
+        "confidence": 1
+      },
+      "tags": [],
+      "attributes": {}
+    }
+  ],
+  "relationships": [],
+  "constraints": [],
+  "locks": [],
+  "budgets": {
+    "targetDevices": ["desktop"],
+    "qualityTier": "draft",
+    "streaming": "disabled"
+  }
+}

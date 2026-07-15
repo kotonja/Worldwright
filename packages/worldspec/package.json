@@ -1,0 +1,38 @@
+{
+  "name": "@worldwright/worldspec",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The versioned semantic world contract shared by Worldwright systems.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "worldspec": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "schema"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "schema:check": "tsx scripts/check-schema.ts",
+    "schema:generate": "tsx scripts/generate-schema.ts",
+    "test": "vitest run",
+    "test:dist": "tsx scripts/check-dist.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "worldspec": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "0.34.38",
+    "ajv": "8.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "tsx": "4.20.3",
+    "vitest": "3.2.4"
+  }
+}

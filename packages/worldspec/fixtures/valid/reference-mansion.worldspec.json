@@ -1,0 +1,715 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "id": "project-cliffside-mansion",
+    "name": "Neo-Gothic Cliffside Mansion",
+    "description": "A semantic architectural plan for a dramatic but traversable coastal mansion.",
+    "seed": 1847,
+    "units": "studs",
+    "upAxis": "Y"
+  },
+  "intent": {
+    "summary": "Create an editable neo-gothic mansion overlooking a stormy coast, with a legible interior and a discreet secret route.",
+    "mustHave": [
+      "A recognizable neo-gothic front facade",
+      "A continuous traversable route between all floors",
+      "A grand foyer connected to the ballroom",
+      "A library containing a concealed secret-door interaction"
+    ],
+    "mustNotHave": [
+      "Inaccessible decorative-only rooms",
+      "A direct copy of unobserved reference geometry",
+      "Modern glass-box additions"
+    ],
+    "preferences": [
+      "Frame the ocean from major public rooms",
+      "Keep service spaces visually subordinate",
+      "Use restrained asymmetry and layered silhouettes"
+    ]
+  },
+  "references": [
+    {
+      "id": "ref-mansion-front",
+      "kind": "image",
+      "role": "Primary exterior massing and facade reference",
+      "uri": "https://example.invalid/references/neo-gothic-mansion-front.jpg",
+      "influence": 1,
+      "notes": "Only the visible front elevation and silhouette are observed."
+    },
+    {
+      "id": "ref-library-style",
+      "kind": "image",
+      "role": "Library material, lighting, and detail reference",
+      "uri": "https://example.invalid/references/gothic-library.jpg",
+      "influence": 0.72,
+      "notes": "Guides atmosphere rather than exact room geometry."
+    },
+    {
+      "id": "ref-owner-brief",
+      "kind": "text",
+      "role": "Program and traversal requirements",
+      "influence": 0.9,
+      "notes": "Requests three floors, entertaining rooms, a main stair, and one secret passage."
+    }
+  ],
+  "style": {
+    "architecture": [
+      "neo-gothic country house",
+      "picturesque coastal estate"
+    ],
+    "shapeLanguage": [
+      "steep gables",
+      "pointed arches",
+      "vertical window groupings",
+      "layered stone buttresses"
+    ],
+    "materialFamilies": [
+      "dark coastal stone",
+      "aged oak",
+      "oxidized metal",
+      "slate roofing"
+    ],
+    "palette": [
+      "charcoal",
+      "storm blue",
+      "warm amber",
+      "weathered gray"
+    ],
+    "detailDensity": "hero",
+    "aging": "moderate",
+    "lighting": [
+      "cool overcast exterior",
+      "warm practical interior pools",
+      "high-contrast library accents"
+    ],
+    "exclusions": [
+      "bright synthetic plastics",
+      "contemporary curtain walls",
+      "uniform repeated ornament"
+    ]
+  },
+  "rootEntityId": "entity-world",
+  "entities": [
+    {
+      "id": "entity-ballroom",
+      "kind": "room",
+      "name": "Ocean Ballroom",
+      "parentId": "entity-floor-ground",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "ref-mansion-front",
+          "ref-owner-brief"
+        ],
+        "confidence": 0.74,
+        "notes": "The exterior bays suggest a large public room, but its interior geometry is not directly visible."
+      },
+      "bounds": {
+        "size": {
+          "x": 58,
+          "y": 24,
+          "z": 42
+        }
+      },
+      "tags": [
+        "entertaining",
+        "public",
+        "room"
+      ],
+      "attributes": {
+        "oceanView": true,
+        "program": "formal_entertaining"
+      }
+    },
+    {
+      "id": "entity-bedroom-primary",
+      "kind": "room",
+      "name": "Primary Bedroom",
+      "parentId": "entity-floor-upper",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "ref-owner-brief"
+        ],
+        "confidence": 0.62,
+        "notes": "Required by the residential program and positioned for the coastal view."
+      },
+      "bounds": {
+        "size": {
+          "x": 38,
+          "y": 18,
+          "z": 34
+        }
+      },
+      "tags": [
+        "private",
+        "room",
+        "sleeping"
+      ],
+      "attributes": {
+        "oceanView": true,
+        "program": "primary_suite"
+      }
+    },
+    {
+      "id": "entity-cliffside-region",
+      "kind": "region",
+      "name": "Western Cliff Estate",
+      "parentId": "entity-world",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": [
+          "ref-mansion-front"
+        ],
+        "confidence": 0.9,
+        "notes": "The exposed coastal cliff and sea horizon are visible in the exterior reference."
+      },
+      "bounds": {
+        "size": {
+          "x": 900,
+          "y": 320,
+          "z": 760
+        }
+      },
+      "tags": [
+        "cliffside",
+        "coastal",
+        "site"
+      ],
+      "attributes": {
+        "coastExposure": "west",
+        "terrain": "rocky_cliff"
+      }
+    },
+    {
+      "id": "entity-floor-cellar",
+      "kind": "floor",
+      "name": "Cellar Level",
+      "parentId": "entity-primary-mansion",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "ref-owner-brief"
+        ],
+        "confidence": 0.58,
+        "notes": "A cellar is introduced to support service circulation and the requested secret route."
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": -16,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 154,
+          "y": 16,
+          "z": 88
+        }
+      },
+      "tags": [
+        "floor",
+        "service",
+        "subterranean"
+      ],
+      "attributes": {
+        "level": -1
+      }
+    },
+    {
+      "id": "entity-floor-ground",
+      "kind": "floor",
+      "name": "Ground Floor",
+      "parentId": "entity-primary-mansion",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "ref-mansion-front",
+          "ref-owner-brief"
+        ],
+        "confidence": 0.82,
+        "notes": "Ground-floor height and public-room placement are inferred from visible facade openings."
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 168,
+          "y": 24,
+          "z": 102
+        }
+      },
+      "tags": [
+        "floor",
+        "public"
+      ],
+      "attributes": {
+        "level": 0
+      }
+    },
+    {
+      "id": "entity-floor-upper",
+      "kind": "floor",
+      "name": "Upper Floor",
+      "parentId": "entity-primary-mansion",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "ref-mansion-front",
+          "ref-owner-brief"
+        ],
+        "confidence": 0.78,
+        "notes": "The visible upper window course establishes a second inhabited floor."
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 24,
+          "z": 0
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 150,
+          "y": 18,
+          "z": 88
+        }
+      },
+      "tags": [
+        "floor",
+        "private"
+      ],
+      "attributes": {
+        "level": 1
+      }
+    },
+    {
+      "id": "entity-foyer",
+      "kind": "room",
+      "name": "Grand Foyer",
+      "parentId": "entity-floor-ground",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "ref-mansion-front",
+          "ref-owner-brief"
+        ],
+        "confidence": 0.81,
+        "notes": "Its central placement follows the observed primary entrance."
+      },
+      "bounds": {
+        "size": {
+          "x": 36,
+          "y": 24,
+          "z": 34
+        }
+      },
+      "tags": [
+        "circulation",
+        "public",
+        "room"
+      ],
+      "attributes": {
+        "doubleHeight": true,
+        "program": "arrival"
+      }
+    },
+    {
+      "id": "entity-front-facade",
+      "kind": "landmark",
+      "name": "Protected Front Facade",
+      "parentId": "entity-primary-mansion",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": [
+          "ref-mansion-front"
+        ],
+        "confidence": 0.96,
+        "notes": "The silhouette, entry bay, and principal window rhythm are directly visible."
+      },
+      "tags": [
+        "facade",
+        "front",
+        "protected"
+      ],
+      "attributes": {
+        "protected": true,
+        "referencePriority": "primary"
+      }
+    },
+    {
+      "id": "entity-kitchen",
+      "kind": "room",
+      "name": "Service Kitchen",
+      "parentId": "entity-floor-ground",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "ref-owner-brief"
+        ],
+        "confidence": 0.65,
+        "notes": "The kitchen is programmatically necessary but hidden from the exterior reference."
+      },
+      "bounds": {
+        "size": {
+          "x": 34,
+          "y": 18,
+          "z": 30
+        }
+      },
+      "tags": [
+        "room",
+        "service"
+      ],
+      "attributes": {
+        "program": "food_preparation",
+        "serviceAccess": true
+      }
+    },
+    {
+      "id": "entity-library",
+      "kind": "room",
+      "name": "West Library",
+      "parentId": "entity-floor-ground",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "ref-library-style",
+          "ref-owner-brief"
+        ],
+        "confidence": 0.7,
+        "notes": "The room program and location are invented; material atmosphere follows the style reference."
+      },
+      "bounds": {
+        "size": {
+          "x": 42,
+          "y": 20,
+          "z": 32
+        }
+      },
+      "tags": [
+        "private",
+        "reading",
+        "room"
+      ],
+      "attributes": {
+        "concealsSecretDoor": true,
+        "program": "library"
+      }
+    },
+    {
+      "id": "entity-main-staircase",
+      "kind": "route",
+      "name": "Main Staircase",
+      "parentId": "entity-primary-mansion",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "ref-mansion-front",
+          "ref-owner-brief"
+        ],
+        "confidence": 0.76,
+        "notes": "The exact stair is hidden, but a principal vertical circulation route is required."
+      },
+      "tags": [
+        "circulation",
+        "stairs",
+        "vertical"
+      ],
+      "attributes": {
+        "accessibleFloors": 3,
+        "routeType": "staircase"
+      }
+    },
+    {
+      "id": "entity-primary-mansion",
+      "kind": "structure",
+      "name": "Cliffwatch Mansion",
+      "parentId": "entity-cliffside-region",
+      "provenance": {
+        "classification": "observed",
+        "referenceIds": [
+          "ref-mansion-front"
+        ],
+        "confidence": 0.94,
+        "notes": "Primary massing and visible exterior composition come from the front reference."
+      },
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 96,
+          "z": -80
+        },
+        "rotationEulerDegrees": {
+          "x": 0,
+          "y": 8,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "bounds": {
+        "size": {
+          "x": 180,
+          "y": 72,
+          "z": 112
+        }
+      },
+      "tags": [
+        "hero",
+        "mansion",
+        "structure"
+      ],
+      "attributes": {
+        "facadeOrientation": "west",
+        "program": "residential_estate"
+      }
+    },
+    {
+      "id": "entity-secret-door",
+      "kind": "interaction",
+      "name": "Library Bookcase Latch",
+      "parentId": "entity-library",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "ref-library-style",
+          "ref-owner-brief"
+        ],
+        "confidence": 0.61,
+        "notes": "A localized interaction realizes the requested secret passage without implying observed evidence."
+      },
+      "tags": [
+        "discoverable",
+        "interaction",
+        "secret"
+      ],
+      "attributes": {
+        "activation": "book_latch",
+        "reversible": true
+      }
+    },
+    {
+      "id": "entity-secret-passage",
+      "kind": "route",
+      "name": "Library-to-Cellar Secret Passage",
+      "parentId": "entity-floor-cellar",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [
+          "ref-owner-brief"
+        ],
+        "confidence": 0.55,
+        "notes": "The concealed route is explicitly invented to satisfy the owner brief."
+      },
+      "tags": [
+        "hidden",
+        "route",
+        "secret"
+      ],
+      "attributes": {
+        "routeType": "concealed_passage",
+        "terminus": "cellar"
+      }
+    },
+    {
+      "id": "entity-world",
+      "kind": "world",
+      "name": "Cliffwatch World",
+      "provenance": {
+        "classification": "inferred",
+        "referenceIds": [
+          "ref-mansion-front",
+          "ref-owner-brief"
+        ],
+        "confidence": 0.88,
+        "notes": "The world boundary combines the observed site context with the requested playable scope."
+      },
+      "tags": [
+        "root",
+        "world"
+      ],
+      "attributes": {
+        "biome": "temperate_coastal",
+        "planningScope": "semantic"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "relationship-foyer-ballroom",
+      "type": "adjacent_to",
+      "sourceId": "entity-foyer",
+      "targetId": "entity-ballroom",
+      "directed": false,
+      "attributes": {
+        "connection": "double_doors"
+      }
+    },
+    {
+      "id": "relationship-foyer-staircase",
+      "type": "connects_to",
+      "sourceId": "entity-foyer",
+      "targetId": "entity-main-staircase",
+      "directed": false,
+      "attributes": {
+        "connection": "open_landing"
+      }
+    },
+    {
+      "id": "relationship-library-secret-door",
+      "type": "serves",
+      "sourceId": "entity-secret-door",
+      "targetId": "entity-library",
+      "directed": true,
+      "attributes": {
+        "purpose": "concealed_entry"
+      }
+    },
+    {
+      "id": "relationship-secret-door-passage",
+      "type": "connects_to",
+      "sourceId": "entity-secret-door",
+      "targetId": "entity-secret-passage",
+      "directed": true,
+      "attributes": {
+        "state": "locked_until_activated"
+      }
+    },
+    {
+      "id": "relationship-staircase-cellar",
+      "type": "connects_to",
+      "sourceId": "entity-main-staircase",
+      "targetId": "entity-floor-cellar",
+      "directed": false,
+      "attributes": {
+        "landing": "cellar"
+      }
+    },
+    {
+      "id": "relationship-staircase-ground",
+      "type": "connects_to",
+      "sourceId": "entity-main-staircase",
+      "targetId": "entity-floor-ground",
+      "directed": false,
+      "attributes": {
+        "landing": "ground"
+      }
+    },
+    {
+      "id": "relationship-staircase-upper",
+      "type": "connects_to",
+      "sourceId": "entity-main-staircase",
+      "targetId": "entity-floor-upper",
+      "directed": false,
+      "attributes": {
+        "landing": "upper"
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "id": "constraint-all-rooms-reachable",
+      "type": "reachability",
+      "severity": "error",
+      "source": "user",
+      "description": "Every planned room must be reachable from the grand foyer through normal or explicitly interactive routes.",
+      "subjectIds": [
+        "entity-ballroom",
+        "entity-bedroom-primary",
+        "entity-kitchen",
+        "entity-library"
+      ],
+      "targetIds": [
+        "entity-foyer"
+      ],
+      "parameters": {
+        "allowSecretRoute": true,
+        "maximumLockedInteractions": 1
+      }
+    },
+    {
+      "id": "constraint-front-facade-preserved",
+      "type": "preservation",
+      "severity": "error",
+      "source": "reference",
+      "description": "Preserve the observed front silhouette, entry bay, and primary window rhythm during localized regeneration.",
+      "subjectIds": [
+        "entity-front-facade"
+      ],
+      "targetIds": [
+        "entity-primary-mansion"
+      ],
+      "parameters": {
+        "preserveEntryBay": true,
+        "preserveSilhouette": true,
+        "preserveWindowRhythm": true
+      }
+    }
+  ],
+  "locks": [
+    {
+      "id": "lock-front-facade",
+      "entityId": "entity-front-facade",
+      "fieldPaths": [
+        "attributes.protected",
+        "attributes.referencePriority",
+        "provenance"
+      ],
+      "owner": "user",
+      "reason": "The reference-facing facade is the approved visual anchor."
+    }
+  ],
+  "budgets": {
+    "targetDevices": [
+      "desktop",
+      "mobile"
+    ],
+    "qualityTier": "high",
+    "streaming": "preferred",
+    "limits": {
+      "instances": 24000,
+      "triangles": 1800000,
+      "textureMemoryMegabytes": 384
+    }
+  }
+}

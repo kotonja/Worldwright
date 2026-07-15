@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "0.1.0",
+  "project": {
+    "id": "project-parent-cycle",
+    "name": "Parent Cycle Fixture",
+    "seed": 1,
+    "units": "studs",
+    "upAxis": "Y"
+  },
+  "intent": {
+    "summary": "Exercise parent cycle detection.",
+    "mustHave": [],
+    "mustNotHave": [],
+    "preferences": []
+  },
+  "references": [],
+  "style": {
+    "architecture": ["test"],
+    "shapeLanguage": ["simple"],
+    "materialFamilies": ["stone"],
+    "palette": ["gray"],
+    "detailDensity": "low",
+    "aging": "pristine",
+    "lighting": ["daylight"],
+    "exclusions": []
+  },
+  "rootEntityId": "entity-world",
+  "entities": [
+    {
+      "id": "entity-cycle-a",
+      "kind": "room",
+      "name": "Cycle A",
+      "parentId": "entity-cycle-b",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [],
+        "confidence": 1
+      },
+      "tags": [],
+      "attributes": {}
+    },
+    {
+      "id": "entity-cycle-b",
+      "kind": "room",
+      "name": "Cycle B",
+      "parentId": "entity-cycle-a",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [],
+        "confidence": 1
+      },
+      "tags": [],
+      "attributes": {}
+    },
+    {
+      "id": "entity-world",
+      "kind": "world",
+      "name": "World",
+      "provenance": {
+        "classification": "invented",
+        "referenceIds": [],
+        "confidence": 1
+      },
+      "tags": [],
+      "attributes": {}
+    }
+  ],
+  "relationships": [],
+  "constraints": [],
+  "locks": [],
+  "budgets": {
+    "targetDevices": ["desktop"],
+    "qualityTier": "draft",
+    "streaming": "disabled"
+  }
+}
