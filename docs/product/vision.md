@@ -44,8 +44,9 @@ Worldwright is intended to operate as a repeated loop:
    targets, and budgets.
 7. **Repair** — make localized changes, respect locks, and return to observation and testing.
 
-The loop is a product direction. Milestone 0 implements its shared data foundation, not the
-end-to-end loop.
+The loop is a product direction. Milestone 0 implements its shared semantic data foundation, and
+Milestone 1 implements the offline desired-state and transaction boundary for a bounded primitive
+subset. Neither milestone implements the end-to-end loop or a live Studio connection.
 
 ## System vocabulary
 
@@ -62,7 +63,19 @@ budgets. It is the canonical contract between current and future Worldwright com
 
 Milestone 0 implements WorldSpec v0.1 schema generation, validation, normalization, serialization,
 diagnostics, a CLI, fixtures, and tests. WorldSpec v0.1 is a semantic plan, not a geometry or Roblox
-Instance format.
+Instance format. The Milestone 1 compiler consumes it without changing its wire contract.
+
+### Roblox Manifest, Scene Snapshot, and Change Set
+
+The Roblox Manifest is the complete desired Worldwright-managed state compiled from one WorldSpec
+document. The Scene Snapshot is observed managed state for one project and records direct unmanaged
+child roots that Worldwright must protect. The Change Set is a deterministic, reviewable dry-run
+transition from one exact snapshot to one exact desired manifest.
+
+Milestone 1 implements strict `0.1.0` contracts for these representations, an allowlisted primitive
+compiler, pure planning and simulation, an abstract transaction executor, and an in-memory test
+adapter. These are safe offline foundations for future Studio integrations; they do not create or
+modify Roblox Instances in a live place.
 
 ### Forge
 
@@ -110,26 +123,34 @@ implemented.
 
 ## Current milestone
 
-Milestone 0 is **WorldSpec v0.1 and the Worldwright repository foundation**. It establishes a strict
-machine-readable contract before any plugin, orchestrator, solver, generator, or compiler is built.
-Its scope is intentionally narrow: schema and types, semantic validation, deterministic
-normalization, CLI tooling, fixtures, tests, documentation, and automated quality checks.
+Milestone 0, **WorldSpec v0.1 and the Worldwright repository foundation**, is complete. It
+established the strict machine-readable semantic contract, validation, deterministic normalization,
+CLI tooling, fixtures, tests, documentation, and automated quality checks.
+
+Milestone 1, **the transactional Roblox primitive compiler**, is the current implementation. It
+compiles explicitly directed WorldSpec entities into a deterministic desired manifest, reconciles
+that manifest against an observed snapshot, produces and simulates a dry-run change set, and
+executes that plan through an abstract adapter with result verification and snapshot-based rollback.
+The implemented adapter is an in-memory test utility only.
 
 ## Current non-goals
 
-Milestone 0 does not include:
+Milestone 1 does not include:
 
 - Atlas or AI orchestration;
 - calls to OpenAI or another AI or generation provider;
 - image, plan, sketch, heightmap, or existing-place understanding;
 - spatial planning or constraint solving;
-- asset routing, asset generation, or mesh generation;
-- a Roblox compiler or Roblox Instance serialization;
-- Forge, a Roblox Studio plugin, Luau code, or Studio/MCP integration;
+- asset routing, asset generation, mesh generation, terrain editing, or asset insertion;
+- arbitrary Roblox class or property support, Roblox Instance serialization, or executable Luau;
+- a live Roblox Studio adapter, Forge, a plugin, ChangeHistoryService integration, or Studio MCP
+  connectivity;
 - The Critic, visual inspection, gameplay testing, or automated repair;
 - the complete Reference-to-Mansion vertical slice;
 - a database, production service, web application, authentication, telemetry, or analytics; or
 - licensing or commercial packaging decisions.
 
 Those capabilities require explicit future milestones and must not be inferred from the presence of
-the WorldSpec foundation.
+the offline compiler and transaction protocol. Milestone 1 proves deterministic contracts and
+failure recovery against an in-memory adapter; it makes no claim that Roblox Studio was connected
+to, observed, or modified.

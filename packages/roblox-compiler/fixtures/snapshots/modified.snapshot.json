@@ -1,0 +1,759 @@
+{
+  "nodes": [
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "architectural-shell",
+        "WorldwrightEntityKind": "structure",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Folder",
+      "entityKind": "structure",
+      "id": "architectural-shell",
+      "name": "Architectural Shell",
+      "parentId": "courtyard-structure",
+      "properties": {}
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "courtyard-details",
+        "WorldwrightEntityKind": "room",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Folder",
+      "entityKind": "room",
+      "id": "courtyard-details",
+      "name": "Courtyard Details",
+      "parentId": "courtyard-floor",
+      "properties": {}
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "courtyard-floor",
+        "WorldwrightEntityKind": "floor",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Folder",
+      "entityKind": "floor",
+      "id": "courtyard-floor",
+      "name": "Courtyard Floor Container",
+      "parentId": "courtyard-structure",
+      "properties": {}
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "courtyard-guide-orb",
+        "WorldwrightEntityKind": "landmark",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "landmark",
+      "id": "courtyard-guide-orb",
+      "name": "Amber Guide Orb",
+      "parentId": "courtyard-details",
+      "properties": {
+        "anchored": true,
+        "canCollide": false,
+        "canQuery": true,
+        "canTouch": false,
+        "castShadow": false,
+        "color": {
+          "b": 48,
+          "g": 176,
+          "r": 255
+        },
+        "material": "Neon",
+        "position": {
+          "x": 0,
+          "y": 9,
+          "z": 0
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 15,
+          "y": 30,
+          "z": 45
+        },
+        "shape": "Ball",
+        "size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "transparency": 0.1
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "courtyard-region",
+        "WorldwrightEntityKind": "region",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Model",
+      "entityKind": "region",
+      "id": "courtyard-region",
+      "name": "Courtyard Region",
+      "parentId": "courtyard-world",
+      "properties": {}
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "courtyard-structure",
+        "WorldwrightEntityKind": "structure",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Model",
+      "entityKind": "structure",
+      "id": "courtyard-structure",
+      "name": "Courtyard Blockout",
+      "parentId": "courtyard-region",
+      "properties": {}
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "courtyard-world",
+        "WorldwrightEntityKind": "world",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard",
+        "WorldwrightSourceHash": "126971459a48442de97d677c641c562af85dcf063202b57915c099cf5e8fe515"
+      },
+      "className": "Folder",
+      "entityKind": "world",
+      "id": "courtyard-world",
+      "name": "Primitive Courtyard World",
+      "properties": {}
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "east-wall",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "east-wall",
+      "name": "East Brick Wall",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 72,
+          "g": 96,
+          "r": 168
+        },
+        "material": "Brick",
+        "position": {
+          "x": 24,
+          "y": 5,
+          "z": 0
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 90,
+          "z": 0
+        },
+        "shape": "Block",
+        "size": {
+          "x": 43.2,
+          "y": 10,
+          "z": 2
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "entry-left-pier",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "entry-left-pier",
+      "name": "Entry Left Pier",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 194,
+          "g": 207,
+          "r": 214
+        },
+        "material": "Marble",
+        "position": {
+          "x": -5,
+          "y": 4,
+          "z": 22.5
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 4,
+          "z": 0
+        },
+        "shape": "Block",
+        "size": {
+          "x": 2,
+          "y": 8,
+          "z": 3
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "entry-lintel",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "entry-lintel",
+      "name": "Entry Wood Lintel",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": false,
+        "castShadow": true,
+        "color": {
+          "b": 48,
+          "g": 78,
+          "r": 112
+        },
+        "material": "WoodPlanks",
+        "position": {
+          "x": 0,
+          "y": 8.5,
+          "z": 22.5
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 0,
+          "z": 2
+        },
+        "shape": "Block",
+        "size": {
+          "x": 14.399999999999999,
+          "y": 1.5,
+          "z": 3
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "entry-right-pier",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "entry-right-pier",
+      "name": "Entry Right Pier",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 194,
+          "g": 207,
+          "r": 214
+        },
+        "material": "Marble",
+        "position": {
+          "x": 5,
+          "y": 4,
+          "z": 22.5
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": -4,
+          "z": 0
+        },
+        "shape": "Block",
+        "size": {
+          "x": 2,
+          "y": 8,
+          "z": 3
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "entry-roof-ramp",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "WedgePart",
+      "entityKind": "object",
+      "id": "entry-roof-ramp",
+      "name": "Entry Slate Roof Ramp",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 82,
+          "g": 70,
+          "r": 64
+        },
+        "material": "Slate",
+        "position": {
+          "x": 0,
+          "y": 10.5,
+          "z": 22
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 180,
+          "z": 0
+        },
+        "size": {
+          "x": 14,
+          "y": 3.75,
+          "z": 4.800000000000001
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "fountain-basin",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "fountain-basin",
+      "name": "Cobblestone Fountain Basin",
+      "parentId": "courtyard-details",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 110,
+          "g": 108,
+          "r": 104
+        },
+        "material": "Cobblestone",
+        "position": {
+          "x": 0,
+          "y": 1.25,
+          "z": 0
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 0,
+          "z": 90
+        },
+        "shape": "Cylinder",
+        "size": {
+          "x": 2.75,
+          "y": 12,
+          "z": 13.200000000000001
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "fountain-column",
+        "WorldwrightEntityKind": "landmark",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "landmark",
+      "id": "fountain-column",
+      "name": "Metal Fountain Column",
+      "parentId": "courtyard-details",
+      "properties": {
+        "anchored": true,
+        "canCollide": false,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 84,
+          "g": 78,
+          "r": 74
+        },
+        "material": "Metal",
+        "position": {
+          "x": 0,
+          "y": 4.5,
+          "z": 0
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 0,
+          "z": 90
+        },
+        "shape": "Cylinder",
+        "size": {
+          "x": 6,
+          "y": 1.6,
+          "z": 1.6
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "fountain-water",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "fountain-water",
+      "name": "Glass Fountain Water",
+      "parentId": "courtyard-details",
+      "properties": {
+        "anchored": true,
+        "canCollide": false,
+        "canQuery": false,
+        "canTouch": false,
+        "castShadow": false,
+        "color": {
+          "b": 214,
+          "g": 170,
+          "r": 92
+        },
+        "material": "Glass",
+        "position": {
+          "x": 0,
+          "y": 2.35,
+          "z": 0
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 0,
+          "z": 90
+        },
+        "shape": "Cylinder",
+        "size": {
+          "x": 0.5,
+          "y": 10,
+          "z": 10
+        },
+        "transparency": 0.45
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "north-wall",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "north-wall",
+      "name": "North Brick Wall",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 66,
+          "g": 88,
+          "r": 156
+        },
+        "material": "Brick",
+        "position": {
+          "x": 0,
+          "y": 5,
+          "z": -24
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Block",
+        "size": {
+          "x": 48,
+          "y": 10,
+          "z": 2
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "northwest-buttress",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "CornerWedgePart",
+      "entityKind": "object",
+      "id": "northwest-buttress",
+      "name": "Northwest Corner Buttress",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": false,
+        "castShadow": true,
+        "color": {
+          "b": 142,
+          "g": 146,
+          "r": 144
+        },
+        "material": "Concrete",
+        "position": {
+          "x": -23,
+          "y": 4,
+          "z": -23
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 45,
+          "z": 0
+        },
+        "size": {
+          "x": 5.5,
+          "y": 9,
+          "z": 4.5
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "obsolete-courtyard-marker",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "obsolete-courtyard-marker",
+      "name": "Obsolete Courtyard Marker",
+      "parentId": "courtyard-details",
+      "properties": {
+        "anchored": true,
+        "canCollide": false,
+        "canQuery": true,
+        "canTouch": false,
+        "castShadow": false,
+        "color": {
+          "b": 48,
+          "g": 176,
+          "r": 255
+        },
+        "material": "Neon",
+        "position": {
+          "x": 8,
+          "y": 1,
+          "z": 8
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 15,
+          "y": 30,
+          "z": 45
+        },
+        "shape": "Ball",
+        "size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "transparency": 0.1
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "plaza-floor",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "plaza-floor",
+      "name": "Legacy Concrete Plaza Floor",
+      "parentId": "courtyard-floor",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 124,
+          "g": 118,
+          "r": 112
+        },
+        "material": "Concrete",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Block",
+        "size": {
+          "x": 48,
+          "y": 1,
+          "z": 48
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "south-wall",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "south-wall",
+      "name": "South Brick Wall",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 62,
+          "g": 82,
+          "r": 148
+        },
+        "material": "Brick",
+        "position": {
+          "x": 0,
+          "y": 5,
+          "z": 24
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": 180,
+          "z": 0
+        },
+        "shape": "Block",
+        "size": {
+          "x": 48,
+          "y": 10,
+          "z": 2
+        },
+        "transparency": 0
+      }
+    },
+    {
+      "attributes": {
+        "WorldwrightCompilerVersion": "0.1.0",
+        "WorldwrightEntityId": "west-wall",
+        "WorldwrightEntityKind": "object",
+        "WorldwrightManaged": true,
+        "WorldwrightProjectId": "project-primitive-courtyard"
+      },
+      "className": "Part",
+      "entityKind": "object",
+      "id": "west-wall",
+      "name": "West Brick Wall",
+      "parentId": "architectural-shell",
+      "properties": {
+        "anchored": true,
+        "canCollide": true,
+        "canQuery": true,
+        "canTouch": true,
+        "castShadow": true,
+        "color": {
+          "b": 68,
+          "g": 92,
+          "r": 160
+        },
+        "material": "Brick",
+        "position": {
+          "x": -24,
+          "y": 5,
+          "z": 0
+        },
+        "rotationEulerDegreesXYZ": {
+          "x": 0,
+          "y": -90,
+          "z": 0
+        },
+        "shape": "Block",
+        "size": {
+          "x": 48,
+          "y": 11,
+          "z": 2
+        },
+        "transparency": 0
+      }
+    }
+  ],
+  "projectId": "project-primitive-courtyard",
+  "rootNodeId": "courtyard-world",
+  "schemaVersion": "0.1.0",
+  "target": {
+    "service": "Workspace"
+  },
+  "unmanagedRoots": []
+}

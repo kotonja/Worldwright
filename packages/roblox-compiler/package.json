@@ -1,0 +1,46 @@
+{
+  "name": "@worldwright/roblox-compiler",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic Roblox manifest compilation and transactional reconciliation for Worldwright.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "default": "./dist/testing.js"
+    }
+  },
+  "bin": {
+    "roblox-compiler": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "fixture:check": "tsx scripts/check-fixtures.ts",
+    "fixture:generate": "tsx scripts/generate-fixtures.ts",
+    "schema:check": "tsx scripts/check-schemas.ts",
+    "schema:generate": "tsx scripts/generate-schemas.ts",
+    "test": "vitest run",
+    "test:dist": "tsx scripts/check-dist.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "roblox-compiler": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "0.34.38",
+    "@worldwright/worldspec": "workspace:*",
+    "ajv": "8.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "tsx": "4.20.3",
+    "vitest": "3.2.4"
+  }
+}

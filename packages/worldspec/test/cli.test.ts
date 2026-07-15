@@ -13,6 +13,8 @@ import type { CliIo } from '../src/cli.js';
 import { normalizeWorldSpec, stringifyWorldSpec } from '../src/index.js';
 import { fixturePath, fixtureSource, loadValidFixture } from './helpers.js';
 
+const subprocessTestTimeout = 60_000;
+
 interface CapturedIo {
   readonly io: CliIo;
   readonly stdout: () => string;
@@ -189,81 +191,93 @@ describe('worldspec CLI', () => {
     expect(capture.stderr()).not.toContain(' at ');
   });
 
-  it('runs as a real tsx subprocess and propagates the documented exit code', () => {
-    const cliPath = fileURLToPath(new URL('../src/cli.ts', import.meta.url));
-    const packagePath = fileURLToPath(new URL('..', import.meta.url));
-    const result = spawnSync(
-      process.execPath,
-      [
-        '--import',
-        'tsx',
-        cliPath,
+  it(
+    'runs as a real tsx subprocess and propagates the documented exit code',
+    () => {
+      const cliPath = fileURLToPath(new URL('../src/cli.ts', import.meta.url));
+      const packagePath = fileURLToPath(new URL('..', import.meta.url));
+      const result = spawnSync(
+        process.execPath,
+        [
+          '--import',
+          'tsx',
+          cliPath,
+          'validate',
+          fixturePath('invalid/dangling-parent.worldspec.json'),
+          '--json',
+        ],
+        { cwd: packagePath, encoding: 'utf8' },
+      );
+
+      expect(result.error).toBeUndefined();
+      expect(result.status).toBe(1);
+      expect(JSON.parse(result.stdout)).toEqual(
+        expect.objectContaining({
+          valid: false,
+          diagnostics: expect.arrayContaining([
+            expect.objectContaining({ code: 'entity.parent_missing' }),
+          ]),
+        }),
+      );
+      expect(result.stderr).toBe('');
+    },
+    subprocessTestTimeout,
+  );
+
+  it(
+    'resolves documented repository-relative paths when launched from the root',
+    () => {
+      const repositoryPath = fileURLToPath(new URL('../../../', import.meta.url));
+      const result = spawnSync(
+        process.execPath,
+        [
+          '--import',
+          'tsx',
+          'packages/worldspec/src/cli.ts',
+          'validate',
+          'packages/worldspec/fixtures/valid/reference-mansion.worldspec.json',
+          '--json',
+        ],
+        { cwd: repositoryPath, encoding: 'utf8' },
+      );
+
+      expect(result.error).toBeUndefined();
+      expect(result.status).toBe(0);
+      expect(JSON.parse(result.stdout)).toEqual({ valid: true, diagnostics: [] });
+      expect(result.stderr).toBe('');
+    },
+    subprocessTestTimeout,
+  );
+
+  it(
+    'keeps invalid JSON-mode output parseable through the documented pnpm command',
+    () => {
+      const repositoryPath = fileURLToPath(new URL('../../../', import.meta.url));
+      const cliArguments = [
+        'worldspec',
         'validate',
-        fixturePath('invalid/dangling-parent.worldspec.json'),
+        'packages/worldspec/fixtures/invalid/duplicate-id.worldspec.json',
         '--json',
-      ],
-      { cwd: packagePath, encoding: 'utf8' },
-    );
+      ];
+      const result =
+        process.platform === 'win32'
+          ? spawnSync(
+              process.env.ComSpec ?? 'cmd.exe',
+              ['/d', '/s', '/c', `pnpm ${cliArguments.join(' ')}`],
+              { cwd: repositoryPath, encoding: 'utf8' },
+            )
+          : spawnSync('pnpm', cliArguments, { cwd: repositoryPath, encoding: 'utf8' });
 
-    expect(result.error).toBeUndefined();
-    expect(result.status).toBe(1);
-    expect(JSON.parse(result.stdout)).toEqual(
-      expect.objectContaining({
-        valid: false,
-        diagnostics: expect.arrayContaining([
-          expect.objectContaining({ code: 'entity.parent_missing' }),
-        ]),
-      }),
-    );
-    expect(result.stderr).toBe('');
-  });
-
-  it('resolves documented repository-relative paths when launched from the root', () => {
-    const repositoryPath = fileURLToPath(new URL('../../../', import.meta.url));
-    const result = spawnSync(
-      process.execPath,
-      [
-        '--import',
-        'tsx',
-        'packages/worldspec/src/cli.ts',
-        'validate',
-        'packages/worldspec/fixtures/valid/reference-mansion.worldspec.json',
-        '--json',
-      ],
-      { cwd: repositoryPath, encoding: 'utf8' },
-    );
-
-    expect(result.error).toBeUndefined();
-    expect(result.status).toBe(0);
-    expect(JSON.parse(result.stdout)).toEqual({ valid: true, diagnostics: [] });
-    expect(result.stderr).toBe('');
-  });
-
-  it('keeps invalid JSON-mode output parseable through the documented pnpm command', () => {
-    const repositoryPath = fileURLToPath(new URL('../../../', import.meta.url));
-    const cliArguments = [
-      'worldspec',
-      'validate',
-      'packages/worldspec/fixtures/invalid/duplicate-id.worldspec.json',
-      '--json',
-    ];
-    const result =
-      process.platform === 'win32'
-        ? spawnSync(
-            process.env.ComSpec ?? 'cmd.exe',
-            ['/d', '/s', '/c', `pnpm ${cliArguments.join(' ')}`],
-            { cwd: repositoryPath, encoding: 'utf8' },
-          )
-        : spawnSync('pnpm', cliArguments, { cwd: repositoryPath, encoding: 'utf8' });
-
-    expect(result.error).toBeUndefined();
-    expect(result.status).toBe(1);
-    expect(JSON.parse(result.stdout)).toEqual(
-      expect.objectContaining({
-        valid: false,
-        diagnostics: expect.arrayContaining([expect.objectContaining({ code: 'id.duplicate' })]),
-      }),
-    );
-    expect(result.stderr).toBe('');
-  });
+      expect(result.error).toBeUndefined();
+      expect(result.status).toBe(1);
+      expect(JSON.parse(result.stdout)).toEqual(
+        expect.objectContaining({
+          valid: false,
+          diagnostics: expect.arrayContaining([expect.objectContaining({ code: 'id.duplicate' })]),
+        }),
+      );
+      expect(result.stderr).toBe('');
+    },
+    subprocessTestTimeout,
+  );
 });
