@@ -23,7 +23,14 @@ text-to-random-parts or text-to-mesh toy.
   protocol, and in-memory test adapter. It is not a live Studio integration.
 - **The Studio MCP Adapter** is the Milestone 3 local-stdio, unsaved-sandbox, Edit-mode bridge from
   the existing `RobloxAdapter` interface to one exact Roblox Studio session. It is not a general
-  Luau or Studio automation API.
+  Luau or Studio automation API. Milestone 4 adds deterministic chunked mutation and exact-session
+  reconnectable observation beneath that same boundary.
+- **Studio Batch Protocol** is the separate fixed `apply_chunk` request and response contract. A
+  chunk is a transport unit; the complete Roblox Change Set remains the authorization unit.
+- **Studio Progress Report** classifies one fresh complete snapshot as the exact base, an exact
+  canonical operation prefix, the complete result, or unsafe.
+- **Studio Transport Report** is the strict identity-free record of chunk, call, uncertainty,
+  reconnect, and compensation counts. It does not replace the Studio Apply Receipt.
 - **Studio Apply Receipt** is the strict, sanitized record of an observed Studio transaction
   outcome. It is not mutation authorization, a digital signature, or visual-quality proof.
 - **Forge** is the future Roblox Studio creator interface.
@@ -43,9 +50,11 @@ Do not describe future systems as implemented.
   Snapshot, and Change Set schemas and their schema-derived static types.
 - `packages/roblox-compiler/schema/*.schema.json` files are generated. Never hand-edit them; use the
   root schema generation and drift-check commands.
-- `packages/roblox-compiler/src/compile.ts`, `reconcile.ts`, `simulate.ts`, and `transaction.ts`
-  define compiler, planning, simulation, and transaction behavior. Safety invariants belong in those
-  package boundaries rather than only in a caller or adapter.
+- `packages/roblox-compiler/src/compile.ts`, `reconcile.ts`, `simulate.ts`, `progress.ts`,
+  `batch-adapter.ts`, `transaction-engine.ts`, and `transaction.ts` define compiler, planning,
+  simulation, exact-prefix classification, sequential/batch adapter boundaries, and shared
+  transaction behavior. Safety invariants belong in those package boundaries rather than only in a
+  caller or adapter.
 - `packages/roblox-compiler/fixtures/worldspec/primitive-courtyard.worldspec.json` is the authored
   fixture input. The corresponding manifest, snapshot, and change-set artifacts are generated;
   update them with `pnpm fixture:generate` and verify them with `pnpm fixture:check`.
@@ -73,20 +82,33 @@ Do not describe future systems as implemented.
   `src/bridge/protocol-schema.ts` exposes the bridge-specific boundary. Corresponding
   `packages/studio-mcp-adapter/schema/*.schema.json` files are generated and must never be
   hand-edited.
+- `packages/studio-mcp-adapter/src/batch/contract-schema.ts` is the source for the strict Studio
+  Batch Request and Response schemas. `src/batch/chunk.ts`, `request.ts`, `response.ts`,
+  `program.ts`, and `transport.ts` define deterministic partitioning, expected parent-state
+  progression, strict framing, fixed program construction, and Studio-specific batch reporting.
+- `packages/studio-mcp-adapter/src/report-contract-schema.ts` is the source for the Studio Progress
+  and Transport Report schemas. `progress-report.ts` and `transport-report.ts` define their
+  normalization, validation, serialization, and hashing behavior. Keep these contracts separate from
+  the closed Studio Apply Receipt `0.1.0`.
 - `packages/studio-mcp-adapter/src/mcp/command.ts`, `capabilities.ts`, `session.ts`, and `client.ts`
   define local process resolution, tool discovery, exact Studio selection, and the isolated MCP SDK
   boundary.
+- `packages/studio-mcp-adapter/src/connection/session-lease.ts` and `reconnect.ts` define poisoning,
+  bounded replacement, exact-ID reselection, and observation-only reconnect behavior.
 - `packages/studio-mcp-adapter/src/bridge/program.ts` and the action-specific bridge builders define
-  the only fixed Luau programs Worldwright may send: `probe`, `snapshot`, `create`, `update`, and
-  `delete`. `program.ts` also defines Studio-side raw metadata hashing, decoded-state checks, actual
-  engine verification, and compact encoding. Never expose its source or accept caller-supplied Luau.
+  the only fixed Luau programs Worldwright may send: `probe`, `snapshot`, `create`, `update`,
+  `delete`, and the separately versioned fixed `apply_chunk` composition. `program.ts` also defines
+  Studio-side raw metadata hashing, decoded-state checks, actual engine verification, and compact
+  encoding. Never expose its source or accept caller-supplied Luau.
 - `packages/studio-mcp-adapter/src/engine-state.ts`, `snapshot.ts`, and `adapter.ts` define
   host-side canonical metadata hashing, compact transport integrity and reconstruction,
-  unmanaged-root observation, compiler snapshot conversion, and the implementation of the existing
-  compiler adapter interface. Transaction safety remains in the compiler's `applyRobloxChangeSet`.
+  unmanaged-root observation, compiler snapshot conversion, and the implementation of the compiler
+  sequential and optional batch adapter interfaces. Transaction safety remains in the compiler's
+  shared transaction engine.
 - `docs/studio-mcp-adapter/0.1.0.md` documents the published adapter, bridge, receipt, CLI, sandbox,
-  security, and limitation behavior. Update it with every Studio adapter contract or behavior
-  change.
+  security, and limitation baseline. `docs/studio-mcp-adapter/0.2.0.md` documents batch, reconnect,
+  progress, report, compatibility, and current limitation behavior. Update the applicable reference
+  with every Studio adapter contract or behavior change.
 - The root `package.json` `packageManager` field and `pnpm-lock.yaml` define the package-manager
   version and dependency resolution.
 
@@ -128,6 +150,11 @@ Use the root scripts:
 - `pnpm studio:live-smoke -- --studio-id <id> --confirm <full-reviewed-live-sequence-sha256>` - run
   that exact separate real-Studio acceptance flow in a new unsaved local sandbox. This command is
   intentionally excluded from `pnpm check` and CI.
+- `pnpm studio:batch-live-smoke -- --review` - print the offline reviewed Milestone 4 chunked and
+  reconnectable live-sequence envelope and its full authorization hash without connecting to Studio.
+- `pnpm studio:batch-live-smoke -- --studio-id <id> --confirm <full-reviewed-sequence-sha256>` - run
+  that exact separate Milestone 4 real-Studio acceptance flow. This command is intentionally
+  excluded from `pnpm check` and CI.
 - `pnpm check` - run formatting, linting, build, type checks, tests, schema and fixture drift
   checks, and compiled-distribution smoke tests for all packages.
 
@@ -182,6 +209,8 @@ Use the root scripts:
 - Treat stable IDs and managed attributes as identity. `Instance.Name` is a display value only.
 - Treat a manifest as desired state, a snapshot as observed state, and a change set as a dry-run
   transition with exact base, desired, and result hashes. Do not collapse these roles.
+- Treat the complete normalized Change Set hash as the only mutation confirmation. A chunk ID, chunk
+  hash, operation response, receipt, or transport report is not authorization.
 - World-space transform semantics are fixed in compiler v0.1. Parent hierarchy controls organization
   only; it does not compose transforms.
 - Reject class changes rather than silently replacing an existing node.
@@ -190,11 +219,18 @@ Use the root scripts:
   unmanaged-root marker.
 - Validate a fresh complete snapshot and its hash before mutation. A stale change set must call no
   adapter mutation method.
-- Apply operations sequentially only after pure simulation. Return success only after a complete
-  result snapshot verifies against the expected hash.
-- On apply or verification failure, plan compensation from observed current state back to the exact
-  initial snapshot. Never report rollback success until the complete restored snapshot hash is
-  verified.
+- Apply operations in exact canonical order through either the sequential adapter or deterministic
+  nonempty batches that flatten to that exact sequence, and only after pure simulation. Return
+  success only after a complete result snapshot verifies against the expected hash.
+- Keep exact-prefix classification pure, non-mutating, bounded, and based on complete normalized
+  base, observed, and Change Set values. Reject arbitrary subsets, skipped or reordered effects,
+  third states, unrelated managed changes, changed unmanaged roots, and scope mismatch.
+- On apply or verification failure, read a fresh complete snapshot and classify it before
+  compensation. Never compensate a state outside the exact attempted prefix envelope, and never
+  report rollback success until the complete restored snapshot hash is verified.
+- Treat a thrown batch failure as uncertain and conservatively count the complete submitted chunk as
+  attempted unless a trustworthy strict response proves a smaller exact attempted prefix. Never
+  blindly retry an uncertain chunk or automatically resume forward work.
 - Keep production adapter interfaces narrow and allowlisted. The in-memory adapter belongs under the
   testing export and must not be presented as a Studio adapter.
 
@@ -212,9 +248,21 @@ Use the root scripts:
   `GameId == 0`, and Studio stopped in Edit mode. Never add a published-place or running-session
   bypass.
 - Generate Luau only from the audited fixed `probe`, `snapshot`, `create`, `update`, and `delete`
-  bridge builders plus schema-validated JSON and deterministic safe literal encoding. Never expose
-  raw `execute_luau`, arbitrary MCP tool calls, dynamic evaluation, script creation, arbitrary
-  classes, generic property setters, generic attribute setters, assets, or network access.
+  bridge builders or the separate fixed `apply_chunk` composition, plus schema-validated JSON and
+  deterministic safe literal encoding. Never expose raw `execute_luau`, arbitrary MCP tool calls,
+  dynamic evaluation, script creation, arbitrary classes, generic property setters, generic
+  attribute setters, assets, or network access.
+- Partition batches deterministically without reordering or splitting operations. Enforce at most 32
+  node operations, at most 3 MiB of canonical batch request data, the existing 4 MiB outer payload
+  bound, the 45-second batch timeout, and the existing 512-operation transaction limit. Reject one
+  operation that cannot fit before calling Studio.
+- Build batch parent preconditions from transaction-observed expected state. Advance expected state
+  only for an exact acknowledged prefix, and replace it completely after every fresh snapshot.
+- The fixed batch program must build the selected-project managed index once before its operation
+  loop, update that chunk-local index after each acknowledged operation, then perform one
+  authoritative end-of-chunk rebuild and complete requested-state verification before returning
+  success. Keep per-operation security and operation-local restoration in the shared audited
+  helpers.
 - Treat the public managed attributes and canonical adapter-owned node-state metadata as necessary
   but insufficient evidence. Verify actual class, name, direct parent, public attributes, and every
   allowlisted engine property before returning a snapshot or targeting an operation. Drift fails
@@ -225,14 +273,37 @@ Use the root scripts:
   subtree. Mutation lookup must start at direct `Workspace` roots and descend only through the exact
   selected-project managed lineage. Never attribute, rename, move, clone, or destroy protected
   content, and block destructive changes to protected managed lineages.
-- Implement only the existing `RobloxAdapter` methods and call the compiler's
-  `applyRobloxChangeSet`. Do not duplicate stale checks, simulation, rollback admissibility,
-  compensation, or result verification in the MCP package.
+- Implement only the existing `RobloxAdapter` methods plus the optional generic compiler batch
+  method, and call the compiler's shared sequential or batched transaction entry point. Do not
+  duplicate stale checks, simulation, exact-prefix admissibility, compensation, or result
+  verification in the MCP package.
+- Treat every timed-out, rejected, closed, lost, malformed, mismatched, incomplete, or
+  locally-unrestored mutation response as uncertain. Poison and close that client, send it no later
+  tool call, and never retransmit its uncertain chunk. Require proof that the old owned process tree
+  terminated before starting or trusting a replacement; close failure or timeout blocks automatic
+  recovery. Close every rejected replacement too; unproven candidate termination permanently blocks
+  later replacement attempts.
+- Reconnect for recovery observation only through a new default local-stdio process. Rediscover
+  capabilities, require the exact original Studio ID, confirm it active, and re-probe zero
+  PlaceId/GameId and stopped Edit mode before reading state. Never select another or same-named
+  Studio, and never exceed two reconnect attempts per transaction.
+- After uncertainty, report the forward transaction failed even when the complete desired state is
+  observed. Version `0.1.0` compensates an exact admissible nonzero prefix, including the full
+  result, back to the exact base; it does not resume forward automatically. Unsafe observations
+  receive zero compensation mutations.
+- Cross-check compensation against the pure safe snapshot transition, then execute the exact inverse
+  forward prefix in reverse order so every partial compensation remains an independently
+  classifiable shorter prefix. After uncertain compensation, replan only from a strictly shorter
+  observed prefix; never retransmit the same zero-progress uncertain chunk.
+- Keep the persisted `WorldwrightStudioAdapterVersion` meaning at `0.1.0` when the package version
+  is `0.2.0`; existing Milestone 3 managed nodes must remain readable without metadata rewrites.
 - Bound operations, managed nodes, payloads, results, tool-call durations, image content, and
-  adapter metadata. Sanitize diagnostics and receipts; never expose raw Luau, MCP messages, Studio
-  output, stderr, credentials, machine paths, usernames, or environment dumps.
+  adapter metadata. Sanitize diagnostics, receipts, and transport reports; never expose raw Luau,
+  MCP messages, Studio output, stderr, credentials, Studio IDs in shareable reports, machine paths,
+  usernames, or environment dumps.
 - Keep viewport captures, receipts, and sanitized live summaries under
-  `.worldwright/live-milestone-3/` and untracked. A capture is evidence, not a visual-quality claim.
+  `.worldwright/live-milestone-4/` and untracked for Milestone 4. A capture is evidence, not a
+  visual-quality claim.
 - Do not call ChangeHistoryService. The MCP bridge is not a plugin, Studio undo is not transaction
   isolation, and a future Forge history recording cannot replace snapshot verification.
 
@@ -250,16 +321,22 @@ Use the root scripts:
   set-to-simulated-snapshot test, including deterministic hashes and exact result verification.
 - Transaction behavior requires tests for success, no-op, stale rejection before mutation, failures
   before and after mutation, verification mismatch, verified rollback, rollback failure,
-  unmanaged-descendant protection, and deterministic attempted-operation order.
+  unmanaged-descendant protection, deterministic attempted-operation order, every exact progress
+  prefix, unsafe unrelated state, sequential regression, batch success, uncertain failure, and
+  conservative full-result compensation.
 - Studio adapter behavior requires fake-MCP tests for command resolution, capability schema
   compatibility, exact session selection, sandbox rejection, adversarial literal encoding, response
   framing, engine drift, empty and populated snapshots, unmanaged and foreign-project boundaries,
   create/update/delete failure cleanup, existing transaction compensation, receipts, capture,
-  process cleanup, CLI confirmation, operation bounds, and sanitization. CI must not require Studio.
+  process cleanup, deterministic chunking, batch contracts and fixed programs, response prefixes,
+  expected parent progression, client poisoning, exact-ID reconnection, reconnect bounds, reports,
+  progress CLI exit codes, confirmation, operation/payload bounds, and sanitization. CI must not
+  require Studio.
 - A live Studio success claim requires an actual run against one unsaved local Edit-mode sandbox,
-  exact canonical snapshot hash comparisons, tested ownership boundaries, verified no-op and update
-  repair, verified controlled-failure compensation, and untracked evidence. Fake-client tests do not
-  prove live acceptance.
+  exact canonical snapshot hash comparisons, actual chunk and mutation-execute call counts, at most
+  16 forward mutation calls for the 400-create Cliffwatch transition, verified no-op and update
+  repair, controlled lost-acknowledgment exact-ID reconnect, exact-prefix classification, verified
+  compensation, and untracked evidence. Fake-client tests do not prove live acceptance.
 - Before claiming completion, run `pnpm check`. Also run a narrower command while iterating when it
   gives faster feedback.
 - Report every failed or skipped check honestly. Never claim a command passed unless it ran
@@ -271,7 +348,8 @@ Use the root scripts:
 - No hidden network calls, telemetry, or analytics.
 - Do not add an AI provider, another live Roblox integration, Forge plugin, external generation
   provider, database, authentication system, or production service without an explicit milestone
-  authorizing it. Milestone 3 authorizes only the bounded local Studio MCP adapter described above.
+  authorizing it. Milestone 4 authorizes only deterministic chunking and reconnectable recovery
+  within the bounded local Studio MCP adapter described above.
 - WorldSpec is data only. Never accept or introduce arbitrary executable code, provider credentials,
   or chain-of-thought fields.
 - Roblox compiler contracts are data only. Never introduce scripts, dynamic evaluation, arbitrary
@@ -291,8 +369,10 @@ A change is done only when its implementation, tests, generated schemas, generat
 documentation agree; `pnpm check` passes; generated, normalized, and hashed output is deterministic;
 transaction changes include verified rollback coverage; planner changes include complete geometry,
 circulation, and offline pipeline coverage; Studio adapter changes preserve exact selection,
-sandbox, fixed-program, engine-verification, ownership, receipt, and compensation boundaries; the
-diff contains no unrelated files, tracked live evidence, or secrets; and implemented versus future
-Studio, playtesting, Forge, and Critic scope is stated accurately. If any required check or real
-live acceptance cannot run or fails, leave a clear record instead of declaring the live milestone
-complete.
+sandbox, fixed-program, engine-verification, ownership, receipt, and compensation boundaries; batch
+changes preserve complete Change Set authorization, deterministic ordering and bounds, client
+poisoning, exact-ID reconnect, exact-prefix classification, no blind retry, no automatic resume,
+strict transport reporting, and actual live call-count evidence; the diff contains no unrelated
+files, tracked live evidence, or secrets; and implemented versus future Studio, playtesting, Forge,
+and Critic scope is stated accurately. If any required check or real live acceptance cannot run or
+fails, leave a clear record instead of declaring the live milestone complete.

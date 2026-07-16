@@ -1,6 +1,18 @@
+import { Buffer } from 'node:buffer';
+
+import type { StudioBatchRequest } from '../batch/types.js';
+import { stringifyStudioBatchRequest } from '../batch/normalize.js';
+import { validateStudioBatchRequest } from '../batch/validate.js';
+import { STUDIO_BATCH_RESPONSE_PREFIX } from '../constants.js';
+import { StudioAdapterError } from '../diagnostics.js';
 import type { StudioBridgeRequest } from '../types.js';
-import { issueFixedStudioBridgeProgram, type FixedStudioBridgeProgram } from '../mcp/client.js';
+import {
+  issueFixedStudioBatchProgram,
+  issueFixedStudioBridgeProgram,
+  type FixedStudioBridgeProgram,
+} from '../mcp/client.js';
 import { encodeStudioBridgePayload } from './payload.js';
+import { encodeLuauLongBracketLiteral } from './literal.js';
 
 const PAYLOAD_MARKER = '__WORLDWRIGHT_VALIDATED_PAYLOAD__';
 
@@ -1293,12 +1305,18 @@ local function sandboxGate()
   return nil
 end
 
-local function createAction()
+local function createAction(batchState)
   local node = payload.node
   if not isValidInstanceName(node.name) then
     return failure("studio.property_invalid", "Managed Instance.Name is invalid or too long.", node.id, "Name")
   end
-  local root, index, indexError = buildProjectIndex(payload.projectId)
+  local root, index, indexError
+  if batchState ~= nil then
+    root = batchState.root
+    index = batchState.index
+  else
+    root, index, indexError = buildProjectIndex(payload.projectId)
+  end
   if indexError ~= nil then return failure(indexError, "Managed project index is invalid.", node.id) end
   if index[node.id] ~= nil then return failure("studio.create_failed", "Managed entity already exists.", node.id) end
   local parent, parentError = resolveParent(node, root, index)
@@ -1317,8 +1335,16 @@ local function createAction()
   local ok = pcall(function()
     instance = newAllowedInstance(node.className)
     setCreatedNodeState(instance, node, payload.stateJson, payload.stateHash, parent)
-    local updatedRoot, updatedIndex, updatedError = buildProjectIndex(payload.projectId)
-    if updatedError ~= nil then error(updatedError) end
+    local updatedRoot, updatedIndex, updatedError
+    if batchState ~= nil then
+      index[node.id] = instance
+      if node.parentId == nil then batchState.root = instance end
+      updatedRoot = batchState.root
+      updatedIndex = index
+    else
+      updatedRoot, updatedIndex, updatedError = buildProjectIndex(payload.projectId)
+      if updatedError ~= nil then error(updatedError) end
+    end
     local created = updatedIndex[node.id]
     if created ~= instance then error("created instance was not indexed") end
     local valid = verifyInstance(created, node, payload.stateJson, payload.stateHash, updatedIndex)
@@ -1326,6 +1352,10 @@ local function createAction()
     if node.parentId == nil and updatedRoot ~= instance then error("created root mismatch") end
   end)
   if not ok then
+    if batchState ~= nil then
+      index[node.id] = nil
+      if batchState.root == instance then batchState.root = root end
+    end
     local cleanupObserved, cleanupComplete = pcall(function()
       return cleanupFailedCreate(instance, node, payload.projectId)
     end)
@@ -1341,7 +1371,7 @@ local function createAction()
   return success({ nodeId = node.id })
 end
 
-local function updateAction()
+local function updateAction(batchState)
   local before = payload.before
   local after = payload.after
   if not isValidInstanceName(before.name) then
@@ -1350,7 +1380,13 @@ local function updateAction()
   if not isValidInstanceName(after.name) then
     return failure("studio.property_invalid", "Managed after Instance.Name is invalid or too long.", after.id, "Name")
   end
-  local root, index, indexError = buildProjectIndex(payload.projectId)
+  local root, index, indexError
+  if batchState ~= nil then
+    root = batchState.root
+    index = batchState.index
+  else
+    root, index, indexError = buildProjectIndex(payload.projectId)
+  end
   if indexError ~= nil then return failure(indexError, "Managed project index is invalid.", before.id) end
   local instance = index[before.id]
   if instance == nil then return failure("studio.update_failed", "Update target is absent.", before.id) end
@@ -1396,15 +1432,26 @@ local function updateAction()
   end
   local applied = pcall(function()
     setUpdatedNodeState(instance, after, payload.afterStateJson, payload.afterStateHash, parent)
-    local _, updatedIndex, updatedError = buildProjectIndex(payload.projectId)
-    if updatedError ~= nil then error(updatedError) end
+    local updatedIndex, updatedError
+    if batchState ~= nil then
+      updatedIndex = index
+    else
+      _, updatedIndex, updatedError = buildProjectIndex(payload.projectId)
+      if updatedError ~= nil then error(updatedError) end
+    end
     local valid = verifyInstance(instance, after, payload.afterStateJson, payload.afterStateHash, updatedIndex)
     if not valid then error("updated instance verification failed") end
   end)
   if not applied then
     local restored = pcall(function()
-      local restoredRoot, restoredIndex, restoredError = buildProjectIndex(payload.projectId)
-      if restoredError ~= nil then error(restoredError) end
+      local restoredRoot, restoredIndex, restoredError
+      if batchState ~= nil then
+        restoredRoot = batchState.root
+        restoredIndex = index
+      else
+        restoredRoot, restoredIndex, restoredError = buildProjectIndex(payload.projectId)
+        if restoredError ~= nil then error(restoredError) end
+      end
       local restoredParent, restoredParentError = resolveParent(before, restoredRoot, restoredIndex, instance)
       if restoredParentError ~= nil then error(restoredParentError) end
       local restoredParentValid = verifyResolvedParent(
@@ -1416,8 +1463,13 @@ local function updateAction()
       )
       if not restoredParentValid then error("restore parent state invalid") end
       setUpdatedNodeState(instance, before, payload.beforeStateJson, payload.beforeStateHash, restoredParent)
-      local _, finalIndex, finalError = buildProjectIndex(payload.projectId)
-      if finalError ~= nil then error(finalError) end
+      local finalIndex, finalError
+      if batchState ~= nil then
+        finalIndex = index
+      else
+        _, finalIndex, finalError = buildProjectIndex(payload.projectId)
+        if finalError ~= nil then error(finalError) end
+      end
       local valid = verifyInstance(instance, before, payload.beforeStateJson, payload.beforeStateHash, finalIndex)
       if not valid then error("restored instance verification failed") end
     end)
@@ -1427,12 +1479,18 @@ local function updateAction()
   return success({ nodeId = before.id })
 end
 
-local function deleteAction()
+local function deleteAction(batchState)
   local before = payload.before
   if not isValidInstanceName(before.name) then
     return failure("studio.property_invalid", "Managed Instance.Name is invalid or too long.", before.id, "Name")
   end
-  local _, index, indexError = buildProjectIndex(payload.projectId)
+  local root, index, indexError
+  if batchState ~= nil then
+    root = batchState.root
+    index = batchState.index
+  else
+    root, index, indexError = buildProjectIndex(payload.projectId)
+  end
   if indexError ~= nil then return failure(indexError, "Managed project index is invalid.", before.id) end
   local instance = index[before.id]
   if instance == nil then return failure("studio.delete_failed", "Delete target is absent.", before.id) end
@@ -1446,9 +1504,18 @@ local function deleteAction()
   end
   local deleted = pcall(function() instance:Destroy() end)
   if not deleted then return failure("studio.delete_failed", "Delete failed.", before.id) end
-  local _, finalIndex, finalError = buildProjectIndex(payload.projectId)
-  if finalError ~= nil or finalIndex[before.id] ~= nil then
-    return failure("studio.delete_failed", "Delete absence could not be verified.", before.id)
+  if batchState ~= nil then
+    local parentObserved, finalParent = pcall(function() return instance.Parent end)
+    if not parentObserved or finalParent ~= nil then
+      return failure("studio.delete_failed", "Delete absence could not be verified.", before.id)
+    end
+    index[before.id] = nil
+    if root == instance then batchState.root = nil end
+  else
+    local _, finalIndex, finalError = buildProjectIndex(payload.projectId)
+    if finalError ~= nil or finalIndex[before.id] ~= nil then
+      return failure("studio.delete_failed", "Delete absence could not be verified.", before.id)
+    end
   end
   return success({ nodeId = before.id })
 end
@@ -1465,6 +1532,491 @@ if payload.action == "update" then return updateAction() end
 if payload.action == "delete" then return deleteAction() end
 return failure("studio.response_invalid", "Unsupported fixed bridge action.")
 `;
+
+const FIXED_SINGLE_DISPATCH = String.raw`if payload.protocolVersion ~= PROTOCOL_VERSION then
+  return failure("studio.response_invalid", "Unsupported bridge protocol version.")
+end
+if payload.action == "probe" then return probeAction() end
+local gateFailure = sandboxGate()
+if gateFailure ~= nil then return gateFailure end
+if payload.action == "snapshot" then return snapshotAction() end
+if payload.action == "create" then return createAction() end
+if payload.action == "update" then return updateAction() end
+if payload.action == "delete" then return deleteAction() end
+return failure("studio.response_invalid", "Unsupported fixed bridge action.")`;
+
+const FIXED_BATCH_DISPATCH = String.raw`
+local MAX_BATCH_OPERATIONS = 32
+local MAX_BATCH_PAYLOAD_BYTES = 3 * 1024 * 1024
+local MAX_CHANGE_SET_OPERATIONS = 512
+local BATCH_KEYS = {
+  protocolVersion = true,
+  action = true,
+  projectId = true,
+  changeSetHash = true,
+  chunkId = true,
+  chunkIndex = true,
+  operations = true,
+}
+local BATCH_CREATE_KEYS = {
+  type = true,
+  operationId = true,
+  node = true,
+  stateJson = true,
+  stateHash = true,
+  parentState = true,
+}
+local BATCH_UPDATE_KEYS = {
+  type = true,
+  operationId = true,
+  before = true,
+  after = true,
+  beforeStateJson = true,
+  beforeStateHash = true,
+  afterStateJson = true,
+  afterStateHash = true,
+  beforeParentState = true,
+  afterParentState = true,
+}
+local BATCH_DELETE_KEYS = {
+  type = true,
+  operationId = true,
+  before = true,
+  beforeStateJson = true,
+  beforeStateHash = true,
+}
+local PARENT_STATE_KEYS = { node = true, stateJson = true, stateHash = true }
+
+local batchPayload = payload
+
+local function batchReply(fields)
+  fields.protocolVersion = PROTOCOL_VERSION
+  fields.action = "apply_chunk"
+  fields.changeSetHash = batchPayload.changeSetHash
+  fields.chunkId = batchPayload.chunkId
+  fields.chunkIndex = batchPayload.chunkIndex
+  local encoded = canonicalJson(fields)
+  if #RESPONSE_PREFIX + #encoded + 1 > MAX_STUDIO_OUTPUT_BYTES then
+    encoded = canonicalJson({
+      protocolVersion = PROTOCOL_VERSION,
+      action = "apply_chunk",
+      ok = false,
+      changeSetHash = batchPayload.changeSetHash,
+      chunkId = batchPayload.chunkId,
+      chunkIndex = batchPayload.chunkIndex,
+      operationsAttempted = 0,
+      operationsApplied = 0,
+      completedOperationIds = array(),
+      localRestoreSucceeded = true,
+      diagnostic = {
+        code = "studio.response_too_large",
+        message = "Studio batch response exceeded the bounded result size.",
+      },
+    })
+  end
+  return RESPONSE_PREFIX .. encoded .. "\n"
+end
+
+local function batchFailure(
+  attempted,
+  applied,
+  completedOperationIds,
+  diagnostic,
+  localRestoreSucceeded,
+  failedOperationId
+)
+  local response = {
+    ok = false,
+    operationsAttempted = attempted,
+    operationsApplied = applied,
+    completedOperationIds = completedOperationIds,
+    localRestoreSucceeded = localRestoreSucceeded,
+    diagnostic = diagnostic,
+  }
+  if failedOperationId ~= nil then response.failedOperationId = failedOperationId end
+  return batchReply(response)
+end
+
+local function batchInputFailure(code, message)
+  return batchFailure(0, 0, array(), { code = code, message = message }, true, nil)
+end
+
+local function isDenseArray(value)
+  if typeof(value) ~= "table" then return false end
+  local length = #value
+  local count = 0
+  for key in pairs(value) do
+    if typeof(key) ~= "number" or key % 1 ~= 0 or key < 1 or key > length then return false end
+    count += 1
+  end
+  return count == length
+end
+
+local function batchNodeStateValid(node, stateJson, stateHash, projectId)
+  if not isSafeStoredNodeShape(node)
+    or node.attributes.WorldwrightProjectId ~= projectId
+    or typeof(stateJson) ~= "string"
+    or stateJson == ""
+    or #stateJson > MAX_NODE_STATE_BYTES
+    or not isLowerSha256(stateHash) then
+    return false
+  end
+  local hashed, computed = pcall(function() return sha256Hex(stateJson) end)
+  if not hashed or computed ~= stateHash then return false end
+  local decoded, storedNode = pcall(function() return HttpService:JSONDecode(stateJson) end)
+  return decoded
+    and isSafeStoredNodeShape(storedNode)
+    and canonicalJson(storedNode) == canonicalJson(node)
+end
+
+local function batchParentStateValid(parentState, parentId, projectId)
+  if parentId == nil then return parentState == nil end
+  if typeof(parentState) ~= "table"
+    or not hasOnlyKeys(parentState, PARENT_STATE_KEYS)
+    or typeof(parentState.node) ~= "table"
+    or parentState.node.id ~= parentId
+    or (parentState.node.className ~= "Folder" and parentState.node.className ~= "Model") then
+    return false
+  end
+  return batchNodeStateValid(
+    parentState.node,
+    parentState.stateJson,
+    parentState.stateHash,
+    projectId
+  )
+end
+
+local function batchOperationValid(operation, projectId)
+  if typeof(operation) ~= "table" or typeof(operation.type) ~= "string" then return false end
+  if operation.type == "create" then
+    return hasOnlyKeys(operation, BATCH_CREATE_KEYS)
+      and typeof(operation.node) == "table"
+      and operation.operationId == "create:" .. tostring(operation.node and operation.node.id)
+      and batchNodeStateValid(operation.node, operation.stateJson, operation.stateHash, projectId)
+      and batchParentStateValid(operation.parentState, operation.node.parentId, projectId)
+  end
+  if operation.type == "update" then
+    return hasOnlyKeys(operation, BATCH_UPDATE_KEYS)
+      and typeof(operation.before) == "table"
+      and typeof(operation.after) == "table"
+      and operation.operationId == "update:" .. tostring(operation.before and operation.before.id)
+      and operation.before.id == operation.after.id
+      and operation.before.className == operation.after.className
+      and canonicalJson(operation.before) ~= canonicalJson(operation.after)
+      and batchNodeStateValid(
+        operation.before,
+        operation.beforeStateJson,
+        operation.beforeStateHash,
+        projectId
+      )
+      and batchNodeStateValid(
+        operation.after,
+        operation.afterStateJson,
+        operation.afterStateHash,
+        projectId
+      )
+      and batchParentStateValid(
+        operation.beforeParentState,
+        operation.before.parentId,
+        projectId
+      )
+      and batchParentStateValid(
+        operation.afterParentState,
+        operation.after.parentId,
+        projectId
+      )
+  end
+  if operation.type == "delete" then
+    return hasOnlyKeys(operation, BATCH_DELETE_KEYS)
+      and typeof(operation.before) == "table"
+      and operation.operationId == "delete:" .. tostring(operation.before and operation.before.id)
+      and batchNodeStateValid(
+        operation.before,
+        operation.beforeStateJson,
+        operation.beforeStateHash,
+        projectId
+      )
+  end
+  return false
+end
+
+local function batchPayloadValid(value)
+  if typeof(value) ~= "table"
+    or not hasOnlyKeys(value, BATCH_KEYS)
+    or value.protocolVersion ~= PROTOCOL_VERSION
+    or value.action ~= "apply_chunk"
+    or not isIdentifier(value.projectId)
+    or not isLowerSha256(value.changeSetHash)
+    or not isLowerSha256(value.chunkId)
+    or not isFiniteNumber(value.chunkIndex)
+    or value.chunkIndex % 1 ~= 0
+    or value.chunkIndex < 0
+    or value.chunkIndex >= MAX_CHANGE_SET_OPERATIONS
+    or #payloadJson > MAX_BATCH_PAYLOAD_BYTES
+    or not isDenseArray(value.operations)
+    or #value.operations < 1
+    or #value.operations > MAX_BATCH_OPERATIONS then
+    return false
+  end
+  local seenOperationIds = {}
+  local seenNodeIds = {}
+  local priorPhase = 0
+  for _, operation in ipairs(value.operations) do
+    if not batchOperationValid(operation, value.projectId) then return false end
+    local node = operation.type == "create" and operation.node or operation.before
+    local phase = operation.type == "create" and 1 or (operation.type == "update" and 2 or 3)
+    if phase < priorPhase
+      or seenOperationIds[operation.operationId] == true
+      or seenNodeIds[node.id] == true then
+      return false
+    end
+    priorPhase = phase
+    seenOperationIds[operation.operationId] = true
+    seenNodeIds[node.id] = true
+  end
+  return true
+end
+
+local function singlePayloadFor(operation)
+  if operation.type == "create" then
+    return {
+      protocolVersion = PROTOCOL_VERSION,
+      action = "create",
+      projectId = batchPayload.projectId,
+      node = operation.node,
+      stateJson = operation.stateJson,
+      stateHash = operation.stateHash,
+      parentState = operation.parentState,
+    }
+  end
+  if operation.type == "update" then
+    return {
+      protocolVersion = PROTOCOL_VERSION,
+      action = "update",
+      projectId = batchPayload.projectId,
+      before = operation.before,
+      after = operation.after,
+      beforeStateJson = operation.beforeStateJson,
+      beforeStateHash = operation.beforeStateHash,
+      afterStateJson = operation.afterStateJson,
+      afterStateHash = operation.afterStateHash,
+      beforeParentState = operation.beforeParentState,
+      afterParentState = operation.afterParentState,
+    }
+  end
+  return {
+    protocolVersion = PROTOCOL_VERSION,
+    action = "delete",
+    projectId = batchPayload.projectId,
+    before = operation.before,
+    beforeStateJson = operation.beforeStateJson,
+    beforeStateHash = operation.beforeStateHash,
+  }
+end
+
+local function decodeSingleResponse(text)
+  if typeof(text) ~= "string"
+    or string.sub(text, 1, #RESPONSE_PREFIX) ~= RESPONSE_PREFIX
+    or string.sub(text, -1) ~= "\n" then
+    return nil
+  end
+  local decoded, response = pcall(function()
+    return HttpService:JSONDecode(string.sub(text, #RESPONSE_PREFIX + 1, -2))
+  end)
+  if not decoded or typeof(response) ~= "table" or typeof(response.ok) ~= "boolean" then
+    return nil
+  end
+  return response
+end
+
+local function localRestoreProven(response)
+  local code = response.diagnostic and response.diagnostic.code
+  return code ~= "studio.create_cleanup_failed"
+    and code ~= "studio.update_restore_failed"
+    and code ~= "studio.delete_failed"
+    and code ~= "studio.response_invalid"
+end
+
+if not batchPayloadValid(batchPayload) then
+  return batchInputFailure("studio.response_invalid", "Studio batch payload is invalid.")
+end
+local selfTested, selfTestPassed = pcall(sha256SelfTest)
+if not selfTested or not selfTestPassed then
+  return batchInputFailure("studio.adapter_metadata_invalid", "Studio batch hashing self-test failed.")
+end
+if game.PlaceId ~= 0 or game.GameId ~= 0 then
+  return batchInputFailure(
+    "studio.published_place_forbidden",
+    "Worldwright may mutate only an unsaved local sandbox."
+  )
+end
+if RunService:IsRunning() then
+  return batchInputFailure("studio.edit_mode_required", "Worldwright requires stopped Edit mode.")
+end
+
+local batchRoot, batchIndex, batchIndexError = buildProjectIndex(batchPayload.projectId)
+if batchIndexError ~= nil then
+  return batchInputFailure(batchIndexError, "Managed project index is invalid.")
+end
+local batchState = { root = batchRoot, index = batchIndex }
+local completedOperationIds = array()
+for operationIndex, operation in ipairs(batchPayload.operations) do
+  payload = singlePayloadFor(operation)
+  local invoked, singleText = pcall(function()
+    if operation.type == "create" then return createAction(batchState) end
+    if operation.type == "update" then return updateAction(batchState) end
+    return deleteAction(batchState)
+  end)
+  payload = batchPayload
+  if not invoked then
+    return batchFailure(
+      operationIndex,
+      operationIndex - 1,
+      completedOperationIds,
+      { code = "studio.response_invalid", message = "Studio batch operation failed unexpectedly." },
+      false,
+      operation.operationId
+    )
+  end
+  local singleResponse = decodeSingleResponse(singleText)
+  if singleResponse == nil then
+    return batchFailure(
+      operationIndex,
+      operationIndex - 1,
+      completedOperationIds,
+      { code = "studio.response_invalid", message = "Studio batch operation response is invalid." },
+      false,
+      operation.operationId
+    )
+  end
+  if not singleResponse.ok then
+    return batchFailure(
+      operationIndex,
+      operationIndex - 1,
+      completedOperationIds,
+      singleResponse.diagnostic,
+      localRestoreProven(singleResponse),
+      operation.operationId
+    )
+  end
+  table.insert(completedOperationIds, operation.operationId)
+end
+
+local finalRoot, finalIndex, finalIndexError = buildProjectIndex(batchPayload.projectId)
+local finalStateValid = finalIndexError == nil and finalRoot == batchState.root
+if finalStateValid then
+  for entityId, instance in pairs(batchState.index) do
+    if finalIndex[entityId] ~= instance then
+      finalStateValid = false
+      break
+    end
+  end
+end
+if finalStateValid then
+  for entityId, instance in pairs(finalIndex) do
+    if batchState.index[entityId] ~= instance then
+      finalStateValid = false
+      break
+    end
+  end
+end
+if finalStateValid then
+  for _, operation in ipairs(batchPayload.operations) do
+    if operation.type == "create" then
+      local instance = finalIndex[operation.node.id]
+      local valid = instance ~= nil and verifyInstance(
+          instance,
+          operation.node,
+          operation.stateJson,
+          operation.stateHash,
+          finalIndex
+        )
+      if not valid then
+        finalStateValid = false
+        break
+      end
+    elseif operation.type == "update" then
+      local instance = finalIndex[operation.after.id]
+      local valid = instance ~= nil and verifyInstance(
+          instance,
+          operation.after,
+          operation.afterStateJson,
+          operation.afterStateHash,
+          finalIndex
+        )
+      if not valid then
+        finalStateValid = false
+        break
+      end
+    elseif finalIndex[operation.before.id] ~= nil then
+      finalStateValid = false
+      break
+    end
+  end
+end
+if not finalStateValid then
+  return batchFailure(
+    #batchPayload.operations,
+    #batchPayload.operations,
+    completedOperationIds,
+    { code = "studio.engine_state_drift", message = "Studio batch final state verification failed." },
+    false,
+    nil
+  )
+end
+
+return batchReply({
+  ok = true,
+  operationsAttempted = #batchPayload.operations,
+  operationsApplied = #batchPayload.operations,
+  completedOperationIds = completedOperationIds,
+})`;
+
+function fixedStudioBatchTemplate(): string {
+  const responseDeclaration = String.raw`local RESPONSE_PREFIX = "WORLDWRIGHT_STUDIO_BRIDGE_V1\n"`;
+  const batchResponseDeclaration = `local RESPONSE_PREFIX = ${JSON.stringify(STUDIO_BATCH_RESPONSE_PREFIX)}`;
+  const responseIndex = FIXED_STUDIO_BRIDGE.indexOf(responseDeclaration);
+  const dispatchIndex = FIXED_STUDIO_BRIDGE.indexOf(FIXED_SINGLE_DISPATCH);
+  if (
+    responseIndex < 0 ||
+    FIXED_STUDIO_BRIDGE.indexOf(responseDeclaration, responseIndex + 1) >= 0 ||
+    dispatchIndex < 0 ||
+    FIXED_STUDIO_BRIDGE.indexOf(FIXED_SINGLE_DISPATCH, dispatchIndex + 1) >= 0
+  ) {
+    throw new Error('Fixed Studio batch composition invariant failed.');
+  }
+  return FIXED_STUDIO_BRIDGE.replace(responseDeclaration, batchResponseDeclaration).replace(
+    FIXED_SINGLE_DISPATCH,
+    FIXED_BATCH_DISPATCH,
+  );
+}
+
+export function buildStudioBatchBridgeProgram(requestInput: unknown): FixedStudioBridgeProgram {
+  const validation = validateStudioBatchRequest(requestInput);
+  if (!validation.valid) throw new StudioAdapterError(validation.diagnostics);
+  const request: StudioBatchRequest = validation.value;
+  const json = stringifyStudioBatchRequest(request);
+  return issueFixedStudioBatchProgram(fixedStudioBatchSource(json));
+}
+
+function fixedStudioBatchSource(canonicalRequestJson: string): string {
+  const encoded = encodeLuauLongBracketLiteral(canonicalRequestJson);
+  const template = fixedStudioBatchTemplate();
+  const markerIndex = template.indexOf(PAYLOAD_MARKER);
+  if (
+    markerIndex < 0 ||
+    template.indexOf(PAYLOAD_MARKER, markerIndex + PAYLOAD_MARKER.length) >= 0
+  ) {
+    throw new Error('Fixed Studio batch payload marker invariant failed.');
+  }
+  return template.replace(PAYLOAD_MARKER, () => encoded);
+}
+
+/** @internal Exact conservative size of the encoded MCP arguments with the longer source key. */
+export function measureFixedStudioBatchOuterPayloadBytes(canonicalRequestJson: string): number {
+  const source = fixedStudioBatchSource(canonicalRequestJson);
+  return Buffer.byteLength(JSON.stringify({ source, datamodel_type: 'Edit' }), 'utf8');
+}
 
 export function buildStudioBridgeProgram(request: StudioBridgeRequest): FixedStudioBridgeProgram {
   const encoded = encodeStudioBridgePayload(request);

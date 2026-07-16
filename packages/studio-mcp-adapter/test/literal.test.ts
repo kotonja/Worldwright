@@ -198,15 +198,15 @@ describe('fixed Luau payload encoding', () => {
       action: 'probe',
     }).source;
     const createBody = source.slice(
-      source.indexOf('local function createAction()'),
-      source.indexOf('local function updateAction()'),
+      source.indexOf('local function createAction(batchState)'),
+      source.indexOf('local function updateAction(batchState)'),
     );
     const updateBody = source.slice(
-      source.indexOf('local function updateAction()'),
-      source.indexOf('local function deleteAction()'),
+      source.indexOf('local function updateAction(batchState)'),
+      source.indexOf('local function deleteAction(batchState)'),
     );
     const deleteBody = source.slice(
-      source.indexOf('local function deleteAction()'),
+      source.indexOf('local function deleteAction(batchState)'),
       source.lastIndexOf('if payload.protocolVersion'),
     );
     expect(createBody.indexOf('isValidInstanceName(node.name)')).toBeLessThan(

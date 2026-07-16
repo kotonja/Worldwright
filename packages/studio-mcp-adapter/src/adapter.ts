@@ -2,20 +2,33 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 
 import {
   applyRobloxChangeSet,
+  applyRobloxChangeSetBatched,
+  hashRobloxChangeSet,
   validateRobloxChangeSet,
   type ApplyResult,
   type RobloxAdapter,
   type RobloxAdapterScope,
+  type RobloxChangeOperation,
   type RobloxManagedNode,
+  type RobloxOperationBatchAdapter,
+  type RobloxOperationBatchContext,
   type RobloxSnapshot,
 } from '@worldwright/roblox-compiler';
 
+import { StudioBatchTransactionTransport } from './batch/transport.js';
 import { buildCreateProgram } from './bridge/create-program.js';
 import { buildDeleteProgram } from './bridge/delete-program.js';
 import { parseStudioBridgeResponse } from './bridge/response.js';
 import { buildProbeProgram, buildSnapshotProgram } from './bridge/snapshot-program.js';
 import { buildUpdateProgram } from './bridge/update-program.js';
 import { STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS } from './constants.js';
+import {
+  createStudioReconnectState,
+  StudioExactSessionLease,
+  type StudioMcpClientFactory,
+  type StudioReconnectState,
+} from './connection/session-lease.js';
+import { reconnectExactStudioSessionForObservation } from './connection/reconnect.js';
 import { StudioAdapterError, studioDiagnostic } from './diagnostics.js';
 import {
   captureStudioViewport,
@@ -37,18 +50,38 @@ import {
   type StudioSessionSummary,
 } from './mcp/session.js';
 import { snapshotFromStudioCompact } from './snapshot.js';
+import type { StudioTransportReport } from './report-types.js';
 import type { StudioBridgeResponse } from './types.js';
 
 const ADAPTER_CONSTRUCTION_TOKEN = Symbol('worldwright.studioMcp.adapterConstruction');
 export type StudioAdapterFaultOperation = 'create' | 'update' | 'delete';
 const internalStudioTransactionAdapters = new WeakMap<StudioMcpRobloxAdapter, RobloxAdapter>();
+const internalStudioBatchAdapters = new WeakMap<
+  StudioMcpRobloxAdapter,
+  RobloxOperationBatchAdapter
+>();
 const authorizedStudioTransactionRunners = new WeakMap<
   StudioMcpRobloxAdapter,
   (input: unknown, faultOperation?: StudioAdapterFaultOperation) => Promise<ApplyResult>
 >();
+const lostAcknowledgmentRunners = new WeakMap<
+  StudioMcpRobloxAdapter,
+  (input: unknown) => Promise<StudioChangeSetApplyEvidence>
+>();
+const doubleLostAcknowledgmentRunners = new WeakMap<
+  StudioMcpRobloxAdapter,
+  (input: unknown) => Promise<StudioChangeSetApplyEvidence>
+>();
+
+export interface StudioChangeSetApplyEvidence {
+  readonly result: ApplyResult;
+  readonly transportReport: StudioTransportReport;
+}
 
 interface StudioTransactionContext {
   readonly expectedNodes: Map<string, RobloxManagedNode>;
+  readonly reconnectState: StudioReconnectState;
+  readonly batchTransport?: StudioBatchTransactionTransport;
 }
 
 function createPostMutationFaultAdapter(
@@ -124,8 +157,7 @@ function successSnapshot(
 }
 
 export class StudioMcpRobloxAdapter implements RobloxAdapter {
-  readonly #client: StudioMcpClient;
-  readonly #session: StudioSessionSummary;
+  readonly #lease: StudioExactSessionLease;
   readonly #transactionContext = new AsyncLocalStorage<StudioTransactionContext>();
   readonly #mutationAuthorized: boolean;
   #transactionTail: Promise<void> = Promise.resolve();
@@ -138,6 +170,7 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     client: StudioMcpClient,
     session: StudioSessionSummary,
     mutationAuthorized: boolean,
+    connectClient: StudioMcpClientFactory = connectStudioMcp,
   ) {
     if (token !== ADAPTER_CONSTRUCTION_TOKEN) {
       throw new StudioAdapterError([
@@ -148,8 +181,7 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
         ),
       ]);
     }
-    this.#client = client;
-    this.#session = session;
+    this.#lease = new StudioExactSessionLease(client, session, connectClient);
     this.#mutationAuthorized = mutationAuthorized;
     const transactionAdapter = Object.freeze({
       readSnapshot: (scope: Readonly<RobloxAdapterScope>): Promise<unknown> =>
@@ -169,17 +201,38 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
       ): Promise<void> => this.#deleteNode(scope, before),
     });
     internalStudioTransactionAdapters.set(this, transactionAdapter);
+    const batchAdapter: RobloxOperationBatchAdapter = Object.freeze({
+      ...transactionAdapter,
+      applyOperationBatch: (
+        scope: Readonly<RobloxAdapterScope>,
+        operations: readonly Readonly<RobloxChangeOperation>[],
+        context: Readonly<RobloxOperationBatchContext>,
+      ) => {
+        const transport = this.#transactionContext.getStore()?.batchTransport;
+        if (transport === undefined) {
+          throw new StudioAdapterError([
+            StudioBatchTransactionTransport.diagnosticForMissingContext(),
+          ]);
+        }
+        return transport.applyOperationBatch(scope, operations, context);
+      },
+    });
+    internalStudioBatchAdapters.set(this, batchAdapter);
     authorizedStudioTransactionRunners.set(this, (input, faultOperation) =>
       this.#runAuthorizedTransaction(input, faultOperation),
+    );
+    lostAcknowledgmentRunners.set(this, (input) => this.#runDetailedTransaction(input, true));
+    doubleLostAcknowledgmentRunners.set(this, (input) =>
+      this.#runDetailedTransaction(input, true, true),
     );
   }
 
   public get studioId(): string {
-    return this.#session.studioId;
+    return this.#lease.studioId;
   }
 
   public get displayName(): string {
-    return this.#session.displayName;
+    return this.#lease.displayName;
   }
 
   async #serialized<T>(operation: () => Promise<T>, allowClosing = false): Promise<T> {
@@ -206,18 +259,27 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     program: FixedStudioBridgeProgram,
     expectedNodeId?: string,
   ): Promise<StudioBridgeResponse> {
-    await this.#reassertExactSession();
-    const text = await executeFixedStudioBridgeProgram(this.#client, program);
+    return this.#runFixedOnClient(this.#lease.currentClient(), action, program, expectedNodeId);
+  }
+
+  async #runFixedOnClient(
+    client: StudioMcpClient,
+    action: 'probe' | 'snapshot' | 'create' | 'update' | 'delete',
+    program: FixedStudioBridgeProgram,
+    expectedNodeId?: string,
+  ): Promise<StudioBridgeResponse> {
+    await selectStudioSession(client, this.#lease.studioId);
+    const text = await executeFixedStudioBridgeProgram(client, program);
     return parseStudioBridgeResponse(text, action, expectedNodeId);
   }
 
   async #reassertExactSession(): Promise<void> {
-    await selectStudioSession(this.#client, this.#session.studioId);
+    await this.#lease.reassertExactSession();
   }
 
-  async #probeSelectedStudioUnlocked(): Promise<StudioSandboxProbe> {
-    await this.#reassertExactSession();
-    const state = parseStudioStateText(await this.#client.getStudioStateText());
+  async #probeClient(client: StudioMcpClient): Promise<StudioSandboxProbe> {
+    await selectStudioSession(client, this.#lease.studioId);
+    const state = parseStudioStateText(await client.getStudioStateText());
     if (!state.editAvailable || state.playtesting) {
       throw new StudioAdapterError([
         studioDiagnostic(
@@ -227,14 +289,16 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
         ),
       ]);
     }
-    const response = successSnapshot(await this.#runFixed('probe', buildProbeProgram()));
+    const response = successSnapshot(
+      await this.#runFixedOnClient(client, 'probe', buildProbeProgram()),
+    );
     if (response.action !== 'probe') {
       throw new StudioAdapterError([
         studioDiagnostic('studio.response_invalid', '/action', 'Studio probe response is invalid.'),
       ]);
     }
     return {
-      studioId: this.#session.studioId,
+      studioId: this.#lease.studioId,
       placeName: sanitizeStudioDisplayName(response.probe.placeName),
       placeId: response.probe.placeId,
       gameId: response.probe.gameId,
@@ -242,6 +306,10 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
       playtesting: state.playtesting || response.probe.isRunning,
       editExecutionAvailable: state.editAvailable && response.probe.isEditAvailable,
     };
+  }
+
+  async #probeSelectedStudioUnlocked(): Promise<StudioSandboxProbe> {
+    return this.#probeClient(this.#lease.currentClient());
   }
 
   public async probeSelectedStudio(): Promise<StudioSandboxProbe> {
@@ -278,6 +346,8 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
   #replaceExpectedNodes(snapshot: Readonly<RobloxSnapshot>): void {
     const context = this.#transactionContext.getStore();
     if (context === undefined) return;
+    context.batchTransport?.replaceObservedSnapshot(snapshot);
+    if (context.batchTransport !== undefined) return;
     context.expectedNodes.clear();
     for (const node of snapshot.nodes) {
       context.expectedNodes.set(node.id, structuredClone(node));
@@ -311,8 +381,16 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
   async #readSnapshot(scope: Readonly<RobloxAdapterScope>): Promise<RobloxSnapshot> {
     assertScope(scope);
     return this.#runAdapterOperation(async () => {
+      const context = this.#transactionContext.getStore();
+      const client = await reconnectExactStudioSessionForObservation(
+        this.#lease,
+        context?.reconnectState,
+        async (candidate) => {
+          assertSandboxStudioProbe(await this.#probeClient(candidate));
+        },
+      );
       const response = successSnapshot(
-        await this.#runFixed('snapshot', buildSnapshotProgram(scope.projectId)),
+        await this.#runFixedOnClient(client, 'snapshot', buildSnapshotProgram(scope.projectId)),
       );
       if (response.action !== 'snapshot') {
         throw new StudioAdapterError([
@@ -413,7 +491,84 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
         ),
       ]);
     }
-    return this.#runAuthorizedTransaction(input);
+    const validation = validateRobloxChangeSet(input);
+    if (!validation.valid) {
+      const internalAdapter = internalStudioTransactionAdapters.get(this);
+      if (internalAdapter === undefined) {
+        throw new StudioAdapterError([
+          studioDiagnostic('studio.usage_invalid', '/adapter', 'The Studio adapter is invalid.'),
+        ]);
+      }
+      return applyRobloxChangeSet(internalAdapter, input);
+    }
+    return (await this.#runDetailedTransaction(validation.value)).result;
+  }
+
+  /** Applies through chunked transport and returns separate deterministic transport evidence. */
+  public async applyChangeSetDetailed(input: unknown): Promise<StudioChangeSetApplyEvidence> {
+    return this.#runDetailedTransaction(input);
+  }
+
+  async #runDetailedTransaction(
+    input: unknown,
+    discardNextForwardAcknowledgment = false,
+    discardNextCompensationAcknowledgment = false,
+  ): Promise<StudioChangeSetApplyEvidence> {
+    if (!this.#mutationAuthorized) {
+      throw new StudioAdapterError([
+        studioDiagnostic(
+          'studio.usage_invalid',
+          '/adapter',
+          'A read-only auto-selected Studio adapter cannot apply a change set.',
+        ),
+      ]);
+    }
+    const validation = validateRobloxChangeSet(input);
+    if (!validation.valid) {
+      throw new StudioAdapterError([
+        studioDiagnostic(
+          'studio.transaction_failed',
+          '/changeSet',
+          'Chunked Studio apply requires a valid complete Roblox Change Set.',
+        ),
+      ]);
+    }
+    if (validation.value.operations.length > STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS) {
+      throw new StudioAdapterError([
+        studioDiagnostic(
+          'studio.operation_limit_exceeded',
+          '/operations',
+          `Studio transactions are limited to ${STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS} operations.`,
+        ),
+      ]);
+    }
+    const batchAdapter = internalStudioBatchAdapters.get(this);
+    if (batchAdapter === undefined) {
+      throw new StudioAdapterError([
+        studioDiagnostic('studio.usage_invalid', '/adapter', 'The Studio adapter is invalid.'),
+      ]);
+    }
+    const changeSetHash = hashRobloxChangeSet(validation.value);
+    const transport = new StudioBatchTransactionTransport({
+      projectId: validation.value.preconditions.projectId,
+      changeSetHash,
+      operationsPlanned: validation.value.operations.length,
+      lease: this.#lease,
+      discardNextForwardAcknowledgment,
+      discardNextCompensationAcknowledgment,
+    });
+    return this.#serialized(async () => {
+      await this.#assertSandbox();
+      const result = await this.#transactionContext.run(
+        {
+          expectedNodes: transport.expectedNodes,
+          reconnectState: transport.reconnectState,
+          batchTransport: transport,
+        },
+        () => applyRobloxChangeSetBatched(batchAdapter, validation.value, transport.planBatches),
+      );
+      return { result, transportReport: transport.buildReport(result) };
+    });
   }
 
   /** Testing reaches this only through a module-private WeakMap runner. */
@@ -436,10 +591,8 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
         studioDiagnostic('studio.usage_invalid', '/adapter', 'The Studio adapter is invalid.'),
       ]);
     }
-    const transactionAdapter =
-      faultOperation === undefined
-        ? internalAdapter
-        : createPostMutationFaultAdapter(internalAdapter, faultOperation);
+    if (faultOperation === undefined) return (await this.#runDetailedTransaction(input)).result;
+    const transactionAdapter = createPostMutationFaultAdapter(internalAdapter, faultOperation);
     const validation = validateRobloxChangeSet(input);
     if (!validation.valid) return applyRobloxChangeSet(transactionAdapter, input);
     if (validation.value.operations.length > STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS) {
@@ -453,8 +606,9 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     }
     return this.#serialized(async () => {
       await this.#assertSandbox();
-      return this.#transactionContext.run({ expectedNodes: new Map() }, () =>
-        applyRobloxChangeSet(transactionAdapter, validation.value),
+      return this.#transactionContext.run(
+        { expectedNodes: new Map(), reconnectState: createStudioReconnectState() },
+        () => applyRobloxChangeSet(transactionAdapter, validation.value),
       );
     });
   }
@@ -465,14 +619,14 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     return this.#serialized(async () => {
       await this.#assertSandbox();
       await this.#reassertExactSession();
-      return captureStudioViewport(this.#client, request);
+      return captureStudioViewport(this.#lease.currentClient(), request);
     });
   }
 
   public close(): Promise<void> {
     if (this.#closePromise !== undefined) return this.#closePromise;
     this.#closing = true;
-    this.#closePromise = this.#serialized(() => this.#client.close(), true);
+    this.#closePromise = this.#serialized(() => this.#lease.close(), true);
     return this.#closePromise;
   }
 }
@@ -490,6 +644,34 @@ export function runAuthorizedStudioTransactionForTesting(
     ]);
   }
   return runner(input, faultOperation);
+}
+
+/** @internal Testing-only controlled loss after Studio completes one forward batch. */
+export function runStudioBatchLostAcknowledgmentForTesting(
+  adapter: StudioMcpRobloxAdapter,
+  input: unknown,
+): Promise<StudioChangeSetApplyEvidence> {
+  const runner = lostAcknowledgmentRunners.get(adapter);
+  if (runner === undefined) {
+    throw new StudioAdapterError([
+      studioDiagnostic('studio.usage_invalid', '/adapter', 'The Studio adapter is invalid.'),
+    ]);
+  }
+  return runner(input);
+}
+
+/** @internal Testing-only controlled loss after forward and compensating batches complete. */
+export function runStudioBatchDoubleLostAcknowledgmentForTesting(
+  adapter: StudioMcpRobloxAdapter,
+  input: unknown,
+): Promise<StudioChangeSetApplyEvidence> {
+  const runner = doubleLostAcknowledgmentRunners.get(adapter);
+  if (runner === undefined) {
+    throw new StudioAdapterError([
+      studioDiagnostic('studio.usage_invalid', '/adapter', 'The Studio adapter is invalid.'),
+    ]);
+  }
+  return runner(input);
 }
 
 async function connectWithSession(
@@ -538,11 +720,13 @@ export function createStudioMcpAdapterForTesting(
   client: StudioMcpClient,
   session: StudioSessionSummary,
   mutationAuthorized = true,
+  connectClient?: StudioMcpClientFactory,
 ): StudioMcpRobloxAdapter {
   return new StudioMcpRobloxAdapter(
     ADAPTER_CONSTRUCTION_TOKEN,
     client,
     session,
     mutationAuthorized,
+    connectClient,
   );
 }

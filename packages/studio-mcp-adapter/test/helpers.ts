@@ -7,10 +7,15 @@ import type {
 } from '@worldwright/roblox-compiler';
 
 import { createStudioMcpAdapterForTesting, type StudioMcpRobloxAdapter } from '../src/adapter.js';
-import { STUDIO_BRIDGE_RESPONSE_PREFIX } from '../src/constants.js';
+import type {
+  StudioBatchOperation,
+  StudioBatchRequest,
+  StudioBatchResponse,
+} from '../src/batch/types.js';
+import { STUDIO_BATCH_RESPONSE_PREFIX, STUDIO_BRIDGE_RESPONSE_PREFIX } from '../src/constants.js';
 import { compareCodePoints } from '../src/diagnostics.js';
 import { canonicalNodeMetadata } from '../src/engine-state.js';
-import { stringifyCanonicalJson, type JsonValue } from '../src/json.js';
+import { canonicalizeJsonValue, type JsonValue } from '../src/json.js';
 import type { AllowedStudioMcpToolName } from '../src/mcp/capabilities.js';
 import { connectStudioMcpForTesting } from '../src/testing.js';
 import { compactSnapshotFixture } from '../scripts/compact-snapshot-fixture.js';
@@ -45,7 +50,7 @@ export function emptySnapshot(manifest: Readonly<RobloxManifest>): RobloxSnapsho
   };
 }
 
-function extractPayload(source: string): StudioBridgeRequest {
+function extractPayload(source: string): StudioBridgeRequest | StudioBatchRequest {
   const marker = 'local payloadJson = ';
   const start = source.indexOf(marker);
   if (start < 0) throw new Error('Fixed bridge payload marker is missing.');
@@ -164,7 +169,11 @@ function validToolList(): readonly unknown[] {
 }
 
 function frame(response: StudioBridgeResponse): string {
-  return `${STUDIO_BRIDGE_RESPONSE_PREFIX}${stringifyCanonicalJson(response as JsonValue)}`;
+  return `${STUDIO_BRIDGE_RESPONSE_PREFIX}${JSON.stringify(canonicalizeJsonValue(response as JsonValue))}\n`;
+}
+
+function batchFrame(response: StudioBatchResponse): string {
+  return `${STUDIO_BATCH_RESPONSE_PREFIX}${JSON.stringify(canonicalizeJsonValue(response as JsonValue))}\n`;
 }
 
 export interface FakeStudioOptions {
@@ -185,18 +194,24 @@ export interface FakeStudioOptions {
     action: 'create' | 'update' | 'delete';
     code: 'studio.identity_invalid' | 'studio.root_invalid';
   }>;
+  readonly beforeReconnect?: (protocol: FakeStudioProtocol) => void;
 }
 
-export class FakeStudioProtocol {
-  readonly nodes = new Map<string, RobloxManagedNode>();
+interface FakeStudioSharedState {
+  readonly nodes: Map<string, RobloxManagedNode>;
   readonly calls: Array<{
     readonly tool: AllowedStudioMcpToolName;
     readonly argumentsValue: Readonly<Record<string, unknown>>;
-  }> = [];
+  }>;
+}
+
+export class FakeStudioProtocol {
+  readonly nodes: Map<string, RobloxManagedNode>;
+  readonly calls: FakeStudioSharedState['calls'];
   readonly unmanagedRoots: readonly StudioRawUnmanagedRoot[];
   placeId: number;
   gameId: number;
-  readonly running: boolean;
+  running: boolean;
   readonly throwAfter: 'create' | 'update' | 'delete' | undefined;
   readonly publishBeforeAction: 'snapshot' | 'create' | 'update' | 'delete' | undefined;
   readonly parentDriftBeforeAction:
@@ -215,8 +230,15 @@ export class FakeStudioProtocol {
   #active = true;
   public closed = false;
 
-  public constructor(options: Readonly<FakeStudioOptions> = {}) {
-    for (const node of options.initialNodes ?? []) this.nodes.set(node.id, structuredClone(node));
+  public constructor(
+    options: Readonly<FakeStudioOptions> = {},
+    sharedState?: Readonly<FakeStudioSharedState>,
+  ) {
+    this.nodes = sharedState?.nodes ?? new Map<string, RobloxManagedNode>();
+    this.calls = sharedState?.calls ?? [];
+    if (sharedState === undefined) {
+      for (const node of options.initialNodes ?? []) this.nodes.set(node.id, structuredClone(node));
+    }
     this.unmanagedRoots = structuredClone(options.unmanagedRoots ?? []);
     this.placeId = options.placeId ?? 0;
     this.gameId = options.gameId ?? 0;
@@ -294,7 +316,109 @@ export class FakeStudioProtocol {
     );
   }
 
-  #execute(request: StudioBridgeRequest): unknown {
+  #singleRequestFromBatch(
+    request: Readonly<StudioBatchRequest>,
+    operation: Readonly<StudioBatchOperation>,
+  ): StudioBridgeRequest {
+    const common = { protocolVersion: '0.1.0' as const, projectId: request.projectId };
+    switch (operation.type) {
+      case 'create':
+        return {
+          ...common,
+          action: 'create',
+          node: operation.node,
+          stateJson: operation.stateJson,
+          stateHash: operation.stateHash,
+          ...(operation.parentState === undefined ? {} : { parentState: operation.parentState }),
+        };
+      case 'update':
+        return {
+          ...common,
+          action: 'update',
+          before: operation.before,
+          after: operation.after,
+          beforeStateJson: operation.beforeStateJson,
+          beforeStateHash: operation.beforeStateHash,
+          afterStateJson: operation.afterStateJson,
+          afterStateHash: operation.afterStateHash,
+          ...(operation.beforeParentState === undefined
+            ? {}
+            : { beforeParentState: operation.beforeParentState }),
+          ...(operation.afterParentState === undefined
+            ? {}
+            : { afterParentState: operation.afterParentState }),
+        };
+      case 'delete':
+        return {
+          ...common,
+          action: 'delete',
+          before: operation.before,
+          beforeStateJson: operation.beforeStateJson,
+          beforeStateHash: operation.beforeStateHash,
+        };
+    }
+  }
+
+  #responseFromEnvelope(value: unknown): StudioBridgeResponse {
+    const content =
+      typeof value === 'object' && value !== null && 'content' in value
+        ? (value as { readonly content?: readonly unknown[] }).content
+        : undefined;
+    const first = content?.[0];
+    const text =
+      typeof first === 'object' && first !== null && 'text' in first
+        ? (first as { readonly text?: unknown }).text
+        : undefined;
+    if (typeof text !== 'string' || !text.startsWith(STUDIO_BRIDGE_RESPONSE_PREFIX)) {
+      throw new Error('Fake single bridge response is malformed.');
+    }
+    return JSON.parse(text.slice(STUDIO_BRIDGE_RESPONSE_PREFIX.length)) as StudioBridgeResponse;
+  }
+
+  #executeBatch(request: Readonly<StudioBatchRequest>): unknown {
+    const completedOperationIds: string[] = [];
+    for (let index = 0; index < request.operations.length; index += 1) {
+      const operation = request.operations[index]!;
+      const single = this.#responseFromEnvelope(
+        this.#execute(this.#singleRequestFromBatch(request, operation)),
+      );
+      if (!single.ok) {
+        return this.#text(
+          batchFrame({
+            protocolVersion: '0.1.0',
+            action: 'apply_chunk',
+            ok: false,
+            changeSetHash: request.changeSetHash,
+            chunkId: request.chunkId,
+            chunkIndex: request.chunkIndex,
+            operationsAttempted: index + 1,
+            operationsApplied: index,
+            completedOperationIds,
+            failedOperationId: operation.operationId,
+            localRestoreSucceeded: true,
+            diagnostic: single.diagnostic,
+          }),
+        );
+      }
+      completedOperationIds.push(operation.operationId);
+    }
+    return this.#text(
+      batchFrame({
+        protocolVersion: '0.1.0',
+        action: 'apply_chunk',
+        ok: true,
+        changeSetHash: request.changeSetHash,
+        chunkId: request.chunkId,
+        chunkIndex: request.chunkIndex,
+        operationsAttempted: request.operations.length,
+        operationsApplied: request.operations.length,
+        completedOperationIds,
+      }),
+    );
+  }
+
+  #execute(request: StudioBridgeRequest | StudioBatchRequest): unknown {
+    if (request.action === 'apply_chunk') return this.#executeBatch(request);
     if (request.action !== 'probe') {
       if (!this.#publicationInjected && request.action === this.publishBeforeAction) {
         this.#publicationInjected = true;
@@ -492,6 +616,27 @@ export async function createFakeStudioAdapter(
 ): Promise<{ readonly adapter: StudioMcpRobloxAdapter; readonly protocol: FakeStudioProtocol }> {
   const protocol = new FakeStudioProtocol(options);
   const client = await connectStudioMcpForTesting(() => protocol);
+  const sharedState: FakeStudioSharedState = {
+    nodes: protocol.nodes,
+    calls: protocol.calls,
+  };
+  let reconnectHookUsed = false;
+  const reconnectClient = async () => {
+    if (!reconnectHookUsed) {
+      reconnectHookUsed = true;
+      options.beforeReconnect?.(protocol);
+    }
+    const replacement = new FakeStudioProtocol(
+      {
+        placeId: protocol.placeId,
+        gameId: protocol.gameId,
+        running: protocol.running,
+        unmanagedRoots: protocol.unmanagedRoots,
+      },
+      sharedState,
+    );
+    return connectStudioMcpForTesting(() => replacement);
+  };
   return {
     adapter: createStudioMcpAdapterForTesting(
       client,
@@ -501,6 +646,7 @@ export async function createFakeStudioAdapter(
         active: true,
       },
       options.mutationAuthorized ?? true,
+      reconnectClient,
     ),
     protocol,
   };

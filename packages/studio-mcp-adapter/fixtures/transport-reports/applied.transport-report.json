@@ -1,0 +1,20 @@
+{
+  "changeSetHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "chunksAttempted": 1,
+  "chunksCompleted": 1,
+  "chunksPlanned": 1,
+  "compensationChunksAttempted": 0,
+  "compensationChunksCompleted": 0,
+  "compensationOperationsApplied": 0,
+  "compensationOperationsAttempted": 0,
+  "finalOutcome": "applied",
+  "mode": "chunked",
+  "mutationExecuteCalls": 1,
+  "operationsAppliedBeforeFailure": 20,
+  "operationsAttempted": 20,
+  "operationsPlanned": 20,
+  "reconnectAttempts": 0,
+  "reconnectsSucceeded": 0,
+  "schemaVersion": "0.1.0",
+  "uncertainTransportEvents": 0
+}

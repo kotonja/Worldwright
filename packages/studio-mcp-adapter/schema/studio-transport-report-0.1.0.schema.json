@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:worldwright:studio-transport-report:0.1.0",
+  "title": "Worldwright Studio Transport Report 0.1.0",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0",
+      "type": "string"
+    },
+    "mode": {
+      "const": "chunked",
+      "type": "string"
+    },
+    "changeSetHash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "operationsPlanned": {
+      "minimum": 0,
+      "maximum": 512,
+      "type": "integer"
+    },
+    "operationsAttempted": {
+      "minimum": 0,
+      "maximum": 512,
+      "type": "integer"
+    },
+    "operationsAppliedBeforeFailure": {
+      "minimum": 0,
+      "maximum": 512,
+      "type": "integer"
+    },
+    "chunksPlanned": {
+      "minimum": 0,
+      "maximum": 512,
+      "type": "integer"
+    },
+    "chunksAttempted": {
+      "minimum": 0,
+      "maximum": 512,
+      "type": "integer"
+    },
+    "chunksCompleted": {
+      "minimum": 0,
+      "maximum": 512,
+      "type": "integer"
+    },
+    "mutationExecuteCalls": {
+      "minimum": 0,
+      "maximum": 1056,
+      "type": "integer"
+    },
+    "uncertainTransportEvents": {
+      "minimum": 0,
+      "maximum": 3,
+      "type": "integer"
+    },
+    "reconnectAttempts": {
+      "minimum": 0,
+      "maximum": 2,
+      "type": "integer"
+    },
+    "reconnectsSucceeded": {
+      "minimum": 0,
+      "maximum": 2,
+      "type": "integer"
+    },
+    "compensationOperationsAttempted": {
+      "minimum": 0,
+      "maximum": 544,
+      "type": "integer"
+    },
+    "compensationOperationsApplied": {
+      "minimum": 0,
+      "maximum": 544,
+      "type": "integer"
+    },
+    "compensationChunksAttempted": {
+      "minimum": 0,
+      "maximum": 544,
+      "type": "integer"
+    },
+    "compensationChunksCompleted": {
+      "minimum": 0,
+      "maximum": 512,
+      "type": "integer"
+    },
+    "finalOutcome": {
+      "anyOf": [
+        {
+          "const": "applied",
+          "type": "string"
+        },
+        {
+          "const": "noop",
+          "type": "string"
+        },
+        {
+          "const": "failed-restored",
+          "type": "string"
+        },
+        {
+          "const": "failed-unsafe",
+          "type": "string"
+        },
+        {
+          "const": "failed-unrestored",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "mode",
+    "changeSetHash",
+    "operationsPlanned",
+    "operationsAttempted",
+    "operationsAppliedBeforeFailure",
+    "chunksPlanned",
+    "chunksAttempted",
+    "chunksCompleted",
+    "mutationExecuteCalls",
+    "uncertainTransportEvents",
+    "reconnectAttempts",
+    "reconnectsSucceeded",
+    "compensationOperationsAttempted",
+    "compensationOperationsApplied",
+    "compensationChunksAttempted",
+    "compensationChunksCompleted",
+    "finalOutcome"
+  ]
+}

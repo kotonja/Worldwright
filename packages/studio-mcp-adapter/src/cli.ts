@@ -5,18 +5,25 @@ import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
+  classifyRobloxChangeSetProgress,
   hashRobloxChangeSet,
+  hashRobloxSnapshot,
   normalizeRobloxChangeSet,
   normalizeRobloxManifest,
+  normalizeRobloxSnapshot,
   planRobloxChangeSet,
   stringifyRobloxChangeSet,
   stringifyRobloxSnapshot,
   validateRobloxChangeSet,
   validateRobloxManifest,
+  validateRobloxSnapshot,
   type RobloxChangeSet,
   type RobloxManifest,
+  type RobloxSnapshot,
 } from '@worldwright/roblox-compiler';
 
+import { chunkStudioBatchOperations } from './batch/chunk.js';
+import { buildStudioBatchOperations } from './batch/request.js';
 import {
   connectReadOnlyStudioMcpAdapter,
   connectSelectedStudioMcpAdapter,
@@ -30,6 +37,8 @@ import {
   type StudioDiagnosticCode,
 } from './diagnostics.js';
 import { hashStudioApplyReceipt } from './hashing.js';
+import { buildStudioProgressReport, hashStudioProgressReport } from './progress-report.js';
+import { hashStudioTransportReport } from './transport-report.js';
 import { stringifyCanonicalJson, type JsonValue } from './json.js';
 import { connectStudioMcp } from './mcp/client.js';
 import { assertSandboxStudioProbe, listStudioSessions } from './mcp/session.js';
@@ -39,6 +48,7 @@ import { buildStudioApplyReceipt } from './receipt.js';
 const USAGE = `Usage:
   studio-mcp probe [--studio-id <id>] [--json]
   studio-mcp snapshot [--studio-id <id>] --project-id <project-id> [--output <path>] [--json]
+  studio-mcp progress --studio-id <id> --base-snapshot <path> --change-set <path> [--json]
   studio-mcp plan-live [--studio-id <id>] --manifest <path> [--output <path>] [--json]
   studio-mcp apply --studio-id <id> --change-set <path> --confirm <full-sha256> [--receipt-output <path>] [--json]
   studio-mcp verify --studio-id <id> --manifest <path> [--json]
@@ -46,7 +56,7 @@ const USAGE = `Usage:
 `;
 
 const LIVE_EVIDENCE_DIRECTORY = fileURLToPath(
-  new URL('../../../.worldwright/live-milestone-3/', import.meta.url),
+  new URL('../../../.worldwright/live-milestone-4/', import.meta.url),
 );
 
 interface CliIo {
@@ -256,6 +266,12 @@ async function loadChangeSet(path: string): Promise<RobloxChangeSet> {
   return normalizeRobloxChangeSet(validation.value);
 }
 
+async function loadSnapshot(path: string): Promise<RobloxSnapshot> {
+  const validation = validateRobloxSnapshot(await readJson(path));
+  if (!validation.valid) throw compilerFailure(validation.diagnostics);
+  return normalizeRobloxSnapshot(validation.value);
+}
+
 async function closeAdapter(adapter: StudioMcpRobloxAdapter | undefined): Promise<void> {
   if (adapter === undefined) return;
   await adapter.close().catch(() => undefined);
@@ -332,6 +348,46 @@ async function runSnapshot(
   }
 }
 
+async function runProgress(
+  args: readonly string[],
+  io: CliIo,
+  dependencies: StudioMcpCliDependencies,
+): Promise<number> {
+  const options = parseOptions(args, new Set(['studio-id', 'base-snapshot', 'change-set']));
+  const studioId = required(options, 'studio-id');
+  const baseSnapshot = await loadSnapshot(required(options, 'base-snapshot'));
+  const changeSet = await loadChangeSet(required(options, 'change-set'));
+  let adapter: StudioMcpRobloxAdapter | undefined;
+  try {
+    adapter = await dependencies.connectReadOnlyAdapter(studioId);
+    const observed = await adapter.readSnapshot({
+      projectId: changeSet.preconditions.projectId,
+      target: changeSet.preconditions.target,
+    });
+    const result = classifyRobloxChangeSetProgress(baseSnapshot, observed, changeSet);
+    const report = buildStudioProgressReport(result);
+    const reportHash = hashStudioProgressReport(report);
+    if (options.json) {
+      writeJson(io, {
+        success: result.success,
+        progress: report,
+        progressReportHash: reportHash,
+      } as unknown as JsonValue);
+    } else if (report.classification !== 'unsafe') {
+      io.writeStdout(
+        `Classification: ${report.classification}\nApplied prefix: ${String(report.appliedPrefixLength)} / ${String(report.operationsTotal)}\nBase snapshot hash: ${report.baseSnapshotHash}\nObserved snapshot hash: ${report.observedSnapshotHash}\n${'nextOperationId' in report ? `Next operation: ${report.nextOperationId}\n` : ''}Progress report hash: ${reportHash}\n`,
+      );
+    } else {
+      for (const entry of report.diagnostics) {
+        io.writeStderr(`${entry.code}: ${entry.message}\n`);
+      }
+    }
+    return result.success ? 0 : 1;
+  } finally {
+    await closeAdapter(adapter);
+  }
+}
+
 async function runPlanLive(
   args: readonly string[],
   io: CliIo,
@@ -379,9 +435,10 @@ function writeApplyPreview(
   placeName: string,
   changeSet: Readonly<RobloxChangeSet>,
   changeSetHash: string,
+  plannedChunkCount: number,
 ): void {
   io.writeStdout(
-    `Studio ID: ${studioId}\nUnsaved place: ${placeName}\nProject: ${changeSet.preconditions.projectId}\nCreates: ${changeSet.summary.creates}\nUpdates: ${changeSet.summary.updates}\nDeletes: ${changeSet.summary.deletes}\nTotal operations: ${changeSet.summary.total}\nBase snapshot hash: ${changeSet.preconditions.baseSnapshotHash}\nDesired manifest hash: ${changeSet.preconditions.desiredManifestHash}\nExpected result hash: ${changeSet.preconditions.resultSnapshotHash}\nRequired confirmation hash: ${changeSetHash}\n`,
+    `Studio ID: ${studioId}\nUnsaved place: ${placeName}\nProject: ${changeSet.preconditions.projectId}\nCreates: ${changeSet.summary.creates}\nUpdates: ${changeSet.summary.updates}\nDeletes: ${changeSet.summary.deletes}\nTotal operations: ${changeSet.summary.total}\nTransport mode: chunked\nPlanned chunks: ${String(plannedChunkCount)}\nMaximum operations per chunk: 32\nBase snapshot hash: ${changeSet.preconditions.baseSnapshotHash}\nDesired manifest hash: ${changeSet.preconditions.desiredManifestHash}\nExpected result hash: ${changeSet.preconditions.resultSnapshotHash}\nRequired confirmation hash: ${changeSetHash}\n`,
   );
 }
 
@@ -421,8 +478,23 @@ async function runApply(
   try {
     adapter = await dependencies.connectSelectedAdapter(studioId);
     const probe = assertSandboxStudioProbe(await adapter.probeSelectedStudio());
-    if (!options.json) writeApplyPreview(io, studioId, probe.placeName, changeSet, changeSetHash);
-    const result = await adapter.applyChangeSet(changeSet);
+    const previewSnapshot = await adapter.readSnapshot({
+      projectId: changeSet.preconditions.projectId,
+      target: changeSet.preconditions.target,
+    });
+    const plannedChunkCount =
+      hashRobloxSnapshot(previewSnapshot) === changeSet.preconditions.baseSnapshotHash
+        ? chunkStudioBatchOperations({
+            projectId: changeSet.preconditions.projectId,
+            changeSetHash,
+            operations: buildStudioBatchOperations(changeSet.operations, previewSnapshot.nodes),
+          }).length
+        : 0;
+    if (!options.json) {
+      writeApplyPreview(io, studioId, probe.placeName, changeSet, changeSetHash, plannedChunkCount);
+    }
+    const applied = await adapter.applyChangeSetDetailed(changeSet);
+    const { result, transportReport } = applied;
     const receipt = buildStudioApplyReceipt(
       {
         studio: {
@@ -461,6 +533,7 @@ async function runApply(
       }
     }
     const receiptHash = hashStudioApplyReceipt(receipt);
+    const transportReportHash = hashStudioTransportReport(transportReport);
     if (options.json) {
       writeJson(io, {
         success: result.success && receiptWriteDiagnostic === undefined,
@@ -468,6 +541,8 @@ async function runApply(
         result,
         receipt,
         receiptHash,
+        transportReport,
+        transportReportHash,
         ...(receiptOutput === undefined
           ? {}
           : { receiptWritten: receiptWriteDiagnostic === undefined }),
@@ -475,7 +550,7 @@ async function runApply(
       } as unknown as JsonValue);
     } else {
       io.writeStdout(
-        `Transaction status: ${receipt.status}\nOperations attempted: ${receipt.operationsAttempted}\nReceipt hash: ${receiptHash}\n`,
+        `Transaction status: ${receipt.status}\nOperations attempted: ${receipt.operationsAttempted}\nChunks attempted: ${String(transportReport.chunksAttempted)}\nMutation execute calls: ${String(transportReport.mutationExecuteCalls)}\nReconnect attempts: ${String(transportReport.reconnectAttempts)}\nCompensation restored base: ${String(result.success ? false : result.rollback.attempted && result.rollback.succeeded)}\nReceipt hash: ${receiptHash}\nTransport report hash: ${transportReportHash}\n`,
       );
       if (receiptWriteDiagnostic !== undefined) {
         io.writeStderr(`${receiptWriteDiagnostic.code}: ${receiptWriteDiagnostic.message}\n`);
@@ -611,6 +686,8 @@ export async function runStudioMcpCli(
         return await runProbe(rest, io, dependencies);
       case 'snapshot':
         return await runSnapshot(rest, io, dependencies);
+      case 'progress':
+        return await runProgress(rest, io, dependencies);
       case 'plan-live':
         return await runPlanLive(rest, io, dependencies);
       case 'apply':

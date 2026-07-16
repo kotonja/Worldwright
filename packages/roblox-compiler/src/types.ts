@@ -134,6 +134,38 @@ export interface SimulationFailure {
 
 export type SimulationResult = SimulationSuccess | SimulationFailure;
 
+export type RobloxChangeSetProgressClassification = 'base' | 'prefix' | 'complete';
+
+export interface RobloxChangeSetProgressSuccess {
+  readonly success: true;
+  readonly classification: RobloxChangeSetProgressClassification;
+  readonly projectId: string;
+  readonly target: Readonly<RobloxTarget>;
+  readonly baseSnapshotHash: string;
+  readonly observedSnapshotHash: string;
+  readonly changeSetHash: string;
+  readonly operationsTotal: number;
+  readonly appliedPrefixLength: number;
+  readonly nextOperationId?: string;
+  readonly diagnostics: readonly RobloxDiagnostic[];
+}
+
+export interface RobloxChangeSetProgressFailure {
+  readonly success: false;
+  readonly classification: 'unsafe';
+  readonly diagnostics: readonly RobloxDiagnostic[];
+  readonly projectId?: string;
+  readonly target?: Readonly<RobloxTarget>;
+  readonly baseSnapshotHash?: string;
+  readonly observedSnapshotHash?: string;
+  readonly changeSetHash?: string;
+  readonly operationsTotal?: number;
+}
+
+export type RobloxChangeSetProgressResult =
+  | RobloxChangeSetProgressSuccess
+  | RobloxChangeSetProgressFailure;
+
 export interface RobloxAdapterScope {
   readonly projectId: string;
   readonly target: Readonly<RobloxTarget>;

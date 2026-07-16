@@ -69,6 +69,7 @@ describe('Studio MCP CLI', () => {
     const help = ioCapture();
     expect(await runStudioMcpCli(['--help'], help.io)).toBe(0);
     expect(help.stdout.join('')).toContain('studio-mcp apply');
+    expect(help.stdout.join('')).toContain('studio-mcp progress');
 
     const invalid = ioCapture();
     expect(await runStudioMcpCli(['apply', '--studio-id', 'studio-test'], invalid.io)).toBe(2);
@@ -86,6 +87,107 @@ describe('Studio MCP CLI', () => {
       ).toBe(false);
     }
   });
+
+  it('classifies read-only live progress without attempting mutation', async () => {
+    const directory = await tempDirectory();
+    const manifest = loadCourtyardManifest();
+    const base = emptySnapshot(manifest);
+    const plan = planRobloxChangeSet(base, manifest);
+    if (!plan.success) throw new Error('Fixture planning failed.');
+    const basePath = join(directory, 'base.snapshot.json');
+    const changeSetPath = join(directory, 'change-set.json');
+    await writeFile(basePath, `${JSON.stringify(base, null, 2)}\n`, 'utf8');
+    await writeFile(changeSetPath, `${JSON.stringify(plan.changeSet, null, 2)}\n`, 'utf8');
+    const fake = await dependencies();
+    const output = ioCapture();
+    const exitCode = await runStudioMcpCli(
+      [
+        'progress',
+        '--studio-id',
+        'studio-test',
+        '--base-snapshot',
+        basePath,
+        '--change-set',
+        changeSetPath,
+        '--json',
+      ],
+      output.io,
+      fake.dependencies,
+    );
+    if (exitCode !== 0) {
+      throw new Error(`Progress CLI failed: ${output.stderr.join('')}${output.stdout.join('')}`);
+    }
+    expect(JSON.parse(output.stdout.join(''))).toMatchObject({
+      success: true,
+      progress: { classification: 'base', appliedPrefixLength: 0 },
+    });
+    expect(fake.protocol.nodes.size).toBe(0);
+    expect(
+      fake.protocol.calls.filter(
+        (call) =>
+          call.tool === 'execute_luau' &&
+          typeof call.argumentsValue['code'] === 'string' &&
+          call.argumentsValue['code'].includes('"action": "apply_chunk"'),
+      ),
+    ).toHaveLength(0);
+  });
+
+  it.each([
+    { label: 'prefix', nodeCount: 1, classification: 'prefix', exitCode: 0 },
+    { label: 'complete', nodeCount: 'all', classification: 'complete', exitCode: 0 },
+    { label: 'unsafe', nodeCount: 'unsafe', classification: 'unsafe', exitCode: 1 },
+  ] as const)(
+    'reports $label read-only progress with the documented domain exit code',
+    async ({ nodeCount, classification, exitCode }) => {
+      const directory = await tempDirectory();
+      const manifest = loadCourtyardManifest();
+      const base = emptySnapshot(manifest);
+      const plan = planRobloxChangeSet(base, manifest);
+      if (!plan.success) throw new Error('Fixture planning failed.');
+      const first = plan.changeSet.operations[0];
+      if (first?.type !== 'create') throw new Error('Expected a create operation.');
+      const initialNodes =
+        nodeCount === 'all'
+          ? manifest.nodes
+          : nodeCount === 'unsafe'
+            ? [{ ...first.node, name: 'Unauthorized third state' }]
+            : [first.node];
+      const basePath = join(directory, 'base.snapshot.json');
+      const changeSetPath = join(directory, 'change-set.json');
+      await writeFile(basePath, `${JSON.stringify(base, null, 2)}\n`, 'utf8');
+      await writeFile(changeSetPath, `${JSON.stringify(plan.changeSet, null, 2)}\n`, 'utf8');
+      const fake = await dependencies({ initialNodes });
+      const output = ioCapture();
+      expect(
+        await runStudioMcpCli(
+          [
+            'progress',
+            '--studio-id',
+            'studio-test',
+            '--base-snapshot',
+            basePath,
+            '--change-set',
+            changeSetPath,
+            '--json',
+          ],
+          output.io,
+          fake.dependencies,
+        ),
+      ).toBe(exitCode);
+      expect(JSON.parse(output.stdout.join(''))).toMatchObject({
+        success: exitCode === 0,
+        progress: { classification },
+      });
+      expect(
+        fake.protocol.calls.filter(
+          (call) =>
+            call.tool === 'execute_luau' &&
+            typeof call.argumentsValue['code'] === 'string' &&
+            call.argumentsValue['code'].includes('"action": "apply_chunk"'),
+        ),
+      ).toHaveLength(0);
+    },
+  );
 
   it('lists sanitized sessions and emits canonical JSON', async () => {
     const fake = await dependencies();
@@ -175,6 +277,18 @@ describe('Studio MCP CLI', () => {
       ),
     ).toBe(0);
     expect(JSON.parse(await readFile(receiptPath, 'utf8'))).toMatchObject({ status: 'applied' });
+    expect(JSON.parse(applyIo.stdout.join(''))).toMatchObject({
+      success: true,
+      transactionSucceeded: true,
+      transportReport: {
+        mode: 'chunked',
+        finalOutcome: 'applied',
+        operationsPlanned: manifest.nodes.length,
+        chunksAttempted: 1,
+        mutationExecuteCalls: 1,
+      },
+      transportReportHash: expect.stringMatching(/^[0-9a-f]{64}$/u),
+    });
 
     const unwritableReceipt = join(evidenceDirectory, 'existing-receipt.json');
     await writeFile(unwritableReceipt, 'preserve me', 'utf8');
@@ -246,6 +360,76 @@ describe('Studio MCP CLI', () => {
     ).toBe(0);
     expect(JSON.parse(verifyIo.stdout.join(''))).toMatchObject({ success: true, matches: true });
   }, 10_000);
+
+  it('reports restored batch failure and fails closed when exact-session re-probe fails', async () => {
+    const directory = await tempDirectory();
+    const manifest = loadCourtyardManifest();
+    const plan = planRobloxChangeSet(emptySnapshot(manifest), manifest);
+    if (!plan.success) throw new Error('Fixture planning failed.');
+    const changeSetPath = join(directory, 'change-set.json');
+    await writeFile(changeSetPath, `${JSON.stringify(plan.changeSet, null, 2)}\n`, 'utf8');
+    const confirmation = hashRobloxChangeSet(plan.changeSet);
+    const args = [
+      'apply',
+      '--studio-id',
+      'studio-test',
+      '--change-set',
+      changeSetPath,
+      '--confirm',
+      confirmation,
+      '--json',
+    ] as const;
+
+    const restored = await dependencies({ throwAfter: 'create' });
+    const restoredOutput = ioCapture();
+    expect(await runStudioMcpCli(args, restoredOutput.io, restored.dependencies)).toBe(1);
+    expect(JSON.parse(restoredOutput.stdout.join(''))).toMatchObject({
+      success: false,
+      transactionSucceeded: false,
+      result: {
+        success: false,
+        stage: 'apply',
+        rollback: { attempted: true, succeeded: true },
+      },
+      transportReport: {
+        finalOutcome: 'failed-restored',
+        uncertainTransportEvents: 1,
+        reconnectAttempts: 1,
+        reconnectsSucceeded: 1,
+      },
+    });
+    expect(restored.protocol.nodes.size).toBe(0);
+
+    const reconnectFailure = await dependencies({
+      throwAfter: 'create',
+      beforeReconnect: (protocol) => {
+        protocol.placeId = 42;
+        protocol.gameId = 42;
+      },
+    });
+    const reconnectOutput = ioCapture();
+    expect(await runStudioMcpCli(args, reconnectOutput.io, reconnectFailure.dependencies)).toBe(1);
+    expect(JSON.parse(reconnectOutput.stdout.join(''))).toMatchObject({
+      success: false,
+      transactionSucceeded: false,
+      result: {
+        success: false,
+        stage: 'apply',
+        rollback: {
+          attempted: true,
+          succeeded: false,
+          diagnostics: [expect.objectContaining({ code: 'transaction.rollback_failed' })],
+        },
+      },
+      transportReport: {
+        finalOutcome: 'failed-unrestored',
+        uncertainTransportEvents: 1,
+        reconnectAttempts: 1,
+        reconnectsSucceeded: 0,
+      },
+    });
+    expect(reconnectFailure.protocol.nodes.size).toBe(1);
+  });
 
   it('removes an incomplete reserved receipt after a post-mutation write failure', async () => {
     const directory = await tempDirectory();

@@ -5,10 +5,18 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import type { TSchema } from '@sinclair/typebox';
 
 import {
+  StudioBatchRequestSchema,
+  StudioBatchResponseSchema,
+} from '../src/batch/contract-schema.js';
+import {
   StudioApplyReceiptSchema,
   StudioBridgeRequestSchema,
   StudioBridgeResponseSchema,
 } from '../src/contract-schema.js';
+import {
+  StudioProgressReportSchema,
+  StudioTransportReportSchema,
+} from '../src/report-contract-schema.js';
 
 export interface StudioSchemaArtifact {
   readonly label: string;
@@ -17,6 +25,34 @@ export interface StudioSchemaArtifact {
 }
 
 export const studioSchemaArtifacts: readonly StudioSchemaArtifact[] = [
+  {
+    label: 'Studio progress report',
+    path: fileURLToPath(
+      new URL('../schema/studio-progress-report-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioProgressReportSchema,
+  },
+  {
+    label: 'Studio transport report',
+    path: fileURLToPath(
+      new URL('../schema/studio-transport-report-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioTransportReportSchema,
+  },
+  {
+    label: 'Studio batch request',
+    path: fileURLToPath(
+      new URL('../schema/studio-batch-request-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioBatchRequestSchema,
+  },
+  {
+    label: 'Studio batch response',
+    path: fileURLToPath(
+      new URL('../schema/studio-batch-response-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioBatchResponseSchema,
+  },
   {
     label: 'Studio bridge request',
     path: fileURLToPath(

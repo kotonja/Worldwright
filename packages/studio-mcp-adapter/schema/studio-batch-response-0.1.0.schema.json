@@ -1,0 +1,210 @@
+{
+  "$id": "urn:worldwright:studio-batch-response:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "const": "apply_chunk",
+          "type": "string"
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "chunkId": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "chunkIndex": {
+          "minimum": 0,
+          "maximum": 511,
+          "type": "integer"
+        },
+        "operationsAttempted": {
+          "minimum": 0,
+          "maximum": 32,
+          "type": "integer"
+        },
+        "operationsApplied": {
+          "minimum": 0,
+          "maximum": 32,
+          "type": "integer"
+        },
+        "completedOperationIds": {
+          "maxItems": 32,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "maxLength": 135,
+            "pattern": "^(?:create|update|delete):[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "changeSetHash",
+        "chunkId",
+        "chunkIndex",
+        "operationsAttempted",
+        "operationsApplied",
+        "completedOperationIds",
+        "ok"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "const": "apply_chunk",
+          "type": "string"
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "chunkId": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "chunkIndex": {
+          "minimum": 0,
+          "maximum": 511,
+          "type": "integer"
+        },
+        "operationsAttempted": {
+          "minimum": 0,
+          "maximum": 32,
+          "type": "integer"
+        },
+        "operationsApplied": {
+          "minimum": 0,
+          "maximum": 32,
+          "type": "integer"
+        },
+        "completedOperationIds": {
+          "maxItems": 32,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "maxLength": 135,
+            "pattern": "^(?:create|update|delete):[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        },
+        "ok": {
+          "const": false,
+          "type": "boolean"
+        },
+        "failedOperationId": {
+          "minLength": 1,
+          "maxLength": 135,
+          "pattern": "^(?:create|update|delete):[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "localRestoreSucceeded": {
+          "type": "boolean"
+        },
+        "diagnostic": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "enum": [
+                "studio.mcp_start_failed",
+                "studio.mcp_handshake_failed",
+                "studio.tool_missing",
+                "studio.tool_schema_unsupported",
+                "studio.tool_call_failed",
+                "studio.tool_timeout",
+                "studio.response_invalid",
+                "studio.response_too_large",
+                "studio.session_not_found",
+                "studio.session_ambiguous",
+                "studio.edit_mode_required",
+                "studio.published_place_forbidden",
+                "studio.project_mismatch",
+                "studio.node_limit_exceeded",
+                "studio.operation_limit_exceeded",
+                "studio.payload_too_large",
+                "studio.identity_invalid",
+                "studio.root_invalid",
+                "studio.hierarchy_invalid",
+                "studio.class_unsupported",
+                "studio.property_invalid",
+                "studio.adapter_metadata_invalid",
+                "studio.adapter_metadata_too_large",
+                "studio.engine_state_drift",
+                "studio.unmanaged_content_protected",
+                "studio.foreign_project_protected",
+                "studio.create_failed",
+                "studio.create_cleanup_failed",
+                "studio.update_failed",
+                "studio.update_restore_failed",
+                "studio.delete_failed",
+                "studio.snapshot_invalid",
+                "studio.transaction_failed",
+                "studio.capture_unavailable",
+                "studio.capture_invalid",
+                "studio.receipt_invalid",
+                "studio.io_failed",
+                "studio.usage_invalid"
+              ]
+            },
+            "message": {
+              "minLength": 1,
+              "maxLength": 1024,
+              "type": "string"
+            },
+            "nodeId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "property": {
+              "minLength": 1,
+              "maxLength": 128,
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "changeSetHash",
+        "chunkId",
+        "chunkIndex",
+        "operationsAttempted",
+        "operationsApplied",
+        "completedOperationIds",
+        "ok",
+        "localRestoreSucceeded",
+        "diagnostic"
+      ]
+    }
+  ]
+}

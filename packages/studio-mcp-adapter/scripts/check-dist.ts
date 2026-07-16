@@ -1,6 +1,13 @@
 import { spawnSync } from 'node:child_process';
-import { stat } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+
+import {
+  hashRobloxChangeSet,
+  simulateRobloxChangeSet,
+  type RobloxChangeSet,
+  type RobloxSnapshot,
+} from '@worldwright/roblox-compiler';
 
 const cliUrl = new URL('../dist/cli.js', import.meta.url);
 const testingUrl = new URL('../dist/testing.js', import.meta.url);
@@ -8,6 +15,15 @@ const cliPath = fileURLToPath(cliUrl);
 const courtyardManifestPath = fileURLToPath(
   new URL(
     '../../roblox-compiler/fixtures/manifest/primitive-courtyard.manifest.json',
+    import.meta.url,
+  ),
+);
+const courtyardBaseSnapshotPath = fileURLToPath(
+  new URL('../../roblox-compiler/fixtures/snapshots/empty.snapshot.json', import.meta.url),
+);
+const courtyardCreateChangeSetPath = fileURLToPath(
+  new URL(
+    '../../roblox-compiler/fixtures/change-sets/create-courtyard.change-set.json',
     import.meta.url,
   ),
 );
@@ -56,6 +72,7 @@ async function checkDist(): Promise<void> {
   const help = run(['--help']);
   assert(help.status === 0, `Compiled help exited ${help.status}.`);
   assert(help.stdout.includes('studio-mcp apply'), 'Compiled help omitted commands.');
+  assert(help.stdout.includes('studio-mcp progress'), 'Compiled help omitted progress.');
   assert(help.stderr === '', 'Compiled help wrote to stderr.');
 
   const usage = run([]);
@@ -173,8 +190,134 @@ async function checkDist(): Promise<void> {
   assert(builtVerifyStatus === 1, `Built valid domain mismatch exited ${builtVerifyStatus}.`);
   assert(builtVerifyOutput.stderr === '', 'Built domain mismatch wrote to stderr in JSON mode.');
   assert(builtVerifyOutput.stdout.includes('"matches": false'), 'Built verify omitted mismatch.');
+  const builtProgressOutput = { stdout: '', stderr: '' };
+  const builtProgressStatus = await builtCli.runStudioMcpCli(
+    [
+      'progress',
+      '--studio-id',
+      'dist-studio',
+      '--base-snapshot',
+      courtyardBaseSnapshotPath,
+      '--change-set',
+      courtyardCreateChangeSetPath,
+      '--json',
+    ],
+    {
+      writeStdout: (value) => (builtProgressOutput.stdout += value),
+      writeStderr: (value) => (builtProgressOutput.stderr += value),
+    },
+    {
+      connectClient: async () => {
+        throw new Error('Unexpected client connection.');
+      },
+      connectSelectedAdapter: async () => {
+        throw new Error('Unexpected selected adapter connection.');
+      },
+      connectReadOnlyAdapter: async () => emptyAdapter,
+    },
+  );
+  assert(builtProgressStatus === 0, `Built progress exited ${builtProgressStatus}.`);
+  assert(builtProgressOutput.stderr === '', 'Built progress wrote to stderr in JSON mode.');
+  assert(
+    builtProgressOutput.stdout.includes('"classification": "base"'),
+    'Built progress omitted the base classification.',
+  );
+
+  const courtyardBaseSnapshot = JSON.parse(
+    await readFile(courtyardBaseSnapshotPath, 'utf8'),
+  ) as RobloxSnapshot;
+  const courtyardChangeSet = JSON.parse(
+    await readFile(courtyardCreateChangeSetPath, 'utf8'),
+  ) as RobloxChangeSet;
+  const simulated = simulateRobloxChangeSet(courtyardBaseSnapshot, courtyardChangeSet);
+  assert(simulated.success, 'Built apply fixture did not simulate.');
+  const changeSetHash = hashRobloxChangeSet(courtyardChangeSet);
+  const chunks = Math.ceil(courtyardChangeSet.operations.length / 32);
+  const builtApplyAdapter = {
+    async probeSelectedStudio(): Promise<unknown> {
+      return {
+        studioId: 'dist-studio',
+        placeName: 'Dist Sandbox',
+        placeId: 0,
+        gameId: 0,
+        dataModelMode: 'Edit',
+        playtesting: false,
+        editExecutionAvailable: true,
+      };
+    },
+    async readSnapshot(): Promise<RobloxSnapshot> {
+      return courtyardBaseSnapshot;
+    },
+    async applyChangeSetDetailed(): Promise<unknown> {
+      return {
+        result: {
+          success: true,
+          status: 'applied',
+          snapshot: simulated.snapshot,
+          diagnostics: [],
+          operationsAttempted: courtyardChangeSet.operations.length,
+          initialSnapshotHash: courtyardChangeSet.preconditions.baseSnapshotHash,
+          finalSnapshotHash: courtyardChangeSet.preconditions.resultSnapshotHash,
+        },
+        transportReport: {
+          schemaVersion: '0.1.0',
+          mode: 'chunked',
+          changeSetHash,
+          operationsPlanned: courtyardChangeSet.operations.length,
+          operationsAttempted: courtyardChangeSet.operations.length,
+          operationsAppliedBeforeFailure: courtyardChangeSet.operations.length,
+          chunksPlanned: chunks,
+          chunksAttempted: chunks,
+          chunksCompleted: chunks,
+          mutationExecuteCalls: chunks,
+          uncertainTransportEvents: 0,
+          reconnectAttempts: 0,
+          reconnectsSucceeded: 0,
+          compensationOperationsAttempted: 0,
+          compensationOperationsApplied: 0,
+          compensationChunksAttempted: 0,
+          compensationChunksCompleted: 0,
+          finalOutcome: 'applied',
+        },
+      };
+    },
+    async close(): Promise<void> {},
+  };
+  const builtApplyOutput = { stdout: '', stderr: '' };
+  const builtApplyStatus = await builtCli.runStudioMcpCli(
+    [
+      'apply',
+      '--studio-id',
+      'dist-studio',
+      '--change-set',
+      courtyardCreateChangeSetPath,
+      '--confirm',
+      changeSetHash,
+      '--json',
+    ],
+    {
+      writeStdout: (value) => (builtApplyOutput.stdout += value),
+      writeStderr: (value) => (builtApplyOutput.stderr += value),
+    },
+    {
+      connectClient: async () => {
+        throw new Error('Unexpected client connection.');
+      },
+      connectSelectedAdapter: async () => builtApplyAdapter,
+      connectReadOnlyAdapter: async () => {
+        throw new Error('Unexpected read-only adapter connection.');
+      },
+    },
+  );
+  assert(builtApplyStatus === 0, `Built batch apply exited ${builtApplyStatus}.`);
+  assert(builtApplyOutput.stderr === '', 'Built batch apply wrote to stderr in JSON mode.');
+  assert(
+    builtApplyOutput.stdout.includes('"finalOutcome": "applied"') &&
+      builtApplyOutput.stdout.includes(`"mutationExecuteCalls": ${chunks}`),
+    'Built batch apply omitted its strict transport report.',
+  );
   assertNoStack(
-    `${builtProbeOutput.stdout}${builtProbeOutput.stderr}${builtVerifyOutput.stdout}${builtVerifyOutput.stderr}`,
+    `${builtProbeOutput.stdout}${builtProbeOutput.stderr}${builtVerifyOutput.stdout}${builtVerifyOutput.stderr}${builtProgressOutput.stdout}${builtProgressOutput.stderr}${builtApplyOutput.stdout}${builtApplyOutput.stderr}`,
   );
 }
 

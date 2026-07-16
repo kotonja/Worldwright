@@ -22,6 +22,7 @@
     "schema:check": "pnpm --recursive --if-present schema:check",
     "schema:generate": "pnpm --recursive --if-present schema:generate",
     "studio-mcp": "tsx packages/studio-mcp-adapter/src/cli.ts",
+    "studio:batch-live-smoke": "tsx packages/studio-mcp-adapter/scripts/live-batch-smoke.ts",
     "studio:live-smoke": "tsx packages/studio-mcp-adapter/scripts/live-smoke.ts",
     "test": "pnpm build && pnpm test:packages",
     "test:dist": "pnpm build && pnpm test:dist:packages",
