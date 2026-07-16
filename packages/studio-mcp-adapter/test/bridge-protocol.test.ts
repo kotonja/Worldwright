@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import { parseStudioBridgeResponse } from '../src/bridge/response.js';
-import { STUDIO_BRIDGE_RESPONSE_PREFIX, STUDIO_MCP_MAX_RESULT_BYTES } from '../src/constants.js';
+import {
+  STUDIO_BRIDGE_RESPONSE_PREFIX,
+  STUDIO_MCP_MAX_BRIDGE_TEXT_BYTES,
+  STUDIO_MCP_MAX_RESULT_BYTES,
+} from '../src/constants.js';
 import { stringifyCanonicalJson, type JsonValue } from '../src/json.js';
 
 function framed(value: JsonValue): string {
@@ -79,6 +83,20 @@ describe('Studio bridge response framing', () => {
         diagnostics: [expect.objectContaining({ code: 'studio.response_too_large' })],
       }),
     );
+  });
+
+  it('maps the compact bridge cap and MCP truncation suffix to response_too_large', () => {
+    const oversized = `${STUDIO_BRIDGE_RESPONSE_PREFIX}${'x'.repeat(STUDIO_MCP_MAX_BRIDGE_TEXT_BYTES)}`;
+    for (const text of [
+      oversized,
+      `${STUDIO_BRIDGE_RESPONSE_PREFIX}{"protocolVersion":"0.1.0"... (truncated)`,
+    ]) {
+      expect(() => parseStudioBridgeResponse(text, 'snapshot')).toThrowError(
+        expect.objectContaining({
+          diagnostics: [expect.objectContaining({ code: 'studio.response_too_large' })],
+        }),
+      );
+    }
   });
 
   it('requires mutation success to echo the exact requested node ID', () => {

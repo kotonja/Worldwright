@@ -1,4 +1,4 @@
-import { Type } from '@sinclair/typebox';
+import { Type, type TSchema, type TTuple } from '@sinclair/typebox';
 import {
   ROBLOX_COMPILER_VERSION,
   RobloxManifestSchema,
@@ -16,8 +16,10 @@ import {
   STUDIO_MCP_MAX_CAPTURE_BYTES,
   STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS,
   STUDIO_MCP_MAX_MANAGED_NODES,
+  STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS,
   STUDIO_MCP_MAX_NODE_STATE_BYTES,
   STUDIO_MCP_MAX_RECEIPT_DIAGNOSTICS,
+  STUDIO_MCP_VIEWPORT_MEDIA_TYPE,
 } from './constants.js';
 import { STUDIO_DIAGNOSTIC_CODES, type StudioDiagnosticCode } from './diagnostics.js';
 
@@ -158,7 +160,7 @@ const RawPrimitivePropertiesSchema = Type.Object(
 const rawNodeFields = {
   entityId: StudioIdentifierSchema,
   projectId: StudioIdentifierSchema,
-  name: Type.String({ minLength: 1, maxLength: STUDIO_MCP_MAX_NODE_STATE_BYTES }),
+  name: Type.String({ minLength: 1, maxLength: STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS }),
   parentKind: Type.Union([
     Type.Literal('Workspace'),
     Type.Literal('managed'),
@@ -206,7 +208,7 @@ export const StudioRawUnmanagedRootSchema = Type.Object(
   {
     parentEntityId: StudioIdentifierSchema,
     className: Type.String({ minLength: 1, maxLength: 100 }),
-    name: Type.String({ minLength: 1, maxLength: 256 }),
+    name: Type.String({ minLength: 1, maxLength: STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS }),
     structuralPath: Type.String({ minLength: 1, maxLength: 2048 }),
     ordinal: Type.Integer({ minimum: 1, maximum: MAX_SAFE_INTEGER }),
   },
@@ -228,6 +230,105 @@ export const StudioRawSnapshotSchema = Type.Object(
     nodes: Type.Array(StudioRawManagedNodeSchema, { maxItems: STUDIO_MCP_MAX_MANAGED_NODES }),
     unmanagedRoots: Type.Array(StudioRawUnmanagedRootSchema, {
       maxItems: STUDIO_MCP_MAX_MANAGED_NODES,
+    }),
+  },
+  { additionalProperties: false },
+);
+
+const compactIndex = Type.Integer({ minimum: 0, maximum: MAX_SAFE_INTEGER });
+const compactOptionalIndex = Type.Integer({ minimum: -1, maximum: MAX_SAFE_INTEGER });
+const compactIdTokenIndices = Type.Array(compactIndex, { minItems: 1, maxItems: 64 });
+const compactNodePrefix = [compactIdTokenIndices, compactOptionalIndex] as const;
+const compactNodeSuffix = [compactIndex, compactIndex, compactOptionalIndex] as const;
+const compactPrimitiveSuffix = [
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  Type.Integer({ minimum: 0, maximum: 31 }),
+] as const;
+
+function draft2020Tuple<T extends TSchema[]>(items: [...T]): TTuple<T> {
+  const legacy = Type.Tuple(items);
+  const draft2020 = {
+    ...legacy,
+    prefixItems: legacy.items,
+  } as TTuple<T> & { items?: unknown; additionalItems?: unknown };
+  delete draft2020.items;
+  delete draft2020.additionalItems;
+  return draft2020;
+}
+
+export const StudioCompactContainerNodeSchema = draft2020Tuple([
+  ...compactNodePrefix,
+  Type.Union([Type.Literal(0), Type.Literal(1)]),
+  ...compactNodeSuffix,
+]);
+export const StudioCompactPartNodeSchema = draft2020Tuple([
+  ...compactNodePrefix,
+  Type.Literal(2),
+  ...compactNodeSuffix,
+  ...compactPrimitiveSuffix,
+  compactIndex,
+]);
+export const StudioCompactWedgeNodeSchema = draft2020Tuple([
+  ...compactNodePrefix,
+  Type.Union([Type.Literal(3), Type.Literal(4)]),
+  ...compactNodeSuffix,
+  ...compactPrimitiveSuffix,
+  Type.Literal(-1),
+]);
+export const StudioCompactManagedNodeSchema = Type.Union([
+  StudioCompactContainerNodeSchema,
+  StudioCompactPartNodeSchema,
+  StudioCompactWedgeNodeSchema,
+]);
+export const StudioCompactUnmanagedRootSchema = draft2020Tuple([
+  compactIndex,
+  compactIndex,
+  compactIndex,
+  Type.Integer({ minimum: 1, maximum: MAX_SAFE_INTEGER }),
+]);
+export const StudioCompactNameSchema = draft2020Tuple([
+  Type.Integer({ minimum: 0, maximum: STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS }),
+  Type.String({ minLength: 1, maxLength: STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS }),
+]);
+export const StudioCompactSnapshotSchema = Type.Object(
+  {
+    projectId: StudioIdentifierSchema,
+    idTokens: Type.Array(Type.String({ minLength: 1, maxLength: 128, pattern: '^[a-z0-9]+$' }), {
+      maxItems: STUDIO_MCP_MAX_MANAGED_NODES * 64,
+    }),
+    names: Type.Array(StudioCompactNameSchema, {
+      maxItems: STUDIO_MCP_MAX_MANAGED_NODES * 2,
+    }),
+    entityKinds: Type.Array(StudioEntityKindSchema, { maxItems: 13 }),
+    sourceHashes: Type.Array(StudioSha256Schema, { maxItems: STUDIO_MCP_MAX_MANAGED_NODES }),
+    numbers: Type.Array(Type.Number(), { maxItems: STUDIO_MCP_MAX_MANAGED_NODES * 13 }),
+    materials: Type.Array(RobloxMaterialSchema, { maxItems: 15 }),
+    shapes: Type.Array(RobloxPartShapeSchema, { maxItems: 3 }),
+    nodes: Type.Array(StudioCompactManagedNodeSchema, {
+      maxItems: STUDIO_MCP_MAX_MANAGED_NODES,
+    }),
+    unmanagedClasses: Type.Array(Type.String({ minLength: 1, maxLength: 100 }), {
+      maxItems: STUDIO_MCP_MAX_MANAGED_NODES,
+    }),
+    unmanagedRoots: Type.Array(StudioCompactUnmanagedRootSchema, {
+      maxItems: STUDIO_MCP_MAX_MANAGED_NODES,
+    }),
+    stateHashesZ85: Type.String({
+      maxLength: STUDIO_MCP_MAX_MANAGED_NODES * 40,
+      pattern: '^[0-9a-zA-Z.\\-:+=^!/*?&<>()\\[\\]{}@%$#]*$',
     }),
   },
   { additionalProperties: false },
@@ -260,7 +361,7 @@ export const StudioBridgeSnapshotSuccessSchema = Type.Object(
     ...responseBase,
     action: Type.Literal('snapshot'),
     ok: Type.Literal(true),
-    snapshot: StudioRawSnapshotSchema,
+    compactSnapshot: StudioCompactSnapshotSchema,
   },
   { additionalProperties: false },
 );
@@ -313,7 +414,7 @@ export const StudioReceiptDiagnosticSchema = Type.Object(
 );
 export const StudioViewportEvidenceSchema = Type.Object(
   {
-    mediaType: Type.Literal('image/png'),
+    mediaType: Type.Literal(STUDIO_MCP_VIEWPORT_MEDIA_TYPE),
     sha256: StudioSha256Schema,
     byteLength: Type.Integer({ minimum: 1, maximum: STUDIO_MCP_MAX_CAPTURE_BYTES }),
   },

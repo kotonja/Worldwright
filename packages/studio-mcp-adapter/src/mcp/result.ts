@@ -1,18 +1,21 @@
 import { Buffer } from 'node:buffer';
 
-import { STUDIO_MCP_MAX_CAPTURE_BYTES, STUDIO_MCP_MAX_RESULT_BYTES } from '../constants.js';
-import { hasValidPngStructure } from '../capture.js';
+import {
+  STUDIO_MCP_MAX_CAPTURE_BYTES,
+  STUDIO_MCP_MAX_RESULT_BYTES,
+  STUDIO_MCP_VIEWPORT_MEDIA_TYPE,
+} from '../constants.js';
+import { hasValidJpegStructure } from '../capture.js';
 import { StudioAdapterError, studioDiagnostic } from '../diagnostics.js';
 
 const MAX_CONTENT_ITEMS = 8;
-const SUPPORTED_IMAGE_MEDIA_TYPES = new Set(['image/png']);
 
 export interface StudioMcpTextResult {
   readonly text: string;
 }
 
 export interface StudioMcpImageResult {
-  readonly mediaType: string;
+  readonly mediaType: typeof STUDIO_MCP_VIEWPORT_MEDIA_TYPE;
   readonly bytes: Uint8Array;
 }
 
@@ -179,7 +182,7 @@ export function readStudioMcpImageResult(value: unknown, tool: string): StudioMc
     content.type !== 'image' ||
     typeof content.data !== 'string' ||
     typeof content.mimeType !== 'string' ||
-    !SUPPORTED_IMAGE_MEDIA_TYPES.has(content.mimeType) ||
+    content.mimeType !== STUDIO_MCP_VIEWPORT_MEDIA_TYPE ||
     Object.keys(content).some((key) => key !== 'type' && key !== 'data' && key !== 'mimeType')
   ) {
     throw resultError(
@@ -189,11 +192,11 @@ export function readStudioMcpImageResult(value: unknown, tool: string): StudioMc
     );
   }
   const bytes = decodeCanonicalBase64(content.data, tool);
-  if (!hasValidPngStructure(bytes)) {
+  if (!hasValidJpegStructure(bytes)) {
     throw resultError(
       'studio.response_invalid',
       tool,
-      `Studio tool ${tool} did not return a structurally valid PNG image.`,
+      `Studio tool ${tool} did not return a structurally valid supported image.`,
     );
   }
   return Object.freeze({ mediaType: content.mimeType, bytes });

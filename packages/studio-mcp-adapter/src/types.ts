@@ -17,6 +17,13 @@ import type {
   StudioBridgeSnapshotRequestSchema,
   StudioBridgeSnapshotSuccessSchema,
   StudioBridgeUpdateRequestSchema,
+  StudioCompactContainerNodeSchema,
+  StudioCompactManagedNodeSchema,
+  StudioCompactNameSchema,
+  StudioCompactPartNodeSchema,
+  StudioCompactSnapshotSchema,
+  StudioCompactUnmanagedRootSchema,
+  StudioCompactWedgeNodeSchema,
   StudioFailedReceiptSchema,
   StudioNoopReceiptSchema,
   StudioProbeSchema,
@@ -45,6 +52,13 @@ export type StudioRawManagedNode = Static<typeof StudioRawManagedNodeSchema>;
 export type StudioRawNode = StudioRawManagedNode;
 export type StudioRawUnmanagedRoot = Static<typeof StudioRawUnmanagedRootSchema>;
 export type StudioRawSnapshot = Static<typeof StudioRawSnapshotSchema>;
+export type StudioCompactContainerNode = Static<typeof StudioCompactContainerNodeSchema>;
+export type StudioCompactPartNode = Static<typeof StudioCompactPartNodeSchema>;
+export type StudioCompactWedgeNode = Static<typeof StudioCompactWedgeNodeSchema>;
+export type StudioCompactManagedNode = Static<typeof StudioCompactManagedNodeSchema>;
+export type StudioCompactName = Static<typeof StudioCompactNameSchema>;
+export type StudioCompactUnmanagedRoot = Static<typeof StudioCompactUnmanagedRootSchema>;
+export type StudioCompactSnapshot = Static<typeof StudioCompactSnapshotSchema>;
 export type StudioProbe = Static<typeof StudioProbeSchema>;
 export type StudioRawProbe = StudioProbe;
 export type StudioBridgeDiagnostic = Static<typeof StudioBridgeDiagnosticSchema>;

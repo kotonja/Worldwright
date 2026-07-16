@@ -119,14 +119,35 @@ describe('fixed Luau payload encoding', () => {
     const snapshotStart = source.indexOf('local function snapshotAction');
     const probeStart = source.indexOf('local function probeAction');
     const snapshotBody = source.slice(snapshotStart, probeStart);
+    const storedNodeStart = source.indexOf('local function readStoredNode');
+    const storedNodeEnd = source.indexOf('local function verifyStoredManagedInstance');
+    const storedNodeBody = source.slice(storedNodeStart, storedNodeEnd);
 
     expect(source).toContain('local function readStoredNode(instance, projectId)');
     expect(source).toContain('or not hasOnlyKeys(node, NODE_KEYS)');
     expect(source).toContain('or not isEntityKind(node.entityKind)');
+    expect(source).toContain('local MAX_INSTANCE_NAME_CODE_POINTS = 100');
+    expect(source).toContain('local function isValidInstanceName(value)');
+    expect(source).toContain('for _, codePoint in utf8.codes(value) do');
+    expect(source).toContain('or not isValidInstanceName(node.name)');
     expect(source).toContain('or properties.anchored ~= true');
     expect(source).toContain('or properties.transparency > 1');
     expect(source).toContain('if #stateJson > MAX_NODE_STATE_BYTES then');
     expect(source).toContain('return nil, nil, nil, "studio.adapter_metadata_too_large"');
+    expect(source).toContain('local function sha256Hex(message)');
+    expect(source).toContain('local function sha256SelfTest()');
+    expect(source).toContain('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+    expect(source).toContain('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
+    expect(source).toContain('248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1');
+    expect(source).toContain(
+      'local hashed, computedStateHash = pcall(function() return sha256Hex(stateJson) end)',
+    );
+    expect(source).toContain('if not hashed or computedStateHash ~= stateHash then');
+    expect(storedNodeBody.indexOf('computedStateHash ~= stateHash')).toBeLessThan(
+      storedNodeBody.indexOf(
+        'local decoded, node = pcall(function() return HttpService:JSONDecode(stateJson) end)',
+      ),
+    );
     expect(source).toContain(
       'local decoded, node = pcall(function() return HttpService:JSONDecode(stateJson) end)',
     );
@@ -134,10 +155,72 @@ describe('fixed Luau payload encoding', () => {
     expect(source).toContain('local verified, valid, propertyName = pcall(function()');
     expect(source).toContain('return false, "studio.engine_state_drift", propertyName, nil');
     expect(snapshotBody.indexOf('verifyStoredManagedInstance')).toBeLessThan(
-      snapshotBody.indexOf('pcall(function() return rawNode'),
+      snapshotBody.indexOf('local idTokens = array()'),
     );
+    expect(snapshotBody).toContain(
+      'local valid, validationCode, propertyName, node, stateHash = verifyStoredManagedInstance(',
+    );
+    expect(snapshotBody.indexOf('pcall(sha256SelfTest)')).toBeLessThan(
+      snapshotBody.indexOf('Workspace:GetChildren()'),
+    );
+    expect(snapshotBody).toContain('selectedNodes[instance] = node');
+    expect(snapshotBody.indexOf('table.sort(selectedInstances')).toBeLessThan(
+      snapshotBody.indexOf('local encodedStateHashes'),
+    );
+    expect(snapshotBody.indexOf('local encodedStateHashes')).toBeLessThan(
+      snapshotBody.indexOf('local compactNodes = array()'),
+    );
+    expect(snapshotBody).toContain('local frontCodedNames = frontCodeSortedNames(names)');
+    expect(snapshotBody).toContain('local encodedStateHash = z85EncodeSha256(');
+    expect(snapshotBody).toContain('stateHashesZ85 = stateHashesZ85');
+    expect(snapshotBody).toContain('compactSnapshot = {');
+    const primitiveTupleStart = snapshotBody.indexOf(
+      'if node.className ~= "Folder" and node.className ~= "Model" then',
+      snapshotBody.indexOf('local compactNodes = array()'),
+    );
+    const primitiveTupleEnd = snapshotBody.indexOf(
+      'table.insert(compactNodes, tuple)',
+      primitiveTupleStart,
+    );
+    expect(
+      snapshotBody.slice(primitiveTupleStart, primitiveTupleEnd).match(/table\.insert\(tuple,/gu),
+    ).toHaveLength(16);
     expect(snapshotBody).toContain('cumulativeMetadataBytes > MAX_RESULT_BYTES');
-    expect(snapshotBody).toContain('local stateBytes = encodedStringBytes(stateJson)');
+    expect(source).toContain('local MAX_STUDIO_OUTPUT_BYTES = 96 * 1024');
+    expect(source).toContain(
+      'if responseBytes > MAX_STUDIO_OUTPUT_BYTES or responseBytes > MAX_RESULT_BYTES then',
+    );
+  });
+
+  it('checks every mutating payload name before its action can mutate Studio', () => {
+    const source = buildStudioBridgeProgram({
+      protocolVersion: '0.1.0',
+      action: 'probe',
+    }).source;
+    const createBody = source.slice(
+      source.indexOf('local function createAction()'),
+      source.indexOf('local function updateAction()'),
+    );
+    const updateBody = source.slice(
+      source.indexOf('local function updateAction()'),
+      source.indexOf('local function deleteAction()'),
+    );
+    const deleteBody = source.slice(
+      source.indexOf('local function deleteAction()'),
+      source.lastIndexOf('if payload.protocolVersion'),
+    );
+    expect(createBody.indexOf('isValidInstanceName(node.name)')).toBeLessThan(
+      createBody.indexOf('buildProjectIndex(payload.projectId)'),
+    );
+    expect(updateBody.indexOf('isValidInstanceName(before.name)')).toBeLessThan(
+      updateBody.indexOf('buildProjectIndex(payload.projectId)'),
+    );
+    expect(updateBody.indexOf('isValidInstanceName(after.name)')).toBeLessThan(
+      updateBody.indexOf('buildProjectIndex(payload.projectId)'),
+    );
+    expect(deleteBody.indexOf('isValidInstanceName(before.name)')).toBeLessThan(
+      deleteBody.indexOf('buildProjectIndex(payload.projectId)'),
+    );
   });
 
   it('indexes only selected-project descendants and keeps snapshot traversal separate', () => {
@@ -196,8 +279,8 @@ describe('fixed Luau payload encoding', () => {
       action: 'probe',
     }).source;
     const cleanupStart = source.indexOf('local function cleanupFailedCreate');
-    const rawPropertiesStart = source.indexOf('local function rawProperties');
-    const cleanupBody = source.slice(cleanupStart, rawPropertiesStart);
+    const compactHelpersStart = source.indexOf('local function normalizedNumber');
+    const cleanupBody = source.slice(cleanupStart, compactHelpersStart);
 
     expect(cleanupBody).toContain('if #instance:GetChildren() ~= 0 then return false end');
     expect(cleanupBody).toContain('local destroyed = pcall(function() instance:Destroy() end)');
@@ -227,7 +310,11 @@ describe('fixed Luau payload encoding', () => {
     );
     expect(source).toContain('ordinal = duplicateOrdinal');
     expect(lengthCheck).toBeLessThan(duplicateKey);
-    expect(source).toContain('local pathBytes = encodedStringBytes(structuralPath)');
+    expect(source).toContain('local compactUnmanagedRoots = array()');
+    expect(source).toContain('nodeIndexById[unmanaged.parentId]');
+    expect(source).toContain('unmanagedClassIndex[unmanaged.className]');
+    expect(source).toContain('nameIndex[unmanaged.name]');
+    expect(source).toContain('unmanaged.ordinal');
   });
 
   it('gates every managed-state action inside the fixed program immediately before dispatch', () => {

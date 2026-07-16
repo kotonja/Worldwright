@@ -106,6 +106,12 @@ display name, active status, list order, or there being only one candidate. Read
 planning flows may auto-select only when exactly one session exists; explicit selection remains
 preferred. Ambiguity returns sanitized candidates and performs no mutation.
 
+The exact ID remains local selection state. The live-smoke runner accepts it privately for initial
+selection and every re-selection, but omits it from the pre-mutation review and shareable summary.
+It must not appear in committed artifacts or pull-request evidence. Strict receipt `0.1.0` still
+contains sanitized sandbox identity, so raw receipts are private, ignored local files rather than
+shareable evidence.
+
 The probe observes the place name, `PlaceId`, `GameId`, data-model mode, playtest state, and Edit
 execution availability. Managed project snapshot and mutation APIs then require:
 
@@ -167,10 +173,34 @@ resolved Instance with that exact transaction observation; merely matching mutab
 parent's current state is insufficient. Workspace-root mutations omit this record.
 
 Every bridge result contains one exact `WORLDWRIGHT_STUDIO_BRIDGE_V1\n` prefix followed by one
-strict JSON object. The client rejects a missing or repeated prefix, malformed JSON, duplicate
-object keys, unknown fields, version mismatch, oversized or ambiguous content, and trailing
-non-whitespace output. JSON whitespace and runtime-specific valid JSON number or string escaping do
-not need byte equality with Node serialization; the validated value is normalized in Node.
+strict JSON object and one final newline. The built-in MCP has been observed to impose a tool-text
+ceiling of approximately 100,000 bytes, so the bridge enforces a conservative 96 KiB (98,304-byte)
+cap on the complete framed result. This transport-specific cap is stricter than the client's general
+16 MiB MCP-result validation bound.
+
+Snapshot success uses a deterministic compact wire value instead of repeating complete object keys
+and strings for every node. Sorted unique dictionaries hold ID tokens, entity kinds, source hashes,
+numbers, materials, shapes, and unmanaged classes. The sorted name dictionary is maximally
+front-coded by Unicode scalar value, and malformed surrogate sequences are rejected. Managed nodes
+and unmanaged-root records are sorted deterministically and encoded as fixed-length numeric tuples
+with zero-based dictionary indexes and explicit `-1` absence sentinels. Each node's stored-state
+SHA-256 is encoded in node order as exactly 40 canonical Z85 characters.
+
+Studio establishes trust before compact encoding. Before snapshot traversal, the fixed bridge runs
+three SHA-256 known vectors and fails closed if its runtime implementation disagrees. It then
+computes SHA-256 over the exact raw `WorldwrightStudioStateJson` bytes and compares it with
+`WorldwrightStudioStateHash`, validates the decoded metadata, and verifies the actual Instance
+hierarchy, attributes, class, name, and every allowlisted engine property. The host then strictly
+checks front-coding, Z85, dictionary uniqueness and order, tuple arity, integer and index ranges,
+class codes, property flags, sentinels, identifiers, node order, hierarchy, root rules, and
+unmanaged-root order. It reconstructs canonical nodes and requires each Node-computed canonical-node
+hash to equal the corresponding decoded stored hash. Public compiler snapshot normalization and
+validation follow. Compact transport does not weaken or replace either contract.
+
+The client rejects a missing or repeated prefix, malformed JSON, duplicate object keys, unknown
+fields, version mismatch, oversized or ambiguous content, and trailing non-whitespace output. JSON
+whitespace and runtime-specific valid JSON number or string escaping do not need byte equality with
+Node serialization; the validated value is normalized in Node.
 
 ## Exact-state metadata and engine verification
 
@@ -193,11 +223,12 @@ The JSON is the canonical normalized managed node represented by the Instance. I
 in Node before mutation. These values are bounded transport metadata and do not appear in compiler
 Snapshot node attributes or Manifests.
 
-Reading metadata is not enough. For every managed node, the bridge verifies public ownership
-attributes, adapter version, state JSON validation, state hash, ID and project agreement,
-`ClassName`, `Name`, and the exact direct managed parent. For primitive classes it also verifies
-`CFrame`, `Size`, `Anchored`, shape where applicable, `Material`, `Color`, `Transparency`,
-`CanCollide`, `CanQuery`, `CanTouch`, and `CastShadow`.
+Reading metadata is not enough. For every managed node, Studio computes SHA-256 over the exact raw
+state-JSON bytes and requires it to match the stored state hash before decoding the value. The
+bridge then verifies the decoded state shape, public ownership attributes, adapter version, ID and
+project agreement, `ClassName`, `Name`, and the exact direct managed parent. For primitive classes
+it also verifies `CFrame`, `Size`, `Anchored`, shape where applicable, `Material`, `Color`,
+`Transparency`, `CanCollide`, `CanQuery`, `CanTouch`, and `CastShadow`.
 
 Expected rotation follows compiler semantics:
 
@@ -225,18 +256,24 @@ The extraction algorithm:
 2. follow selected-project managed children only when building the exact managed project index,
    never crossing an unmanaged or foreign-project boundary;
 3. stop when either the structural-scan or managed-node bound is exceeded;
-4. validate supported classes, public attributes, adapter metadata, and actual engine state before
-   constructing response records;
-5. build project and entity-ID maps and reject duplicates;
-6. resolve exactly one selected-project root when the project is non-empty;
-7. verify the root is a `Folder` or `Model`, is a direct child of `Workspace`, has no managed
+4. compute SHA-256 over each exact raw state-JSON value and require the corresponding stored hash;
+5. validate decoded metadata, supported classes, public attributes, hierarchy, and actual engine
+   state before constructing response records;
+6. build project and entity-ID maps and reject duplicates;
+7. resolve exactly one selected-project root when the project is non-empty;
+8. verify the root is a `Folder` or `Model`, is a direct child of `Workspace`, has no managed
    parent, and carries the selected project's source hash;
-8. require every other selected-project node to have a direct selected-project managed parent;
-9. reject nodes outside the root, cycles, and malformed hierarchy;
-10. record direct unmanaged or foreign-project roots beneath selected managed nodes;
-11. convert only contract fields to the compiler Scene Snapshot;
-12. normalize and validate the result again through `@worldwright/roblox-compiler`; and
-13. return a deep-independent value.
+9. require every other selected-project node to have a direct selected-project managed parent;
+10. reject nodes outside the root, cycles, and malformed hierarchy;
+11. record direct unmanaged or foreign-project roots beneath selected managed nodes;
+12. emit maximally front-coded names, node-order Z85 state hashes, sorted dictionaries, and compact
+    tuples within the 96 KiB framed bridge-output cap;
+13. strictly decode that transport on the host and reconstruct canonical managed nodes;
+14. require every decoded stored-state hash to equal the Node-computed hash of its reconstructed
+    canonical node;
+15. convert only contract fields to the compiler Scene Snapshot;
+16. normalize and validate the result again through `@worldwright/roblox-compiler`; and
+17. return a deep-independent value.
 
 No selected-project nodes is a valid empty snapshot with no root, nodes, or unmanaged roots.
 
@@ -264,6 +301,10 @@ class switch for `Folder`, `Model`, `Part`, `WedgePart`, or `CornerWedgePart`, c
 detached from `Workspace`, applies every allowlisted property and public ownership attribute
 explicitly, applies canonical adapter metadata, and parents it only after initialization. It then
 rereads and verifies the exact state.
+
+The adapter, without changing the compiler node schema, rejects managed request names above Roblox's
+100-Unicode-scalar `Instance.Name` limit. Fixed Luau repeats the scalar/code-point check before any
+mutation, and compact snapshot decoding applies the same limit to managed and unmanaged names.
 
 A failure before parenting destroys the detached Instance. A failure after parenting may remove only
 the just-created matching managed node, only when it has no child and exact ownership, ID, and class
@@ -335,13 +376,18 @@ Studio log, username, environment value, or credential. Their normalized hashes 
 receipt records an observed result; it is not authorization, a digital signature, or evidence of
 visual quality.
 
+Receipt `0.1.0` includes sanitized sandbox identity and therefore remains private local evidence.
+The live-smoke pre-mutation review and `summary.json` omit the exact Studio ID; only those sanitized
+outputs may be copied into a review after the usual check for other private local details. Raw
+receipts and probe output must not be committed or pasted into a pull request.
+
 When `screen_capture` is available, capture requires an explicit output path beneath the
 repository-owned `.worldwright/live-milestone-3/` and accepts only a structurally validated bounded
-PNG. Receipt outputs share the anchored path check; lexical and real-parent checks reject junction
-escapes. The CLI reserves the output before connection, writes decoded bytes once, and returns only
-media type, lowercase SHA-256, and byte length for the receipt. Live evidence remains untracked. The
-complete live runner reserves its receipts, summary, and PNG before connecting and removes them all
-after any incomplete run.
+8-bit baseline-sequential JPEG with exact lowercase `image/jpeg`. Receipt outputs share the anchored
+path check; lexical and real-parent checks reject junction escapes. The CLI reserves the output
+before connection, writes decoded bytes once, and returns only media type, lowercase SHA-256, and
+byte length for the receipt. Live evidence remains untracked. The complete live runner reserves its
+receipts, summary, and JPEG before connecting and removes them all after any incomplete run.
 
 ## Failure modes
 
@@ -368,28 +414,32 @@ installation paths, and environment dumps remain outside the result boundary.
 
 Adapter `0.1.0` has explicit ceilings:
 
-| Resource                                         |   Limit |
-| ------------------------------------------------ | ------: |
-| Change-set operations                            |     512 |
-| Managed nodes                                    |   2,048 |
-| Workspace structural scan                        |  65,536 |
-| Encoded state for one node                       | 256 KiB |
-| Encoded bridge payload                           |   4 MiB |
-| MCP tool result and cumulative snapshot metadata |  16 MiB |
-| Decoded PNG viewport                             |  16 MiB |
-| MCP content items                                |       8 |
-| Receipt diagnostics                              |   4,099 |
-| Process startup                                  |    15 s |
-| Session discovery                                |     6 s |
-| Tool call                                        |    30 s |
-| Process close                                    |     7 s |
-| Engine numeric epsilon                           | 0.00001 |
+| Resource                           |   Limit |
+| ---------------------------------- | ------: |
+| Change-set operations              |     512 |
+| Managed nodes                      |   2,048 |
+| Workspace structural scan          |  65,536 |
+| Encoded state for one node         | 256 KiB |
+| Encoded bridge payload             |   4 MiB |
+| Complete framed bridge output      |  96 KiB |
+| General MCP tool result validation |  16 MiB |
+| Decoded JPEG file bytes            |  16 MiB |
+| Declared JPEG pixel samples        | 256 MiB |
+| MCP content items                  |       8 |
+| Receipt diagnostics                |   4,099 |
+| Process startup                    |    15 s |
+| Session discovery                  |     6 s |
+| Tool call                          |    30 s |
+| Process close                      |     7 s |
+| Engine numeric epsilon             | 0.00001 |
 
 The snapshot bridge traverses `Workspace` once with an explicit bounded queue, builds maps in linear
-time, and sorts only for deterministic serialization. Mutation bridges locate the selected project
-root and index only its exact, bounded, selected-project managed hierarchy once per call; they do
-not repeatedly traverse all of `Workspace` or cross an unmanaged boundary. Traversal is iterative
-rather than dependent on unbounded hierarchy depth.
+time, and sorts dictionaries, nodes, and unmanaged roots for deterministic compact serialization.
+Its 96 KiB framed-output limit stays below the built-in MCP's observed approximately 100,000-byte
+tool-text ceiling. Mutation bridges locate the selected project root and index only its exact,
+bounded, selected-project managed hierarchy once per call; they do not repeatedly traverse all of
+`Workspace` or cross an unmanaged boundary. Traversal is iterative rather than dependent on
+unbounded hierarchy depth.
 
 Version `0.1.0` intentionally uses one MCP `execute_luau` call per mutation. High-throughput batch
 application is future work and must retain operation-specific preconditions, attempted-order

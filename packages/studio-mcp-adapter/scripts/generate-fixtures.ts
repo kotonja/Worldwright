@@ -3,16 +3,12 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import type { ApplyResult, RobloxManagedNode, RobloxManifest } from '@worldwright/roblox-compiler';
+import type { ApplyResult, RobloxManifest } from '@worldwright/roblox-compiler';
 
-import { canonicalNodeMetadata } from '../src/engine-state.js';
 import { buildStudioApplyReceipt } from '../src/receipt.js';
 import { stringifyStudioApplyReceipt, stringifyStudioBridgeResponse } from '../src/normalize.js';
-import type {
-  StudioBridgeResponse,
-  StudioRawManagedNode,
-  StudioReceiptContext,
-} from '../src/types.js';
+import type { StudioBridgeResponse, StudioReceiptContext } from '../src/types.js';
+import { compactSnapshotFixture } from './compact-snapshot-fixture.js';
 
 export interface StudioReceiptFixtureArtifact {
   readonly label: string;
@@ -110,7 +106,7 @@ export function renderStudioReceiptFixtures(): readonly StudioReceiptFixtureArti
     {
       ...commonContext,
       viewportEvidence: {
-        mediaType: 'image/png',
+        mediaType: 'image/jpeg',
         sha256: hashes.viewport,
         byteLength: 1024,
       },
@@ -143,77 +139,6 @@ export function renderStudioReceiptFixtures(): readonly StudioReceiptFixtureArti
   ];
 }
 
-function expectedCFrame(node: Readonly<RobloxManagedNode>): number[] {
-  if (node.className === 'Folder' || node.className === 'Model') return [];
-  const { position, rotationEulerDegreesXYZ: rotation } = node.properties;
-  const x = (rotation.x * Math.PI) / 180;
-  const y = (rotation.y * Math.PI) / 180;
-  const z = (rotation.z * Math.PI) / 180;
-  const cx = Math.cos(x);
-  const sx = Math.sin(x);
-  const cy = Math.cos(y);
-  const sy = Math.sin(y);
-  const cz = Math.cos(z);
-  const sz = Math.sin(z);
-  return [
-    position.x,
-    position.y,
-    position.z,
-    cy * cz,
-    -cy * sz,
-    sy,
-    cx * sz + sx * sy * cz,
-    cx * cz - sx * sy * sz,
-    -sx * cy,
-    sx * sz - cx * sy * cz,
-    sx * cz + cx * sy * sz,
-    cx * cy,
-  ];
-}
-
-function rawNode(node: Readonly<RobloxManagedNode>): StudioRawManagedNode {
-  const metadata = canonicalNodeMetadata(node);
-  const common = {
-    entityId: node.id,
-    projectId: node.attributes.WorldwrightProjectId,
-    name: node.name,
-    parentKind: node.parentId === undefined ? ('Workspace' as const) : ('managed' as const),
-    ...(node.parentId === undefined ? {} : { parentEntityId: node.parentId }),
-    entityKind: node.entityKind,
-    compilerVersion: node.attributes.WorldwrightCompilerVersion,
-    ...(node.attributes.WorldwrightSourceHash === undefined
-      ? {}
-      : { sourceHash: node.attributes.WorldwrightSourceHash }),
-    adapterVersion: '0.1.0' as const,
-    stateJson: metadata.json,
-    stateHash: metadata.hash,
-  };
-  if (node.className === 'Folder' || node.className === 'Model') {
-    return { ...common, className: node.className, properties: {} };
-  }
-  return {
-    ...common,
-    className: node.className,
-    properties: {
-      cframe: expectedCFrame(node),
-      size: [node.properties.size.x, node.properties.size.y, node.properties.size.z],
-      anchored: node.properties.anchored,
-      ...(node.className === 'Part' ? { shape: node.properties.shape } : {}),
-      material: node.properties.material,
-      color: [
-        node.properties.color.r / 255,
-        node.properties.color.g / 255,
-        node.properties.color.b / 255,
-      ],
-      transparency: node.properties.transparency,
-      canCollide: node.properties.canCollide,
-      canQuery: node.properties.canQuery,
-      canTouch: node.properties.canTouch,
-      castShadow: node.properties.castShadow,
-    },
-  };
-}
-
 function loadCliffwatchManifest(): RobloxManifest {
   return JSON.parse(
     readFileSync(
@@ -240,57 +165,45 @@ function bridgeArtifact(
 
 export function renderStudioBridgeFixtures(): readonly StudioFixtureArtifact[] {
   const manifest = loadCliffwatchManifest();
-  const rawNodes = manifest.nodes.map((node) => rawNode(node));
-  const root = rawNodes.find((node) => node.entityId === manifest.rootNodeId)!;
-  const primitive = rawNodes.find(
-    (
-      node,
-    ): node is Extract<
-      StudioRawManagedNode,
-      { className: 'Part' | 'WedgePart' | 'CornerWedgePart' }
-    > => node.className !== 'Folder' && node.className !== 'Model',
+  const root = manifest.nodes.find((node) => node.id === manifest.rootNodeId)!;
+  const primitive = manifest.nodes.find(
+    (node) => node.className !== 'Folder' && node.className !== 'Model',
   )!;
-  const driftedPrimitive = structuredClone(primitive);
-  driftedPrimitive.properties.cframe[0]! += 0.25;
+  const unmanaged = {
+    parentEntityId: root.id,
+    className: 'Folder',
+    name: 'Creator Content',
+    structuralPath: `${root.id}/Folder/Creator Content/1`,
+    ordinal: 1,
+  } as const;
   return [
     bridgeArtifact('Empty project bridge response', 'empty-project.response.json', {
       protocolVersion: '0.1.0',
       action: 'snapshot',
       ok: true,
-      snapshot: { projectId: manifest.source.projectId, nodes: [], unmanagedRoots: [] },
+      compactSnapshot: compactSnapshotFixture(manifest.source.projectId, [], []),
     }),
     bridgeArtifact('Cliffwatch project bridge response', 'cliffwatch-project.response.json', {
       protocolVersion: '0.1.0',
       action: 'snapshot',
       ok: true,
-      snapshot: { projectId: manifest.source.projectId, nodes: rawNodes, unmanagedRoots: [] },
+      compactSnapshot: compactSnapshotFixture(manifest.source.projectId, manifest.nodes, []),
     }),
     bridgeArtifact('Unmanaged child bridge response', 'unmanaged-child.response.json', {
       protocolVersion: '0.1.0',
       action: 'snapshot',
       ok: true,
-      snapshot: {
-        projectId: manifest.source.projectId,
-        nodes: [root],
-        unmanagedRoots: [
-          {
-            parentEntityId: root.entityId,
-            className: 'Folder',
-            name: 'Creator Content',
-            structuralPath: `${root.entityId}/1/Folder/Creator Content`,
-            ordinal: 1,
-          },
-        ],
-      },
+      compactSnapshot: compactSnapshotFixture(manifest.source.projectId, [root], [unmanaged]),
     }),
     bridgeArtifact('Engine drift bridge response', 'engine-drift.response.json', {
       protocolVersion: '0.1.0',
       action: 'snapshot',
-      ok: true,
-      snapshot: {
-        projectId: manifest.source.projectId,
-        nodes: [driftedPrimitive],
-        unmanagedRoots: [],
+      ok: false,
+      diagnostic: {
+        code: 'studio.engine_state_drift',
+        message: 'Managed instance state is invalid.',
+        nodeId: primitive.id,
+        property: 'CFrame',
       },
     }),
   ];

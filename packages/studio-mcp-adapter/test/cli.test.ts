@@ -386,7 +386,7 @@ describe('Studio MCP CLI', () => {
     const directory = await tempDirectory();
     const captureDirectory = join(directory, '.worldwright', 'live-milestone-3');
     await mkdir(captureDirectory, { recursive: true });
-    const capturePath = join(captureDirectory, 'viewport.png');
+    const capturePath = join(captureDirectory, 'viewport.jpg');
     const fake = await dependencies({}, captureDirectory);
     const output = ioCapture();
     expect(
@@ -396,9 +396,7 @@ describe('Studio MCP CLI', () => {
         fake.dependencies,
       ),
     ).toBe(0);
-    expect((await readFile(capturePath)).subarray(0, 8)).toEqual(
-      Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
-    );
+    expect((await readFile(capturePath)).subarray(0, 2)).toEqual(Buffer.from([0xff, 0xd8]));
 
     const outsideFake = await dependencies();
     const outsideIo = ioCapture();
@@ -409,7 +407,7 @@ describe('Studio MCP CLI', () => {
           '--studio-id',
           'studio-test',
           '--output',
-          join(directory, 'outside.png'),
+          join(directory, 'outside.jpg'),
           '--json',
         ],
         outsideIo.io,

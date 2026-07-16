@@ -92,6 +92,16 @@ function generatedRole(entity: Readonly<WorldEntity>): string | undefined {
   return typeof metadata?.role === 'string' ? metadata.role : undefined;
 }
 
+function replaceExactSourceId(
+  source: ReturnType<typeof loadMansionProgram>,
+  currentId: string,
+  nextId: string,
+): ReturnType<typeof loadMansionProgram> {
+  return JSON.parse(
+    JSON.stringify(source).replaceAll(JSON.stringify(currentId), JSON.stringify(nextId)),
+  ) as ReturnType<typeof loadMansionProgram>;
+}
+
 interface WorldAxisAlignedBox {
   readonly minimumX: number;
   readonly maximumX: number;
@@ -403,14 +413,38 @@ describe('complete offline mansion pipeline', () => {
     );
     const byRole = (role: string): WorldEntity[] =>
       generated.filter((entity) => generatedRole(entity) === role);
-    expect(byRole('wall-panel').length).toBeGreaterThan(0);
+    const wallPanels = byRole('wall-panel');
+    const windowGlass = byRole('window-glass');
+    expect(wallPanels.length).toBeGreaterThan(0);
     expect(byRole('slab-panel').length).toBeGreaterThan(0);
-    expect(byRole('window-glass').length).toBeGreaterThan(0);
+    expect(windowGlass.length).toBeGreaterThan(0);
     expect(byRole('stair-step').length).toBeGreaterThan(0);
     expect(byRole('stair-landing').length).toBe(pipeline.plan.floors.length);
 
+    expect(generated.every((entity) => [...entity.name].length <= 100)).toBe(true);
+    const wallPanelOrdinals = wallPanels
+      .map((panel) => {
+        const match = /^Wall Panel ([1-9]\d*)$/.exec(panel.name);
+        expect(match).not.toBeNull();
+        return Number(match?.[1]);
+      })
+      .sort((left, right) => left - right);
+    expect(wallPanelOrdinals).toEqual(
+      Array.from({ length: wallPanels.length }, (_, index) => index + 1),
+    );
+    const windowGlassOrdinals = windowGlass
+      .map((glass) => {
+        const match = /^Window Glass ([1-9]\d*)$/.exec(glass.name);
+        expect(match).not.toBeNull();
+        return Number(match?.[1]);
+      })
+      .sort((left, right) => left - right);
+    expect(windowGlassOrdinals).toEqual(
+      Array.from({ length: windowGlass.length }, (_, index) => index + 1),
+    );
+
     for (const entity of [
-      ...byRole('wall-panel'),
+      ...wallPanels,
       ...byRole('slab-panel'),
       ...byRole('stair-step'),
       ...byRole('stair-landing'),
@@ -424,7 +458,7 @@ describe('complete offline mansion pipeline', () => {
       });
       expect(entity.provenance.classification).toBe('invented');
     }
-    for (const glass of byRole('window-glass')) {
+    for (const glass of windowGlass) {
       expect(objectValue(glass.attributes['worldwright.roblox'])).toMatchObject({
         mode: 'primitive',
         className: 'Part',
@@ -443,6 +477,37 @@ describe('complete offline mansion pipeline', () => {
     }
     expect(stringifyRobloxManifest(pipeline.manifest)).not.toMatch(
       /"className": "(?:LocalScript|ModuleScript|Script)"|https?:\/\/|rbxasset/u,
+    );
+  });
+
+  it('bounds generated display names when a source identifier reaches its maximum length', () => {
+    const longRoomId = `room-${'x'.repeat(123)}`;
+    expect([...longRoomId]).toHaveLength(128);
+    const source = replaceExactSourceId(loadMansionProgram(), 'drawing-room', longRoomId);
+    const pipeline = planAndEmit(source);
+    const generated = pipeline.worldSpec.entities.filter(
+      (entity) => generatedRole(entity) !== undefined,
+    );
+    const windowGlass = generated.filter((entity) => generatedRole(entity) === 'window-glass');
+
+    expect(
+      pipeline.plan.openings.some(
+        (opening) => opening.type === 'window' && [...opening.id].length === 128,
+      ),
+    ).toBe(true);
+    expect(generated.every((entity) => [...entity.name].length <= 100)).toBe(true);
+    expect(windowGlass.length).toBeGreaterThan(0);
+    expect(windowGlass.every((entity) => /^Window Glass [1-9]\d*$/.test(entity.name))).toBe(true);
+
+    const reordered = clone(source);
+    reordered.entities.reverse();
+    reordered.relationships.reverse();
+    const reorderedPipeline = planAndEmit(reordered);
+    expect(stringifyWorldSpec(reorderedPipeline.worldSpec)).toBe(
+      stringifyWorldSpec(pipeline.worldSpec),
+    );
+    expect(stringifyRobloxManifest(reorderedPipeline.manifest)).toBe(
+      stringifyRobloxManifest(pipeline.manifest),
     );
   });
 

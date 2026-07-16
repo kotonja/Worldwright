@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 import { STUDIO_MCP_MAX_RESULT_BYTES } from '../src/constants.js';
 import { readStudioMcpImageResult, readStudioMcpTextResult } from '../src/mcp/result.js';
+import { VALID_JPEG_BYTES } from './image-fixtures.js';
 
 describe('MCP tool result safety', () => {
   it('reads one bounded text result', () => {
@@ -13,17 +14,14 @@ describe('MCP tool result safety', () => {
   });
 
   it('reads one canonical bounded image result', () => {
-    const bytes = Buffer.from(
-      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
-      'base64',
-    );
+    const bytes = VALID_JPEG_BYTES;
     const result = readStudioMcpImageResult(
       {
-        content: [{ type: 'image', mimeType: 'image/png', data: bytes.toString('base64') }],
+        content: [{ type: 'image', mimeType: 'image/jpeg', data: bytes.toString('base64') }],
       },
       'screen_capture',
     );
-    expect(result.mediaType).toBe('image/png');
+    expect(result.mediaType).toBe('image/jpeg');
     expect([...result.bytes]).toEqual([...bytes]);
   });
 
@@ -42,7 +40,19 @@ describe('MCP tool result safety', () => {
         {
           content: [
             { type: 'text', text: 'metadata' },
-            { type: 'image', mimeType: 'image/png', data: 'iVBORw==' },
+            { type: 'image', mimeType: 'image/jpeg', data: '/9j/2Q==' },
+          ],
+        },
+        'studio.response_invalid',
+      ],
+      [
+        {
+          content: [
+            {
+              type: 'image',
+              mimeType: 'image/jpg',
+              data: VALID_JPEG_BYTES.toString('base64'),
+            },
           ],
         },
         'studio.response_invalid',
@@ -59,7 +69,19 @@ describe('MCP tool result safety', () => {
         'studio.response_too_large',
       ],
       [
-        { content: [{ type: 'image', mimeType: 'image/png', data: 'not base64' }] },
+        { content: [{ type: 'image', mimeType: 'image/jpeg', data: 'not base64' }] },
+        'studio.response_invalid',
+      ],
+      [
+        {
+          content: [
+            {
+              type: 'image',
+              mimeType: 'image/jpeg',
+              data: Buffer.from([0xff, 0xd8, 0xff, 0xd9]).toString('base64'),
+            },
+          ],
+        },
         'studio.response_invalid',
       ],
       [

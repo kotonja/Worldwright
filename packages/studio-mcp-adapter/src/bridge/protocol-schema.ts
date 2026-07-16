@@ -2,6 +2,9 @@ export { StudioBridgeRequestSchema, StudioBridgeResponseSchema } from '../contra
 export type {
   StudioBridgeRequest,
   StudioBridgeResponse,
+  StudioCompactManagedNode,
+  StudioCompactSnapshot,
+  StudioCompactUnmanagedRoot,
   StudioRawManagedNode,
   StudioProbe,
   StudioRawSnapshot,

@@ -73,9 +73,11 @@ mutating command therefore requires an exact discovered Studio ID, even when onl
 currently visible. Read-only listing may show sanitized candidates; it never chooses a mutation
 target based on an "active" flag.
 
-The Studio ID is operationally sensitive evidence. It may appear during the local confirmation flow
-and in ignored, local-only receipts, but it is never committed in fixtures or documentation and is
-never copied into live-run summaries or pull-request evidence.
+The Studio ID is private local selection state. The live-smoke runner accepts it only to select and
+reselect the intended session, and omits it from its pre-mutation review and shareable summary.
+Probe output and strict `0.1.0` receipts may still contain the sanitized ID locally, so those raw
+files remain ignored and private; the ID is never committed in fixtures or documentation or copied
+into pull-request evidence.
 
 ## Why v0.1 is restricted to unsaved local sandboxes
 
@@ -108,6 +110,32 @@ tool-call method nor bridge source constants, and its CLI accepts no Luau text o
 
 The internal MCP client is capability-specific. Its existence is not an authorization boundary for
 other tools or clients, and creators should connect only trusted MCP clients to Studio.
+
+## Why snapshot transport is compact and capped at 96 KiB
+
+The built-in Studio MCP has been observed to impose an approximately 100,000-byte ceiling on tool
+text. A verbose JSON snapshot can cross that ceiling well before the adapter's independent managed-
+node and Workspace-scan limits, causing truncation outside the versioned bridge contract.
+
+Snapshot success therefore uses deterministic sorted dictionaries and fixed numeric tuples for
+managed nodes and unmanaged roots. Names use maximal Unicode-scalar-value front-coding; malformed
+surrogate sequences are rejected. Repeated identifiers, enums, source hashes, and numbers are
+referenced by zero-based indexes, while each node's stored-state SHA-256 is packed in node order as
+40 canonical Z85 characters. Explicit `-1` sentinels encode only defined absence cases. The complete
+prefixed response plus final newline is capped conservatively at 96 KiB (98,304 bytes). This cap is
+stricter than the general host-side MCP-result validation bound.
+
+Compactness is not trust. Before snapshot traversal, the fixed bridge runs three SHA-256 known
+vectors and fails closed if its runtime implementation disagrees. Before encoding, Studio computes
+SHA-256 over the exact raw state-JSON bytes and compares it with the stored state hash, then
+validates the decoded metadata and verifies the actual Instance hierarchy, attributes, class, name,
+and allowlisted engine properties. Only those verified canonical node properties enter the compact
+response. The host rejects noncanonical dictionaries and ordering, malformed front-coding or Z85,
+tuple shapes, sentinels, indexes, class codes, flags, identifiers, hierarchy, roots, or unmanaged
+records. It reconstructs each canonical node and requires its Node-computed hash to equal that
+node's decoded stored-state hash. Public compiler snapshot normalization and validation run last.
+The compact form is private bridge transport and does not replace or alter the public Roblox Scene
+Snapshot contract or its hash.
 
 ## Why adapter metadata stores canonical node state
 
@@ -236,6 +264,8 @@ the compiler's canonical observed-state contract.
 - Creator edits during an asynchronous transaction can make compensation inadmissible.
 - The package depends on the built-in Studio MCP tool surface and must reject incompatible schema
   changes rather than guess.
+- Snapshot bridge output is limited to 96 KiB to stay below the built-in MCP's observed tool-text
+  ceiling; a project can therefore hit `studio.response_too_large` before the managed-node bound.
 - A viewport image is operational evidence only; it is neither committed nor interpreted.
 
 ## Versioning implications

@@ -1,14 +1,22 @@
-import { describe, expect, it } from 'vitest';
+import { Buffer } from 'node:buffer';
+import { readFileSync } from 'node:fs';
 
+import { describe, expect, it } from 'vitest';
+import { Value } from '@sinclair/typebox/value';
+import { RobloxManifestSchema } from '@worldwright/roblox-compiler';
+
+import { parseStudioBridgeResponse } from '../src/bridge/response.js';
 import {
   STUDIO_APPLY_RECEIPT_SCHEMA_ID,
+  STUDIO_BRIDGE_RESPONSE_PREFIX,
   STUDIO_BRIDGE_PROTOCOL_VERSION,
   STUDIO_BRIDGE_REQUEST_SCHEMA_ID,
   STUDIO_BRIDGE_RESPONSE_SCHEMA_ID,
-  STUDIO_MCP_ADAPTER_VERSION,
+  STUDIO_MCP_MAX_BRIDGE_TEXT_BYTES,
 } from '../src/constants.js';
 import {
   StudioApplyReceiptSchema,
+  StudioBridgeManagedNodeSchema,
   StudioBridgeRequestSchema,
   StudioBridgeResponseSchema,
 } from '../src/contract-schema.js';
@@ -21,6 +29,7 @@ import {
   validateStudioBridgeResponse,
 } from '../src/validate.js';
 import { renderStudioBridgeFixtures } from '../scripts/generate-fixtures.js';
+import { compactSnapshotFixture } from '../scripts/compact-snapshot-fixture.js';
 
 function folderNode(id = 'root-node', parentId?: string): StudioBridgeManagedNode {
   return {
@@ -84,7 +93,6 @@ describe('Studio adapter strict contracts', () => {
     const before = folderNode();
     const after = { ...folderNode(), name: 'Updated Root' };
     const child = folderNode('child-node', before.id);
-    const compilerCompatibleLongName = { ...folderNode('long-name-node'), name: 'n'.repeat(300) };
     const requests = [
       { protocolVersion: STUDIO_BRIDGE_PROTOCOL_VERSION, action: 'probe' },
       {
@@ -126,15 +134,86 @@ describe('Studio adapter strict contracts', () => {
         beforeStateJson: state(before).stateJson,
         beforeStateHash: state(before).stateHash,
       },
-      {
+    ];
+    expect(requests.every((request) => validateStudioBridgeRequest(request).valid)).toBe(true);
+  });
+
+  it.each([
+    ['ASCII', 'n'],
+    ['non-BMP', '\u{1f600}'],
+  ])('enforces the Studio Instance.Name code-point limit for %s names', (_label, unit) => {
+    const base = folderNode('name-boundary');
+    const accepted = { ...base, name: unit.repeat(100) };
+    const rejected = { ...base, name: unit.repeat(101) };
+    expect(StudioBridgeManagedNodeSchema).toBe(RobloxManifestSchema.properties.nodes.items);
+    expect(Value.Check(RobloxManifestSchema.properties.nodes.items, rejected)).toBe(true);
+    expect(
+      validateStudioBridgeRequest({
         protocolVersion: STUDIO_BRIDGE_PROTOCOL_VERSION,
         action: 'create',
         projectId: 'fixture-project',
-        node: compilerCompatibleLongName,
-        ...state(compilerCompatibleLongName),
-      },
-    ];
-    expect(requests.every((request) => validateStudioBridgeRequest(request).valid)).toBe(true);
+        node: accepted,
+        ...state(accepted),
+      }).valid,
+    ).toBe(true);
+    const rejectedCreate = validateStudioBridgeRequest({
+      protocolVersion: STUDIO_BRIDGE_PROTOCOL_VERSION,
+      action: 'create',
+      projectId: 'fixture-project',
+      node: rejected,
+      ...state(rejected),
+    });
+    expect(rejectedCreate.valid).toBe(false);
+    expect(rejectedCreate.diagnostics).toContainEqual(
+      expect.objectContaining({ code: 'studio.property_invalid', path: '/node/name' }),
+    );
+
+    const rejectedAfter = validateStudioBridgeRequest({
+      protocolVersion: STUDIO_BRIDGE_PROTOCOL_VERSION,
+      action: 'update',
+      projectId: 'fixture-project',
+      before: accepted,
+      after: rejected,
+      beforeStateJson: state(accepted).stateJson,
+      beforeStateHash: state(accepted).stateHash,
+      afterStateJson: state(rejected).stateJson,
+      afterStateHash: state(rejected).stateHash,
+    });
+    expect(rejectedAfter.valid).toBe(false);
+    expect(rejectedAfter.diagnostics).toContainEqual(
+      expect.objectContaining({ code: 'studio.property_invalid', path: '/after/name' }),
+    );
+
+    const rejectedBefore = validateStudioBridgeRequest({
+      protocolVersion: STUDIO_BRIDGE_PROTOCOL_VERSION,
+      action: 'update',
+      projectId: 'fixture-project',
+      before: rejected,
+      after: accepted,
+      beforeStateJson: state(rejected).stateJson,
+      beforeStateHash: state(rejected).stateHash,
+      afterStateJson: state(accepted).stateJson,
+      afterStateHash: state(accepted).stateHash,
+    });
+    expect(rejectedBefore.diagnostics).toContainEqual(
+      expect.objectContaining({ code: 'studio.property_invalid', path: '/before/name' }),
+    );
+
+    const child = folderNode('name-child', rejected.id);
+    const rejectedParent = validateStudioBridgeRequest({
+      protocolVersion: STUDIO_BRIDGE_PROTOCOL_VERSION,
+      action: 'create',
+      projectId: 'fixture-project',
+      node: child,
+      ...state(child),
+      parentState: { node: rejected, ...state(rejected) },
+    });
+    expect(rejectedParent.diagnostics).toContainEqual(
+      expect.objectContaining({
+        code: 'studio.property_invalid',
+        path: '/parentState/node/name',
+      }),
+    );
   });
 
   it('requires exact parent metadata for managed create, update, and restoration paths', () => {
@@ -259,32 +338,24 @@ describe('Studio adapter strict contracts', () => {
   });
 
   it('accepts exact raw responses and rejects injected bridge diagnostic codes', () => {
-    const node = folderNode();
+    const baseNode = folderNode();
+    const node: StudioBridgeManagedNode = {
+      ...baseNode,
+      entityKind: 'world',
+      attributes: {
+        ...baseNode.attributes,
+        WorldwrightEntityKind: 'world',
+        WorldwrightSourceHash: '1'.repeat(64),
+      },
+    };
     const response = {
       protocolVersion: STUDIO_BRIDGE_PROTOCOL_VERSION,
       action: 'snapshot',
       ok: true,
-      snapshot: {
-        projectId: 'fixture-project',
-        nodes: [
-          {
-            entityId: node.id,
-            projectId: 'fixture-project',
-            className: 'Folder',
-            name: node.name,
-            parentKind: 'Workspace',
-            entityKind: node.entityKind,
-            compilerVersion: '0.1.0',
-            adapterVersion: STUDIO_MCP_ADAPTER_VERSION,
-            ...state(node),
-            properties: {},
-          },
-        ],
-        unmanagedRoots: [],
-      },
+      compactSnapshot: compactSnapshotFixture('fixture-project', [node], []),
     };
     expect(validateStudioBridgeResponse(response).valid).toBe(true);
-    const hiddenNodes = [...response.snapshot.nodes];
+    const hiddenNodes = [...response.compactSnapshot.nodes];
     Object.defineProperty(hiddenNodes, '0', {
       value: hiddenNodes[0],
       enumerable: false,
@@ -294,7 +365,7 @@ describe('Studio adapter strict contracts', () => {
     expect(
       validateStudioBridgeResponse({
         ...response,
-        snapshot: { ...response.snapshot, nodes: hiddenNodes },
+        compactSnapshot: { ...response.compactSnapshot, nodes: hiddenNodes },
       }).valid,
     ).toBe(false);
     expect(
@@ -313,5 +384,20 @@ describe('Studio adapter strict contracts', () => {
         true,
       );
     }
+  });
+
+  it('keeps the representative Cliffwatch compact frame below the Studio text cap', () => {
+    const fixture: unknown = JSON.parse(
+      readFileSync(
+        new URL('../fixtures/bridge/cliffwatch-project.response.json', import.meta.url),
+        'utf8',
+      ),
+    );
+    const encoded = JSON.stringify(fixture);
+    expect(encoded).toBeDefined();
+    const frame = `${STUDIO_BRIDGE_RESPONSE_PREFIX}${encoded}\n`;
+
+    expect(Buffer.byteLength(frame, 'utf8')).toBeLessThanOrEqual(STUDIO_MCP_MAX_BRIDGE_TEXT_BYTES);
+    expect(parseStudioBridgeResponse(frame, 'snapshot')).toEqual(fixture);
   });
 });

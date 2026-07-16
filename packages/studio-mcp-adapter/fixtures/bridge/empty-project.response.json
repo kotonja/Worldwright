@@ -1,10 +1,19 @@
 {
   "action": "snapshot",
-  "ok": true,
-  "protocolVersion": "0.1.0",
-  "snapshot": {
+  "compactSnapshot": {
+    "entityKinds": [],
+    "idTokens": [],
+    "materials": [],
+    "names": [],
     "nodes": [],
+    "numbers": [],
     "projectId": "project-cliffwatch-mansion",
+    "shapes": [],
+    "sourceHashes": [],
+    "stateHashesZ85": "",
+    "unmanagedClasses": [],
     "unmanagedRoots": []
-  }
+  },
+  "ok": true,
+  "protocolVersion": "0.1.0"
 }

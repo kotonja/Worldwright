@@ -469,6 +469,8 @@ function addWallsAndOpenings(
     if (existing === undefined) openingsByWall.set(opening.wallId, [opening]);
     else existing.push(opening);
   }
+  let wallPanelOrdinal = 0;
+  let windowGlassOrdinal = 0;
   for (const wall of plan.walls) {
     const floor = plan.floors.find((candidate) => candidate.id === wall.floorId);
     if (floor === undefined) throw new Error(`Wall ${wall.id} has no floor.`);
@@ -495,6 +497,7 @@ function addWallsAndOpenings(
     );
     const panels = decomposeWallPanels(wall, wallOpenings, accumulator.usedIds);
     for (const panel of panels) {
+      wallPanelOrdinal += 1;
       const material =
         wall.kind === 'exterior'
           ? plan.building.materials.exteriorWall
@@ -508,7 +511,7 @@ function addWallsAndOpenings(
         primitiveGeometryEntity(
           plan,
           panel.id,
-          `Wall Panel ${panel.id}`,
+          `Wall Panel ${String(wallPanelOrdinal)}`,
           wall.id,
           wallPanelGeometry(wall, panel, floor.finishedFloorElevation),
           material,
@@ -546,13 +549,14 @@ function addWallsAndOpenings(
         ),
       });
       if (value.type !== 'window') continue;
+      windowGlassOrdinal += 1;
       const glassId = generatedId(accumulator, ['window-glass', value.id]);
       addEntity(
         accumulator,
         primitiveGeometryEntity(
           plan,
           glassId,
-          `Window Glass ${value.id}`,
+          `Window Glass ${String(windowGlassOrdinal)}`,
           value.id,
           openingGeometry(wall, value, floor.finishedFloorElevation),
           plan.building.materials.window,

@@ -36,7 +36,7 @@ import {
   type StudioSandboxProbe,
   type StudioSessionSummary,
 } from './mcp/session.js';
-import { snapshotFromStudioRaw } from './snapshot.js';
+import { snapshotFromStudioCompact } from './snapshot.js';
 import type { StudioBridgeResponse } from './types.js';
 
 const ADAPTER_CONSTRUCTION_TOKEN = Symbol('worldwright.studioMcp.adapterConstruction');
@@ -319,7 +319,7 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
           studioDiagnostic('studio.snapshot_invalid', '', 'Studio snapshot response is invalid.'),
         ]);
       }
-      const snapshot = snapshotFromStudioRaw(response.snapshot, scope.projectId);
+      const snapshot = snapshotFromStudioCompact(response.compactSnapshot, scope.projectId);
       this.#replaceExpectedNodes(snapshot);
       return snapshot;
     });

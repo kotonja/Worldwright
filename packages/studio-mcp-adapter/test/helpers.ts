@@ -13,6 +13,7 @@ import { canonicalNodeMetadata } from '../src/engine-state.js';
 import { stringifyCanonicalJson, type JsonValue } from '../src/json.js';
 import type { AllowedStudioMcpToolName } from '../src/mcp/capabilities.js';
 import { connectStudioMcpForTesting } from '../src/testing.js';
+import { compactSnapshotFixture } from '../scripts/compact-snapshot-fixture.js';
 import type {
   StudioBridgeRequest,
   StudioBridgeParentState,
@@ -20,6 +21,7 @@ import type {
   StudioRawManagedNode,
   StudioRawUnmanagedRoot,
 } from '../src/types.js';
+import { VALID_JPEG_BYTES } from './image-fixtures.js';
 
 export function loadCourtyardManifest(): RobloxManifest {
   return JSON.parse(
@@ -347,14 +349,13 @@ export class FakeStudioProtocol {
             protocolVersion: '0.1.0',
             action: 'snapshot',
             ok: true,
-            snapshot: {
-              projectId: request.projectId,
-              nodes: [...this.nodes.values()]
+            compactSnapshot: compactSnapshotFixture(
+              request.projectId,
+              [...this.nodes.values()]
                 .filter((node) => node.attributes.WorldwrightProjectId === request.projectId)
-                .sort((left, right) => compareCodePoints(left.id, right.id))
-                .map((node) => rawNode(node)),
-              unmanagedRoots: [...this.unmanagedRoots],
-            },
+                .sort((left, right) => compareCodePoints(left.id, right.id)),
+              this.unmanagedRoots,
+            ),
           }),
         );
       case 'create':
@@ -464,16 +465,12 @@ export class FakeStudioProtocol {
       }
       case 'screen_capture': {
         if (!this.#active) throw new Error('Unexpected inactive fake Studio capture.');
-        const pngBytes = Buffer.from(
-          'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
-          'base64',
-        );
         return {
           content: [
             {
               type: 'image',
-              mimeType: 'image/png',
-              data: Buffer.from(pngBytes).toString('base64'),
+              mimeType: 'image/jpeg',
+              data: VALID_JPEG_BYTES.toString('base64'),
             },
           ],
           isError: false,

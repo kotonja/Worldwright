@@ -94,6 +94,27 @@ describe('Studio Apply Receipts', () => {
     }
   });
 
+  it('accepts only exact JPEG viewport evidence in the receipt contract', () => {
+    const receipt = buildStudioApplyReceipt(
+      {
+        ...context(),
+        viewportEvidence: {
+          mediaType: 'image/jpeg',
+          sha256: hashes.failure,
+          byteLength: 191_339,
+        },
+      },
+      success('applied'),
+    );
+    expect(validateStudioApplyReceipt(receipt).valid).toBe(true);
+    expect(
+      validateStudioApplyReceipt({
+        ...receipt,
+        viewportEvidence: { ...receipt.viewportEvidence, mediaType: 'image/png' },
+      }).valid,
+    ).toBe(false);
+  });
+
   it('rejects contradictory outcomes and retains bounded rollback diagnostics beyond operations', () => {
     const applied = buildStudioApplyReceipt(context(), success('applied'));
     expect(validateStudioApplyReceipt({ ...applied, operationsAttempted: 1 }).valid).toBe(false);

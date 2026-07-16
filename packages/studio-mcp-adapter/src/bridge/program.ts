@@ -17,7 +17,9 @@ local RESPONSE_PREFIX = "WORLDWRIGHT_STUDIO_BRIDGE_V1\n"
 local MAX_NODES = 2048
 local MAX_WORKSPACE_SCAN_INSTANCES = 65536
 local MAX_NODE_STATE_BYTES = 262144
+local MAX_INSTANCE_NAME_CODE_POINTS = 100
 local MAX_RESULT_BYTES = 16777216
+local MAX_STUDIO_OUTPUT_BYTES = 96 * 1024
 local EPSILON = 0.00001
 local payloadJson = __WORLDWRIGHT_VALIDATED_PAYLOAD__
 local payload = HttpService:JSONDecode(payloadJson)
@@ -27,12 +29,7 @@ local function array(values)
   return setmetatable(values or {}, ARRAY_MT)
 end
 
-local function indent(depth)
-  return string.rep("  ", depth)
-end
-
-local function canonicalJson(value, depth)
-  depth = depth or 0
+local function canonicalJson(value)
   local valueType = typeof(value)
   if valueType == "nil" then
     return "null"
@@ -47,9 +44,9 @@ local function canonicalJson(value, depth)
     if #value == 0 then return "[]" end
     local encoded = table.create(#value)
     for index, entry in ipairs(value) do
-      encoded[index] = indent(depth + 1) .. canonicalJson(entry, depth + 1)
+      encoded[index] = canonicalJson(entry)
     end
-    return "[\n" .. table.concat(encoded, ",\n") .. "\n" .. indent(depth) .. "]"
+    return "[" .. table.concat(encoded, ",") .. "]"
   end
   local keys = {}
   for key in pairs(value) do
@@ -62,17 +59,15 @@ local function canonicalJson(value, depth)
   if #keys == 0 then return "{}" end
   local encoded = table.create(#keys)
   for index, key in ipairs(keys) do
-    encoded[index] = indent(depth + 1)
-      .. HttpService:JSONEncode(key)
-      .. ": "
-      .. canonicalJson(value[key], depth + 1)
+    encoded[index] = HttpService:JSONEncode(key) .. ":" .. canonicalJson(value[key])
   end
-  return "{\n" .. table.concat(encoded, ",\n") .. "\n" .. indent(depth) .. "}"
+  return "{" .. table.concat(encoded, ",") .. "}"
 end
 
 local function reply(response)
-  local encoded = canonicalJson(response, 0)
-  if #RESPONSE_PREFIX + #encoded + 1 > MAX_RESULT_BYTES then
+  local encoded = canonicalJson(response)
+  local responseBytes = #RESPONSE_PREFIX + #encoded + 1
+  if responseBytes > MAX_STUDIO_OUTPUT_BYTES or responseBytes > MAX_RESULT_BYTES then
     encoded = canonicalJson({
       protocolVersion = PROTOCOL_VERSION,
       action = payload.action,
@@ -81,7 +76,7 @@ local function reply(response)
         code = "studio.response_too_large",
         message = "Studio bridge response exceeded the bounded result size.",
       },
-    }, 0)
+    })
   end
   return RESPONSE_PREFIX .. encoded .. "\n"
 end
@@ -262,6 +257,21 @@ local function isEntityKind(value)
     or value == "interaction"
 end
 
+local function isValidInstanceName(value)
+  if typeof(value) ~= "string" then return false end
+  local count = 0
+  local valid = pcall(function()
+    for _, codePoint in utf8.codes(value) do
+      if codePoint > 0x10ffff or (codePoint >= 0xd800 and codePoint <= 0xdfff) then
+        error("invalid Unicode scalar value")
+      end
+      count += 1
+      if count > MAX_INSTANCE_NAME_CODE_POINTS then error("Instance.Name too long") end
+    end
+  end)
+  return valid and count >= 1
+end
+
 local function isVectorRecord(value)
   return typeof(value) == "table"
     and hasOnlyKeys(value, VECTOR_KEYS)
@@ -293,13 +303,170 @@ local function isLowerSha256(value)
     and string.match(value, "^[0-9a-f]+$") ~= nil
 end
 
+local UINT32_MODULUS = 4294967296
+local SHA256_INITIAL = {
+  0x6a09e667,
+  0xbb67ae85,
+  0x3c6ef372,
+  0xa54ff53a,
+  0x510e527f,
+  0x9b05688c,
+  0x1f83d9ab,
+  0x5be0cd19,
+}
+local SHA256_CONSTANTS = {
+  0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
+  0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+  0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
+  0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+  0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc,
+  0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+  0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7,
+  0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+  0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
+  0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+  0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3,
+  0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+  0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5,
+  0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+  0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
+  0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
+}
+local HEX_DIGITS = "0123456789abcdef"
+
+local function add32(left, right)
+  return (left + right) % UINT32_MODULUS
+end
+
+local function add32x4(a, b, c, d)
+  return (a + b + c + d) % UINT32_MODULUS
+end
+
+local function add32x5(a, b, c, d, e)
+  return (a + b + c + d + e) % UINT32_MODULUS
+end
+
+local function uint32BigEndian(value)
+  return string.char(
+    bit32.band(bit32.rshift(value, 24), 0xff),
+    bit32.band(bit32.rshift(value, 16), 0xff),
+    bit32.band(bit32.rshift(value, 8), 0xff),
+    bit32.band(value, 0xff)
+  )
+end
+
+local function uint32Hex(value)
+  local encoded = table.create(8)
+  local outputIndex = 1
+  for shift = 28, 0, -4 do
+    local digit = bit32.band(bit32.rshift(value, shift), 0x0f)
+    encoded[outputIndex] = string.sub(HEX_DIGITS, digit + 1, digit + 1)
+    outputIndex += 1
+  end
+  return table.concat(encoded)
+end
+
+local function sha256Hex(message)
+  local messageLength = #message
+  local bitLength = messageLength * 8
+  local highBitLength = math.floor(bitLength / UINT32_MODULUS)
+  local lowBitLength = bitLength % UINT32_MODULUS
+  local zeroByteCount = (56 - ((messageLength + 1) % 64)) % 64
+  local padded = message
+    .. string.char(0x80)
+    .. string.rep("\0", zeroByteCount)
+    .. uint32BigEndian(highBitLength)
+    .. uint32BigEndian(lowBitLength)
+  local hash = table.clone(SHA256_INITIAL)
+  local words = table.create(64, 0)
+
+  for chunkStart = 1, #padded, 64 do
+    for wordIndex = 1, 16 do
+      local byteIndex = chunkStart + (wordIndex - 1) * 4
+      local b1, b2, b3, b4 = string.byte(padded, byteIndex, byteIndex + 3)
+      words[wordIndex] = b1 * 0x1000000 + b2 * 0x10000 + b3 * 0x100 + b4
+    end
+    for wordIndex = 17, 64 do
+      local previous15 = words[wordIndex - 15]
+      local previous2 = words[wordIndex - 2]
+      local sigma0 = bit32.bxor(
+        bit32.rrotate(previous15, 7),
+        bit32.rrotate(previous15, 18),
+        bit32.rshift(previous15, 3)
+      )
+      local sigma1 = bit32.bxor(
+        bit32.rrotate(previous2, 17),
+        bit32.rrotate(previous2, 19),
+        bit32.rshift(previous2, 10)
+      )
+      words[wordIndex] = add32x4(
+        words[wordIndex - 16],
+        sigma0,
+        words[wordIndex - 7],
+        sigma1
+      )
+    end
+
+    local a, b, c, d = hash[1], hash[2], hash[3], hash[4]
+    local e, f, g, h = hash[5], hash[6], hash[7], hash[8]
+    for round = 1, 64 do
+      local upperSigma1 = bit32.bxor(
+        bit32.rrotate(e, 6),
+        bit32.rrotate(e, 11),
+        bit32.rrotate(e, 25)
+      )
+      local choose = bit32.bxor(bit32.band(e, f), bit32.band(bit32.bnot(e), g))
+      local temporary1 = add32x5(h, upperSigma1, choose, SHA256_CONSTANTS[round], words[round])
+      local upperSigma0 = bit32.bxor(
+        bit32.rrotate(a, 2),
+        bit32.rrotate(a, 13),
+        bit32.rrotate(a, 22)
+      )
+      local majority = bit32.bxor(
+        bit32.band(a, b),
+        bit32.band(a, c),
+        bit32.band(b, c)
+      )
+      local temporary2 = add32(upperSigma0, majority)
+      h = g
+      g = f
+      f = e
+      e = add32(d, temporary1)
+      d = c
+      c = b
+      b = a
+      a = add32(temporary1, temporary2)
+    end
+    hash[1] = add32(hash[1], a)
+    hash[2] = add32(hash[2], b)
+    hash[3] = add32(hash[3], c)
+    hash[4] = add32(hash[4], d)
+    hash[5] = add32(hash[5], e)
+    hash[6] = add32(hash[6], f)
+    hash[7] = add32(hash[7], g)
+    hash[8] = add32(hash[8], h)
+  end
+
+  local encoded = table.create(8)
+  for index, value in ipairs(hash) do encoded[index] = uint32Hex(value) end
+  return table.concat(encoded)
+end
+
+local function sha256SelfTest()
+  return sha256Hex("")
+      == "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    and sha256Hex("abc")
+      == "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    and sha256Hex("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq")
+      == "248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1"
+end
+
 local function isSafeStoredNodeShape(node)
   if typeof(node) ~= "table"
     or not hasOnlyKeys(node, NODE_KEYS)
     or not isIdentifier(node.id)
     or not isEntityKind(node.entityKind)
-    or typeof(node.name) ~= "string"
-    or node.name == ""
+    or not isValidInstanceName(node.name)
     or (node.parentId ~= nil and not isIdentifier(node.parentId))
     or not isAllowedManagedClass(node.className)
     or typeof(node.attributes) ~= "table"
@@ -446,6 +613,10 @@ local function readStoredNode(instance, projectId)
   if #stateJson > MAX_NODE_STATE_BYTES then
     return nil, nil, nil, "studio.adapter_metadata_too_large"
   end
+  local hashed, computedStateHash = pcall(function() return sha256Hex(stateJson) end)
+  if not hashed or computedStateHash ~= stateHash then
+    return nil, nil, nil, "studio.adapter_metadata_invalid"
+  end
   for attributeName in pairs(instance:GetAttributes()) do
     if string.sub(attributeName, 1, 17) == "WorldwrightStudio"
       and attributeName ~= "WorldwrightStudioAdapterVersion"
@@ -469,13 +640,13 @@ end
 
 local function verifyStoredManagedInstance(instance, projectId, index)
   local node, stateJson, stateHash, metadataError = readStoredNode(instance, projectId)
-  if metadataError ~= nil then return false, metadataError, nil, nil end
+  if metadataError ~= nil then return false, metadataError, nil, nil, nil end
   local verified, valid, propertyName = pcall(function()
     return verifyInstance(instance, node, stateJson, stateHash, index)
   end)
-  if not verified then return false, "studio.adapter_metadata_invalid", nil, nil end
-  if not valid then return false, "studio.engine_state_drift", propertyName, nil end
-  return true, nil, nil, node
+  if not verified then return false, "studio.adapter_metadata_invalid", nil, nil, nil end
+  if not valid then return false, "studio.engine_state_drift", propertyName, nil, nil end
+  return true, nil, nil, node, stateHash
 end
 
 local function setPublicNodeState(instance, node)
@@ -672,62 +843,113 @@ local function cleanupFailedCreate(instance, node, projectId)
   return true
 end
 
-local function rawProperties(instance)
-  if instance.ClassName == "Folder" or instance.ClassName == "Model" then return {} end
-  local x, y, z, r00, r01, r02, r10, r11, r12, r20, r21, r22 = instance.CFrame:GetComponents()
-  local result = {
-    cframe = array({ x, y, z, r00, r01, r02, r10, r11, r12, r20, r21, r22 }),
-    size = array({ instance.Size.X, instance.Size.Y, instance.Size.Z }),
-    anchored = instance.Anchored,
-    material = instance.Material.Name,
-    color = array({ instance.Color.R, instance.Color.G, instance.Color.B }),
-    transparency = instance.Transparency,
-    canCollide = instance.CanCollide,
-    canQuery = instance.CanQuery,
-    canTouch = instance.CanTouch,
-    castShadow = instance.CastShadow,
-  }
-  if instance.ClassName == "Part" then result.shape = instance.Shape.Name end
-  return result
+local function normalizedNumber(value)
+  if value == 0 then return 0 end
+  return value
 end
 
-local function rawNode(instance, projectId)
-  local parentKind = "other"
-  local parentEntityId = nil
-  if instance.Parent == Workspace then
-    parentKind = "Workspace"
-  elseif instance.Parent ~= nil and isSelectedManaged(instance.Parent, projectId) then
-    parentKind = "managed"
-    parentEntityId = instance.Parent:GetAttribute("WorldwrightEntityId")
+local function addDictionaryValue(values, seen, value)
+  if seen[value] == nil then
+    seen[value] = true
+    table.insert(values, value)
   end
-  local result = {
-    entityId = instance:GetAttribute("WorldwrightEntityId"),
-    projectId = instance:GetAttribute("WorldwrightProjectId"),
-    className = instance.ClassName,
-    name = instance.Name,
-    parentKind = parentKind,
-    entityKind = instance:GetAttribute("WorldwrightEntityKind"),
-    compilerVersion = instance:GetAttribute("WorldwrightCompilerVersion"),
-    adapterVersion = instance:GetAttribute("WorldwrightStudioAdapterVersion"),
-    stateJson = instance:GetAttribute("WorldwrightStudioStateJson"),
-    stateHash = instance:GetAttribute("WorldwrightStudioStateHash"),
-    properties = rawProperties(instance),
-  }
-  if parentEntityId ~= nil then result.parentEntityId = parentEntityId end
-  local sourceHash = instance:GetAttribute("WorldwrightSourceHash")
-  if sourceHash ~= nil then result.sourceHash = sourceHash end
+end
+
+local function sortAndIndexDictionary(values)
+  table.sort(values)
+  local index = {}
+  for valueIndex, value in ipairs(values) do index[value] = valueIndex - 1 end
+  return index
+end
+
+local function utf8CodePointsAndOffsets(value)
+  if not isValidInstanceName(value) then return nil, nil end
+  local codePoints = array()
+  local byteOffsets = array()
+  local valid = pcall(function()
+    for byteIndex, codePoint in utf8.codes(value) do
+      table.insert(byteOffsets, byteIndex)
+      table.insert(codePoints, codePoint)
+    end
+  end)
+  if not valid then return nil, nil end
+  return codePoints, byteOffsets
+end
+
+local function frontCodeSortedNames(values)
+  local encoded = array()
+  local previousCodePoints = nil
+  for _, value in ipairs(values) do
+    local codePoints, byteOffsets = utf8CodePointsAndOffsets(value)
+    if codePoints == nil then return nil end
+    local commonPrefixCodePointCount = 0
+    if previousCodePoints ~= nil then
+      local maximumPrefix = math.min(#previousCodePoints, #codePoints)
+      while commonPrefixCodePointCount < maximumPrefix
+        and previousCodePoints[commonPrefixCodePointCount + 1]
+          == codePoints[commonPrefixCodePointCount + 1] do
+        commonPrefixCodePointCount += 1
+      end
+    end
+    local suffixByteOffset = byteOffsets[commonPrefixCodePointCount + 1]
+    if suffixByteOffset == nil then return nil end
+    local suffix = string.sub(value, suffixByteOffset)
+    if suffix == "" then return nil end
+    table.insert(encoded, array({ commonPrefixCodePointCount, suffix }))
+    previousCodePoints = codePoints
+  end
+  return encoded
+end
+
+local Z85_ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#"
+
+local function z85EncodeSha256(stateHash)
+  if not isLowerSha256(stateHash) then return nil end
+  local encoded = table.create(40)
+  local outputIndex = 1
+  for hexIndex = 1, 64, 8 do
+    local value = tonumber(string.sub(stateHash, hexIndex, hexIndex + 7), 16)
+    if value == nil then return nil end
+    local block = table.create(5)
+    for digitIndex = 5, 1, -1 do
+      local digit = value % 85
+      value = math.floor(value / 85)
+      block[digitIndex] = string.sub(Z85_ALPHABET, digit + 1, digit + 1)
+    end
+    for digitIndex = 1, 5 do
+      encoded[outputIndex] = block[digitIndex]
+      outputIndex += 1
+    end
+  end
+  local result = table.concat(encoded)
+  if #result ~= 40 then return nil end
   return result
 end
 
-local function encodedStringBytes(value)
-  local encoded, result = pcall(function() return HttpService:JSONEncode(value) end)
-  if not encoded then return nil end
-  return #result
+local function splitEntityId(entityId)
+  local tokens = array()
+  for token in string.gmatch(entityId, "[^-]+") do table.insert(tokens, token) end
+  return tokens
+end
+
+local function classCode(className)
+  if className == "Folder" then return 0 end
+  if className == "Model" then return 1 end
+  if className == "Part" then return 2 end
+  if className == "WedgePart" then return 3 end
+  if className == "CornerWedgePart" then return 4 end
+  return nil
 end
 
 local function snapshotAction()
+  local selfTested, selfTestPassed = pcall(sha256SelfTest)
+  if not selfTested or not selfTestPassed then
+    return failure(
+      "studio.adapter_metadata_invalid",
+      "Studio metadata integrity self-test failed."
+    )
+  end
   local projectId = payload.projectId
-  local selected = array()
   local selectedInstances = {}
   local selectedChildren = {}
   local projectIndex = {}
@@ -778,6 +1000,8 @@ local function snapshotAction()
     end
   end
 
+  local selectedNodes = {}
+  local selectedStateHashes = {}
   for _, instance in ipairs(selectedInstances) do
     local entityId = instance:GetAttribute("WorldwrightEntityId")
     local parent = instance.Parent
@@ -788,37 +1012,112 @@ local function snapshotAction()
       and parent.ClassName ~= "Model" then
       return failure("studio.hierarchy_invalid", "Managed parent class is invalid.", entityId)
     end
-    local valid, validationCode, propertyName = verifyStoredManagedInstance(instance, projectId, projectIndex)
+    local valid, validationCode, propertyName, node, stateHash = verifyStoredManagedInstance(
+      instance,
+      projectId,
+      projectIndex
+    )
     if not valid then
       return failure(validationCode, "Managed instance state is invalid.", entityId, propertyName)
     end
     local stateJson = instance:GetAttribute("WorldwrightStudioStateJson")
-    local stateBytes = encodedStringBytes(stateJson)
-    local nameBytes = encodedStringBytes(instance.Name)
-    local idBytes = encodedStringBytes(entityId)
-    if stateBytes == nil or nameBytes == nil or idBytes == nil then
-      return failure("studio.snapshot_invalid", "Managed snapshot strings could not be encoded safely.", entityId)
-    end
-    cumulativeMetadataBytes += stateBytes + nameBytes + idBytes + 1024
+    cumulativeMetadataBytes += #stateJson + #node.id + #node.name + 1024
     if cumulativeMetadataBytes > MAX_RESULT_BYTES then
-      return failure("studio.response_too_large", "Snapshot metadata exceeds the cumulative response budget.")
+      return failure("studio.response_too_large", "Snapshot metadata exceeds the cumulative work budget.")
     end
-    local observed, raw = pcall(function() return rawNode(instance, projectId) end)
-    if not observed then
-      return failure("studio.snapshot_invalid", "Managed engine state could not be observed safely.", entityId)
-    end
-    table.insert(selected, raw)
+    selectedNodes[instance] = node
+    selectedStateHashes[instance] = stateHash
   end
-  table.sort(selected, function(left, right) return left.entityId < right.entityId end)
+  table.sort(selectedInstances, function(left, right)
+    return selectedNodes[left].id < selectedNodes[right].id
+  end)
 
-  local unmanaged = array()
+  local encodedStateHashes = table.create(#selectedInstances)
+  for index, instance in ipairs(selectedInstances) do
+    local encodedStateHash = z85EncodeSha256(selectedStateHashes[instance])
+    if encodedStateHash == nil then
+      return failure(
+        "studio.adapter_metadata_invalid",
+        "Managed state hash could not be encoded safely.",
+        selectedNodes[instance].id
+      )
+    end
+    encodedStateHashes[index] = encodedStateHash
+  end
+  local stateHashesZ85 = table.concat(encodedStateHashes)
+  if #stateHashesZ85 ~= #selectedInstances * 40 then
+    return failure("studio.adapter_metadata_invalid", "Managed state hashes could not be packed exactly.")
+  end
+
+  local idTokens = array()
+  local names = array()
+  local entityKinds = array()
+  local sourceHashes = array()
+  local numbers = array()
+  local materials = array()
+  local shapes = array()
+  local unmanagedClasses = array()
+  local idTokensSeen = {}
+  local namesSeen = {}
+  local entityKindsSeen = {}
+  local sourceHashesSeen = {}
+  local numbersSeen = {}
+  local materialsSeen = {}
+  local shapesSeen = {}
+  local unmanagedClassesSeen = {}
+  local nodeTokenSequences = {}
+  local nodeIndexById = {}
+
+  for nodePosition, instance in ipairs(selectedInstances) do
+    local node = selectedNodes[instance]
+    nodeIndexById[node.id] = nodePosition - 1
+    local tokens = splitEntityId(node.id)
+    if #tokens == 0 or table.concat(tokens, "-") ~= node.id then
+      return failure("studio.identity_invalid", "Managed entity ID could not be tokenized exactly.", node.id)
+    end
+    nodeTokenSequences[node.id] = tokens
+    for _, token in ipairs(tokens) do addDictionaryValue(idTokens, idTokensSeen, token) end
+    addDictionaryValue(names, namesSeen, node.name)
+    addDictionaryValue(entityKinds, entityKindsSeen, node.entityKind)
+    local sourceHash = node.attributes.WorldwrightSourceHash
+    if sourceHash ~= nil then
+      addDictionaryValue(sourceHashes, sourceHashesSeen, sourceHash)
+    end
+    if node.className ~= "Folder" and node.className ~= "Model" then
+      local properties = node.properties
+      local primitiveNumbers = {
+        properties.position.x,
+        properties.position.y,
+        properties.position.z,
+        properties.rotationEulerDegreesXYZ.x,
+        properties.rotationEulerDegreesXYZ.y,
+        properties.rotationEulerDegreesXYZ.z,
+        properties.size.x,
+        properties.size.y,
+        properties.size.z,
+        properties.color.r,
+        properties.color.g,
+        properties.color.b,
+        properties.transparency,
+      }
+      for _, value in ipairs(primitiveNumbers) do
+        addDictionaryValue(numbers, numbersSeen, normalizedNumber(value))
+      end
+      addDictionaryValue(materials, materialsSeen, properties.material)
+      if node.className == "Part" then
+        addDictionaryValue(shapes, shapesSeen, properties.shape)
+      end
+    end
+  end
+
+  local unmanagedRecords = {}
   for _, instance in ipairs(selectedInstances) do
-    local parentId = instance:GetAttribute("WorldwrightEntityId")
+    local parentId = selectedNodes[instance].id
     if typeof(parentId) ~= "string" or parentId == "" then
       return failure("studio.identity_invalid", "Managed parent ID is missing or invalid.")
     end
     local unmanagedChildren = {}
-    for originalIndex, child in ipairs(selectedChildren[instance]) do
+    for _, child in ipairs(selectedChildren[instance]) do
       if not isSelectedManaged(child, projectId) then
         if child.Name == "" then
           return failure("studio.snapshot_invalid", "Unmanaged root has an empty display name.", parentId)
@@ -826,18 +1125,17 @@ local function snapshotAction()
         table.insert(unmanagedChildren, {
           className = child.ClassName,
           name = child.Name,
-          originalIndex = originalIndex,
         })
       end
     end
     table.sort(unmanagedChildren, function(left, right)
       if left.className ~= right.className then return left.className < right.className end
       if left.name ~= right.name then return left.name < right.name end
-      return left.originalIndex < right.originalIndex
+      return false
     end)
     local duplicateCounts = {}
     for _, child in ipairs(unmanagedChildren) do
-      if #unmanaged >= MAX_NODES then
+      if #unmanagedRecords >= MAX_NODES then
         return failure("studio.node_limit_exceeded", "Unmanaged-root marker limit exceeded.")
       end
       if #parentId + #child.className + #child.name + 16 > 2048 then
@@ -856,27 +1154,115 @@ local function snapshotAction()
       if #structuralPath > 2048 then
         return failure("studio.snapshot_invalid", "Unmanaged structural path is too long.", parentId)
       end
-      local classBytes = encodedStringBytes(child.className)
-      local nameBytes = encodedStringBytes(child.name)
-      local pathBytes = encodedStringBytes(structuralPath)
-      if classBytes == nil or nameBytes == nil or pathBytes == nil then
-        return failure("studio.snapshot_invalid", "Unmanaged snapshot strings could not be encoded safely.", parentId)
-      end
-      cumulativeMetadataBytes += classBytes + nameBytes + pathBytes + 128
-      if cumulativeMetadataBytes > MAX_RESULT_BYTES then
-        return failure("studio.response_too_large", "Snapshot metadata exceeds the cumulative response budget.")
-      end
-      table.insert(unmanaged, {
-        parentEntityId = parentId,
+      addDictionaryValue(names, namesSeen, child.name)
+      addDictionaryValue(unmanagedClasses, unmanagedClassesSeen, child.className)
+      table.insert(unmanagedRecords, {
+        parentId = parentId,
         className = child.className,
         name = child.name,
-        structuralPath = structuralPath,
         ordinal = duplicateOrdinal,
       })
     end
   end
-  table.sort(unmanaged, function(left, right) return left.structuralPath < right.structuralPath end)
-  return success({ snapshot = { projectId = projectId, nodes = selected, unmanagedRoots = unmanaged } })
+  table.sort(unmanagedRecords, function(left, right)
+    if left.parentId ~= right.parentId then return left.parentId < right.parentId end
+    if left.className ~= right.className then return left.className < right.className end
+    if left.name ~= right.name then return left.name < right.name end
+    return left.ordinal < right.ordinal
+  end)
+
+  local idTokenIndex = sortAndIndexDictionary(idTokens)
+  local nameIndex = sortAndIndexDictionary(names)
+  local frontCodedNames = frontCodeSortedNames(names)
+  if frontCodedNames == nil then
+    return failure("studio.snapshot_invalid", "Snapshot names could not be encoded as valid Unicode.")
+  end
+  local entityKindIndex = sortAndIndexDictionary(entityKinds)
+  local sourceHashIndex = sortAndIndexDictionary(sourceHashes)
+  local numberIndex = sortAndIndexDictionary(numbers)
+  local materialIndex = sortAndIndexDictionary(materials)
+  local shapeIndex = sortAndIndexDictionary(shapes)
+  local unmanagedClassIndex = sortAndIndexDictionary(unmanagedClasses)
+
+  local compactNodes = array()
+  for _, instance in ipairs(selectedInstances) do
+    local node = selectedNodes[instance]
+    local tokenIndices = array()
+    for _, token in ipairs(nodeTokenSequences[node.id]) do
+      table.insert(tokenIndices, idTokenIndex[token])
+    end
+    local parentIndex = -1
+    if node.parentId ~= nil then
+      parentIndex = nodeIndexById[node.parentId]
+      if parentIndex == nil then
+        return failure("studio.hierarchy_invalid", "Managed parent index is invalid.", node.id)
+      end
+    end
+    local encodedSourceHashIndex = -1
+    local sourceHash = node.attributes.WorldwrightSourceHash
+    if sourceHash ~= nil then encodedSourceHashIndex = sourceHashIndex[sourceHash] end
+    local tuple = array({
+      tokenIndices,
+      parentIndex,
+      classCode(node.className),
+      nameIndex[node.name],
+      entityKindIndex[node.entityKind],
+      encodedSourceHashIndex,
+    })
+    if node.className ~= "Folder" and node.className ~= "Model" then
+      local properties = node.properties
+      table.insert(tuple, numberIndex[normalizedNumber(properties.position.x)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.position.y)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.position.z)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.rotationEulerDegreesXYZ.x)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.rotationEulerDegreesXYZ.y)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.rotationEulerDegreesXYZ.z)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.size.x)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.size.y)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.size.z)])
+      table.insert(tuple, materialIndex[properties.material])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.color.r)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.color.g)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.color.b)])
+      table.insert(tuple, numberIndex[normalizedNumber(properties.transparency)])
+      local flags = 0
+      if properties.anchored then flags += 1 end
+      if properties.canCollide then flags += 2 end
+      if properties.canQuery then flags += 4 end
+      if properties.canTouch then flags += 8 end
+      if properties.castShadow then flags += 16 end
+      table.insert(tuple, flags)
+      table.insert(tuple, node.className == "Part" and shapeIndex[properties.shape] or -1)
+    end
+    table.insert(compactNodes, tuple)
+  end
+
+  local compactUnmanagedRoots = array()
+  for _, unmanaged in ipairs(unmanagedRecords) do
+    table.insert(compactUnmanagedRoots, array({
+      nodeIndexById[unmanaged.parentId],
+      unmanagedClassIndex[unmanaged.className],
+      nameIndex[unmanaged.name],
+      unmanaged.ordinal,
+    }))
+  end
+
+  return success({
+    compactSnapshot = {
+      projectId = projectId,
+      idTokens = idTokens,
+      names = frontCodedNames,
+      stateHashesZ85 = stateHashesZ85,
+      entityKinds = entityKinds,
+      sourceHashes = sourceHashes,
+      numbers = numbers,
+      materials = materials,
+      shapes = shapes,
+      nodes = compactNodes,
+      unmanagedClasses = unmanagedClasses,
+      unmanagedRoots = compactUnmanagedRoots,
+    },
+  })
 end
 
 local function probeAction()
@@ -909,6 +1295,9 @@ end
 
 local function createAction()
   local node = payload.node
+  if not isValidInstanceName(node.name) then
+    return failure("studio.property_invalid", "Managed Instance.Name is invalid or too long.", node.id, "Name")
+  end
   local root, index, indexError = buildProjectIndex(payload.projectId)
   if indexError ~= nil then return failure(indexError, "Managed project index is invalid.", node.id) end
   if index[node.id] ~= nil then return failure("studio.create_failed", "Managed entity already exists.", node.id) end
@@ -955,6 +1344,12 @@ end
 local function updateAction()
   local before = payload.before
   local after = payload.after
+  if not isValidInstanceName(before.name) then
+    return failure("studio.property_invalid", "Managed before Instance.Name is invalid or too long.", before.id, "Name")
+  end
+  if not isValidInstanceName(after.name) then
+    return failure("studio.property_invalid", "Managed after Instance.Name is invalid or too long.", after.id, "Name")
+  end
   local root, index, indexError = buildProjectIndex(payload.projectId)
   if indexError ~= nil then return failure(indexError, "Managed project index is invalid.", before.id) end
   local instance = index[before.id]
@@ -1034,6 +1429,9 @@ end
 
 local function deleteAction()
   local before = payload.before
+  if not isValidInstanceName(before.name) then
+    return failure("studio.property_invalid", "Managed Instance.Name is invalid or too long.", before.id, "Name")
+  end
   local _, index, indexError = buildProjectIndex(payload.projectId)
   if indexError ~= nil then return failure(indexError, "Managed project index is invalid.", before.id) end
   local instance = index[before.id]

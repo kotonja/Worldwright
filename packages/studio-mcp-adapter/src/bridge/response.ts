@@ -2,6 +2,7 @@ import { Buffer } from 'node:buffer';
 
 import {
   STUDIO_BRIDGE_RESPONSE_PREFIX,
+  STUDIO_MCP_MAX_BRIDGE_TEXT_BYTES,
   STUDIO_MCP_MAX_RESULT_BYTES,
   type StudioBridgeAction,
 } from '../constants.js';
@@ -132,6 +133,15 @@ export function parseStudioBridgeResponse(
       ),
     ]);
   }
+  if (Buffer.byteLength(text, 'utf8') > STUDIO_MCP_MAX_BRIDGE_TEXT_BYTES) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.response_too_large',
+        '',
+        `Studio bridge response exceeds ${STUDIO_MCP_MAX_BRIDGE_TEXT_BYTES} bytes.`,
+      ),
+    ]);
+  }
   const prefixIndex = text.indexOf(STUDIO_BRIDGE_RESPONSE_PREFIX);
   const secondPrefixIndex = text.indexOf(
     STUDIO_BRIDGE_RESPONSE_PREFIX,
@@ -151,6 +161,15 @@ export function parseStudioBridgeResponse(
   try {
     parsed = JSON.parse(encoded) as unknown;
   } catch {
+    if (/(?:\.\.\.|…)[ \t]*\(truncated\)[ \t\r\n]*$/iu.test(encoded)) {
+      throw new StudioAdapterError([
+        studioDiagnostic(
+          'studio.response_too_large',
+          '',
+          'Studio bridge response was truncated by the MCP transport.',
+        ),
+      ]);
+    }
     throw new StudioAdapterError([
       studioDiagnostic('studio.response_invalid', '', 'Studio bridge returned malformed JSON.'),
     ]);

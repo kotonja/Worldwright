@@ -78,10 +78,12 @@ Do not describe future systems as implemented.
   boundary.
 - `packages/studio-mcp-adapter/src/bridge/program.ts` and the action-specific bridge builders define
   the only fixed Luau programs Worldwright may send: `probe`, `snapshot`, `create`, `update`, and
-  `delete`. Never expose their source or accept caller-supplied Luau.
-- `packages/studio-mcp-adapter/src/engine-state.ts`, `snapshot.ts`, and `adapter.ts` define actual
-  engine verification, unmanaged-root observation, and the implementation of the existing compiler
-  adapter interface. Transaction safety remains in the compiler's `applyRobloxChangeSet`.
+  `delete`. `program.ts` also defines Studio-side raw metadata hashing, decoded-state checks, actual
+  engine verification, and compact encoding. Never expose its source or accept caller-supplied Luau.
+- `packages/studio-mcp-adapter/src/engine-state.ts`, `snapshot.ts`, and `adapter.ts` define
+  host-side canonical metadata hashing, compact transport integrity and reconstruction,
+  unmanaged-root observation, compiler snapshot conversion, and the implementation of the existing
+  compiler adapter interface. Transaction safety remains in the compiler's `applyRobloxChangeSet`.
 - `docs/studio-mcp-adapter/0.1.0.md` documents the published adapter, bridge, receipt, CLI, sandbox,
   security, and limitation behavior. Update it with every Studio adapter contract or behavior
   change.

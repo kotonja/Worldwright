@@ -66,25 +66,7 @@ export function normalizeStudioBridgeRequest(
 export function normalizeStudioBridgeResponse(
   response: Readonly<StudioBridgeResponse>,
 ): StudioBridgeResponse {
-  const normalized = canonicalClone(response);
-  if (!normalized.ok || normalized.action !== 'snapshot') return normalized;
-  return {
-    ...normalized,
-    snapshot: {
-      ...normalized.snapshot,
-      nodes: [...normalized.snapshot.nodes].sort((left, right) =>
-        compareCodePoints(left.entityId, right.entityId),
-      ),
-      unmanagedRoots: [...normalized.snapshot.unmanagedRoots].sort(
-        (left, right) =>
-          compareCodePoints(left.parentEntityId, right.parentEntityId) ||
-          compareCodePoints(left.structuralPath, right.structuralPath) ||
-          left.ordinal - right.ordinal ||
-          compareCodePoints(left.className, right.className) ||
-          compareCodePoints(left.name, right.name),
-      ),
-    },
-  };
+  return canonicalClone(response);
 }
 
 export function normalizeStudioApplyReceipt(

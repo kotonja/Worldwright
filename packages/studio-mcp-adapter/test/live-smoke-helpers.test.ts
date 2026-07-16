@@ -27,7 +27,7 @@ function envelope(): LiveSmokeAuthorizationEnvelope {
     modifiedSnapshotHash: '5'.repeat(64),
     repairChangeSetHash: '6'.repeat(64),
     faultChangeSetHash: '4'.repeat(64),
-    captureMediaType: 'image/png',
+    captureMediaType: 'image/jpeg',
     steps: [
       'initial-reconciliation',
       'canonical-noop',
@@ -35,7 +35,7 @@ function envelope(): LiveSmokeAuthorizationEnvelope {
       'exact-inverse-repair',
       'post-update-fault',
       'verified-compensation',
-      'png-viewport-capture',
+      'jpeg-viewport-capture',
       'final-canonical-noop',
     ],
   };
@@ -121,11 +121,10 @@ describe('live smoke authority and review helpers', () => {
     );
   });
 
-  it('renders complete counts and hashes while escaping untrusted display text', () => {
+  it('renders complete counts and hashes without exposing the private Studio ID', () => {
     const authorizationEnvelope = envelope();
     const authorizationEnvelopeHash = hashLiveSmokeAuthorizationEnvelope(authorizationEnvelope);
     const output = formatLiveSmokePreMutationReview({
-      studioId: 'studio\nnot-a-second-line',
       placeName: 'Sandbox\nInjected label',
       initialState: 'empty',
       changeSet: changeSet(),
@@ -135,7 +134,6 @@ describe('live smoke authority and review helpers', () => {
     });
     const parsed = JSON.parse(output) as Record<string, unknown>;
     expect(parsed).toMatchObject({
-      studioId: 'studio\nnot-a-second-line',
       unsavedPlaceName: 'Sandbox\nInjected label',
       initialState: 'empty',
       projectId: 'project-live-review',
@@ -147,7 +145,8 @@ describe('live smoke authority and review helpers', () => {
       authorizationEnvelope,
       requiredLiveSequenceConfirmationHash: authorizationEnvelopeHash,
     });
-    expect(output).not.toContain('studio\nnot-a-second-line');
+    expect(parsed).not.toHaveProperty('studioId');
+    expect(output).not.toContain('"studioId"');
     expect(output).not.toContain('Sandbox\nInjected label');
   });
 });

@@ -29,7 +29,7 @@ export interface LiveSmokeAuthorizationEnvelope {
   readonly modifiedSnapshotHash: string;
   readonly repairChangeSetHash: string;
   readonly faultChangeSetHash: string;
-  readonly captureMediaType: 'image/png';
+  readonly captureMediaType: 'image/jpeg';
   readonly steps: readonly [
     'initial-reconciliation',
     'canonical-noop',
@@ -37,13 +37,12 @@ export interface LiveSmokeAuthorizationEnvelope {
     'exact-inverse-repair',
     'post-update-fault',
     'verified-compensation',
-    'png-viewport-capture',
+    'jpeg-viewport-capture',
     'final-canonical-noop',
   ];
 }
 
 export interface LiveSmokePreMutationReviewInput {
-  readonly studioId: string;
   readonly placeName: string;
   readonly initialState: LiveSmokeInitialState;
   readonly changeSet: Readonly<RobloxChangeSet>;
@@ -133,7 +132,6 @@ export function formatLiveSmokePreMutationReview(
 ): string {
   const review = {
     review: 'Worldwright Milestone 3 live pre-mutation review',
-    studioId: input.studioId,
     unsavedPlaceName: input.placeName,
     initialState: input.initialState,
     projectId: input.changeSet.preconditions.projectId,

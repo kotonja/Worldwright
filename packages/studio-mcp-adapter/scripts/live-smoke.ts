@@ -60,7 +60,7 @@ const reservedEvidenceNames = [
   'noop.receipt.json',
   'rollback.receipt.json',
   'summary.json',
-  'viewport.png',
+  'viewport.jpg',
 ] as const;
 type ReservedEvidenceName = (typeof reservedEvidenceNames)[number];
 
@@ -202,7 +202,7 @@ function reviewedLiveSequence(
     modifiedSnapshotHash: hashRobloxSnapshot(modifiedSnapshot),
     repairChangeSetHash: hashRobloxChangeSet(repairPlan),
     faultChangeSetHash: hashRobloxChangeSet(updatePlan),
-    captureMediaType: 'image/png',
+    captureMediaType: 'image/jpeg',
     steps: [
       'initial-reconciliation',
       'canonical-noop',
@@ -210,7 +210,7 @@ function reviewedLiveSequence(
       'exact-inverse-repair',
       'post-update-fault',
       'verified-compensation',
-      'png-viewport-capture',
+      'jpeg-viewport-capture',
       'final-canonical-noop',
     ],
   };
@@ -351,7 +351,6 @@ async function run(): Promise<void> {
     }
     process.stderr.write(
       formatLiveSmokePreMutationReview({
-        studioId,
         placeName: probe.placeName,
         initialState,
         changeSet: initialPlan,
@@ -447,8 +446,8 @@ async function run(): Promise<void> {
     }
 
     const capture = await adapter.captureViewport({ captureId: 'worldwright-milestone-3' });
-    if (capture.mediaType !== 'image/png') {
-      throw new Error('Studio viewport evidence was not a PNG image.');
+    if (capture.mediaType !== sequence.envelope.captureMediaType) {
+      throw new Error('Studio viewport evidence did not match the reviewed media type.');
     }
     const viewportEvidence = createViewportEvidence(capture.mediaType, capture.bytes);
 
@@ -526,7 +525,7 @@ async function run(): Promise<void> {
       'summary.json',
       stringifyCanonicalJson(summary as JsonValue),
     );
-    await writeReservedEvidence(evidenceTargets, 'viewport.png', capture.bytes);
+    await writeReservedEvidence(evidenceTargets, 'viewport.jpg', capture.bytes);
     evidenceComplete = true;
     process.stdout.write(
       stringifyCanonicalJson({ success: true, ...summary } as unknown as JsonValue),

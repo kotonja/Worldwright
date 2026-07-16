@@ -12,6 +12,7 @@ import {
   STUDIO_MCP_MAX_PAYLOAD_BYTES,
   STUDIO_MCP_MAX_RESULT_BYTES,
   STUDIO_MCP_MAX_NODE_STATE_BYTES,
+  STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS,
 } from './constants.js';
 import {
   compareCodePoints,
@@ -33,6 +34,7 @@ import {
   isBoundedCompilerDiagnosticPointer,
   isUnsafePresentationCharacter,
 } from './privacy.js';
+import { compactSnapshotSemanticDiagnostics } from './snapshot.js';
 import {
   normalizeStudioApplyReceipt,
   normalizeStudioBridgeRequest,
@@ -46,7 +48,6 @@ import type {
   StudioBridgeRequest,
   StudioBridgeResponse,
   StudioContractValidationResult,
-  StudioRawManagedNode,
 } from './types.js';
 
 const ajv = new Ajv2020({
@@ -213,6 +214,23 @@ function requestNodeDiagnostics(
   path: string,
 ): StudioDiagnostic[] {
   const diagnostics: StudioDiagnostic[] = [];
+  const nameCodePoints = [...node.name];
+  if (
+    nameCodePoints.some((character) => {
+      const codePoint = character.codePointAt(0)!;
+      return codePoint >= 0xd800 && codePoint <= 0xdfff;
+    }) ||
+    nameCodePoints.length > STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS
+  ) {
+    diagnostics.push(
+      studioDiagnostic(
+        'studio.property_invalid',
+        `${path}/name`,
+        `Managed Instance.Name must contain at most ${STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS} Unicode scalar values.`,
+        { relatedId: node.id },
+      ),
+    );
+  }
   if (
     node.attributes.WorldwrightEntityId !== node.id ||
     node.attributes.WorldwrightEntityKind !== node.entityKind
@@ -407,109 +425,6 @@ function bridgeRequestSemanticDiagnostics(
   }
 }
 
-function rawNodeState(node: Readonly<StudioRawManagedNode>): StudioBridgeManagedNode | undefined {
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(node.stateJson) as unknown;
-  } catch {
-    return undefined;
-  }
-  return checkManagedNode(parsed) ? parsed : undefined;
-}
-
-function rawNodeDiagnostics(
-  node: Readonly<StudioRawManagedNode>,
-  projectId: string,
-  path: string,
-): StudioDiagnostic[] {
-  const diagnostics: StudioDiagnostic[] = [];
-  const state = rawNodeState(node);
-  if (state === undefined) {
-    return [
-      studioDiagnostic(
-        'studio.adapter_metadata_invalid',
-        `${path}/stateJson`,
-        'Stored node state is invalid.',
-      ),
-    ];
-  }
-  diagnostics.push(
-    ...stateIntegrityDiagnostics(
-      state,
-      node.stateJson,
-      node.stateHash,
-      `${path}/stateJson`,
-      'studio.adapter_metadata_invalid',
-    ),
-  );
-  if (node.projectId !== projectId || state.attributes.WorldwrightProjectId !== projectId) {
-    diagnostics.push(
-      studioDiagnostic(
-        'studio.project_mismatch',
-        path,
-        'Snapshot node belongs to a different project.',
-      ),
-    );
-  }
-  if (
-    node.entityId !== state.id ||
-    node.entityKind !== state.entityKind ||
-    node.className !== state.className ||
-    node.name !== state.name
-  ) {
-    diagnostics.push(
-      studioDiagnostic(
-        'studio.adapter_metadata_invalid',
-        path,
-        'Raw node identity differs from stored state.',
-      ),
-    );
-  }
-  if (node.parentKind === 'managed') {
-    if (node.parentEntityId === undefined || state.parentId !== node.parentEntityId) {
-      diagnostics.push(
-        studioDiagnostic(
-          'studio.hierarchy_invalid',
-          path,
-          'Managed parent metadata is inconsistent.',
-        ),
-      );
-    }
-  } else if (node.parentKind === 'Workspace') {
-    if (node.parentEntityId !== undefined || state.parentId !== undefined) {
-      diagnostics.push(
-        studioDiagnostic(
-          'studio.hierarchy_invalid',
-          path,
-          'Workspace root metadata is inconsistent.',
-        ),
-      );
-    }
-  }
-  if (node.className === 'Part' && node.properties.shape === undefined) {
-    diagnostics.push(
-      studioDiagnostic(
-        'studio.property_invalid',
-        `${path}/properties/shape`,
-        'Part shape is required.',
-      ),
-    );
-  }
-  if (
-    (node.className === 'WedgePart' || node.className === 'CornerWedgePart') &&
-    node.properties.shape !== undefined
-  ) {
-    diagnostics.push(
-      studioDiagnostic(
-        'studio.property_invalid',
-        `${path}/properties/shape`,
-        'Wedge classes do not carry a shape value.',
-      ),
-    );
-  }
-  return diagnostics;
-}
-
 function bridgeResponseSemanticDiagnostics(
   response: Readonly<StudioBridgeResponse>,
 ): StudioDiagnostic[] {
@@ -527,49 +442,7 @@ function bridgeResponseSemanticDiagnostics(
     ];
   }
   if (!response.ok || response.action !== 'snapshot') return [];
-  const diagnostics: StudioDiagnostic[] = [];
-  const ids = new Set<string>();
-  for (let index = 0; index < response.snapshot.nodes.length; index += 1) {
-    const node = response.snapshot.nodes[index]!;
-    const path = `/snapshot/nodes/${String(index)}`;
-    if (ids.has(node.entityId)) {
-      diagnostics.push(
-        studioDiagnostic(
-          'studio.identity_invalid',
-          `${path}/entityId`,
-          'Snapshot entity IDs must be unique.',
-        ),
-      );
-    }
-    ids.add(node.entityId);
-    diagnostics.push(...rawNodeDiagnostics(node, response.snapshot.projectId, path));
-  }
-  const unmanagedKeys = new Set<string>();
-  for (let index = 0; index < response.snapshot.unmanagedRoots.length; index += 1) {
-    const root = response.snapshot.unmanagedRoots[index]!;
-    const path = `/snapshot/unmanagedRoots/${String(index)}`;
-    if (!ids.has(root.parentEntityId)) {
-      diagnostics.push(
-        studioDiagnostic(
-          'studio.hierarchy_invalid',
-          `${path}/parentEntityId`,
-          'Unmanaged root parent is not a managed snapshot node.',
-        ),
-      );
-    }
-    const key = `${root.parentEntityId}\u0000${root.structuralPath}\u0000${String(root.ordinal)}`;
-    if (unmanagedKeys.has(key)) {
-      diagnostics.push(
-        studioDiagnostic(
-          'studio.identity_invalid',
-          path,
-          'Unmanaged structural descriptors must be unique.',
-        ),
-      );
-    }
-    unmanagedKeys.add(key);
-  }
-  return diagnostics;
+  return compactSnapshotSemanticDiagnostics(response.compactSnapshot);
 }
 
 function containsLocalPath(value: string): boolean {

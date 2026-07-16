@@ -55,8 +55,9 @@ will reject it.
 ### 5. Copy the exact Studio ID
 
 Copy the exact opaque Studio ID for the new baseplate. Do not choose by focus, window title, display
-name, active state, or list order. Keep this value only in the local terminal or untracked evidence;
-do not put it in documentation, fixtures, commits, or a pull-request body.
+name, active state, or list order. Keep this value only in the local terminal. Strict receipts may
+retain a sanitized copy, so treat those ignored files as private local evidence; do not put the ID
+or a raw receipt in documentation, fixtures, commits, or a pull-request body.
 
 The examples below use a shell placeholder:
 
@@ -130,7 +131,7 @@ Plan the same manifest again and review that it is a no-op before optionally app
 `screen_capture` is available, save evidence only to the ignored local directory:
 
 ```powershell
-pnpm studio-mcp capture --studio-id <exact-studio-id> --output .worldwright/live-milestone-3/cliffwatch.png
+pnpm studio-mcp capture --studio-id <exact-studio-id> --output .worldwright/live-milestone-3/cliffwatch.jpg
 ```
 
 A matching snapshot hash proves state convergence. A viewport capture is evidence only and does not
@@ -139,7 +140,7 @@ prove visual quality, traversal, gameplay, or performance.
 For the complete controlled live acceptance sequence, skip the manual `apply` in step 8. First run
 the no-connect review mode and inspect its complete authorization envelope. It pins the allowed
 empty-create or canonical-no-op transition, one-name update, inverse repair, controlled fault,
-compensation, PNG capture, and final no-op. Copy the complete
+compensation, JPEG capture, and final no-op. Copy the complete
 `requiredLiveSequenceConfirmationHash`, then run the selected-place flow:
 
 ```powershell
@@ -151,9 +152,10 @@ The review command performs no Studio connection or mutation. The selected-place
 the entire lowercase hash of that exact reviewed sequence. It rejects a prefix, `yes`, a manifest
 hash, a different full hash, and fixture drift before it connects. After connection it matches the
 live empty or canonical initial plan to the corresponding reviewed hash. Before mutation it prints a
-JSON-escaped review with the exact session, unsaved place, initial-state classification, operation
-counts, base hash, desired hash, expected result hash, planned change-set hash, and required
-sequence hash.
+JSON-escaped review with the unsaved place, initial-state classification, operation counts, base
+hash, desired hash, expected result hash, planned change-set hash, and required sequence hash. The
+exact Studio ID is still used privately for selection and re-selection but is omitted from this
+review.
 
 The command accepts either a completely empty managed project or the exact canonical Cliffwatch
 snapshot left by an interrupted run. It never deletes or adopts an unexpected managed state. It also
@@ -162,6 +164,10 @@ never overwrites `applied.receipt.json`, `noop.receipt.json`, `rollback.receipt.
 and removes all reservations if the run is incomplete. Archive or remove prior untracked evidence
 before an intentional rerun. This command is deliberately excluded from `pnpm check` and ordinary
 CI.
+
+Only the pre-mutation review and sanitized `summary.json` are designed for shareable review after a
+privacy check; both omit the Studio ID. The three strict receipts retain sanitized sandbox identity
+by contract and must remain private and untracked.
 
 ### Optional manual live ownership-boundary check
 
@@ -209,8 +215,9 @@ procedure is not actually run, report ownership protection as offline-tested, no
 
 Confirm that the live smoke run left the sandbox in the original canonical Cliffwatch manifest
 state. Review local evidence under `.worldwright/live-milestone-3/`, then close Studio without
-publishing the place. Keep the evidence untracked and do not commit images, Studio IDs, local paths,
-raw MCP logs, Studio output logs, usernames, machine details, or environment values.
+publishing the place. Keep raw receipts and other private evidence untracked, and do not commit
+images, Studio IDs, local paths, raw MCP logs, Studio output logs, usernames, machine details, or
+environment values.
 
 ## If a gate fails
 
