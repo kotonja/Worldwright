@@ -21,6 +21,8 @@
     "roblox-compiler": "tsx packages/roblox-compiler/src/cli.ts",
     "schema:check": "pnpm --recursive --if-present schema:check",
     "schema:generate": "pnpm --recursive --if-present schema:generate",
+    "studio-mcp": "tsx packages/studio-mcp-adapter/src/cli.ts",
+    "studio:live-smoke": "tsx packages/studio-mcp-adapter/scripts/live-smoke.ts",
     "test": "pnpm build && pnpm test:packages",
     "test:dist": "pnpm build && pnpm test:dist:packages",
     "test:dist:packages": "pnpm --recursive --if-present test:dist",

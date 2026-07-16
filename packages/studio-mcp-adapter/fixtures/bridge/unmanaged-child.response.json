@@ -1,0 +1,56 @@
+{
+  "action": "snapshot",
+  "compactSnapshot": {
+    "entityKinds": [
+      "world"
+    ],
+    "idTokens": [
+      "cliffwatch",
+      "world"
+    ],
+    "materials": [],
+    "names": [
+      [
+        0,
+        "Cliffwatch World"
+      ],
+      [
+        1,
+        "reator Content"
+      ]
+    ],
+    "nodes": [
+      [
+        [
+          1,
+          0
+        ],
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "numbers": [],
+    "projectId": "project-cliffwatch-mansion",
+    "shapes": [],
+    "sourceHashes": [
+      "90210ae55809a0e9b0ec596c301dcb047cd473f642682f5e2f376856ac7ef646"
+    ],
+    "stateHashesZ85": "*:>jdeh*C&pS&7.CmRaZwQ6Ldfi%^fC=B+EJBZ-#",
+    "unmanagedClasses": [
+      "Folder"
+    ],
+    "unmanagedRoots": [
+      [
+        0,
+        0,
+        1,
+        1
+      ]
+    ]
+  },
+  "ok": true,
+  "protocolVersion": "0.1.0"
+}

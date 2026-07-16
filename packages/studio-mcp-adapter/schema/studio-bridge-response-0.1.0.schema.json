@@ -1,0 +1,814 @@
+{
+  "$id": "urn:worldwright:studio-bridge-response:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "const": "probe",
+          "type": "string"
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        },
+        "probe": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "placeName": {
+              "minLength": 1,
+              "maxLength": 256,
+              "type": "string"
+            },
+            "placeId": {
+              "minimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            },
+            "gameId": {
+              "minimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            },
+            "isRunning": {
+              "type": "boolean"
+            },
+            "isEditAvailable": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "placeName",
+            "placeId",
+            "gameId",
+            "isRunning",
+            "isEditAvailable"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "ok",
+        "probe"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "const": "snapshot",
+          "type": "string"
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        },
+        "compactSnapshot": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "idTokens": {
+              "maxItems": 131072,
+              "type": "array",
+              "items": {
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9]+$",
+                "type": "string"
+              }
+            },
+            "names": {
+              "maxItems": 4096,
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "prefixItems": [
+                  {
+                    "minimum": 0,
+                    "maximum": 100,
+                    "type": "integer"
+                  },
+                  {
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "entityKinds": {
+              "maxItems": 13,
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "world",
+                    "type": "string"
+                  },
+                  {
+                    "const": "region",
+                    "type": "string"
+                  },
+                  {
+                    "const": "district",
+                    "type": "string"
+                  },
+                  {
+                    "const": "parcel",
+                    "type": "string"
+                  },
+                  {
+                    "const": "structure",
+                    "type": "string"
+                  },
+                  {
+                    "const": "floor",
+                    "type": "string"
+                  },
+                  {
+                    "const": "room",
+                    "type": "string"
+                  },
+                  {
+                    "const": "route",
+                    "type": "string"
+                  },
+                  {
+                    "const": "terrain",
+                    "type": "string"
+                  },
+                  {
+                    "const": "landmark",
+                    "type": "string"
+                  },
+                  {
+                    "const": "object",
+                    "type": "string"
+                  },
+                  {
+                    "const": "spawn",
+                    "type": "string"
+                  },
+                  {
+                    "const": "interaction",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "sourceHashes": {
+              "maxItems": 2048,
+              "type": "array",
+              "items": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "numbers": {
+              "maxItems": 26624,
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "materials": {
+              "maxItems": 15,
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "SmoothPlastic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Concrete",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Brick",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Wood",
+                    "type": "string"
+                  },
+                  {
+                    "const": "WoodPlanks",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Slate",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Cobblestone",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Metal",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Glass",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Neon",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Grass",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Sand",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Rock",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Marble",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Granite",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "shapes": {
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "Block",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Ball",
+                    "type": "string"
+                  },
+                  {
+                    "const": "Cylinder",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "nodes": {
+              "maxItems": 2048,
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "minItems": 6,
+                    "maxItems": 6,
+                    "prefixItems": [
+                      {
+                        "minItems": 1,
+                        "maxItems": 64,
+                        "type": "array",
+                        "items": {
+                          "minimum": 0,
+                          "maximum": 9007199254740991,
+                          "type": "integer"
+                        }
+                      },
+                      {
+                        "minimum": -1,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "const": 0,
+                            "type": "number"
+                          },
+                          {
+                            "const": 1,
+                            "type": "number"
+                          }
+                        ]
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": -1,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 22,
+                    "maxItems": 22,
+                    "prefixItems": [
+                      {
+                        "minItems": 1,
+                        "maxItems": 64,
+                        "type": "array",
+                        "items": {
+                          "minimum": 0,
+                          "maximum": 9007199254740991,
+                          "type": "integer"
+                        }
+                      },
+                      {
+                        "minimum": -1,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "const": 2,
+                        "type": "number"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": -1,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 31,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 22,
+                    "maxItems": 22,
+                    "prefixItems": [
+                      {
+                        "minItems": 1,
+                        "maxItems": 64,
+                        "type": "array",
+                        "items": {
+                          "minimum": 0,
+                          "maximum": 9007199254740991,
+                          "type": "integer"
+                        }
+                      },
+                      {
+                        "minimum": -1,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "const": 3,
+                            "type": "number"
+                          },
+                          {
+                            "const": 4,
+                            "type": "number"
+                          }
+                        ]
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": -1,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      {
+                        "minimum": 0,
+                        "maximum": 31,
+                        "type": "integer"
+                      },
+                      {
+                        "const": -1,
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "unmanagedClasses": {
+              "maxItems": 2048,
+              "type": "array",
+              "items": {
+                "minLength": 1,
+                "maxLength": 100,
+                "type": "string"
+              }
+            },
+            "unmanagedRoots": {
+              "maxItems": 2048,
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "prefixItems": [
+                  {
+                    "minimum": 0,
+                    "maximum": 9007199254740991,
+                    "type": "integer"
+                  },
+                  {
+                    "minimum": 0,
+                    "maximum": 9007199254740991,
+                    "type": "integer"
+                  },
+                  {
+                    "minimum": 0,
+                    "maximum": 9007199254740991,
+                    "type": "integer"
+                  },
+                  {
+                    "minimum": 1,
+                    "maximum": 9007199254740991,
+                    "type": "integer"
+                  }
+                ]
+              }
+            },
+            "stateHashesZ85": {
+              "maxLength": 81920,
+              "pattern": "^[0-9a-zA-Z.\\-:+=^!/*?&<>()\\[\\]{}@%$#]*$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "projectId",
+            "idTokens",
+            "names",
+            "entityKinds",
+            "sourceHashes",
+            "numbers",
+            "materials",
+            "shapes",
+            "nodes",
+            "unmanagedClasses",
+            "unmanagedRoots",
+            "stateHashesZ85"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "ok",
+        "compactSnapshot"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "anyOf": [
+            {
+              "const": "create",
+              "type": "string"
+            },
+            {
+              "const": "update",
+              "type": "string"
+            },
+            {
+              "const": "delete",
+              "type": "string"
+            }
+          ]
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        },
+        "nodeId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "ok",
+        "nodeId"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "anyOf": [
+            {
+              "const": "probe",
+              "type": "string"
+            },
+            {
+              "const": "snapshot",
+              "type": "string"
+            },
+            {
+              "const": "create",
+              "type": "string"
+            },
+            {
+              "const": "update",
+              "type": "string"
+            },
+            {
+              "const": "delete",
+              "type": "string"
+            }
+          ]
+        },
+        "ok": {
+          "const": false,
+          "type": "boolean"
+        },
+        "diagnostic": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "enum": [
+                "studio.mcp_start_failed",
+                "studio.mcp_handshake_failed",
+                "studio.tool_missing",
+                "studio.tool_schema_unsupported",
+                "studio.tool_call_failed",
+                "studio.tool_timeout",
+                "studio.response_invalid",
+                "studio.response_too_large",
+                "studio.session_not_found",
+                "studio.session_ambiguous",
+                "studio.edit_mode_required",
+                "studio.published_place_forbidden",
+                "studio.project_mismatch",
+                "studio.node_limit_exceeded",
+                "studio.operation_limit_exceeded",
+                "studio.payload_too_large",
+                "studio.identity_invalid",
+                "studio.root_invalid",
+                "studio.hierarchy_invalid",
+                "studio.class_unsupported",
+                "studio.property_invalid",
+                "studio.adapter_metadata_invalid",
+                "studio.adapter_metadata_too_large",
+                "studio.engine_state_drift",
+                "studio.unmanaged_content_protected",
+                "studio.foreign_project_protected",
+                "studio.create_failed",
+                "studio.create_cleanup_failed",
+                "studio.update_failed",
+                "studio.update_restore_failed",
+                "studio.delete_failed",
+                "studio.snapshot_invalid",
+                "studio.transaction_failed",
+                "studio.capture_unavailable",
+                "studio.capture_invalid",
+                "studio.receipt_invalid",
+                "studio.io_failed",
+                "studio.usage_invalid"
+              ]
+            },
+            "message": {
+              "minLength": 1,
+              "maxLength": 1024,
+              "type": "string"
+            },
+            "nodeId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "property": {
+              "minLength": 1,
+              "maxLength": 128,
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "ok",
+        "diagnostic"
+      ]
+    }
+  ]
+}

@@ -6,9 +6,11 @@ Milestone 1 implements the offline boundary from a valid WorldSpec `0.1.0` docum
 Roblox Manifest, deterministic dry-run planning against a Roblox Scene Snapshot, pure change-set
 simulation, and verified transactional execution through an abstract adapter.
 
-The repository includes a deterministic in-memory adapter for tests and local simulation. It does
-not include a Roblox Studio adapter, a Forge plugin, Studio MCP connectivity, live Instance
-mutation, Luau generation, assets, or a command that applies changes to a place.
+The compiler package includes a deterministic in-memory adapter for tests and local simulation. It
+does not itself connect to Studio, generate Luau, or expose a live `apply` command. Milestone 3 adds
+a separate `@worldwright/studio-mcp-adapter` package that consumes this public adapter and
+transaction boundary for one exact unsaved local Edit-mode sandbox. Forge, assets, published-place
+mutation, and gameplay testing remain outside the compiler and adapter.
 
 ## Complete data flow
 
@@ -281,15 +283,16 @@ cause is uncertain.
 protect targeted operations as they execute. The rollback admissibility guard prevents compensation
 from overwriting detected unrelated managed or unmanaged-root changes.
 
-These checks do not provide engine-level atomicity or transaction isolation. A future live adapter
-should serialize Worldwright transactions within one project scope and must treat creator edits
-during an asynchronous transaction as a concurrency hazard. If causality cannot be established from
-the attempted-operation envelope, Worldwright reports rollback failure and leaves the unrelated
-state untouched.
+These checks do not provide engine-level atomicity or transaction isolation. Any live adapter must
+serialize Worldwright transactions within one selected project scope and treat creator edits during
+an asynchronous transaction as a concurrency hazard. The Milestone 3 Studio adapter preserves that
+boundary for an exact unsaved sandbox. If causality cannot be established from the
+attempted-operation envelope, Worldwright reports rollback failure and leaves the unrelated state
+untouched.
 
 ## Adapter boundary
 
-The current interface is intentionally narrow: read the selected project snapshot, create one
+The compiler interface is intentionally narrow: read the selected project snapshot, create one
 allowlisted node, update a complete node under a full before-state precondition, and delete a
 complete before node. Every read and mutation is scoped to the project and the `Workspace` target.
 
@@ -298,16 +301,22 @@ holds independent state, preserves unmanaged roots, enforces identity, parents, 
 ordering, and ownership rules, and can model failures before a call, after mutation, incorrect
 post-apply state, and rollback failure. It is a test double, not a production Studio adapter.
 
-## Future Studio, Forge, and MCP integration
+The separate `StudioMcpRobloxAdapter` implements the same four methods through fixed bridge actions.
+It validates an exact Studio session, requires an unsaved stopped-Edit-mode sandbox, verifies actual
+engine state, and maps direct unmanaged roots. It still delegates stale checks, pure simulation,
+result verification, rollback admissibility, and compensation to this compiler executor. See
+[Studio MCP adapter architecture](studio-mcp-adapter.md).
 
-A future Roblox Studio adapter may implement the same interface by creating and updating the
+## Studio mapping and future Forge integration
+
+The Milestone 3 Roblox Studio adapter implements the same interface by creating and updating the
 allowlisted [Instance](https://create.roblox.com/docs/reference/engine/classes/Instance) and
 [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart) classes. For primitive
 rotation it must construct the equivalent of
 `CFrame.new(position) * CFrame.fromEulerAnglesXYZ(math.rad(x), math.rad(y), math.rad(z))`; parent
 transforms remain organizational in contract v0.1.
 
-That adapter is not implemented. A future use of
+A future use of
 [ChangeHistoryService](https://create.roblox.com/docs/reference/engine/classes/ChangeHistoryService)
 may complement creator undo, but it does not provide transaction isolation and cannot replace
 project-scoped serialization, snapshot preconditions, post-apply verification, rollback
@@ -317,10 +326,12 @@ Forge remains the future creator-facing Studio interface. It may present manifes
 change sets, explain conflicts, request explicit approval, and call a separately implemented live
 adapter. Forge does not exist in Milestone 1.
 
-[Studio MCP](https://create.roblox.com/docs/studio/mcp) remains a possible future transport for an
-adapter. Connectivity does not relax any contract, allowlist, ownership, hashing, or rollback rule,
-and no MCP client or server is present in this milestone.
+[Studio MCP](https://create.roblox.com/docs/studio/mcp) is the transport selected for the first live
+adapter. Connectivity does not relax any contract, allowlist, ownership, hashing, or rollback rule.
+The adapter exposes no raw Luau, supports no remote MCP transport, and refuses published or running
+places.
 
-Atlas, planners, asset routing, and The Critic are also future systems. The primitive compiler
-consumes already-authored explicit directives; it does not infer architectural layout or evaluate a
-live world.
+The Architecture Planner is implemented in a separate offline package. Atlas, broader planners,
+asset routing, live playtest observation, and The Critic remain future systems. The primitive
+compiler consumes already-authored explicit directives; neither compiler nor adapter evaluates
+gameplay or visual quality.

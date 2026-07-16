@@ -47,9 +47,10 @@ Worldwright is intended to operate as a repeated loop:
 The loop is a product direction. Milestone 0 implements the WorldSpec and canonical semantic-data
 foundation. Milestone 1 implements the offline manifest, snapshot, change-set, simulation,
 transaction, and in-memory adapter boundary for a bounded primitive subset. Milestone 2 implements
-the offline deterministic architectural blockout planner. These three foundations still do not
-constitute the complete live loop: no Roblox Studio connection or observation, gameplay execution,
-visual critique, or automated repair has occurred.
+the offline deterministic architectural blockout planner. Milestone 3 adds a deliberately bounded
+Studio MCP transaction bridge for one exact unsaved local Edit-mode sandbox. This is not the
+complete loop: no Play-mode gameplay execution, traversal evaluation, visual critique, reference
+understanding, or autonomous repair has been implemented.
 
 ## System vocabulary
 
@@ -78,8 +79,9 @@ transition from one exact snapshot to one exact desired manifest.
 
 Milestone 1 implements strict `0.1.0` contracts for these representations, an allowlisted primitive
 compiler, pure planning and simulation, an abstract transaction executor, and an in-memory test
-adapter. These are safe offline foundations for future Studio integrations; they do not create or
-modify Roblox Instances in a live place.
+adapter. The compiler remains an offline package. Milestone 3's separate Studio MCP adapter consumes
+those unchanged contracts and the public adapter interface; it does not make the compiler itself a
+live integration.
 
 ### Architecture Planner
 
@@ -89,6 +91,19 @@ Architecture Plan, and emits a compiler-ready derived WorldSpec containing deter
 blockout primitives. Its implemented topology is bounded `double_loaded_spine` planning. It does not
 infer architecture from images or unconstrained prose and does not connect to or modify Roblox
 Studio.
+
+### Studio MCP Adapter
+
+`@worldwright/studio-mcp-adapter` is the Milestone 3 live transaction bridge. It connects to Roblox
+Studio's built-in MCP server over a local stdio process, requires one exact Studio session, and may
+observe or mutate managed project contents only when both place IDs are zero and Studio is stopped
+in Edit mode.
+
+Its internal `execute_luau` use is limited to fixed `probe`, `snapshot`, `create`, `update`, and
+`delete` programs carrying schema-validated JSON. The package exposes no arbitrary Luau or Studio
+tool proxy. It verifies actual engine state, maps unmanaged roots without claiming ownership, and
+delegates stale checks, result verification, and compensation to the existing transaction executor.
+It is not a plugin, Forge, a published-place deployment path, or a playtest observer.
 
 ### Forge
 
@@ -121,9 +136,9 @@ implemented.
 The separate Cliffwatch mansion fixture is an implemented Milestone 2 architectural-program and
 blockout fixture. It begins with explicit architecture directives and proves the deterministic
 offline path through an Architecture Plan, derived WorldSpec, compiler output, reconciliation, and
-simulation. It does not understand reference media and does not include finished art, facade
-reconstruction, landscaping, lighting, interactions, gameplay validation, or live Studio
-observation.
+simulation. Milestone 3 uses its manifest as a deterministic live sandbox acceptance input, but that
+does not add reference understanding, finished art, facade reconstruction, landscaping, lighting,
+interactions, gameplay validation, traversal proof, or visual evaluation.
 
 ## Non-negotiable qualities
 
@@ -152,16 +167,22 @@ directed WorldSpec entities into a deterministic desired manifest, reconciles th
 an observed snapshot, produces and simulates a dry-run change set, and executes that plan through an
 abstract adapter with result verification and snapshot-based rollback.
 
-Milestone 2, **the deterministic architectural blockout planner**, is the current implemented
-milestone on this branch. It adds deterministic integer-grid architectural planning, separate
-reviewable Architecture Plans, walls, doors, windows, aligned stairs, explicit circulation,
-compiler-ready WorldSpec emission, compiler verification, and offline reconciliation and simulation.
-Its output is a coherent architectural blockout, not finished visual art. The only implemented
-adapter remains the in-memory test adapter.
+Milestone 2, **the deterministic architectural blockout planner**, is complete. It adds
+deterministic integer-grid architectural planning, separate reviewable Architecture Plans, walls,
+doors, windows, aligned stairs, explicit circulation, compiler-ready WorldSpec emission, compiler
+verification, and offline reconciliation and simulation. Its output is a coherent architectural
+blockout, not finished visual art.
+
+Milestone 3, **the Roblox Studio MCP transaction bridge**, is the current implementation. It adds a
+local-stdio MCP client, runtime capability checks, exact Studio-session selection, an unsaved-place
+and stopped-Edit-mode gate, fixed Luau actions, live snapshot extraction, actual engine-state and
+unmanaged-root verification, an implementation of the existing adapter interface, strict receipts,
+and optional untracked viewport evidence. A real live acceptance claim requires an actual unsaved
+Studio run and exact snapshot-hash verification; offline fake-MCP tests do not substitute for it.
 
 ## Current repository non-goals
 
-The implemented bounded Architecture Planner does not include:
+The implemented foundations and bounded Studio adapter do not include:
 
 - arbitrary, broader, or learned architectural topology generation beyond its bounded
   `double_loaded_spine` profile;
@@ -169,8 +190,9 @@ The implemented bounded Architecture Planner does not include:
 - facade reconstruction, roofs, terrain, furnishings, lighting, landscaping, or polished art;
 - asset routing, asset generation, mesh generation, terrain editing, or asset insertion;
 - Atlas, AI orchestration, or calls to OpenAI or another generation provider;
-- arbitrary Roblox class or property support, Roblox Instance serialization, or executable Luau;
-- a live Roblox Studio adapter, Studio MCP connectivity, Forge, a Studio plugin, or
+- arbitrary Roblox class or property support, unmanaged Roblox Instance serialization, or a public
+  arbitrary-Luau interface;
+- published-place or running-session mutation, remote MCP, Forge, a Studio plugin, or
   ChangeHistoryService integration;
 - live traversal, interaction, or gameplay testing;
 - The Critic, visual inspection, localized automated repair, or the complete Reference-to-Mansion
@@ -179,6 +201,8 @@ The implemented bounded Architecture Planner does not include:
   analytics; or
 - licensing or commercial packaging decisions.
 
-Those capabilities require later explicitly authorized milestones. The current repository proves
-deterministic offline semantic, planning, compiler, transaction, and simulation boundaries against
-an in-memory adapter; it makes no claim that Roblox Studio was connected to, observed, or modified.
+Those capabilities require later explicitly authorized milestones. The current repository combines
+deterministic offline semantic, planning, compiler, transaction, and simulation boundaries with one
+narrow unsaved-sandbox Studio transport. Successful state mutation is not evidence of gameplay,
+traversal, performance, or visual quality, and a live success claim is valid only when backed by an
+actual Studio run and exact canonical snapshot hashes.

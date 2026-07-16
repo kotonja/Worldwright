@@ -1,0 +1,11 @@
+{
+  "action": "snapshot",
+  "diagnostic": {
+    "code": "studio.engine_state_drift",
+    "message": "Managed instance state is invalid.",
+    "nodeId": "archgen-slab-panel-floor-ground-1-26943878e1ddda92",
+    "property": "CFrame"
+  },
+  "ok": false,
+  "protocolVersion": "0.1.0"
+}

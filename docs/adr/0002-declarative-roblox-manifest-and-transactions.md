@@ -268,10 +268,10 @@ patch release. Backward-compatible additions require a new minor contract versio
 schema artifact. Removing, narrowing, renaming, or reinterpreting fields, spatial semantics,
 ownership rules, operation semantics, or hash inputs requires a major version.
 
-Those compatibility rules begin when a contract is published. The four `0.1.0` compiler contracts
-are still unmerged and unpublished, so this review correction can replace the ambiguous transaction
-result hash field before publication while retaining the draft versions. It does not change any of
-the four JSON wire schemas and requires no migration.
+At the time of this decision, the four `0.1.0` compiler contracts were still unmerged. That allowed
+the review correction to replace the ambiguous transaction result-hash wording before acceptance
+while retaining the draft versions. It changed none of the four JSON wire schemas and required no
+migration; subsequent changes follow the compatibility rules above.
 
 WorldSpec remains independently versioned. Milestone 1 consumes WorldSpec `0.1.0` through its public
 package API and stores compiler directives in the already-open entity attributes map; it does not
