@@ -1,0 +1,10 @@
+{
+  "action": "snapshot",
+  "ok": true,
+  "protocolVersion": "0.1.0",
+  "snapshot": {
+    "nodes": [],
+    "projectId": "project-cliffwatch-mansion",
+    "unmanagedRoots": []
+  }
+}

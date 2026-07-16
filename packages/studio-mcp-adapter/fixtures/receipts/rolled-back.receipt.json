@@ -1,0 +1,37 @@
+{
+  "adapterVersion": "0.1.0",
+  "baseSnapshotHash": "2222222222222222222222222222222222222222222222222222222222222222",
+  "changeSetHash": "1111111111111111111111111111111111111111111111111111111111111111",
+  "desiredManifestHash": "3333333333333333333333333333333333333333333333333333333333333333",
+  "diagnostics": [
+    {
+      "code": "transaction.verification_failed",
+      "message": "Observed snapshot did not match the expected result.",
+      "path": "",
+      "severity": "error"
+    }
+  ],
+  "expectedResultSnapshotHash": "4444444444444444444444444444444444444444444444444444444444444444",
+  "finalSnapshotHash": "2222222222222222222222222222222222222222222222222222222222222222",
+  "observedFailureSnapshotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+  "operationsAttempted": 1,
+  "operationsPlanned": 2,
+  "projectId": "fixture-project",
+  "rollback": {
+    "attempted": true,
+    "restoredSnapshotHash": "2222222222222222222222222222222222222222222222222222222222222222",
+    "succeeded": true
+  },
+  "schemaVersion": "0.1.0",
+  "status": "failed",
+  "studio": {
+    "gameId": 0,
+    "placeId": 0,
+    "placeName": "Fixture Sandbox",
+    "studioId": "[redacted]"
+  },
+  "target": {
+    "service": "Workspace"
+  },
+  "transactionStage": "verification"
+}

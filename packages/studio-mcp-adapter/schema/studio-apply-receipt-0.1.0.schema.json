@@ -1,0 +1,715 @@
+{
+  "$id": "urn:worldwright:studio-apply-receipt:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "adapterVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "studio": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "studioId": {
+              "minLength": 1,
+              "maxLength": 256,
+              "type": "string"
+            },
+            "placeName": {
+              "minLength": 1,
+              "maxLength": 256,
+              "type": "string"
+            },
+            "placeId": {
+              "const": 0,
+              "type": "number"
+            },
+            "gameId": {
+              "const": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "studioId",
+            "placeName",
+            "placeId",
+            "gameId"
+          ]
+        },
+        "projectId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "target": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "service": {
+              "const": "Workspace",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service"
+          ]
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "baseSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "desiredManifestHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "expectedResultSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "operationsPlanned": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "operationsAttempted": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "diagnostics": {
+          "maxItems": 4099,
+          "type": "array",
+          "items": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "code": {
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+                "type": "string"
+              },
+              "severity": {
+                "anyOf": [
+                  {
+                    "const": "error",
+                    "type": "string"
+                  },
+                  {
+                    "const": "warning",
+                    "type": "string"
+                  }
+                ]
+              },
+              "path": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "message": {
+                "minLength": 1,
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "relatedId": {
+                "minLength": 1,
+                "maxLength": 128,
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "severity",
+              "path",
+              "message"
+            ]
+          }
+        },
+        "viewportEvidence": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "mediaType": {
+              "const": "image/png",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "byteLength": {
+              "minimum": 1,
+              "maximum": 16777216,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "mediaType",
+            "sha256",
+            "byteLength"
+          ]
+        },
+        "status": {
+          "const": "applied",
+          "type": "string"
+        },
+        "finalSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "adapterVersion",
+        "studio",
+        "projectId",
+        "target",
+        "changeSetHash",
+        "baseSnapshotHash",
+        "desiredManifestHash",
+        "expectedResultSnapshotHash",
+        "operationsPlanned",
+        "operationsAttempted",
+        "diagnostics",
+        "status",
+        "finalSnapshotHash"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "adapterVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "studio": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "studioId": {
+              "minLength": 1,
+              "maxLength": 256,
+              "type": "string"
+            },
+            "placeName": {
+              "minLength": 1,
+              "maxLength": 256,
+              "type": "string"
+            },
+            "placeId": {
+              "const": 0,
+              "type": "number"
+            },
+            "gameId": {
+              "const": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "studioId",
+            "placeName",
+            "placeId",
+            "gameId"
+          ]
+        },
+        "projectId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "target": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "service": {
+              "const": "Workspace",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service"
+          ]
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "baseSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "desiredManifestHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "expectedResultSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "operationsPlanned": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "operationsAttempted": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "diagnostics": {
+          "maxItems": 4099,
+          "type": "array",
+          "items": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "code": {
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+                "type": "string"
+              },
+              "severity": {
+                "anyOf": [
+                  {
+                    "const": "error",
+                    "type": "string"
+                  },
+                  {
+                    "const": "warning",
+                    "type": "string"
+                  }
+                ]
+              },
+              "path": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "message": {
+                "minLength": 1,
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "relatedId": {
+                "minLength": 1,
+                "maxLength": 128,
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "severity",
+              "path",
+              "message"
+            ]
+          }
+        },
+        "viewportEvidence": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "mediaType": {
+              "const": "image/png",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "byteLength": {
+              "minimum": 1,
+              "maximum": 16777216,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "mediaType",
+            "sha256",
+            "byteLength"
+          ]
+        },
+        "status": {
+          "const": "noop",
+          "type": "string"
+        },
+        "finalSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "adapterVersion",
+        "studio",
+        "projectId",
+        "target",
+        "changeSetHash",
+        "baseSnapshotHash",
+        "desiredManifestHash",
+        "expectedResultSnapshotHash",
+        "operationsPlanned",
+        "operationsAttempted",
+        "diagnostics",
+        "status",
+        "finalSnapshotHash"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "adapterVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "studio": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "studioId": {
+              "minLength": 1,
+              "maxLength": 256,
+              "type": "string"
+            },
+            "placeName": {
+              "minLength": 1,
+              "maxLength": 256,
+              "type": "string"
+            },
+            "placeId": {
+              "const": 0,
+              "type": "number"
+            },
+            "gameId": {
+              "const": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "studioId",
+            "placeName",
+            "placeId",
+            "gameId"
+          ]
+        },
+        "projectId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "target": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "service": {
+              "const": "Workspace",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service"
+          ]
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "baseSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "desiredManifestHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "expectedResultSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "operationsPlanned": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "operationsAttempted": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "diagnostics": {
+          "maxItems": 4099,
+          "type": "array",
+          "items": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "code": {
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+                "type": "string"
+              },
+              "severity": {
+                "anyOf": [
+                  {
+                    "const": "error",
+                    "type": "string"
+                  },
+                  {
+                    "const": "warning",
+                    "type": "string"
+                  }
+                ]
+              },
+              "path": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "message": {
+                "minLength": 1,
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "relatedId": {
+                "minLength": 1,
+                "maxLength": 128,
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "severity",
+              "path",
+              "message"
+            ]
+          }
+        },
+        "viewportEvidence": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "mediaType": {
+              "const": "image/png",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "byteLength": {
+              "minimum": 1,
+              "maximum": 16777216,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "mediaType",
+            "sha256",
+            "byteLength"
+          ]
+        },
+        "status": {
+          "const": "failed",
+          "type": "string"
+        },
+        "transactionStage": {
+          "anyOf": [
+            {
+              "const": "change-set-validation",
+              "type": "string"
+            },
+            {
+              "const": "snapshot-read",
+              "type": "string"
+            },
+            {
+              "const": "snapshot-validation",
+              "type": "string"
+            },
+            {
+              "const": "stale-check",
+              "type": "string"
+            },
+            {
+              "const": "preflight",
+              "type": "string"
+            },
+            {
+              "const": "apply",
+              "type": "string"
+            },
+            {
+              "const": "verification",
+              "type": "string"
+            }
+          ]
+        },
+        "rollback": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "attempted": {
+                  "const": false,
+                  "type": "boolean"
+                },
+                "succeeded": {
+                  "const": false,
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "attempted",
+                "succeeded"
+              ]
+            },
+            {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "attempted": {
+                  "const": true,
+                  "type": "boolean"
+                },
+                "succeeded": {
+                  "const": true,
+                  "type": "boolean"
+                },
+                "restoredSnapshotHash": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "attempted",
+                "succeeded",
+                "restoredSnapshotHash"
+              ]
+            },
+            {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "attempted": {
+                  "const": true,
+                  "type": "boolean"
+                },
+                "succeeded": {
+                  "const": false,
+                  "type": "boolean"
+                },
+                "diagnostics": {
+                  "minItems": 1,
+                  "maxItems": 4099,
+                  "type": "array",
+                  "items": {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "minLength": 1,
+                        "maxLength": 128,
+                        "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+                        "type": "string"
+                      },
+                      "severity": {
+                        "anyOf": [
+                          {
+                            "const": "error",
+                            "type": "string"
+                          },
+                          {
+                            "const": "warning",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "path": {
+                        "maxLength": 1024,
+                        "type": "string"
+                      },
+                      "message": {
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "type": "string"
+                      },
+                      "relatedId": {
+                        "minLength": 1,
+                        "maxLength": 128,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "code",
+                      "severity",
+                      "path",
+                      "message"
+                    ]
+                  }
+                },
+                "observedAfterRollbackSnapshotHash": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "attempted",
+                "succeeded",
+                "diagnostics"
+              ]
+            }
+          ]
+        },
+        "observedFailureSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "finalSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "adapterVersion",
+        "studio",
+        "projectId",
+        "target",
+        "changeSetHash",
+        "baseSnapshotHash",
+        "desiredManifestHash",
+        "expectedResultSnapshotHash",
+        "operationsPlanned",
+        "operationsAttempted",
+        "diagnostics",
+        "status",
+        "transactionStage",
+        "rollback"
+      ]
+    }
+  ]
+}

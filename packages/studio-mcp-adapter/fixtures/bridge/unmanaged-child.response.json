@@ -1,0 +1,33 @@
+{
+  "action": "snapshot",
+  "ok": true,
+  "protocolVersion": "0.1.0",
+  "snapshot": {
+    "nodes": [
+      {
+        "adapterVersion": "0.1.0",
+        "className": "Folder",
+        "compilerVersion": "0.1.0",
+        "entityId": "world-cliffwatch",
+        "entityKind": "world",
+        "name": "Cliffwatch World",
+        "parentKind": "Workspace",
+        "projectId": "project-cliffwatch-mansion",
+        "properties": {},
+        "sourceHash": "87c7371aa6e23efe131cb9434d74bb6e517e326258f13dd46f618aac4cbaa0b5",
+        "stateHash": "ea4197b4282db176c12fadd62dd727a536ffd7c46da8078bbbed537d787114c3",
+        "stateJson": "{\n  \"attributes\": {\n    \"WorldwrightCompilerVersion\": \"0.1.0\",\n    \"WorldwrightEntityId\": \"world-cliffwatch\",\n    \"WorldwrightEntityKind\": \"world\",\n    \"WorldwrightManaged\": true,\n    \"WorldwrightProjectId\": \"project-cliffwatch-mansion\",\n    \"WorldwrightSourceHash\": \"87c7371aa6e23efe131cb9434d74bb6e517e326258f13dd46f618aac4cbaa0b5\"\n  },\n  \"className\": \"Folder\",\n  \"entityKind\": \"world\",\n  \"id\": \"world-cliffwatch\",\n  \"name\": \"Cliffwatch World\",\n  \"properties\": {}\n}\n"
+      }
+    ],
+    "projectId": "project-cliffwatch-mansion",
+    "unmanagedRoots": [
+      {
+        "className": "Folder",
+        "name": "Creator Content",
+        "ordinal": 1,
+        "parentEntityId": "world-cliffwatch",
+        "structuralPath": "world-cliffwatch/1/Folder/Creator Content"
+      }
+    ]
+  }
+}

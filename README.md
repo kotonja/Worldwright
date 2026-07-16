@@ -3,9 +3,10 @@
 Worldwright is an AI World Architect for compiling human intent and references into coherent,
 editable, testable, and performance-aware Roblox worlds.
 
-> **Status:** Milestones 0 and 1 are complete. Milestone 2 is the current implementation: a
-> deterministic architectural blockout planner that compiles a bounded room program through the
-> existing offline Roblox pipeline. There is no live Roblox Studio integration.
+> **Status:** Milestones 0, 1, and 2 are complete. Milestone 3 is the current implementation: a
+> deliberately bounded transaction bridge to Roblox Studio's built-in MCP server. **It may read or
+> mutate managed project state only in a new unsaved local place (`PlaceId == 0`, `GameId == 0`),
+> stopped in Edit mode, and selected by its exact Studio ID.**
 
 ## Product principles
 
@@ -72,12 +73,32 @@ The planner produces a coherent, editable architectural blockout. It is not fini
 does not claim building-code compliance, and does not infer unspecified architecture from prose or
 images.
 
+Milestone 3 adds the private `@worldwright/studio-mcp-adapter` package:
+
+- a pinned MCP v1 client that starts Roblox Studio's built-in server over local stdio only;
+- runtime discovery and schema validation for required Studio tools;
+- exact Studio-session selection and an unsaved-local-sandbox, stopped-Edit-mode gate;
+- fixed `probe`, `snapshot`, `create`, `update`, and `delete` Luau bridge programs with inert
+  schema-validated JSON payloads;
+- live conversion of managed Instances into the existing compiler Scene Snapshot contract;
+- structural unmanaged-root mapping and protection for creator-owned and foreign-project content;
+- canonical per-node adapter metadata plus verification against actual engine properties;
+- an implementation of the existing compiler `RobloxAdapter` interface, using the existing
+  `applyRobloxChangeSet` executor for stale checks, simulation, exact result verification, and
+  compensation;
+- strict deterministic Studio Apply Receipts and optional untracked viewport evidence; and
+- a dependency-light CLI, fake-MCP test boundary, generated schemas, and live acceptance runner.
+
+The public package API and CLI cannot accept raw Luau, arbitrary Studio tool calls, arbitrary Roblox
+classes or properties, scripts, assets, network endpoints, or a published-place bypass. Enabling
+Studio MCP remains privileged; creators should connect only trusted clients.
+
 ## Not implemented yet
 
-There is no live Roblox Studio adapter, Studio MCP connectivity, plugin, Forge interface,
-ChangeHistoryService integration, or CLI apply command. Atlas orchestration, learned or
-reference-image architectural generation, asset routing or generation, The Critic, and a polished
-Reference-to-Mansion vertical slice remain future work.
+There is no Studio plugin, Forge interface, ChangeHistoryService integration, published-place
+mutation, Play-mode automation, gameplay or traversal evaluation, or visual critique. Atlas
+orchestration, learned or reference-image architectural generation, asset routing or generation, The
+Critic, and a polished Reference-to-Mansion vertical slice remain future work.
 
 The repository makes no external generation or AI calls and contains no production service,
 database, authentication, telemetry, analytics, or deployment integration.
@@ -91,14 +112,19 @@ database, authentication, telemetry, analytics, or deployment integration.
 |   |-- adr/
 |   |   |-- 0001-worldspec-as-canonical-contract.md
 |   |   |-- 0002-declarative-roblox-manifest-and-transactions.md
-|   |   `-- 0003-deterministic-orthogonal-architecture-planning.md
+|   |   |-- 0003-deterministic-orthogonal-architecture-planning.md
+|   |   `-- 0004-use-studio-mcp-for-the-first-live-adapter.md
 |   |-- architecture/
 |   |   |-- architecture-planner.md
 |   |   |-- roblox-compiler.md
+|   |   |-- studio-mcp-adapter.md
 |   |   `-- system-overview.md
 |   |-- architecture-planner/0.1.0.md
 |   |-- product/vision.md
 |   |-- roblox-compiler/0.1.0.md
+|   |-- studio-mcp-adapter/
+|   |   |-- 0.1.0.md
+|   |   `-- sandbox-setup.md
 |   `-- worldspec/0.1.0.md
 |-- packages/
 |   |-- architecture-planner/
@@ -113,6 +139,12 @@ database, authentication, telemetry, analytics, or deployment integration.
 |   |   |-- scripts/              # Schema, fixture, and compiled-CLI drift/smoke checks
 |   |   |-- src/                  # Compile, validate, plan, simulate, transact, CLI
 |   |   `-- test/                 # Unit, integration, transaction, and CLI tests
+|   |-- studio-mcp-adapter/
+|   |   |-- fixtures/             # Deterministic bridge and receipt examples
+|   |   |-- schema/               # Generated bridge and receipt schemas
+|   |   |-- scripts/              # Schema, dist, and explicit live-smoke entry points
+|   |   |-- src/                  # MCP boundary, fixed bridge, adapter, receipts, capture, CLI
+|   |   `-- test/                 # Fake-MCP, engine, transaction, receipt, and CLI tests
 |   `-- worldspec/
 |       |-- fixtures/             # Valid and intentionally invalid semantic examples
 |       |-- schema/               # Generated WorldSpec schema
@@ -161,14 +193,17 @@ version.
 | `pnpm worldspec`            | Run the WorldSpec CLI.                                                                             |
 | `pnpm roblox-compiler`      | Run the offline Roblox compiler CLI.                                                               |
 | `pnpm architecture-planner` | Run the offline architectural blockout planner CLI.                                                |
+| `pnpm studio-mcp`           | Run the bounded local Studio MCP adapter CLI.                                                      |
+| `pnpm studio:live-smoke`    | Run explicit real-Studio acceptance in an unsaved sandbox; excluded from `pnpm check` and CI.      |
 | `pnpm check`                | Run formatting, lint, build, type, tests, schema and fixture drift, and distribution smoke checks. |
 
-The root fixture commands currently cover generated artifacts owned by the Roblox compiler and
-Architecture Planner. Authored fixture inputs remain unchanged and are never generated.
+The root fixture commands cover generated artifacts owned by the Roblox compiler, Architecture
+Planner, and Studio MCP Adapter. Authored fixture inputs remain unchanged and are never generated.
 
-CI runs `pnpm check` with Node.js 22 for pull requests, pushes to `main`, and manual dispatches.
-Generated `dist` directories remain uncommitted; deterministic schema and fixture artifacts are
-checked in.
+CI runs `pnpm check` with Node.js 22 for pull requests, pushes to `main`, and manual dispatches. It
+uses fake MCP clients and requires no Studio installation. Generated `dist` directories remain
+uncommitted; deterministic schema and fixture artifacts are checked in. Live receipts and images
+remain under the ignored `.worldwright/` directory.
 
 ## WorldSpec CLI
 
@@ -241,18 +276,60 @@ cliffwatch-mansion-program.worldspec.json
 See the [Architecture Planner v0.1 reference](docs/architecture-planner/0.1.0.md) for its supported
 profile, coordinate model, contracts, diagnostics, security boundary, and limitations.
 
+## Studio MCP adapter CLI
+
+Start with a new unsaved Roblox Studio baseplate, enable Studio's built-in MCP server, leave Studio
+stopped in Edit mode, and list the connected sessions:
+
+```sh
+pnpm studio-mcp probe
+```
+
+Copy the exact Studio ID. Plan against the checked-in Cliffwatch manifest, review the complete
+change set, and apply it only with its full lowercase SHA-256 confirmation hash:
+
+```sh
+pnpm studio-mcp plan-live --studio-id <exact-studio-id> --manifest packages/architecture-planner/fixtures/manifest/cliffwatch-mansion-blockout.manifest.json --output .worldwright/live-milestone-3/cliffwatch.change-set.json
+pnpm studio-mcp apply --studio-id <exact-studio-id> --change-set .worldwright/live-milestone-3/cliffwatch.change-set.json --confirm <full-change-set-sha256> --receipt-output .worldwright/live-milestone-3/applied.receipt.json
+pnpm studio-mcp verify --studio-id <exact-studio-id> --manifest packages/architecture-planner/fixtures/manifest/cliffwatch-mansion-blockout.manifest.json
+```
+
+`plan-live` and `apply` are intentionally separate. Mutation never auto-selects a session, and there
+is no `--force`, `--yes`, production-place bypass, custom MCP command, or raw Luau option. The
+package generates only its audited fixed bridge actions.
+
+Alternatively, use the complete real-Studio acceptance sequence instead of the manual `apply` above.
+First print and review the offline sequence envelope. It pins the allowed create or canonical no-op,
+one-node update, inverse repair, controlled fault, PNG capture, and final no-op hashes without
+connecting to Studio. Then pass that envelope's complete hash explicitly:
+
+```sh
+pnpm studio:live-smoke -- --review
+pnpm studio:live-smoke -- --studio-id <exact-studio-id> --confirm <full-reviewed-live-sequence-sha256>
+```
+
+Follow the [sandbox setup guide](docs/studio-mcp-adapter/sandbox-setup.md). Do not test against an
+existing or published place, and do not commit the Studio ID, receipts, image, local paths, or raw
+logs. The acceptance command rejects prefixes and implicit approval, matches the live initial plan
+to one reviewed transition, prints the complete selected-place plan before mutation, and reserves
+all evidence outputs exclusively before it connects or mutates.
+
 ## Documentation
 
 - [Product vision](docs/product/vision.md)
 - [System overview](docs/architecture/system-overview.md)
 - [Roblox compiler architecture](docs/architecture/roblox-compiler.md)
 - [Architecture planner](docs/architecture/architecture-planner.md)
+- [Studio MCP adapter architecture](docs/architecture/studio-mcp-adapter.md)
 - [ADR 0001: WorldSpec is the canonical cross-system contract](docs/adr/0001-worldspec-as-canonical-contract.md)
 - [ADR 0002: Use a declarative Roblox manifest and transactional reconciliation](docs/adr/0002-declarative-roblox-manifest-and-transactions.md)
 - [ADR 0003: Use deterministic orthogonal planning before learned architectural generation](docs/adr/0003-deterministic-orthogonal-architecture-planning.md)
+- [ADR 0004: Use Roblox Studio MCP for the first live adapter](docs/adr/0004-use-studio-mcp-for-the-first-live-adapter.md)
 - [WorldSpec v0.1 reference](docs/worldspec/0.1.0.md)
 - [Roblox compiler v0.1 reference](docs/roblox-compiler/0.1.0.md)
 - [Architecture Planner v0.1 reference](docs/architecture-planner/0.1.0.md)
+- [Studio MCP Adapter v0.1 reference](docs/studio-mcp-adapter/0.1.0.md)
+- [Studio MCP sandbox setup](docs/studio-mcp-adapter/sandbox-setup.md)
 
 ## Roadmap
 
@@ -262,13 +339,17 @@ profile, coordinate model, contracts, diagnostics, security boundary, and limita
    snapshots, dry-run change sets, pure simulation, and verified adapter transactions (Milestone 1,
    complete; offline only).
 3. **Architectural blockout planner** - produce spatially coherent structure, floor, room, and route
-   plans under constraints using a deterministic bounded topology (Milestone 2, current
-   implementation; offline only).
-4. **Studio MCP closed-loop testing** - implement a separately authorized live adapter, observe
-   compiled results, exercise them in Studio, and feed structured findings into repair.
-5. **Reference understanding** - extract evidence and style signals from images, plans, sketches,
+   plans under constraints using a deterministic bounded topology (Milestone 2, complete; offline
+   only).
+4. **Studio MCP transaction bridge** - select one exact unsaved local Edit-mode sandbox, observe and
+   verify managed state, apply confirmed change sets through fixed bridge actions, compensate
+   safely, and record sanitized evidence (Milestone 3, current implementation).
+5. **Live playtest observation and critique** - exercise traversal and interactions under separate
+   authorization, collect structured evidence, and introduce The Critic without confusing a
+   successful transaction with quality evaluation.
+6. **Reference understanding** - extract evidence and style signals from images, plans, sketches,
    heightmaps, text, and existing places while preserving provenance.
-6. **Reference-to-Mansion vertical slice** - integrate the system to produce and iteratively improve
+7. **Reference-to-Mansion vertical slice** - integrate the system to produce and iteratively improve
    a complete mansion, interior, site, landscaping, lighting, interactions, and traversal.
 
-Roadmap items after the architectural blockout planner describe direction, not current capability.
+Roadmap items after the Studio MCP transaction bridge describe direction, not current capability.

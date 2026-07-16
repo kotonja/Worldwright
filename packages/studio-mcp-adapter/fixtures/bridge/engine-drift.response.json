@@ -1,0 +1,58 @@
+{
+  "action": "snapshot",
+  "ok": true,
+  "protocolVersion": "0.1.0",
+  "snapshot": {
+    "nodes": [
+      {
+        "adapterVersion": "0.1.0",
+        "className": "Part",
+        "compilerVersion": "0.1.0",
+        "entityId": "archgen-slab-panel-floor-ground-1-26943878e1ddda92",
+        "entityKind": "object",
+        "name": "Slab Panel 0-1",
+        "parentEntityId": "archgen-slab-group-floor-ground",
+        "parentKind": "managed",
+        "projectId": "project-cliffwatch-mansion",
+        "properties": {
+          "anchored": true,
+          "canCollide": true,
+          "canQuery": true,
+          "canTouch": true,
+          "castShadow": true,
+          "cframe": [
+            320.25,
+            63.5,
+            -180,
+            6.123233995736766e-17,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            6.123233995736766e-17
+          ],
+          "color": [
+            0.403921568627451,
+            0.2980392156862745,
+            0.2196078431372549
+          ],
+          "material": "WoodPlanks",
+          "shape": "Block",
+          "size": [
+            160,
+            1,
+            90
+          ],
+          "transparency": 0
+        },
+        "stateHash": "df3b238e2c82a5038c20d10cce450416a97bdc803dbbc585d07c592f8fd6fd62",
+        "stateJson": "{\n  \"attributes\": {\n    \"WorldwrightCompilerVersion\": \"0.1.0\",\n    \"WorldwrightEntityId\": \"archgen-slab-panel-floor-ground-1-26943878e1ddda92\",\n    \"WorldwrightEntityKind\": \"object\",\n    \"WorldwrightManaged\": true,\n    \"WorldwrightProjectId\": \"project-cliffwatch-mansion\"\n  },\n  \"className\": \"Part\",\n  \"entityKind\": \"object\",\n  \"id\": \"archgen-slab-panel-floor-ground-1-26943878e1ddda92\",\n  \"name\": \"Slab Panel 0-1\",\n  \"parentId\": \"archgen-slab-group-floor-ground\",\n  \"properties\": {\n    \"anchored\": true,\n    \"canCollide\": true,\n    \"canQuery\": true,\n    \"canTouch\": true,\n    \"castShadow\": true,\n    \"color\": {\n      \"b\": 56,\n      \"g\": 76,\n      \"r\": 103\n    },\n    \"material\": \"WoodPlanks\",\n    \"position\": {\n      \"x\": 320,\n      \"y\": 63.5,\n      \"z\": -180\n    },\n    \"rotationEulerDegreesXYZ\": {\n      \"x\": 0,\n      \"y\": 90,\n      \"z\": 0\n    },\n    \"shape\": \"Block\",\n    \"size\": {\n      \"x\": 160,\n      \"y\": 1,\n      \"z\": 90\n    },\n    \"transparency\": 0\n  }\n}\n"
+      }
+    ],
+    "projectId": "project-cliffwatch-mansion",
+    "unmanagedRoots": []
+  }
+}

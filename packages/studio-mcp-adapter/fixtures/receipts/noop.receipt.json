@@ -1,0 +1,23 @@
+{
+  "adapterVersion": "0.1.0",
+  "baseSnapshotHash": "2222222222222222222222222222222222222222222222222222222222222222",
+  "changeSetHash": "1111111111111111111111111111111111111111111111111111111111111111",
+  "desiredManifestHash": "3333333333333333333333333333333333333333333333333333333333333333",
+  "diagnostics": [],
+  "expectedResultSnapshotHash": "2222222222222222222222222222222222222222222222222222222222222222",
+  "finalSnapshotHash": "2222222222222222222222222222222222222222222222222222222222222222",
+  "operationsAttempted": 0,
+  "operationsPlanned": 0,
+  "projectId": "fixture-project",
+  "schemaVersion": "0.1.0",
+  "status": "noop",
+  "studio": {
+    "gameId": 0,
+    "placeId": 0,
+    "placeName": "Fixture Sandbox",
+    "studioId": "[redacted]"
+  },
+  "target": {
+    "service": "Workspace"
+  }
+}

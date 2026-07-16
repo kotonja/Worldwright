@@ -1,0 +1,50 @@
+{
+  "name": "@worldwright/studio-mcp-adapter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sandbox-only Roblox Studio MCP transaction adapter for Worldwright.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "default": "./dist/testing.js"
+    }
+  },
+  "bin": {
+    "studio-mcp": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "fixture:check": "tsx scripts/check-fixtures.ts",
+    "fixture:generate": "tsx scripts/generate-fixtures.ts",
+    "schema:check": "tsx scripts/check-schemas.ts",
+    "schema:generate": "tsx scripts/generate-schemas.ts",
+    "test": "vitest run",
+    "test:dist": "tsx scripts/check-dist.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "studio-mcp": "tsx src/cli.ts",
+    "live:smoke": "tsx scripts/live-smoke.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "@sinclair/typebox": "0.34.38",
+    "@worldwright/roblox-compiler": "workspace:*",
+    "ajv": "8.17.1",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "@worldwright/architecture-planner": "workspace:*",
+    "tsx": "4.20.3",
+    "vitest": "3.2.4"
+  }
+}

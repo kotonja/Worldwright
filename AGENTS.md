@@ -21,6 +21,11 @@ text-to-random-parts or text-to-mesh toy.
   desired manifest.
 - **The Roblox compiler** is the Milestone 1 offline compiler, reconciler, simulator, transaction
   protocol, and in-memory test adapter. It is not a live Studio integration.
+- **The Studio MCP Adapter** is the Milestone 3 local-stdio, unsaved-sandbox, Edit-mode bridge from
+  the existing `RobloxAdapter` interface to one exact Roblox Studio session. It is not a general
+  Luau or Studio automation API.
+- **Studio Apply Receipt** is the strict, sanitized record of an observed Studio transaction
+  outcome. It is not mutation authorization, a digital signature, or visual-quality proof.
 - **Forge** is the future Roblox Studio creator interface.
 - **The Critic** is the future evaluation and localized-repair system.
 
@@ -63,6 +68,23 @@ Do not describe future systems as implemented.
   with every compiler contract or behavior change.
 - `docs/architecture-planner/0.1.0.md` documents the published planner contracts and behavior.
   Update it with every architecture directive, plan, solver, geometry, or emission change.
+- `packages/studio-mcp-adapter/src/contract-schema.ts` is the source for the Studio Apply Receipt
+  and fixed Studio bridge schemas and their schema-derived static types;
+  `src/bridge/protocol-schema.ts` exposes the bridge-specific boundary. Corresponding
+  `packages/studio-mcp-adapter/schema/*.schema.json` files are generated and must never be
+  hand-edited.
+- `packages/studio-mcp-adapter/src/mcp/command.ts`, `capabilities.ts`, `session.ts`, and `client.ts`
+  define local process resolution, tool discovery, exact Studio selection, and the isolated MCP SDK
+  boundary.
+- `packages/studio-mcp-adapter/src/bridge/program.ts` and the action-specific bridge builders define
+  the only fixed Luau programs Worldwright may send: `probe`, `snapshot`, `create`, `update`, and
+  `delete`. Never expose their source or accept caller-supplied Luau.
+- `packages/studio-mcp-adapter/src/engine-state.ts`, `snapshot.ts`, and `adapter.ts` define actual
+  engine verification, unmanaged-root observation, and the implementation of the existing compiler
+  adapter interface. Transaction safety remains in the compiler's `applyRobloxChangeSet`.
+- `docs/studio-mcp-adapter/0.1.0.md` documents the published adapter, bridge, receipt, CLI, sandbox,
+  security, and limitation behavior. Update it with every Studio adapter contract or behavior
+  change.
 - The root `package.json` `packageManager` field and `pnpm-lock.yaml` define the package-manager
   version and dependency resolution.
 
@@ -88,8 +110,8 @@ Use the root scripts:
 - `pnpm schema:generate` - regenerate checked-in JSON Schemas for all schema-owning packages.
 - `pnpm schema:check` - fail if any generated schema artifact has drifted.
 - `pnpm fixture:generate` - regenerate deterministic generated fixture artifacts for every package
-  that owns generated fixtures, currently the Roblox compiler and Architecture Planner; authored
-  fixture inputs remain unchanged.
+  that owns generated fixtures, currently the Roblox compiler, Architecture Planner, and Studio MCP
+  Adapter; authored fixture inputs remain unchanged.
 - `pnpm fixture:check` - fail when any generated fixture artifact differs from its deterministic
   generator output.
 - `pnpm worldspec <command>` - run the WorldSpec CLI, for example `pnpm worldspec validate ...`.
@@ -97,6 +119,13 @@ Use the root scripts:
   `pnpm roblox-compiler compile ...`.
 - `pnpm architecture-planner <command>` - run the offline planner CLI, for example
   `pnpm architecture-planner build ...`.
+- `pnpm studio-mcp <command>` - run the bounded Studio adapter CLI, for example
+  `pnpm studio-mcp probe`.
+- `pnpm studio:live-smoke -- --review` - print the offline reviewed live-sequence envelope and its
+  full authorization hash without connecting to Studio.
+- `pnpm studio:live-smoke -- --studio-id <id> --confirm <full-reviewed-live-sequence-sha256>` - run
+  that exact separate real-Studio acceptance flow in a new unsaved local sandbox. This command is
+  intentionally excluded from `pnpm check` and CI.
 - `pnpm check` - run formatting, linting, build, type checks, tests, schema and fixture drift
   checks, and compiled-distribution smoke tests for all packages.
 
@@ -167,6 +196,44 @@ Use the root scripts:
 - Keep production adapter interfaces narrow and allowlisted. The in-memory adapter belongs under the
   testing export and must not be presented as a Studio adapter.
 
+## Studio MCP adapter rules
+
+- Support only Roblox Studio's built-in MCP server over a locally started stdio process. Do not add
+  Streamable HTTP, SSE, TCP, remote URLs, downloaded servers, registry discovery, or arbitrary CLI
+  commands.
+- Treat MCP as a privileged local capability. Validate discovered schemas for `list_roblox_studios`,
+  `set_active_studio`, `get_studio_state`, and `execute_luau` before use, and validate every bounded
+  tool result. Never silently guess arguments for an incompatible tool.
+- Require an exact discovered Studio ID for every mutating command, even when one Studio is
+  connected. Do not select by focus, display name, active status, or list order.
+- Read managed project state or mutate only in a new unsaved local sandbox with `PlaceId == 0`,
+  `GameId == 0`, and Studio stopped in Edit mode. Never add a published-place or running-session
+  bypass.
+- Generate Luau only from the audited fixed `probe`, `snapshot`, `create`, `update`, and `delete`
+  bridge builders plus schema-validated JSON and deterministic safe literal encoding. Never expose
+  raw `execute_luau`, arbitrary MCP tool calls, dynamic evaluation, script creation, arbitrary
+  classes, generic property setters, generic attribute setters, assets, or network access.
+- Treat the public managed attributes and canonical adapter-owned node-state metadata as necessary
+  but insufficient evidence. Verify actual class, name, direct parent, public attributes, and every
+  allowlisted engine property before returning a snapshot or targeting an operation. Drift fails
+  closed and is never silently adopted.
+- Preserve unmanaged and foreign-project roots. The required bounded snapshot scan may inspect only
+  hierarchy, class, and ownership attributes to detect selected-project nodes outside their root; it
+  records only direct structural boundaries and never reads source/content or serializes a protected
+  subtree. Mutation lookup must start at direct `Workspace` roots and descend only through the exact
+  selected-project managed lineage. Never attribute, rename, move, clone, or destroy protected
+  content, and block destructive changes to protected managed lineages.
+- Implement only the existing `RobloxAdapter` methods and call the compiler's
+  `applyRobloxChangeSet`. Do not duplicate stale checks, simulation, rollback admissibility,
+  compensation, or result verification in the MCP package.
+- Bound operations, managed nodes, payloads, results, tool-call durations, image content, and
+  adapter metadata. Sanitize diagnostics and receipts; never expose raw Luau, MCP messages, Studio
+  output, stderr, credentials, machine paths, usernames, or environment dumps.
+- Keep viewport captures, receipts, and sanitized live summaries under
+  `.worldwright/live-milestone-3/` and untracked. A capture is evidence, not a visual-quality claim.
+- Do not call ChangeHistoryService. The MCP bridge is not a plugin, Studio undo is not transaction
+  isolation, and a future Forge history recording cannot replace snapshot verification.
+
 ## Tests and documentation
 
 - Every behavior change requires focused tests and corresponding documentation.
@@ -182,6 +249,15 @@ Use the root scripts:
 - Transaction behavior requires tests for success, no-op, stale rejection before mutation, failures
   before and after mutation, verification mismatch, verified rollback, rollback failure,
   unmanaged-descendant protection, and deterministic attempted-operation order.
+- Studio adapter behavior requires fake-MCP tests for command resolution, capability schema
+  compatibility, exact session selection, sandbox rejection, adversarial literal encoding, response
+  framing, engine drift, empty and populated snapshots, unmanaged and foreign-project boundaries,
+  create/update/delete failure cleanup, existing transaction compensation, receipts, capture,
+  process cleanup, CLI confirmation, operation bounds, and sanitization. CI must not require Studio.
+- A live Studio success claim requires an actual run against one unsaved local Edit-mode sandbox,
+  exact canonical snapshot hash comparisons, tested ownership boundaries, verified no-op and update
+  repair, verified controlled-failure compensation, and untracked evidence. Fake-client tests do not
+  prove live acceptance.
 - Before claiming completion, run `pnpm check`. Also run a narrower command while iterating when it
   gives faster feedback.
 - Report every failed or skipped check honestly. Never claim a command passed unless it ran
@@ -191,9 +267,9 @@ Use the root scripts:
 
 - Never commit secrets, credentials, tokens, personal data, or private reference content.
 - No hidden network calls, telemetry, or analytics.
-- Do not add an AI provider, live Roblox Studio adapter, Studio MCP integration, Forge plugin,
-  external generation provider, database, authentication system, or production service without an
-  explicit milestone authorizing it.
+- Do not add an AI provider, another live Roblox integration, Forge plugin, external generation
+  provider, database, authentication system, or production service without an explicit milestone
+  authorizing it. Milestone 3 authorizes only the bounded local Studio MCP adapter described above.
 - WorldSpec is data only. Never accept or introduce arbitrary executable code, provider credentials,
   or chain-of-thought fields.
 - Roblox compiler contracts are data only. Never introduce scripts, dynamic evaluation, arbitrary
@@ -201,6 +277,9 @@ Use the root scripts:
 - Architecture contracts are data only. Never accept executable source, provider credentials, unsafe
   numeric values, unbounded user-controlled search, hidden source mutation, or emission against a
   stale source hash.
+- Studio bridge and receipt contracts are data only. Never accept arbitrary Luau, executable Roblox
+  Instances, arbitrary MCP payloads, credentials, logs, image bytes, machine paths, or environment
+  dumps.
 - Validate unknown external input before using it, and avoid exposing stack traces for expected user
   errors.
 
@@ -209,6 +288,9 @@ Use the root scripts:
 A change is done only when its implementation, tests, generated schemas, generated fixtures, and
 documentation agree; `pnpm check` passes; generated, normalized, and hashed output is deterministic;
 transaction changes include verified rollback coverage; planner changes include complete geometry,
-circulation, and offline pipeline coverage; the diff contains no unrelated files or secrets; and
-implemented versus future Studio scope is stated accurately. If any required check cannot run or
-fails, leave a clear record instead of declaring the work complete.
+circulation, and offline pipeline coverage; Studio adapter changes preserve exact selection,
+sandbox, fixed-program, engine-verification, ownership, receipt, and compensation boundaries; the
+diff contains no unrelated files, tracked live evidence, or secrets; and implemented versus future
+Studio, playtesting, Forge, and Critic scope is stated accurately. If any required check or real
+live acceptance cannot run or fails, leave a clear record instead of declaring the live milestone
+complete.
