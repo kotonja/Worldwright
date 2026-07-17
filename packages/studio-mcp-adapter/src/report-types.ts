@@ -20,6 +20,7 @@ export interface StudioTransportCounters {
   chunksPlanned: number;
   chunksAttempted: number;
   chunksCompleted: number;
+  sandboxLeaseClaimCalls: number;
   mutationExecuteCalls: number;
   uncertainTransportEvents: number;
   reconnectAttempts: number;

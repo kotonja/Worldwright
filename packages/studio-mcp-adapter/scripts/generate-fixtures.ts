@@ -11,10 +11,7 @@ import {
 } from '@worldwright/roblox-compiler';
 
 import { chunkStudioBatchOperations } from '../src/batch/chunk.js';
-import {
-  stringifyStudioBatchRequest,
-  stringifyStudioBatchResponse,
-} from '../src/batch/normalize.js';
+import { stringifyStudioBatchResponse } from '../src/batch/normalize.js';
 import { buildStudioBatchOperations } from '../src/batch/request.js';
 import { buildStudioApplyReceipt } from '../src/receipt.js';
 import {
@@ -254,6 +251,8 @@ function renderStudioBatchAndReportFixtures(): readonly StudioFixtureArtifact[] 
   const request = chunkStudioBatchOperations({
     projectId: manifest.source.projectId,
     changeSetHash: 'a'.repeat(64),
+    // A deterministic non-secret placeholder; generated fixtures never contain a real lease ID.
+    sandboxLeaseId: '0'.repeat(64),
     operations: buildStudioBatchOperations(plan.changeSet.operations, []),
   })[0]!.request;
   const response = {
@@ -279,6 +278,7 @@ function renderStudioBatchAndReportFixtures(): readonly StudioFixtureArtifact[] 
       chunksPlanned: 1,
       chunksAttempted: 1,
       chunksCompleted: 1,
+      sandboxLeaseClaimCalls: 1,
       mutationExecuteCalls: 1,
       uncertainTransportEvents: 0,
       reconnectAttempts: 0,
@@ -291,11 +291,6 @@ function renderStudioBatchAndReportFixtures(): readonly StudioFixtureArtifact[] 
     'applied',
   );
   return [
-    {
-      label: 'Studio batch request',
-      path: fileURLToPath(new URL('../fixtures/batch/create.request.json', import.meta.url)),
-      content: stringifyStudioBatchRequest(request),
-    },
     {
       label: 'Studio batch response',
       path: fileURLToPath(new URL('../fixtures/batch/create.response.json', import.meta.url)),

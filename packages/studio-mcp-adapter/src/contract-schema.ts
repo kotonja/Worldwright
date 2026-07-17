@@ -21,7 +21,12 @@ import {
   STUDIO_MCP_MAX_RECEIPT_DIAGNOSTICS,
   STUDIO_MCP_VIEWPORT_MEDIA_TYPE,
 } from './constants.js';
-import { STUDIO_DIAGNOSTIC_CODES, type StudioDiagnosticCode } from './diagnostics.js';
+import {
+  STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES,
+  STUDIO_DIAGNOSTIC_CODES,
+  type StudioBridgeV01DiagnosticCode,
+  type StudioDiagnosticCode,
+} from './diagnostics.js';
 
 const JSON_SCHEMA_DRAFT_2020_12 = 'https://json-schema.org/draft/2020-12/schema';
 const MAX_SAFE_INTEGER = 9_007_199_254_740_991;
@@ -333,13 +338,27 @@ export const StudioCompactSnapshotSchema = Type.Object(
   },
   { additionalProperties: false },
 );
-export const StudioBridgeDiagnosticCodeSchema = Type.Unsafe<StudioDiagnosticCode>({
+export const StudioBridgeDiagnosticCodeSchema = Type.Unsafe<StudioBridgeV01DiagnosticCode>({
   type: 'string',
-  enum: [...STUDIO_DIAGNOSTIC_CODES],
+  enum: [...STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES],
 });
 export const StudioBridgeDiagnosticSchema = Type.Object(
   {
     code: StudioBridgeDiagnosticCodeSchema,
+    message: Type.String({ minLength: 1, maxLength: 1024 }),
+    nodeId: Type.Optional(StudioIdentifierSchema),
+    property: Type.Optional(Type.String({ minLength: 1, maxLength: 128 })),
+  },
+  { additionalProperties: false },
+);
+/** Additive protocol diagnostic contract; Bridge 0.1 continues using its frozen enum above. */
+export const StudioProtocolDiagnosticCodeSchema = Type.Unsafe<StudioDiagnosticCode>({
+  type: 'string',
+  enum: [...STUDIO_DIAGNOSTIC_CODES],
+});
+export const StudioProtocolDiagnosticSchema = Type.Object(
+  {
+    code: StudioProtocolDiagnosticCodeSchema,
     message: Type.String({ minLength: 1, maxLength: 1024 }),
     nodeId: Type.Optional(StudioIdentifierSchema),
     property: Type.Optional(Type.String({ minLength: 1, maxLength: 128 })),

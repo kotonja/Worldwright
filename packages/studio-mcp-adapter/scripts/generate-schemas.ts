@@ -17,6 +17,11 @@ import {
   StudioProgressReportSchema,
   StudioTransportReportSchema,
 } from '../src/report-contract-schema.js';
+import {
+  StudioSandboxLeaseRecordSchema,
+  StudioSandboxLeaseRequestSchema,
+  StudioSandboxLeaseResponseSchema,
+} from '../src/sandbox-lease/contract-schema.js';
 
 export interface StudioSchemaArtifact {
   readonly label: string;
@@ -25,6 +30,27 @@ export interface StudioSchemaArtifact {
 }
 
 export const studioSchemaArtifacts: readonly StudioSchemaArtifact[] = [
+  {
+    label: 'Studio sandbox lease record',
+    path: fileURLToPath(
+      new URL('../schema/studio-sandbox-lease-record-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioSandboxLeaseRecordSchema,
+  },
+  {
+    label: 'Studio sandbox lease request',
+    path: fileURLToPath(
+      new URL('../schema/studio-sandbox-lease-request-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioSandboxLeaseRequestSchema,
+  },
+  {
+    label: 'Studio sandbox lease response',
+    path: fileURLToPath(
+      new URL('../schema/studio-sandbox-lease-response-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioSandboxLeaseResponseSchema,
+  },
   {
     label: 'Studio progress report',
     path: fileURLToPath(

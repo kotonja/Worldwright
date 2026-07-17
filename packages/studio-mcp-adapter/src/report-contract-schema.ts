@@ -116,6 +116,7 @@ export const StudioTransportReportSchema = Type.Object(
     chunksPlanned: count(STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS),
     chunksAttempted: count(STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS),
     chunksCompleted: count(STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS),
+    sandboxLeaseClaimCalls: count(1),
     mutationExecuteCalls: count(MAX_MUTATION_EXECUTE_CALLS),
     uncertainTransportEvents: count(STUDIO_MCP_MAX_RECONNECTS_PER_TRANSACTION + 1),
     reconnectAttempts: count(STUDIO_MCP_MAX_RECONNECTS_PER_TRANSACTION),

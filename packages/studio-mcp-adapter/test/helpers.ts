@@ -12,11 +12,27 @@ import type {
   StudioBatchRequest,
   StudioBatchResponse,
 } from '../src/batch/types.js';
-import { STUDIO_BATCH_RESPONSE_PREFIX, STUDIO_BRIDGE_RESPONSE_PREFIX } from '../src/constants.js';
+import {
+  STUDIO_BATCH_RESPONSE_PREFIX,
+  STUDIO_BRIDGE_RESPONSE_PREFIX,
+  STUDIO_SANDBOX_LEASE_RESPONSE_PREFIX,
+} from '../src/constants.js';
 import { compareCodePoints } from '../src/diagnostics.js';
 import { canonicalNodeMetadata } from '../src/engine-state.js';
 import { canonicalizeJsonValue, type JsonValue } from '../src/json.js';
 import type { AllowedStudioMcpToolName } from '../src/mcp/capabilities.js';
+import {
+  sandboxLeaseRecordsEqual,
+  stringifySandboxLeaseRecord,
+} from '../src/sandbox-lease/normalize.js';
+import { parseSandboxLeaseAttribute } from '../src/sandbox-lease/record.js';
+import type {
+  SandboxLeaseIdFactory,
+  StudioSandboxLeaseAction,
+  StudioSandboxLeaseRecord,
+  StudioSandboxLeaseRequest,
+  StudioSandboxLeaseResponse,
+} from '../src/sandbox-lease/types.js';
 import { connectStudioMcpForTesting } from '../src/testing.js';
 import { compactSnapshotFixture } from '../scripts/compact-snapshot-fixture.js';
 import type {
@@ -50,14 +66,19 @@ export function emptySnapshot(manifest: Readonly<RobloxManifest>): RobloxSnapsho
   };
 }
 
-function extractPayload(source: string): StudioBridgeRequest | StudioBatchRequest {
+function extractPayload(
+  source: string,
+): StudioBridgeRequest | StudioBatchRequest | StudioSandboxLeaseRequest {
   const marker = 'local payloadJson = ';
   const start = source.indexOf(marker);
   if (start < 0) throw new Error('Fixed bridge payload marker is missing.');
   const literal = source.slice(start + marker.length);
   const match = /^\[(=*)\[([\s\S]*?)\]\1\]/u.exec(literal);
   if (match === null) throw new Error('Fixed bridge payload literal is malformed.');
-  return JSON.parse(match[2]!) as StudioBridgeRequest;
+  return JSON.parse(match[2]!) as
+    | StudioBridgeRequest
+    | StudioBatchRequest
+    | StudioSandboxLeaseRequest;
 }
 
 function cframe(node: Readonly<RobloxManagedNode>): number[] {
@@ -176,6 +197,10 @@ function batchFrame(response: StudioBatchResponse): string {
   return `${STUDIO_BATCH_RESPONSE_PREFIX}${JSON.stringify(canonicalizeJsonValue(response as JsonValue))}\n`;
 }
 
+function sandboxLeaseFrame(response: StudioSandboxLeaseResponse): string {
+  return `${STUDIO_SANDBOX_LEASE_RESPONSE_PREFIX}${JSON.stringify(canonicalizeJsonValue(response as JsonValue))}\n`;
+}
+
 export interface FakeStudioOptions {
   readonly placeId?: number;
   readonly gameId?: number;
@@ -195,10 +220,26 @@ export interface FakeStudioOptions {
     code: 'studio.identity_invalid' | 'studio.root_invalid';
   }>;
   readonly beforeReconnect?: (protocol: FakeStudioProtocol) => void;
+  readonly beforeBatch?: (
+    protocol: FakeStudioProtocol,
+    request: Readonly<StudioBatchRequest>,
+  ) => void;
+  readonly afterBatch?: (
+    protocol: FakeStudioProtocol,
+    request: Readonly<StudioBatchRequest>,
+  ) => void;
+  readonly leaseIdFactory?: SandboxLeaseIdFactory;
+  readonly initialSandboxLeaseAttribute?: unknown;
+  /** A distinct DataModel can retain the same exact Studio and sandbox facts on reconnect. */
+  readonly reconnectDataModel?: Readonly<{
+    readonly initialNodes?: readonly RobloxManagedNode[];
+    readonly sandboxLeaseAttribute?: unknown;
+  }>;
 }
 
 interface FakeStudioSharedState {
   readonly nodes: Map<string, RobloxManagedNode>;
+  readonly workspace: { sandboxLeaseAttribute: unknown };
   readonly calls: Array<{
     readonly tool: AllowedStudioMcpToolName;
     readonly argumentsValue: Readonly<Record<string, unknown>>;
@@ -208,6 +249,7 @@ interface FakeStudioSharedState {
 export class FakeStudioProtocol {
   readonly nodes: Map<string, RobloxManagedNode>;
   readonly calls: FakeStudioSharedState['calls'];
+  readonly workspace: FakeStudioSharedState['workspace'];
   readonly unmanagedRoots: readonly StudioRawUnmanagedRoot[];
   placeId: number;
   gameId: number;
@@ -223,6 +265,12 @@ export class FakeStudioProtocol {
         code: 'studio.identity_invalid' | 'studio.root_invalid';
       }>
     | undefined;
+  readonly beforeBatch:
+    | ((protocol: FakeStudioProtocol, request: Readonly<StudioBatchRequest>) => void)
+    | undefined;
+  readonly afterBatch:
+    | ((protocol: FakeStudioProtocol, request: Readonly<StudioBatchRequest>) => void)
+    | undefined;
   #faultThrown = false;
   #publicationInjected = false;
   #parentDriftInjected = false;
@@ -236,6 +284,9 @@ export class FakeStudioProtocol {
   ) {
     this.nodes = sharedState?.nodes ?? new Map<string, RobloxManagedNode>();
     this.calls = sharedState?.calls ?? [];
+    this.workspace = sharedState?.workspace ?? {
+      sandboxLeaseAttribute: options.initialSandboxLeaseAttribute,
+    };
     if (sharedState === undefined) {
       for (const node of options.initialNodes ?? []) this.nodes.set(node.id, structuredClone(node));
     }
@@ -247,6 +298,8 @@ export class FakeStudioProtocol {
     this.publishBeforeAction = options.publishBeforeAction;
     this.parentDriftBeforeAction = options.parentDriftBeforeAction;
     this.ownershipConflictBeforeAction = options.ownershipConflictBeforeAction;
+    this.beforeBatch = options.beforeBatch;
+    this.afterBatch = options.afterBatch;
   }
 
   public async connect(): Promise<void> {}
@@ -257,6 +310,14 @@ export class FakeStudioProtocol {
 
   public simulateExternalSessionSwitch(): void {
     this.#active = false;
+  }
+
+  public get sandboxLeaseAttribute(): unknown {
+    return this.workspace.sandboxLeaseAttribute;
+  }
+
+  public set sandboxLeaseAttribute(value: unknown) {
+    this.workspace.sandboxLeaseAttribute = value;
   }
 
   #text(text: string): unknown {
@@ -284,6 +345,143 @@ export class FakeStudioProtocol {
         diagnostic: { code, message },
       }),
     );
+  }
+
+  #sandboxLeaseFailure(
+    action: StudioSandboxLeaseAction,
+    code:
+      | 'studio.published_place_forbidden'
+      | 'studio.edit_mode_required'
+      | 'studio.sandbox_lease_invalid'
+      | 'studio.sandbox_lease_conflict'
+      | 'studio.sandbox_identity_mismatch',
+    message: string,
+  ): unknown {
+    return this.#text(
+      sandboxLeaseFrame({
+        protocolVersion: '0.1.0',
+        action,
+        ok: false,
+        diagnostic: { code, message },
+      }),
+    );
+  }
+
+  #compactSnapshot(projectId: string) {
+    return compactSnapshotFixture(
+      projectId,
+      [...this.nodes.values()]
+        .filter((node) => node.attributes.WorldwrightProjectId === projectId)
+        .sort((left, right) => compareCodePoints(left.id, right.id)),
+      this.unmanagedRoots,
+    );
+  }
+
+  #currentSandboxLease(
+    action: StudioSandboxLeaseAction,
+    malformedCode: 'studio.sandbox_lease_invalid' | 'studio.sandbox_identity_mismatch',
+  ):
+    | { readonly ok: true; readonly record?: StudioSandboxLeaseRecord }
+    | { readonly ok: false; readonly response: unknown } {
+    try {
+      const record = parseSandboxLeaseAttribute(this.workspace.sandboxLeaseAttribute);
+      return record === undefined ? { ok: true } : { ok: true, record };
+    } catch {
+      return {
+        ok: false,
+        response: this.#sandboxLeaseFailure(
+          action,
+          malformedCode,
+          malformedCode === 'studio.sandbox_lease_invalid'
+            ? 'The existing sandbox lease attribute is invalid.'
+            : 'The loaded sandbox does not carry the exact transaction lease.',
+        ),
+      };
+    }
+  }
+
+  #executeSandboxLease(request: Readonly<StudioSandboxLeaseRequest>): unknown {
+    if (this.placeId !== 0 || this.gameId !== 0) {
+      return this.#sandboxLeaseFailure(
+        request.action,
+        'studio.published_place_forbidden',
+        'Sandbox leases are forbidden in published places.',
+      );
+    }
+    if (this.running) {
+      return this.#sandboxLeaseFailure(
+        request.action,
+        'studio.edit_mode_required',
+        'Sandbox leases require stopped Edit mode.',
+      );
+    }
+    const parsed = this.#currentSandboxLease(
+      request.action,
+      request.action === 'bound_snapshot'
+        ? 'studio.sandbox_identity_mismatch'
+        : 'studio.sandbox_lease_invalid',
+    );
+    if (!parsed.ok) return parsed.response;
+    const record = parsed.record;
+
+    switch (request.action) {
+      case 'read_lease':
+        return this.#text(
+          sandboxLeaseFrame({
+            protocolVersion: '0.1.0',
+            action: 'read_lease',
+            ok: true,
+            leasePresent: record !== undefined,
+            ...(record === undefined ? {} : { lease: record }),
+          }),
+        );
+      case 'claim_lease': {
+        const expectedMatches =
+          request.expectedLeasePresent === (record !== undefined) &&
+          (record === undefined ||
+            (request.expectedLease !== undefined &&
+              sandboxLeaseRecordsEqual(record, request.expectedLease)));
+        if (!expectedMatches) {
+          return this.#sandboxLeaseFailure(
+            'claim_lease',
+            'studio.sandbox_lease_conflict',
+            'The sandbox lease changed before compare-and-set claim.',
+          );
+        }
+        const next = stringifySandboxLeaseRecord(request.newLease);
+        this.workspace.sandboxLeaseAttribute = next;
+        if (this.workspace.sandboxLeaseAttribute !== next) {
+          return this.#sandboxLeaseFailure(
+            'claim_lease',
+            'studio.sandbox_lease_conflict',
+            'The sandbox lease claim could not be verified.',
+          );
+        }
+        return this.#text(
+          sandboxLeaseFrame({
+            protocolVersion: '0.1.0',
+            action: 'claim_lease',
+            ok: true,
+          }),
+        );
+      }
+      case 'bound_snapshot':
+        if (record === undefined || !sandboxLeaseRecordsEqual(record, request.lease)) {
+          return this.#sandboxLeaseFailure(
+            'bound_snapshot',
+            'studio.sandbox_identity_mismatch',
+            'The loaded sandbox does not carry the exact transaction lease.',
+          );
+        }
+        return this.#text(
+          sandboxLeaseFrame({
+            protocolVersion: '0.1.0',
+            action: 'bound_snapshot',
+            ok: true,
+            compactSnapshot: this.#compactSnapshot(request.lease.projectId),
+          }),
+        );
+    }
   }
 
   #maybeFault(action: 'create' | 'update' | 'delete'): void {
@@ -375,7 +573,41 @@ export class FakeStudioProtocol {
     return JSON.parse(text.slice(STUDIO_BRIDGE_RESPONSE_PREFIX.length)) as StudioBridgeResponse;
   }
 
+  #batchIdentityFailure(request: Readonly<StudioBatchRequest>): unknown {
+    return this.#text(
+      batchFrame({
+        protocolVersion: '0.1.0',
+        action: 'apply_chunk',
+        ok: false,
+        changeSetHash: request.changeSetHash,
+        chunkId: request.chunkId,
+        chunkIndex: request.chunkIndex,
+        operationsAttempted: 0,
+        operationsApplied: 0,
+        completedOperationIds: [],
+        localRestoreSucceeded: false,
+        diagnostic: {
+          code: 'studio.sandbox_identity_mismatch',
+          message: 'The loaded sandbox does not carry the exact transaction lease.',
+        },
+      }),
+    );
+  }
+
   #executeBatch(request: Readonly<StudioBatchRequest>): unknown {
+    this.beforeBatch?.(this, request);
+    const parsed = this.#currentSandboxLease('bound_snapshot', 'studio.sandbox_identity_mismatch');
+    if (!parsed.ok) return this.#batchIdentityFailure(request);
+    const current = parsed.record;
+    if (
+      current === undefined ||
+      current.schemaVersion !== '0.1.0' ||
+      current.leaseId !== request.sandboxLeaseId ||
+      current.projectId !== request.projectId ||
+      current.changeSetHash !== request.changeSetHash
+    ) {
+      return this.#batchIdentityFailure(request);
+    }
     const completedOperationIds: string[] = [];
     for (let index = 0; index < request.operations.length; index += 1) {
       const operation = request.operations[index]!;
@@ -417,8 +649,19 @@ export class FakeStudioProtocol {
     );
   }
 
-  #execute(request: StudioBridgeRequest | StudioBatchRequest): unknown {
-    if (request.action === 'apply_chunk') return this.#executeBatch(request);
+  #execute(request: StudioBridgeRequest | StudioBatchRequest | StudioSandboxLeaseRequest): unknown {
+    if (
+      request.action === 'read_lease' ||
+      request.action === 'claim_lease' ||
+      request.action === 'bound_snapshot'
+    ) {
+      return this.#executeSandboxLease(request);
+    }
+    if (request.action === 'apply_chunk') {
+      const response = this.#executeBatch(request);
+      this.afterBatch?.(this, request);
+      return response;
+    }
     if (request.action !== 'probe') {
       if (!this.#publicationInjected && request.action === this.publishBeforeAction) {
         this.#publicationInjected = true;
@@ -473,13 +716,7 @@ export class FakeStudioProtocol {
             protocolVersion: '0.1.0',
             action: 'snapshot',
             ok: true,
-            compactSnapshot: compactSnapshotFixture(
-              request.projectId,
-              [...this.nodes.values()]
-                .filter((node) => node.attributes.WorldwrightProjectId === request.projectId)
-                .sort((left, right) => compareCodePoints(left.id, right.id)),
-              this.unmanagedRoots,
-            ),
+            compactSnapshot: this.#compactSnapshot(request.projectId),
           }),
         );
       case 'create':
@@ -618,8 +855,24 @@ export async function createFakeStudioAdapter(
   const client = await connectStudioMcpForTesting(() => protocol);
   const sharedState: FakeStudioSharedState = {
     nodes: protocol.nodes,
+    workspace: protocol.workspace,
     calls: protocol.calls,
   };
+  const reconnectState: FakeStudioSharedState =
+    options.reconnectDataModel === undefined
+      ? sharedState
+      : {
+          nodes: new Map(
+            (options.reconnectDataModel.initialNodes ?? []).map((node) => [
+              node.id,
+              structuredClone(node),
+            ]),
+          ),
+          workspace: {
+            sandboxLeaseAttribute: options.reconnectDataModel.sandboxLeaseAttribute,
+          },
+          calls: protocol.calls,
+        };
   let reconnectHookUsed = false;
   const reconnectClient = async () => {
     if (!reconnectHookUsed) {
@@ -632,8 +885,10 @@ export async function createFakeStudioAdapter(
         gameId: protocol.gameId,
         running: protocol.running,
         unmanagedRoots: protocol.unmanagedRoots,
+        ...(options.beforeBatch === undefined ? {} : { beforeBatch: options.beforeBatch }),
+        ...(options.afterBatch === undefined ? {} : { afterBatch: options.afterBatch }),
       },
-      sharedState,
+      reconnectState,
     );
     return connectStudioMcpForTesting(() => replacement);
   };
@@ -647,6 +902,7 @@ export async function createFakeStudioAdapter(
       },
       options.mutationAuthorized ?? true,
       reconnectClient,
+      options.leaseIdFactory,
     ),
     protocol,
   };

@@ -49,6 +49,7 @@ const UNPROVEN_LOCAL_RESTORE_CODES = new Set<StudioDiagnosticCode>([
   'studio.update_restore_failed',
   'studio.delete_failed',
   'studio.response_invalid',
+  'studio.sandbox_identity_mismatch',
 ]);
 
 function errorParameter(error: ErrorObject, key: string): string | undefined {

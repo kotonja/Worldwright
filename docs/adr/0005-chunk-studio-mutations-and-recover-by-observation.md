@@ -22,6 +22,13 @@ latency for the repeated build, observe, critique, and repair loop Worldwright e
 Before adding playtesting or The Critic, the mutation lane needs fewer calls and observation-based
 recovery after an acknowledgment becomes uncertain.
 
+Director review identified one additional identity boundary. Roblox Studio's connected-instance ID
+selects the Studio target, but it is not documented as durable identity for the particular unsaved
+DataModel loaded inside that process. The same Studio can replace one unsaved place with another
+that also reports zero PlaceId/GameId, stopped Edit mode, and the same display name. Exact-ID
+reselection plus the generic sandbox gate therefore cannot by itself prove that recovery observed
+the DataModel that received the uncertain mutation.
+
 ## Decision
 
 Worldwright adds a separately versioned fixed batch protocol. It partitions the already authorized,
@@ -41,6 +48,34 @@ both sequential and batch adapters. The Studio package owns only its fixed batch
 connection lifecycle, exact-session lease, Studio-specific transport, and sanitized transport
 reporting.
 
+### Bind each nonempty transaction to one unsaved DataModel
+
+Every nonempty authorized Studio transaction claims one private adapter-owned sandbox lease stored
+as strict canonical JSON in the fixed `Workspace` attribute `WorldwrightStudioSandboxLeaseJson`. The
+record binds a cryptographically random transaction lease ID to the project ID and complete
+normalized Change Set hash. It is not a WorldSpec entity, managed node, Manifest, Scene Snapshot,
+Change Set, receipt, report identity, or creator-facing object.
+
+Claim occurs only after Change Set validation, the fresh exact-base check, and complete pure
+simulation, and only after the engine has ruled out a no-op. The fixed claim program reads the prior
+state, compares it byte-for-byte with the expected valid canonical record or explicit absence,
+writes the new canonical record once, and reads it back for exact verification. A competing
+claimant, malformed prior record, published or running place, or changed prior value fails closed. A
+successful record remains on Workspace after the transaction; the next nonempty transaction rotates
+it through the same compare-and-set. There is no uncertain cleanup or clear action. A verified no-op
+performs zero lease claims and zero mutation calls.
+
+The compiler's optional preparation hook establishes this adapter-owned boundary after preflight,
+then requires a second complete lease-bound snapshot with the exact original base hash before the
+first batch. Every forward batch, final verification, failure observation, compensation batch,
+reconnect observation, and post-compensation verification uses the same lease. The complete Change
+Set hash remains the mutation authorization unit; the lease is only private transport evidence.
+
+The lease is not authentication, a digital signature, permanent Roblox object identity, a
+replacement for exact Studio selection or snapshot hashes, or creator approval. Its identifier and
+JSON are excluded from receipts, Progress Reports, Transport Reports, CLI output, fixtures, PR text,
+and shareable live summaries.
+
 ### Batch acknowledgments are not final proof
 
 A schema-valid success response proves only what the fixed program reports about that tool call. It
@@ -58,14 +93,20 @@ snapshot, is sent through it, and the uncertain chunk is never retried blindly.
 
 The next recovery observation may establish a new local-stdio MCP connection. It must rediscover
 compatible tools, find and select the exact original Studio ID, verify that ID became active, and
-re-probe `PlaceId == 0`, `GameId == 0`, and stopped Edit mode. Display name, focus, active status,
-list order, or there being one remaining session cannot substitute for the exact ID. Reconnection is
-bounded to two attempts per transaction.
+re-probe `PlaceId == 0`, `GameId == 0`, and stopped Edit mode. It must then verify the exact
+original sandbox lease and obtain the complete selected-project snapshot together in one fixed
+`bound_snapshot` operation. Display name, focus, active status, list order, or there being one
+remaining session cannot substitute for the exact ID; the exact ID and generic sandbox facts cannot
+substitute for the lease-bound DataModel observation. Reconnection is bounded to two attempts per
+transaction.
 
 ### Fresh observation is authoritative
 
-After a certain or uncertain failure, a fresh complete snapshot is compared with the original base
-and the complete canonical Change Set. The pure classifier accepts only a state exactly equal to:
+After a certain or uncertain failure, a fresh complete lease-bound snapshot is compared with the
+original base and the complete canonical Change Set. A missing, malformed, or different lease,
+project, or Change Set blocks snapshot classification and all compensation, producing an unrestored
+failure rather than evidence from a replacement DataModel. The pure classifier accepts only a state
+exactly equal to:
 
 - the base snapshot at prefix length zero;
 - one exact ordered operation prefix; or
@@ -134,7 +175,15 @@ recovery observation. A new process and exact-session revalidation are required.
 ### Reconnect to the only visible or similarly named Studio
 
 Rejected. Window names and list position are not mutation authority. Only the exact original Studio
-ID plus a renewed sandbox probe can preserve selection intent.
+ID preserves selection intent, and even that ID plus a renewed sandbox probe is insufficient
+DataModel identity. Recovery additionally requires the original transaction lease and snapshot in
+one fixed bound operation.
+
+### Treat the Studio ID as durable unsaved-place identity
+
+Rejected. The Studio ID identifies a connected Studio instance, not a guaranteed permanent identity
+for whichever unsaved DataModel it currently contains. A same-ID replacement place must fail before
+classification or compensation when its private lease is absent or different.
 
 ### Automatically resume from an exact prefix
 
@@ -170,6 +219,9 @@ snapshot or transaction invariants.
 - Sequential and batch adapters share validation, simulation, verification, and compensation
   semantics.
 - Recovery decisions are based on a fresh complete observation from a newly trusted connection.
+- Every nonempty transaction is bound to one unsaved DataModel across initial revalidation, forward
+  mutation, final verification, reconnect, and compensation.
+- Lease mismatch blocks recovery before a replacement place can be mistaken for a restored base.
 - Exact-prefix classification distinguishes admissible transaction effects from unrelated edits.
 - Lost acknowledgments cannot silently become retries or successful forward completion.
 - Strict deterministic transport reports record calls, chunks, uncertainty, reconnects, and
@@ -187,6 +239,8 @@ snapshot or transaction invariants.
 - Concurrent creator or tool edits can make compensation inadmissible and leave manual recovery for
   the creator.
 - Reconnection is bounded and may fail instead of searching for a substitute session.
+- The canonical lease persists after completion and must be rotated by compare-and-set for the next
+  nonempty transaction; this is deliberate private transport metadata on the unsaved Workspace.
 - Live acceptance must report actual mutation-call counts; chunk planning alone is not proof.
 
 ## Versioning implications
@@ -200,6 +254,9 @@ unchanged. Chunking adds separate strict contracts:
 
 - `urn:worldwright:studio-batch-request:0.1.0`
 - `urn:worldwright:studio-batch-response:0.1.0`
+- `urn:worldwright:studio-sandbox-lease-record:0.1.0`
+- `urn:worldwright:studio-sandbox-lease-request:0.1.0`
+- `urn:worldwright:studio-sandbox-lease-response:0.1.0`
 - `urn:worldwright:studio-progress-report:0.1.0`
 - `urn:worldwright:studio-transport-report:0.1.0`
 

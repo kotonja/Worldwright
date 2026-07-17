@@ -14,6 +14,7 @@ import { STUDIO_MCP_MAX_BATCH_OPERATIONS } from '../src/constants.js';
 
 const projectId = 'project-batch-chunking';
 const changeSetHash = 'd'.repeat(64);
+const sandboxLeaseId = 'c'.repeat(64);
 
 function node(id: string, parentId?: string): RobloxManagedNode {
   const entityKind = parentId === undefined ? ('world' as const) : ('object' as const);
@@ -56,6 +57,7 @@ function chunk(count: number) {
   return chunkStudioBatchOperations({
     projectId,
     changeSetHash,
+    sandboxLeaseId,
     operations: prepared(count),
   });
 }
@@ -71,17 +73,23 @@ describe('deterministic Studio batch chunking', () => {
 
   it('splits before a byte bound and rejects one operation that cannot fit', () => {
     const operations = prepared(2);
-    const unrestricted = chunkStudioBatchOperations({ projectId, changeSetHash, operations });
+    const unrestricted = chunkStudioBatchOperations({
+      projectId,
+      changeSetHash,
+      sandboxLeaseId,
+      operations,
+    });
     const twoOperationBytes = unrestricted[0]!.canonicalRequestBytes;
     const oneOperationBytes = chunkStudioBatchOperations({
       projectId,
       changeSetHash,
+      sandboxLeaseId,
       operations: operations.slice(0, 1),
     })[0]!.canonicalRequestBytes;
     expect(twoOperationBytes).toBeGreaterThan(oneOperationBytes);
     expect(
       chunkStudioBatchOperations(
-        { projectId, changeSetHash, operations },
+        { projectId, changeSetHash, sandboxLeaseId, operations },
         {
           maxOperations: STUDIO_MCP_MAX_BATCH_OPERATIONS,
           maxPayloadBytes: twoOperationBytes - 1,
@@ -90,7 +98,7 @@ describe('deterministic Studio batch chunking', () => {
     ).toEqual([1, 1]);
     expect(() =>
       chunkStudioBatchOperations(
-        { projectId, changeSetHash, operations: operations.slice(0, 1) },
+        { projectId, changeSetHash, sandboxLeaseId, operations: operations.slice(0, 1) },
         { maxOperations: STUDIO_MCP_MAX_BATCH_OPERATIONS, maxPayloadBytes: oneOperationBytes - 1 },
       ),
     ).toThrowError();
@@ -110,8 +118,18 @@ describe('deterministic Studio batch chunking', () => {
 
   it('produces byte-identical deterministic IDs and deep-independent output', () => {
     const operations = prepared(33);
-    const first = chunkStudioBatchOperations({ projectId, changeSetHash, operations });
-    const second = chunkStudioBatchOperations({ projectId, changeSetHash, operations });
+    const first = chunkStudioBatchOperations({
+      projectId,
+      changeSetHash,
+      sandboxLeaseId,
+      operations,
+    });
+    const second = chunkStudioBatchOperations({
+      projectId,
+      changeSetHash,
+      sandboxLeaseId,
+      operations,
+    });
     expect(second).toEqual(first);
     const retainedName = first[0]!.request.operations[0];
     if (operations[0]?.type !== 'create' || retainedName?.type !== 'create') {
@@ -119,6 +137,25 @@ describe('deterministic Studio batch chunking', () => {
     }
     operations[0].node.name = 'Caller Mutation';
     expect(retainedName.node.name).not.toBe('Caller Mutation');
+  });
+
+  it('binds requests to the lease without placing private lease material in chunk identity', () => {
+    const operations = prepared(2);
+    const first = chunkStudioBatchOperations({
+      projectId,
+      changeSetHash,
+      sandboxLeaseId,
+      operations,
+    });
+    const rotated = chunkStudioBatchOperations({
+      projectId,
+      changeSetHash,
+      sandboxLeaseId: 'b'.repeat(64),
+      operations,
+    });
+    expect(first[0]!.request.sandboxLeaseId).toBe(sandboxLeaseId);
+    expect(rotated[0]!.request.sandboxLeaseId).toBe('b'.repeat(64));
+    expect(rotated.map((entry) => entry.chunkId)).toEqual(first.map((entry) => entry.chunkId));
   });
 
   it('keeps the 400-create Cliffwatch fixture at no more than 16 chunks', () => {
@@ -136,6 +173,7 @@ describe('deterministic Studio batch chunking', () => {
     const chunks = chunkStudioBatchOperations({
       projectId: changeSet.preconditions.projectId,
       changeSetHash: 'f'.repeat(64),
+      sandboxLeaseId,
       operations,
     });
     expect(chunks).toHaveLength(13);

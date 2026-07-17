@@ -47,6 +47,11 @@
       "maximum": 512,
       "type": "integer"
     },
+    "sandboxLeaseClaimCalls": {
+      "minimum": 0,
+      "maximum": 1,
+      "type": "integer"
+    },
     "mutationExecuteCalls": {
       "minimum": 0,
       "maximum": 1056,
@@ -122,6 +127,7 @@
     "chunksPlanned",
     "chunksAttempted",
     "chunksCompleted",
+    "sandboxLeaseClaimCalls",
     "mutationExecuteCalls",
     "uncertainTransportEvents",
     "reconnectAttempts",

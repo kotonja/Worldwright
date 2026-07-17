@@ -46,12 +46,14 @@ function assertLimits(limits: Readonly<StudioBatchChunkLimits>): void {
 function buildChunk(
   projectId: string,
   changeSetHash: string,
+  sandboxLeaseId: string,
   chunkIndex: number,
   operations: readonly StudioBatchOperation[],
 ): StudioOperationChunk {
   const request = buildStudioBatchRequest({
     projectId,
     changeSetHash,
+    sandboxLeaseId,
     chunkIndex,
     operations,
   });
@@ -68,6 +70,7 @@ function buildChunk(
 function requestByteLengths(
   projectId: string,
   changeSetHash: string,
+  sandboxLeaseId: string,
   chunkIndex: number,
   operations: readonly StudioBatchOperation[],
 ): { readonly canonical: number; readonly outer: number } {
@@ -78,6 +81,7 @@ function requestByteLengths(
     action: 'apply_chunk',
     projectId,
     changeSetHash,
+    sandboxLeaseId,
     chunkId: '0'.repeat(64),
     chunkIndex,
     operations: [...operations],
@@ -104,6 +108,7 @@ export function chunkStudioBatchOperations(
   input: Readonly<{
     projectId: string;
     changeSetHash: string;
+    sandboxLeaseId: string;
     operations: readonly StudioBatchOperation[];
   }>,
   limits: Readonly<StudioBatchChunkLimits> = DEFAULT_LIMITS,
@@ -130,6 +135,7 @@ export function chunkStudioBatchOperations(
         ? requestByteLengths(
             input.projectId,
             input.changeSetHash,
+            input.sandboxLeaseId,
             chunks.length,
             candidateOperations,
           )
@@ -145,10 +151,22 @@ export function chunkStudioBatchOperations(
     }
 
     if (pending.length === 0) singleOperationTooLarge(operation.operationId);
-    const completed = buildChunk(input.projectId, input.changeSetHash, chunks.length, pending);
+    const completed = buildChunk(
+      input.projectId,
+      input.changeSetHash,
+      input.sandboxLeaseId,
+      chunks.length,
+      pending,
+    );
     chunks.push(completed);
     pending = [operation];
-    const single = buildChunk(input.projectId, input.changeSetHash, chunks.length, pending);
+    const single = buildChunk(
+      input.projectId,
+      input.changeSetHash,
+      input.sandboxLeaseId,
+      chunks.length,
+      pending,
+    );
     if (
       single.canonicalRequestBytes > limits.maxPayloadBytes ||
       single.canonicalRequestBytes > STUDIO_MCP_MAX_PAYLOAD_BYTES ||
@@ -160,7 +178,15 @@ export function chunkStudioBatchOperations(
   }
 
   if (pending.length > 0) {
-    chunks.push(buildChunk(input.projectId, input.changeSetHash, chunks.length, pending));
+    chunks.push(
+      buildChunk(
+        input.projectId,
+        input.changeSetHash,
+        input.sandboxLeaseId,
+        chunks.length,
+        pending,
+      ),
+    );
   }
   return Object.freeze(chunks);
 }

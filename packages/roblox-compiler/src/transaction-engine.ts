@@ -25,12 +25,14 @@ import type {
   RobloxAdapterScope,
   RobloxChangeOperation,
   RobloxChangeSet,
+  RobloxMutationPreparationHook,
   RobloxSnapshot,
   RollbackResult,
 } from './types.js';
 
 export interface RobloxTransactionOperationStrategy {
   readonly maxCompensationRecoveryAttempts: number;
+  readonly prepareForMutation?: RobloxMutationPreparationHook;
   planBatches(
     operations: readonly Readonly<RobloxChangeOperation>[],
     changeSetHash: string,
@@ -650,6 +652,89 @@ export async function applyRobloxChangeSetWithStrategy(
     };
   }
 
+  if (strategy.prepareForMutation !== undefined) {
+    let preparationDiagnostics: readonly RobloxDiagnostic[] | undefined;
+    try {
+      const preparation = await strategy.prepareForMutation(
+        deepFreeze(
+          structuredClone({
+            scope,
+            changeSet,
+            changeSetHash,
+            initialSnapshot,
+            initialSnapshotHash,
+          }),
+        ),
+      );
+      if (!preparation.success) preparationDiagnostics = preparation.diagnostics;
+    } catch {
+      preparationDiagnostics = transactionDiagnostic(
+        'transaction.apply_failed',
+        '/preparation',
+        'The adapter could not prepare the mutation boundary.',
+      );
+    }
+    if (preparationDiagnostics !== undefined) {
+      return failure(
+        'apply',
+        preparationDiagnostics.length === 0
+          ? transactionDiagnostic(
+              'transaction.apply_failed',
+              '/preparation',
+              'The adapter could not prepare the mutation boundary.',
+            )
+          : sortDiagnostics(structuredClone(preparationDiagnostics)),
+        0,
+        rollbackNotAttempted(),
+        initialSnapshotHash,
+      );
+    }
+
+    let rawPreparedSnapshot: unknown;
+    try {
+      rawPreparedSnapshot = await adapter.readSnapshot(scope);
+    } catch {
+      return failure(
+        'snapshot-read',
+        transactionDiagnostic(
+          'transaction.snapshot_invalid',
+          '/preparation',
+          'The complete adapter snapshot could not be read after mutation preparation.',
+        ),
+        0,
+        rollbackNotAttempted(),
+        initialSnapshotHash,
+      );
+    }
+    const preparedValidation = validateRobloxSnapshot(rawPreparedSnapshot);
+    if (!preparedValidation.valid) {
+      return failure(
+        'snapshot-validation',
+        wrapDiagnostics('transaction.snapshot_invalid', preparedValidation.diagnostics),
+        0,
+        rollbackNotAttempted(),
+        initialSnapshotHash,
+      );
+    }
+    const preparedSnapshotHash = hashRobloxSnapshot(
+      normalizeRobloxSnapshot(preparedValidation.value),
+    );
+    if (preparedSnapshotHash !== initialSnapshotHash) {
+      return failure(
+        'stale-check',
+        transactionDiagnostic(
+          'transaction.stale_snapshot',
+          '/preconditions/baseSnapshotHash',
+          'The complete current snapshot changed after mutation preparation.',
+        ),
+        0,
+        rollbackNotAttempted(),
+        initialSnapshotHash,
+        preparedSnapshotHash,
+      );
+    }
+  }
+
   const execution = await executeOperationSequence(
     strategy,
     scope,
@@ -785,11 +870,13 @@ export async function applyRobloxChangeSetWithStrategy(
 export function createBatchTransactionStrategy(
   applyBatch: RobloxTransactionOperationStrategy['applyBatch'],
   planner: RobloxOperationBatchPlanner,
+  prepareForMutation?: RobloxMutationPreparationHook,
 ): RobloxTransactionOperationStrategy {
   return {
     maxCompensationRecoveryAttempts: 1,
     planBatches: (operations, changeSetHash, phase) =>
       planner({ changeSetHash, phase, operations }),
     applyBatch,
+    ...(prepareForMutation === undefined ? {} : { prepareForMutation }),
   };
 }

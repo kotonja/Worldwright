@@ -24,6 +24,7 @@ import {
 
 const projectId = 'project-batch-contract';
 const changeSetHash = 'a'.repeat(64);
+const sandboxLeaseId = 'c'.repeat(64);
 
 function node(id: string, parentId?: string): RobloxManagedNode {
   const entityKind = parentId === undefined ? ('world' as const) : ('object' as const);
@@ -55,7 +56,12 @@ function request(operationCount = 2) {
     operations.push({ id: `create:${id}`, type: 'create', node: node(id, root.id) });
   }
   const prepared = buildStudioBatchOperations(operations, []);
-  return chunkStudioBatchOperations({ projectId, changeSetHash, operations: prepared })[0]!.request;
+  return chunkStudioBatchOperations({
+    projectId,
+    changeSetHash,
+    sandboxLeaseId,
+    operations: prepared,
+  })[0]!.request;
 }
 
 function successResponse(requestValue = request()): StudioBatchResponse {
@@ -86,7 +92,15 @@ describe('strict Studio batch contracts', () => {
 
   it('accepts a canonical batch and reuses every v0.1 operation-state check', () => {
     const valid = request();
+    expect(valid.sandboxLeaseId).toBe(sandboxLeaseId);
     expect(validateStudioBatchRequest(valid)).toMatchObject({ valid: true });
+
+    expect(
+      validateStudioBatchRequest({ ...valid, sandboxLeaseId: 'not-a-lease-id' }),
+    ).toMatchObject({
+      valid: false,
+      diagnostics: [expect.objectContaining({ path: '/sandboxLeaseId' })],
+    });
 
     const wrongState = structuredClone(valid);
     if (wrongState.operations[0]?.type !== 'create') throw new Error('Expected a create.');
@@ -124,6 +138,7 @@ describe('strict Studio batch contracts', () => {
     const mixed = chunkStudioBatchOperations({
       projectId,
       changeSetHash,
+      sandboxLeaseId,
       operations: prepared,
     })[0]!.request;
     expect(mixed.operations.map((operation) => operation.type)).toEqual([
@@ -193,6 +208,21 @@ describe('strict Studio batch contracts', () => {
       valid: true,
     });
 
+    const sandboxIdentityFailure: StudioBatchResponse = {
+      ...postChunkVerificationFailure,
+      operationsAttempted: 0,
+      operationsApplied: 0,
+      completedOperationIds: [],
+      localRestoreSucceeded: false,
+      diagnostic: {
+        code: 'studio.sandbox_identity_mismatch',
+        message: 'The selected Studio no longer contains the transaction sandbox.',
+      },
+    };
+    expect(validateStudioBatchResponseForRequest(sandboxIdentityFailure, expected)).toMatchObject({
+      valid: true,
+    });
+
     for (const impossibleRestore of [
       {
         ...failure,
@@ -209,6 +239,7 @@ describe('strict Studio batch contracts', () => {
         operationsApplied: 1,
         completedOperationIds: [expected.operations[0]!.operationId],
       },
+      { ...sandboxIdentityFailure, localRestoreSucceeded: true },
     ]) {
       expect(validateStudioBatchResponseForRequest(impossibleRestore, expected)).toMatchObject({
         valid: false,

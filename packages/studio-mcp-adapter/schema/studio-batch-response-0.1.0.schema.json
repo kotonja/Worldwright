@@ -166,7 +166,10 @@
                 "studio.capture_invalid",
                 "studio.receipt_invalid",
                 "studio.io_failed",
-                "studio.usage_invalid"
+                "studio.usage_invalid",
+                "studio.sandbox_lease_conflict",
+                "studio.sandbox_lease_invalid",
+                "studio.sandbox_identity_mismatch"
               ]
             },
             "message": {

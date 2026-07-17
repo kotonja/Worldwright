@@ -13,7 +13,15 @@ import type {
   RobloxAdapter,
   RobloxAdapterScope,
   RobloxChangeOperation,
+  RobloxMutationPreparationHook,
 } from './types.js';
+
+function preparationHook(adapter: RobloxAdapter): RobloxMutationPreparationHook | undefined {
+  const prepareForMutation = adapter.prepareForMutation;
+  return prepareForMutation === undefined
+    ? undefined
+    : (input) => prepareForMutation.call(adapter, input);
+}
 
 async function applyOperation(
   adapter: RobloxAdapter,
@@ -33,6 +41,7 @@ async function applyOperation(
 }
 
 function sequentialStrategy(adapter: RobloxAdapter): RobloxTransactionOperationStrategy {
+  const prepareForMutation = preparationHook(adapter);
   return {
     maxCompensationRecoveryAttempts: 0,
     planBatches: (operations) => operations.map((operation) => [operation]),
@@ -44,6 +53,7 @@ function sequentialStrategy(adapter: RobloxAdapter): RobloxTransactionOperationS
       await applyOperation(adapter, scope, operation);
       return { success: true, operationsAttempted: 1, operationsApplied: 1 };
     },
+    ...(prepareForMutation === undefined ? {} : { prepareForMutation }),
   };
 }
 
@@ -64,6 +74,7 @@ export function applyRobloxChangeSetBatched(
     createBatchTransactionStrategy(
       (scope, operations, context) => adapter.applyOperationBatch(scope, operations, context),
       planner,
+      preparationHook(adapter),
     ),
   );
 }

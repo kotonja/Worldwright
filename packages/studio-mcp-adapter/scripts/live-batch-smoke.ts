@@ -25,7 +25,6 @@ import {
   buildStudioApplyReceipt,
   chunkStudioBatchOperations,
   createViewportEvidence,
-  hashStudioBatchRequest,
   hashStudioTransportReport,
   stringifyStudioTransportReport,
   validateStudioTransportReport,
@@ -46,6 +45,7 @@ import { assertSandboxStudioProbe, type StudioSandboxProbe } from '../src/mcp/se
 import { stringifyStudioApplyReceipt } from '../src/normalize.js';
 import { applyStudioChangeSetWithLostBatchAcknowledgment } from '../src/testing.js';
 import { validateStudioApplyReceipt } from '../src/validate.js';
+import { buildBatchLiveShareableSummary } from './live-batch-summary.js';
 
 const EXPECTED_CREATE_CHANGE_SET_HASH =
   'cd1c323fdf18f66b1e4e1d0fc414320a5ddcca59bff36d82b0e78a16958c67fb';
@@ -56,7 +56,11 @@ const EXPECTED_CANONICAL_NOOP_CHANGE_SET_HASH =
 const EXPECTED_MODIFIED_SNAPSHOT_HASH =
   'd90337950c6347d149c9da7004dcbc681db58b338e083fbe92b27c9be6b252eb';
 const EXPECTED_CREATE_OPERATION_COUNT = 400;
+const EXPECTED_CREATE_CHUNK_COUNT = 13;
 const MAX_REVIEWED_CREATE_MUTATION_CALLS = 16;
+// Used only to account for the fixed-width private field during offline chunk
+// review. It is never claimed, sent to Studio, or emitted as evidence.
+const LEASE_WIDTH_SIZING_VALUE = '0'.repeat(64);
 
 const evidenceDirectory = fileURLToPath(
   new URL('../../../.worldwright/live-milestone-4/', import.meta.url),
@@ -98,13 +102,12 @@ interface ReviewedChunk {
   readonly chunkIndex: number;
   readonly operationCount: number;
   readonly chunkId: string;
-  readonly requestHash: string;
   readonly canonicalRequestBytes: number;
 }
 
 interface BatchLiveAuthorizationEnvelope {
   readonly schemaVersion: '0.1.0';
-  readonly sequence: 'worldwright-milestone-4-batch-live-smoke-v1';
+  readonly sequence: 'worldwright-milestone-4-batch-live-smoke-v2';
   readonly projectId: string;
   readonly createOperationCount: 400;
   readonly maxBatchOperations: number;
@@ -125,12 +128,13 @@ interface BatchLiveAuthorizationEnvelope {
   readonly captureMediaType: 'image/jpeg';
   readonly steps: readonly [
     'empty-sandbox-gate',
+    'transaction-scoped-sandbox-lease-claim',
     'chunked-400-create',
     'canonical-noop',
     'one-node-display-name-update',
     'exact-inverse-repair',
     'controlled-post-chunk-response-loss',
-    'exact-session-reconnect-and-sandbox-reprobe',
+    'exact-session-reconnect-and-lease-bound-snapshot',
     'exact-prefix-classification',
     'verified-conservative-compensation',
     'jpeg-viewport-capture',
@@ -314,16 +318,19 @@ async function loadReviewedSequence(): Promise<ReviewedSequence> {
   const chunks = chunkStudioBatchOperations({
     projectId: createChangeSet.preconditions.projectId,
     changeSetHash: hashRobloxChangeSet(createChangeSet),
+    sandboxLeaseId: LEASE_WIDTH_SIZING_VALUE,
     operations: batchOperations,
   });
-  if (chunks.length > MAX_REVIEWED_CREATE_MUTATION_CALLS) {
-    throw liveSmokeError('The reviewed 400-create transition exceeds 16 mutation chunks.');
+  if (
+    chunks.length !== EXPECTED_CREATE_CHUNK_COUNT ||
+    chunks.length > MAX_REVIEWED_CREATE_MUTATION_CALLS
+  ) {
+    throw liveSmokeError('The reviewed 400-create transition is not exactly 13 mutation chunks.');
   }
   const reviewedChunks = chunks.map((chunk) => ({
     chunkIndex: chunk.chunkIndex,
     operationCount: chunk.operationIds.length,
     chunkId: chunk.chunkId,
-    requestHash: hashStudioBatchRequest(chunk.request),
     canonicalRequestBytes: chunk.canonicalRequestBytes,
   }));
 
@@ -333,7 +340,7 @@ async function loadReviewedSequence(): Promise<ReviewedSequence> {
   }
   const envelope: BatchLiveAuthorizationEnvelope = {
     schemaVersion: '0.1.0',
-    sequence: 'worldwright-milestone-4-batch-live-smoke-v1',
+    sequence: 'worldwright-milestone-4-batch-live-smoke-v2',
     projectId: manifest.source.projectId,
     createOperationCount: EXPECTED_CREATE_OPERATION_COUNT,
     maxBatchOperations: STUDIO_MCP_MAX_BATCH_OPERATIONS,
@@ -354,12 +361,13 @@ async function loadReviewedSequence(): Promise<ReviewedSequence> {
     captureMediaType: STUDIO_MCP_VIEWPORT_MEDIA_TYPE,
     steps: [
       'empty-sandbox-gate',
+      'transaction-scoped-sandbox-lease-claim',
       'chunked-400-create',
       'canonical-noop',
       'one-node-display-name-update',
       'exact-inverse-repair',
       'controlled-post-chunk-response-loss',
-      'exact-session-reconnect-and-sandbox-reprobe',
+      'exact-session-reconnect-and-lease-bound-snapshot',
       'exact-prefix-classification',
       'verified-conservative-compensation',
       'jpeg-viewport-capture',
@@ -592,13 +600,20 @@ async function runLive(sequence: Readonly<ReviewedSequence>, studioId: string): 
     const liveChunks = chunkStudioBatchOperations({
       projectId: liveCreatePlan.preconditions.projectId,
       changeSetHash: hashRobloxChangeSet(liveCreatePlan),
+      sandboxLeaseId: LEASE_WIDTH_SIZING_VALUE,
       operations: buildStudioBatchOperations(liveCreatePlan.operations, initialSnapshot.nodes),
     });
-    const liveChunkHashes = liveChunks.map((chunk) => hashStudioBatchRequest(chunk.request));
-    const reviewedChunkHashes = sequence.envelope.createChunks.map((chunk) => chunk.requestHash);
     if (
       liveChunks.length !== sequence.envelope.createChunks.length ||
-      !liveChunkHashes.every((hash, index) => hash === reviewedChunkHashes[index])
+      !liveChunks.every((chunk, index) => {
+        const reviewed = sequence.envelope.createChunks[index];
+        return (
+          reviewed !== undefined &&
+          chunk.chunkId === reviewed.chunkId &&
+          chunk.canonicalRequestBytes === reviewed.canonicalRequestBytes &&
+          chunk.operationIds.length === reviewed.operationCount
+        );
+      })
     ) {
       throw liveSmokeError(
         'The live create chunk plan differs from the exact reviewed chunk sequence.',
@@ -620,6 +635,7 @@ async function runLive(sequence: Readonly<ReviewedSequence>, studioId: string): 
       createEvidence.transportReport.mutationExecuteCalls !==
         sequence.envelope.createChunks.length ||
       createEvidence.transportReport.mutationExecuteCalls > MAX_REVIEWED_CREATE_MUTATION_CALLS ||
+      createEvidence.transportReport.sandboxLeaseClaimCalls !== 1 ||
       createEvidence.transportReport.uncertainTransportEvents !== 0
     ) {
       throw liveSmokeError(
@@ -647,7 +663,8 @@ async function runLive(sequence: Readonly<ReviewedSequence>, studioId: string): 
     if (
       noOpEvidence.result.status !== 'noop' ||
       noOpEvidence.result.operationsAttempted !== 0 ||
-      noOpEvidence.transportReport.mutationExecuteCalls !== 0
+      noOpEvidence.transportReport.mutationExecuteCalls !== 0 ||
+      noOpEvidence.transportReport.sandboxLeaseClaimCalls !== 0
     ) {
       throw liveSmokeError('The canonical no-op transaction attempted a mutation.');
     }
@@ -664,6 +681,7 @@ async function runLive(sequence: Readonly<ReviewedSequence>, studioId: string): 
     if (
       updateEvidence.result.operationsAttempted !== 1 ||
       updateEvidence.transportReport.mutationExecuteCalls !== 1 ||
+      updateEvidence.transportReport.sandboxLeaseClaimCalls !== 1 ||
       updateEvidence.result.finalSnapshotHash !== sequence.envelope.modifiedSnapshotHash
     ) {
       throw liveSmokeError(
@@ -689,6 +707,7 @@ async function runLive(sequence: Readonly<ReviewedSequence>, studioId: string): 
     if (
       repairEvidence.result.operationsAttempted !== 1 ||
       repairEvidence.transportReport.mutationExecuteCalls !== 1 ||
+      repairEvidence.transportReport.sandboxLeaseClaimCalls !== 1 ||
       repairEvidence.result.finalSnapshotHash !== sequence.envelope.canonicalSnapshotHash
     ) {
       throw liveSmokeError('The exact inverse repair did not restore the canonical state.');
@@ -723,6 +742,7 @@ async function runLive(sequence: Readonly<ReviewedSequence>, studioId: string): 
       lostResponseEvidence.transportReport.uncertainTransportEvents !== 1 ||
       lostResponseEvidence.transportReport.reconnectAttempts !== 1 ||
       lostResponseEvidence.transportReport.reconnectsSucceeded !== 1 ||
+      lostResponseEvidence.transportReport.sandboxLeaseClaimCalls !== 1 ||
       lostResponseEvidence.transportReport.compensationOperationsAttempted !== 1 ||
       lostResponseEvidence.transportReport.compensationOperationsApplied !== 1 ||
       lostResponseEvidence.transportReport.compensationChunksAttempted !== 1 ||
@@ -813,26 +833,22 @@ async function runLive(sequence: Readonly<ReviewedSequence>, studioId: string): 
       noop: hashStudioApplyReceipt(noOpReceipt),
       lostResponseRollback: hashStudioApplyReceipt(rollbackReceipt),
     } as const;
-    const summary = {
-      schemaVersion: '0.1.0',
+    const summary = buildBatchLiveShareableSummary({
       placeId: probe.placeId,
       gameId: probe.gameId,
-      stoppedEditSandboxVerified: true,
-      exactStudioReselectedAfterUncertainty: true,
-      sandboxReverifiedAfterReconnect: true,
       authorizationEnvelopeHash: sequence.envelopeHash,
       createOperationCount: EXPECTED_CREATE_OPERATION_COUNT,
       createChunkCount: createEvidence.transportReport.chunksCompleted,
       createMutationExecuteCallCount: createEvidence.transportReport.mutationExecuteCalls,
       createChangeSetHash: sequence.envelope.createChangeSetHash,
-      createChunkHashes: sequence.envelope.createChunks.map((chunk) => chunk.requestHash),
+      createChunkIds: sequence.envelope.createChunks.map((chunk) => chunk.chunkId),
       expectedResultHash: sequence.envelope.canonicalSnapshotHash,
       observedResultHash: createdHash,
       noOpChangeSetHash: sequence.envelope.canonicalNoopChangeSetHash,
       noOpMutationExecuteCallCount: noOpEvidence.transportReport.mutationExecuteCalls,
+      noOpSandboxLeaseClaimCallCount: noOpEvidence.transportReport.sandboxLeaseClaimCalls,
       updateResultHash: updateEvidence.result.finalSnapshotHash,
       repairResultHash: repairEvidence.result.finalSnapshotHash,
-      controlledResponseLossForwardFailed: true,
       controlledResponseLossObservedHash: lostResult.observedFailureSnapshotHash,
       observedProgressClassification: observedProgress.classification,
       observedAppliedPrefixLength: observedProgress.appliedPrefixLength,
@@ -845,8 +861,7 @@ async function runLive(sequence: Readonly<ReviewedSequence>, studioId: string): 
       transportReportHashes,
       receiptHashes,
       viewportEvidence,
-      strictArtifactsValidated: true,
-    } as const;
+    });
 
     await writeReservedEvidence(
       evidenceTargets,

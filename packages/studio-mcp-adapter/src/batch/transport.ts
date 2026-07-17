@@ -28,6 +28,7 @@ import { buildStudioBatchBridgeProgram } from './program.js';
 import { buildStudioBatchOperations } from './request.js';
 import { parseStudioBatchResponse } from './response.js';
 import type { StudioBatchRequest } from './types.js';
+import type { StudioSandboxLeaseRecord } from '../sandbox-lease/types.js';
 
 interface PreparedStudioBatch {
   readonly request: Readonly<StudioBatchRequest>;
@@ -95,6 +96,7 @@ export class StudioBatchTransactionTransport {
   readonly #expectedNodes = new Map<string, RobloxManagedNode>();
   readonly #reconnectState: StudioReconnectState = createStudioReconnectState();
   readonly #counters: StudioTransportCounters;
+  #sandboxLeaseId: string | undefined;
   #discardNextForwardAcknowledgment: boolean;
   #discardNextCompensationAcknowledgment: boolean;
   #acknowledgmentDiscarded = false;
@@ -125,6 +127,7 @@ export class StudioBatchTransactionTransport {
       chunksPlanned: 0,
       chunksAttempted: 0,
       chunksCompleted: 0,
+      sandboxLeaseClaimCalls: 0,
       mutationExecuteCalls: 0,
       uncertainTransportEvents: 0,
       reconnectAttempts: 0,
@@ -142,6 +145,24 @@ export class StudioBatchTransactionTransport {
 
   public get expectedNodes(): Map<string, RobloxManagedNode> {
     return this.#expectedNodes;
+  }
+
+  public recordSandboxLeaseClaimCall(): void {
+    if (this.#counters.sandboxLeaseClaimCalls !== 0) {
+      throw new Error('Studio sandbox lease claim call was already recorded.');
+    }
+    this.#counters.sandboxLeaseClaimCalls = 1;
+  }
+
+  public bindSandboxLease(record: Readonly<StudioSandboxLeaseRecord>): void {
+    if (
+      this.#sandboxLeaseId !== undefined ||
+      record.projectId !== this.#projectId ||
+      record.changeSetHash !== this.#changeSetHash
+    ) {
+      throw new Error('Studio sandbox lease cannot be bound to this transaction.');
+    }
+    this.#sandboxLeaseId = record.leaseId;
   }
 
   public replaceObservedSnapshot(snapshot: Readonly<RobloxSnapshot>): void {
@@ -169,12 +190,16 @@ export class StudioBatchTransactionTransport {
     if (input.changeSetHash !== this.#changeSetHash) {
       throw new Error('Studio batch planner change-set identity mismatch.');
     }
+    if (this.#sandboxLeaseId === undefined) {
+      throw new Error('Studio batch planner requires the claimed sandbox lease.');
+    }
     const preparedOperations = buildStudioBatchOperations(input.operations, [
       ...this.#expectedNodes.values(),
     ]);
     const chunks = chunkStudioBatchOperations({
       projectId: this.#projectId,
       changeSetHash: input.changeSetHash,
+      sandboxLeaseId: this.#sandboxLeaseId,
       operations: preparedOperations,
     });
     if (input.phase === 'forward') {
@@ -299,6 +324,18 @@ export class StudioBatchTransactionTransport {
       this.#recordExpectedOperation(operations[index]!);
     }
 
+    if (
+      !response.ok &&
+      !response.localRestoreSucceeded &&
+      response.diagnostic.code === 'studio.sandbox_identity_mismatch' &&
+      response.operationsAttempted === 0 &&
+      response.operationsApplied === 0
+    ) {
+      if (context.phase === 'compensation') {
+        this.#counters.compensationChunksAttempted -= 1;
+      }
+      return failureOutcome(0, 0, operations[0], response.diagnostic.code);
+    }
     if (!response.ok && !response.localRestoreSucceeded) {
       await this.#lease.markUncertainMutation(this.#reconnectState);
       throw new Error('Studio batch local restoration was not proven.');

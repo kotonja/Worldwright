@@ -2,10 +2,15 @@ import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-import { hashRobloxChangeSet, planRobloxChangeSet } from '@worldwright/roblox-compiler';
+import {
+  hashRobloxChangeSet,
+  planRobloxChangeSet,
+  type RobloxSnapshot,
+} from '@worldwright/roblox-compiler';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { runStudioMcpCli, type StudioMcpCliDependencies } from '../src/cli.js';
+import { StudioAdapterError, studioDiagnostic } from '../src/diagnostics.js';
 import { connectStudioMcpForTesting } from '../src/testing.js';
 import {
   createFakeStudioAdapter,
@@ -64,12 +69,77 @@ async function dependencies(
   };
 }
 
+function progressDependencies(
+  observedSnapshot: Readonly<RobloxSnapshot>,
+  acceptedLeaseId: string,
+): {
+  readonly dependencies: StudioMcpCliDependencies;
+  readonly calls: Array<{
+    readonly scope: unknown;
+    readonly changeSetHash: string;
+    readonly leaseId: string;
+  }>;
+  readonly state: {
+    selectedStudioIds: string[];
+    readOnlyConnections: number;
+    closeCalls: number;
+  };
+} {
+  const calls: Array<{
+    readonly scope: unknown;
+    readonly changeSetHash: string;
+    readonly leaseId: string;
+  }> = [];
+  const state = { selectedStudioIds: [] as string[], readOnlyConnections: 0, closeCalls: 0 };
+  const adapter = {
+    async readLeaseBoundSnapshot(
+      scope: unknown,
+      changeSetHash: string,
+      leaseId: string,
+    ): Promise<RobloxSnapshot> {
+      calls.push({ scope: structuredClone(scope), changeSetHash, leaseId });
+      if (leaseId !== acceptedLeaseId) {
+        throw new StudioAdapterError([
+          studioDiagnostic(
+            'studio.sandbox_identity_mismatch',
+            '/sandboxLease',
+            'The current Studio sandbox does not match the requested transaction lease.',
+          ),
+        ]);
+      }
+      return structuredClone(observedSnapshot);
+    },
+    async close(): Promise<void> {
+      state.closeCalls += 1;
+    },
+  } as unknown as Awaited<ReturnType<StudioMcpCliDependencies['connectReadOnlyAdapter']>>;
+  return {
+    calls,
+    state,
+    dependencies: {
+      connectClient: async () => {
+        throw new Error('Unexpected client connection.');
+      },
+      connectSelectedAdapter: async () => {
+        throw new Error('Unexpected mutation-authorized adapter connection.');
+      },
+      connectReadOnlyAdapter: async (studioId) => {
+        if (studioId === undefined) throw new Error('Expected an exact Studio ID.');
+        state.selectedStudioIds.push(studioId);
+        state.readOnlyConnections += 1;
+        return adapter;
+      },
+    },
+  };
+}
+
 describe('Studio MCP CLI', () => {
   it('documents usage and rejects unknown or missing arguments without a stack trace', async () => {
     const help = ioCapture();
     expect(await runStudioMcpCli(['--help'], help.io)).toBe(0);
     expect(help.stdout.join('')).toContain('studio-mcp apply');
     expect(help.stdout.join('')).toContain('studio-mcp progress');
+    expect(help.stdout.join('')).toContain('--sandbox-lease-id <64-lowercase-hex>');
 
     const invalid = ioCapture();
     expect(await runStudioMcpCli(['apply', '--studio-id', 'studio-test'], invalid.io)).toBe(2);
@@ -98,7 +168,8 @@ describe('Studio MCP CLI', () => {
     const changeSetPath = join(directory, 'change-set.json');
     await writeFile(basePath, `${JSON.stringify(base, null, 2)}\n`, 'utf8');
     await writeFile(changeSetPath, `${JSON.stringify(plan.changeSet, null, 2)}\n`, 'utf8');
-    const fake = await dependencies();
+    const sandboxLeaseId = 'a'.repeat(64);
+    const progress = progressDependencies(base, sandboxLeaseId);
     const output = ioCapture();
     const exitCode = await runStudioMcpCli(
       [
@@ -109,10 +180,12 @@ describe('Studio MCP CLI', () => {
         basePath,
         '--change-set',
         changeSetPath,
+        '--sandbox-lease-id',
+        sandboxLeaseId,
         '--json',
       ],
       output.io,
-      fake.dependencies,
+      progress.dependencies,
     );
     if (exitCode !== 0) {
       throw new Error(`Progress CLI failed: ${output.stderr.join('')}${output.stdout.join('')}`);
@@ -121,15 +194,23 @@ describe('Studio MCP CLI', () => {
       success: true,
       progress: { classification: 'base', appliedPrefixLength: 0 },
     });
-    expect(fake.protocol.nodes.size).toBe(0);
-    expect(
-      fake.protocol.calls.filter(
-        (call) =>
-          call.tool === 'execute_luau' &&
-          typeof call.argumentsValue['code'] === 'string' &&
-          call.argumentsValue['code'].includes('"action": "apply_chunk"'),
-      ),
-    ).toHaveLength(0);
+    expect(output.stdout.join('')).not.toContain(sandboxLeaseId);
+    expect(output.stderr.join('')).not.toContain(sandboxLeaseId);
+    expect(progress.calls).toEqual([
+      {
+        scope: {
+          projectId: plan.changeSet.preconditions.projectId,
+          target: plan.changeSet.preconditions.target,
+        },
+        changeSetHash: hashRobloxChangeSet(plan.changeSet),
+        leaseId: sandboxLeaseId,
+      },
+    ]);
+    expect(progress.state).toEqual({
+      selectedStudioIds: ['studio-test'],
+      readOnlyConnections: 1,
+      closeCalls: 1,
+    });
   });
 
   it.each([
@@ -156,7 +237,13 @@ describe('Studio MCP CLI', () => {
       const changeSetPath = join(directory, 'change-set.json');
       await writeFile(basePath, `${JSON.stringify(base, null, 2)}\n`, 'utf8');
       await writeFile(changeSetPath, `${JSON.stringify(plan.changeSet, null, 2)}\n`, 'utf8');
-      const fake = await dependencies({ initialNodes });
+      const observed: RobloxSnapshot = {
+        ...base,
+        rootNodeId: first.node.id,
+        nodes: structuredClone(initialNodes),
+      };
+      const sandboxLeaseId = 'a'.repeat(64);
+      const progress = progressDependencies(observed, sandboxLeaseId);
       const output = ioCapture();
       expect(
         await runStudioMcpCli(
@@ -168,26 +255,119 @@ describe('Studio MCP CLI', () => {
             basePath,
             '--change-set',
             changeSetPath,
+            '--sandbox-lease-id',
+            sandboxLeaseId,
             '--json',
           ],
           output.io,
-          fake.dependencies,
+          progress.dependencies,
         ),
       ).toBe(exitCode);
       expect(JSON.parse(output.stdout.join(''))).toMatchObject({
         success: exitCode === 0,
         progress: { classification },
       });
-      expect(
-        fake.protocol.calls.filter(
-          (call) =>
-            call.tool === 'execute_luau' &&
-            typeof call.argumentsValue['code'] === 'string' &&
-            call.argumentsValue['code'].includes('"action": "apply_chunk"'),
-        ),
-      ).toHaveLength(0);
+      expect(output.stdout.join('')).not.toContain(sandboxLeaseId);
+      expect(output.stderr.join('')).not.toContain(sandboxLeaseId);
+      expect(progress.calls).toHaveLength(1);
+      expect(progress.state.readOnlyConnections).toBe(1);
     },
   );
+
+  it('rejects missing or malformed progress lease IDs before connecting', async () => {
+    const directory = await tempDirectory();
+    const manifest = loadCourtyardManifest();
+    const base = emptySnapshot(manifest);
+    const plan = planRobloxChangeSet(base, manifest);
+    if (!plan.success) throw new Error('Fixture planning failed.');
+    const basePath = join(directory, 'base.snapshot.json');
+    const changeSetPath = join(directory, 'change-set.json');
+    await writeFile(basePath, `${JSON.stringify(base, null, 2)}\n`, 'utf8');
+    await writeFile(changeSetPath, `${JSON.stringify(plan.changeSet, null, 2)}\n`, 'utf8');
+    const acceptedLeaseId = 'a'.repeat(64);
+    const progress = progressDependencies(base, acceptedLeaseId);
+    const baseArgs = [
+      'progress',
+      '--studio-id',
+      'studio-test',
+      '--base-snapshot',
+      basePath,
+      '--change-set',
+      changeSetPath,
+    ] as const;
+
+    for (const candidate of [undefined, '', 'A'.repeat(64), 'a'.repeat(63), `${'a'.repeat(63)}g`]) {
+      const output = ioCapture();
+      const args = [
+        ...baseArgs,
+        ...(candidate === undefined ? [] : ['--sandbox-lease-id', candidate]),
+        '--json',
+      ];
+      expect(await runStudioMcpCli(args, output.io, progress.dependencies)).toBe(2);
+      expect(JSON.parse(output.stdout.join(''))).toMatchObject({
+        success: false,
+        diagnostics: [expect.objectContaining({ code: 'studio.usage_invalid' })],
+      });
+      expect(output.stdout.join('')).not.toContain(acceptedLeaseId);
+      if (candidate !== undefined && candidate.length > 0) {
+        expect(output.stdout.join('')).not.toContain(candidate);
+        expect(output.stderr.join('')).not.toContain(candidate);
+      }
+    }
+    expect(progress.calls).toHaveLength(0);
+    expect(progress.state).toEqual({
+      selectedStudioIds: [],
+      readOnlyConnections: 0,
+      closeCalls: 0,
+    });
+  });
+
+  it('returns unsafe domain status for a mismatched progress lease without exposing either ID', async () => {
+    const directory = await tempDirectory();
+    const manifest = loadCourtyardManifest();
+    const base = emptySnapshot(manifest);
+    const plan = planRobloxChangeSet(base, manifest);
+    if (!plan.success) throw new Error('Fixture planning failed.');
+    const basePath = join(directory, 'base.snapshot.json');
+    const changeSetPath = join(directory, 'change-set.json');
+    await writeFile(basePath, `${JSON.stringify(base, null, 2)}\n`, 'utf8');
+    await writeFile(changeSetPath, `${JSON.stringify(plan.changeSet, null, 2)}\n`, 'utf8');
+    const acceptedLeaseId = 'a'.repeat(64);
+    const suppliedLeaseId = 'b'.repeat(64);
+    const progress = progressDependencies(base, acceptedLeaseId);
+    const output = ioCapture();
+
+    expect(
+      await runStudioMcpCli(
+        [
+          'progress',
+          '--studio-id',
+          'studio-test',
+          '--base-snapshot',
+          basePath,
+          '--change-set',
+          changeSetPath,
+          '--sandbox-lease-id',
+          suppliedLeaseId,
+          '--json',
+        ],
+        output.io,
+        progress.dependencies,
+      ),
+    ).toBe(1);
+    expect(JSON.parse(output.stdout.join(''))).toMatchObject({
+      success: false,
+      diagnostics: [expect.objectContaining({ code: 'studio.sandbox_identity_mismatch' })],
+    });
+    expect(`${output.stdout.join('')}${output.stderr.join('')}`).not.toContain(acceptedLeaseId);
+    expect(`${output.stdout.join('')}${output.stderr.join('')}`).not.toContain(suppliedLeaseId);
+    expect(progress.calls).toHaveLength(1);
+    expect(progress.state).toEqual({
+      selectedStudioIds: ['studio-test'],
+      readOnlyConnections: 1,
+      closeCalls: 1,
+    });
+  });
 
   it('lists sanitized sessions and emits canonical JSON', async () => {
     const fake = await dependencies();
@@ -255,7 +435,11 @@ describe('Studio MCP CLI', () => {
     const changeSet = JSON.parse(await readFile(changeSetPath, 'utf8'));
     const changeSetHash = hashRobloxChangeSet(changeSet);
 
-    const applyFake = await dependencies({}, evidenceDirectory);
+    const privateLeaseId = '0123456789abcdef'.repeat(4);
+    const applyFake = await dependencies(
+      { leaseIdFactory: () => privateLeaseId },
+      evidenceDirectory,
+    );
     const receiptPath = join(evidenceDirectory, 'receipt.json');
     const applyIo = ioCapture();
     expect(
@@ -276,7 +460,8 @@ describe('Studio MCP CLI', () => {
         applyFake.dependencies,
       ),
     ).toBe(0);
-    expect(JSON.parse(await readFile(receiptPath, 'utf8'))).toMatchObject({ status: 'applied' });
+    const receiptText = await readFile(receiptPath, 'utf8');
+    expect(JSON.parse(receiptText)).toMatchObject({ status: 'applied' });
     expect(JSON.parse(applyIo.stdout.join(''))).toMatchObject({
       success: true,
       transactionSucceeded: true,
@@ -289,6 +474,9 @@ describe('Studio MCP CLI', () => {
       },
       transportReportHash: expect.stringMatching(/^[0-9a-f]{64}$/u),
     });
+    expect(`${applyIo.stdout.join('')}${applyIo.stderr.join('')}${receiptText}`).not.toContain(
+      privateLeaseId,
+    );
 
     const unwritableReceipt = join(evidenceDirectory, 'existing-receipt.json');
     await writeFile(unwritableReceipt, 'preserve me', 'utf8');

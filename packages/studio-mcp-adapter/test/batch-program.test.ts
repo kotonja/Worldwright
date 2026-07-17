@@ -18,6 +18,7 @@ function fixtureRequest() {
   return chunkStudioBatchOperations({
     projectId: manifest.source.projectId,
     changeSetHash: 'a'.repeat(64),
+    sandboxLeaseId: 'c'.repeat(64),
     operations: buildStudioBatchOperations(plan.changeSet.operations, []),
   })[0]!.request;
 }
@@ -27,6 +28,11 @@ describe('fixed Studio batch program', () => {
     const program = buildStudioBatchBridgeProgram(fixtureRequest());
     expect(program.source).not.toContain('__WORLDWRIGHT_VALIDATED_PAYLOAD__');
     expect(program.source).toContain('local MAX_BATCH_OPERATIONS = 32');
+    expect(program.source).toContain('sandboxLeaseId = true');
+    expect(program.source).toContain('or not isLowerSha256(value.sandboxLeaseId)');
+    expect(program.source).toContain('batchLease.record.leaseId ~= batchPayload.sandboxLeaseId');
+    expect(program.source).toContain('local function batchIdentityFailure()');
+    expect(program.source).toContain('code = "studio.sandbox_identity_mismatch"');
     expect(program.source).toContain('local function batchPayloadValid');
     expect(program.source).toContain('local function isSafeStoredNodeShape');
     expect(program.source).toContain('local function verifyInstance');
@@ -86,6 +92,7 @@ describe('fixed Studio batch program', () => {
     const hostile = chunkStudioBatchOperations({
       projectId: first.node.attributes.WorldwrightProjectId,
       changeSetHash: 'b'.repeat(64),
+      sandboxLeaseId: 'c'.repeat(64),
       operations,
     })[0]!.request;
     const firstProgram = buildStudioBatchBridgeProgram(hostile);

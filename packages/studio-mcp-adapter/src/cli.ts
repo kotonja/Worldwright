@@ -48,7 +48,7 @@ import { buildStudioApplyReceipt } from './receipt.js';
 const USAGE = `Usage:
   studio-mcp probe [--studio-id <id>] [--json]
   studio-mcp snapshot [--studio-id <id>] --project-id <project-id> [--output <path>] [--json]
-  studio-mcp progress --studio-id <id> --base-snapshot <path> --change-set <path> [--json]
+  studio-mcp progress --studio-id <id> --base-snapshot <path> --change-set <path> --sandbox-lease-id <64-lowercase-hex> [--json]
   studio-mcp plan-live [--studio-id <id>] --manifest <path> [--output <path>] [--json]
   studio-mcp apply --studio-id <id> --change-set <path> --confirm <full-sha256> [--receipt-output <path>] [--json]
   studio-mcp verify --studio-id <id> --manifest <path> [--json]
@@ -353,17 +353,29 @@ async function runProgress(
   io: CliIo,
   dependencies: StudioMcpCliDependencies,
 ): Promise<number> {
-  const options = parseOptions(args, new Set(['studio-id', 'base-snapshot', 'change-set']));
+  const options = parseOptions(
+    args,
+    new Set(['studio-id', 'base-snapshot', 'change-set', 'sandbox-lease-id']),
+  );
   const studioId = required(options, 'studio-id');
+  const sandboxLeaseId = required(options, 'sandbox-lease-id');
+  if (!/^[0-9a-f]{64}$/u.test(sandboxLeaseId)) {
+    usageError('The --sandbox-lease-id value must be exactly 64 lowercase hexadecimal characters.');
+  }
   const baseSnapshot = await loadSnapshot(required(options, 'base-snapshot'));
   const changeSet = await loadChangeSet(required(options, 'change-set'));
+  const changeSetHash = hashRobloxChangeSet(changeSet);
   let adapter: StudioMcpRobloxAdapter | undefined;
   try {
     adapter = await dependencies.connectReadOnlyAdapter(studioId);
-    const observed = await adapter.readSnapshot({
-      projectId: changeSet.preconditions.projectId,
-      target: changeSet.preconditions.target,
-    });
+    const observed = await adapter.readLeaseBoundSnapshot(
+      {
+        projectId: changeSet.preconditions.projectId,
+        target: changeSet.preconditions.target,
+      },
+      changeSetHash,
+      sandboxLeaseId,
+    );
     const result = classifyRobloxChangeSetProgress(baseSnapshot, observed, changeSet);
     const report = buildStudioProgressReport(result);
     const reportHash = hashStudioProgressReport(report);
@@ -487,6 +499,8 @@ async function runApply(
         ? chunkStudioBatchOperations({
             projectId: changeSet.preconditions.projectId,
             changeSetHash,
+            // Fixed-width sizing only; this request plan is never sent.
+            sandboxLeaseId: '0'.repeat(64),
             operations: buildStudioBatchOperations(changeSet.operations, previewSnapshot.nodes),
           }).length
         : 0;
@@ -550,7 +564,7 @@ async function runApply(
       } as unknown as JsonValue);
     } else {
       io.writeStdout(
-        `Transaction status: ${receipt.status}\nOperations attempted: ${receipt.operationsAttempted}\nChunks attempted: ${String(transportReport.chunksAttempted)}\nMutation execute calls: ${String(transportReport.mutationExecuteCalls)}\nReconnect attempts: ${String(transportReport.reconnectAttempts)}\nCompensation restored base: ${String(result.success ? false : result.rollback.attempted && result.rollback.succeeded)}\nReceipt hash: ${receiptHash}\nTransport report hash: ${transportReportHash}\n`,
+        `Transaction status: ${receipt.status}\nOperations attempted: ${receipt.operationsAttempted}\nChunks attempted: ${String(transportReport.chunksAttempted)}\nSandbox lease claim calls: ${String(transportReport.sandboxLeaseClaimCalls)}\nMutation execute calls: ${String(transportReport.mutationExecuteCalls)}\nReconnect attempts: ${String(transportReport.reconnectAttempts)}\nCompensation restored base: ${String(result.success ? false : result.rollback.attempted && result.rollback.succeeded)}\nReceipt hash: ${receiptHash}\nTransport report hash: ${transportReportHash}\n`,
       );
       if (receiptWriteDiagnostic !== undefined) {
         io.writeStderr(`${receiptWriteDiagnostic.code}: ${receiptWriteDiagnostic.message}\n`);

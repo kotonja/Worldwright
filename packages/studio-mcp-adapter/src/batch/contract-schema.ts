@@ -9,10 +9,10 @@ import {
   STUDIO_MCP_MAX_NODE_STATE_BYTES,
 } from '../constants.js';
 import {
-  StudioBridgeDiagnosticSchema,
   StudioBridgeManagedNodeSchema,
   StudioBridgeParentStateSchema,
   StudioIdentifierSchema,
+  StudioProtocolDiagnosticSchema,
   StudioSha256Schema,
 } from '../contract-schema.js';
 
@@ -78,6 +78,7 @@ export const StudioBatchRequestSchema = Type.Object(
     action: Type.Literal('apply_chunk'),
     projectId: StudioIdentifierSchema,
     changeSetHash: StudioSha256Schema,
+    sandboxLeaseId: StudioSha256Schema,
     chunkId: StudioSha256Schema,
     chunkIndex: Type.Integer({
       minimum: 0,
@@ -125,7 +126,7 @@ export const StudioBatchFailureResponseSchema = Type.Object(
     ok: Type.Literal(false),
     failedOperationId: Type.Optional(StudioBatchOperationIdSchema),
     localRestoreSucceeded: Type.Boolean(),
-    diagnostic: StudioBridgeDiagnosticSchema,
+    diagnostic: StudioProtocolDiagnosticSchema,
   },
   { additionalProperties: false },
 );

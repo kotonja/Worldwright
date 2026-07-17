@@ -4,10 +4,11 @@
 
 Milestone 3 added `@worldwright/studio-mcp-adapter`, Worldwright's first deliberately bounded live
 Roblox integration. Milestone 4 retains that boundary and adds deterministic fixed batch mutation,
-client poisoning, exact-session reconnection, and observation-gated compensation. The package
-connects to Roblox Studio's built-in MCP server over a locally started stdio process, observes one
-exact Studio session, and implements the Roblox compiler's sequential and optional batch adapter
-interfaces with fixed Edit-mode Luau bridge programs.
+client poisoning, exact-session reconnection, transaction-scoped unsaved-DataModel leases, and
+observation-gated compensation. The package connects to Roblox Studio's built-in MCP server over a
+locally started stdio process, observes one exact Studio session, and implements the Roblox
+compiler's sequential and optional batch adapter interfaces with fixed Edit-mode Luau bridge
+programs.
 
 The package is not a general Studio automation client. It can inspect or mutate managed project
 state only in an unsaved local sandbox where `game.PlaceId == 0`, `game.GameId == 0`, and the data
@@ -366,9 +367,12 @@ equals the exact initial hash. Creator edits can make rollback inadmissible; Wor
 preserves the uncertain state and reports failure instead of overwriting it.
 
 An uncertain mutation response poisons and closes the current MCP client. The next observation may
-use a new default local-stdio process only after exact original Studio-ID selection and a renewed
-unsaved stopped-sandbox probe. The uncertain chunk is never retried, and version `0.1.0` never
-automatically resumes forward work. See
+use a new default local-stdio process only after exact original Studio-ID selection, a renewed
+unsaved stopped-sandbox probe, and one same-call verification of the original transaction lease plus
+its complete bound snapshot. Studio ID identifies the target Studio but is not sufficient identity
+for the unsaved DataModel loaded inside it. A lease mismatch blocks classification and compensation.
+The uncertain chunk is never retried, and Studio Batch Protocol `0.1.0` never automatically resumes
+forward work. See
 [Studio transaction batching and reconnectable recovery](studio-transaction-batching.md) for the
 current transport design.
 

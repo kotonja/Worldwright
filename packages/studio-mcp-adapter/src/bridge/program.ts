@@ -3,8 +3,14 @@ import { Buffer } from 'node:buffer';
 import type { StudioBatchRequest } from '../batch/types.js';
 import { stringifyStudioBatchRequest } from '../batch/normalize.js';
 import { validateStudioBatchRequest } from '../batch/validate.js';
-import { STUDIO_BATCH_RESPONSE_PREFIX } from '../constants.js';
+import {
+  STUDIO_BATCH_RESPONSE_PREFIX,
+  STUDIO_SANDBOX_LEASE_RESPONSE_PREFIX,
+} from '../constants.js';
 import { StudioAdapterError } from '../diagnostics.js';
+import { stringifyStudioSandboxLeaseRequest } from '../sandbox-lease/normalize.js';
+import type { StudioSandboxLeaseRequest } from '../sandbox-lease/types.js';
+import { validateStudioSandboxLeaseRequest } from '../sandbox-lease/validate.js';
 import type { StudioBridgeRequest } from '../types.js';
 import {
   issueFixedStudioBatchProgram,
@@ -313,6 +319,52 @@ local function isLowerSha256(value)
   return typeof(value) == "string"
     and #value == 64
     and string.match(value, "^[0-9a-f]+$") ~= nil
+end
+
+local SANDBOX_LEASE_ATTRIBUTE_NAME = "WorldwrightStudioSandboxLeaseJson"
+local SANDBOX_LEASE_RECORD_VERSION = "0.1.0"
+local MAX_SANDBOX_LEASE_BYTES = 1024
+local SANDBOX_LEASE_RECORD_KEYS = {
+  schemaVersion = true,
+  leaseId = true,
+  projectId = true,
+  changeSetHash = true,
+}
+
+local function sandboxLeaseRecordValid(record)
+  return typeof(record) == "table"
+    and hasOnlyKeys(record, SANDBOX_LEASE_RECORD_KEYS)
+    and record.schemaVersion == SANDBOX_LEASE_RECORD_VERSION
+    and isLowerSha256(record.leaseId)
+    and isIdentifier(record.projectId)
+    and isLowerSha256(record.changeSetHash)
+end
+
+local function canonicalSandboxLeaseJson(record)
+  return "{\n"
+    .. "  \"changeSetHash\": " .. HttpService:JSONEncode(record.changeSetHash) .. ",\n"
+    .. "  \"leaseId\": " .. HttpService:JSONEncode(record.leaseId) .. ",\n"
+    .. "  \"projectId\": " .. HttpService:JSONEncode(record.projectId) .. ",\n"
+    .. "  \"schemaVersion\": " .. HttpService:JSONEncode(record.schemaVersion) .. "\n"
+    .. "}\n"
+end
+
+local function readSandboxLeaseState()
+  local readSucceeded, raw = pcall(function()
+    return Workspace:GetAttribute(SANDBOX_LEASE_ATTRIBUTE_NAME)
+  end)
+  if not readSucceeded then return nil, "studio.sandbox_lease_invalid" end
+  if raw == nil then return { present = false }, nil end
+  if typeof(raw) ~= "string" or raw == "" or #raw > MAX_SANDBOX_LEASE_BYTES then
+    return nil, "studio.sandbox_lease_invalid"
+  end
+  local decoded, record = pcall(function() return HttpService:JSONDecode(raw) end)
+  if not decoded
+    or not sandboxLeaseRecordValid(record)
+    or canonicalSandboxLeaseJson(record) ~= raw then
+    return nil, "studio.sandbox_lease_invalid"
+  end
+  return { present = true, record = record, raw = raw }, nil
 end
 
 local UINT32_MODULUS = 4294967296
@@ -1545,6 +1597,123 @@ if payload.action == "update" then return updateAction() end
 if payload.action == "delete" then return deleteAction() end
 return failure("studio.response_invalid", "Unsupported fixed bridge action.")`;
 
+const FIXED_SANDBOX_LEASE_DISPATCH = String.raw`
+local LEASE_READ_REQUEST_KEYS = { protocolVersion = true, action = true }
+local LEASE_CLAIM_REQUEST_KEYS = {
+  protocolVersion = true,
+  action = true,
+  expectedLeasePresent = true,
+  expectedLease = true,
+  newLease = true,
+}
+local LEASE_BOUND_SNAPSHOT_REQUEST_KEYS = {
+  protocolVersion = true,
+  action = true,
+  lease = true,
+}
+
+local function sandboxLeasePayloadValid(value)
+  if typeof(value) ~= "table" or value.protocolVersion ~= PROTOCOL_VERSION then return false end
+  if value.action == "read_lease" then
+    return hasOnlyKeys(value, LEASE_READ_REQUEST_KEYS)
+  end
+  if value.action == "claim_lease" then
+    local expectedPresent = value.expectedLeasePresent == true
+    local expectedAbsent = value.expectedLeasePresent == false
+    return hasOnlyKeys(value, LEASE_CLAIM_REQUEST_KEYS)
+      and (expectedPresent or expectedAbsent)
+      and ((expectedPresent and sandboxLeaseRecordValid(value.expectedLease))
+        or (expectedAbsent and value.expectedLease == nil))
+      and sandboxLeaseRecordValid(value.newLease)
+      and (value.expectedLease == nil or value.expectedLease.leaseId ~= value.newLease.leaseId)
+  end
+  if value.action == "bound_snapshot" then
+    return hasOnlyKeys(value, LEASE_BOUND_SNAPSHOT_REQUEST_KEYS)
+      and sandboxLeaseRecordValid(value.lease)
+  end
+  return false
+end
+
+local function readLeaseAction()
+  local current, currentError = readSandboxLeaseState()
+  if currentError ~= nil then
+    return failure(
+      "studio.sandbox_lease_invalid",
+      "Existing Studio sandbox lease metadata is invalid."
+    )
+  end
+  if not current.present then return success({ leasePresent = false }) end
+  return success({ leasePresent = true, lease = current.record })
+end
+
+local function claimLeaseAction()
+  local current, currentError = readSandboxLeaseState()
+  if currentError ~= nil then
+    return failure(
+      "studio.sandbox_lease_invalid",
+      "Existing Studio sandbox lease metadata is invalid."
+    )
+  end
+  local expectedMatches = false
+  if payload.expectedLeasePresent then
+    expectedMatches = current.present
+      and current.raw == canonicalSandboxLeaseJson(payload.expectedLease)
+  else
+    expectedMatches = not current.present
+  end
+  if not expectedMatches then
+    return failure(
+      "studio.sandbox_lease_conflict",
+      "Studio sandbox lease changed before the claim could be applied."
+    )
+  end
+
+  local newJson = canonicalSandboxLeaseJson(payload.newLease)
+  local writeSucceeded = pcall(function()
+    Workspace:SetAttribute(SANDBOX_LEASE_ATTRIBUTE_NAME, newJson)
+  end)
+  if not writeSucceeded then
+    return failure(
+      "studio.sandbox_lease_conflict",
+      "Studio sandbox lease claim could not be written and verified."
+    )
+  end
+  local verified, verificationError = readSandboxLeaseState()
+  if verificationError ~= nil
+    or not verified.present
+    or verified.raw ~= newJson then
+    return failure(
+      "studio.sandbox_lease_conflict",
+      "Studio sandbox lease claim could not be written and verified."
+    )
+  end
+  return success({})
+end
+
+local function boundSnapshotAction()
+  local current, currentError = readSandboxLeaseState()
+  if currentError ~= nil
+    or not current.present
+    or current.raw ~= canonicalSandboxLeaseJson(payload.lease) then
+    return failure(
+      "studio.sandbox_identity_mismatch",
+      "The selected Studio no longer contains the transaction sandbox."
+    )
+  end
+  payload.projectId = payload.lease.projectId
+  return snapshotAction()
+end
+
+if not sandboxLeasePayloadValid(payload) then
+  return failure("studio.response_invalid", "Studio sandbox lease payload is invalid.")
+end
+local gateFailure = sandboxGate()
+if gateFailure ~= nil then return gateFailure end
+if payload.action == "read_lease" then return readLeaseAction() end
+if payload.action == "claim_lease" then return claimLeaseAction() end
+if payload.action == "bound_snapshot" then return boundSnapshotAction() end
+return failure("studio.response_invalid", "Unsupported fixed sandbox lease action.")`;
+
 const FIXED_BATCH_DISPATCH = String.raw`
 local MAX_BATCH_OPERATIONS = 32
 local MAX_BATCH_PAYLOAD_BYTES = 3 * 1024 * 1024
@@ -1554,6 +1723,7 @@ local BATCH_KEYS = {
   action = true,
   projectId = true,
   changeSetHash = true,
+  sandboxLeaseId = true,
   chunkId = true,
   chunkIndex = true,
   operations = true,
@@ -1639,6 +1809,20 @@ end
 
 local function batchInputFailure(code, message)
   return batchFailure(0, 0, array(), { code = code, message = message }, true, nil)
+end
+
+local function batchIdentityFailure()
+  return batchFailure(
+    0,
+    0,
+    array(),
+    {
+      code = "studio.sandbox_identity_mismatch",
+      message = "The selected Studio no longer contains the transaction sandbox.",
+    },
+    false,
+    nil
+  )
 end
 
 local function isDenseArray(value)
@@ -1747,6 +1931,7 @@ local function batchPayloadValid(value)
     or value.action ~= "apply_chunk"
     or not isIdentifier(value.projectId)
     or not isLowerSha256(value.changeSetHash)
+    or not isLowerSha256(value.sandboxLeaseId)
     or not isLowerSha256(value.chunkId)
     or not isFiniteNumber(value.chunkIndex)
     or value.chunkIndex % 1 ~= 0
@@ -1852,6 +2037,16 @@ if game.PlaceId ~= 0 or game.GameId ~= 0 then
 end
 if RunService:IsRunning() then
   return batchInputFailure("studio.edit_mode_required", "Worldwright requires stopped Edit mode.")
+end
+
+local batchLease, batchLeaseError = readSandboxLeaseState()
+if batchLeaseError ~= nil
+  or not batchLease.present
+  or batchLease.record.schemaVersion ~= SANDBOX_LEASE_RECORD_VERSION
+  or batchLease.record.leaseId ~= batchPayload.sandboxLeaseId
+  or batchLease.record.projectId ~= batchPayload.projectId
+  or batchLease.record.changeSetHash ~= batchPayload.changeSetHash then
+  return batchIdentityFailure()
 end
 
 local batchRoot, batchIndex, batchIndexError = buildProjectIndex(batchPayload.projectId)
@@ -1991,6 +2186,25 @@ function fixedStudioBatchTemplate(): string {
   );
 }
 
+function fixedStudioSandboxLeaseTemplate(): string {
+  const responseDeclaration = String.raw`local RESPONSE_PREFIX = "WORLDWRIGHT_STUDIO_BRIDGE_V1\n"`;
+  const leaseResponseDeclaration = `local RESPONSE_PREFIX = ${JSON.stringify(STUDIO_SANDBOX_LEASE_RESPONSE_PREFIX)}`;
+  const responseIndex = FIXED_STUDIO_BRIDGE.indexOf(responseDeclaration);
+  const dispatchIndex = FIXED_STUDIO_BRIDGE.indexOf(FIXED_SINGLE_DISPATCH);
+  if (
+    responseIndex < 0 ||
+    FIXED_STUDIO_BRIDGE.indexOf(responseDeclaration, responseIndex + 1) >= 0 ||
+    dispatchIndex < 0 ||
+    FIXED_STUDIO_BRIDGE.indexOf(FIXED_SINGLE_DISPATCH, dispatchIndex + 1) >= 0
+  ) {
+    throw new Error('Fixed Studio sandbox lease composition invariant failed.');
+  }
+  return FIXED_STUDIO_BRIDGE.replace(responseDeclaration, leaseResponseDeclaration).replace(
+    FIXED_SINGLE_DISPATCH,
+    FIXED_SANDBOX_LEASE_DISPATCH,
+  );
+}
+
 export function buildStudioBatchBridgeProgram(requestInput: unknown): FixedStudioBridgeProgram {
   const validation = validateStudioBatchRequest(requestInput);
   if (!validation.valid) throw new StudioAdapterError(validation.diagnostics);
@@ -2011,6 +2225,30 @@ function fixedStudioBatchSource(canonicalRequestJson: string): string {
   }
   return template.replace(PAYLOAD_MARKER, () => encoded);
 }
+
+function fixedStudioSandboxLeaseSource(canonicalRequestJson: string): string {
+  const encoded = encodeLuauLongBracketLiteral(canonicalRequestJson);
+  const template = fixedStudioSandboxLeaseTemplate();
+  const markerIndex = template.indexOf(PAYLOAD_MARKER);
+  if (
+    markerIndex < 0 ||
+    template.indexOf(PAYLOAD_MARKER, markerIndex + PAYLOAD_MARKER.length) >= 0
+  ) {
+    throw new Error('Fixed Studio sandbox lease payload marker invariant failed.');
+  }
+  return template.replace(PAYLOAD_MARKER, () => encoded);
+}
+
+export function buildStudioSandboxLeaseProgram(requestInput: unknown): FixedStudioBridgeProgram {
+  const validation = validateStudioSandboxLeaseRequest(requestInput);
+  if (!validation.valid) throw new StudioAdapterError(validation.diagnostics);
+  const request: StudioSandboxLeaseRequest = validation.value;
+  return issueFixedStudioBridgeProgram(
+    fixedStudioSandboxLeaseSource(stringifyStudioSandboxLeaseRequest(request)),
+  );
+}
+
+export const buildSandboxLeaseProgram = buildStudioSandboxLeaseProgram;
 
 /** @internal Exact conservative size of the encoded MCP arguments with the longer source key. */
 export function measureFixedStudioBatchOuterPayloadBytes(canonicalRequestJson: string): number {

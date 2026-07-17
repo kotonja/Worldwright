@@ -51,6 +51,13 @@ function semanticDiagnostics(report: Readonly<StudioTransportReport>) {
     report.reconnectAttempts !== 0 ||
     report.reconnectsSucceeded !== 0 ||
     hasCompensation;
+  const hasLeaseBoundActivity =
+    report.operationsAttempted !== 0 ||
+    report.operationsAppliedBeforeFailure !== 0 ||
+    report.chunksAttempted !== 0 ||
+    report.chunksCompleted !== 0 ||
+    report.mutationExecuteCalls !== 0 ||
+    hasRecovery;
   if (
     report.operationsAppliedBeforeFailure > report.operationsAttempted ||
     report.operationsAttempted > report.operationsPlanned ||
@@ -92,16 +99,35 @@ function semanticDiagnostics(report: Readonly<StudioTransportReport>) {
       ),
     );
   }
+  // A compensation apply_chunk call can be rejected by the lease guard before
+  // it becomes an attempted compensation chunk. The execute call remains
+  // truthful evidence, while the compensation counters remain unchanged.
   if (
     report.reconnectsSucceeded > report.reconnectAttempts ||
     report.reconnectAttempts > report.uncertainTransportEvents ||
-    report.mutationExecuteCalls !== report.chunksAttempted + report.compensationChunksAttempted
+    report.mutationExecuteCalls < report.chunksAttempted + report.compensationChunksAttempted ||
+    report.mutationExecuteCalls > report.chunksAttempted + report.compensationChunksAttempted + 1 ||
+    (report.mutationExecuteCalls ===
+      report.chunksAttempted + report.compensationChunksAttempted + 1 &&
+      report.finalOutcome !== 'failed-unrestored')
   ) {
     diagnostics.push(
       studioDiagnostic(
         'studio.receipt_invalid',
         '/mutationExecuteCalls',
         'Transport call or reconnect counts are inconsistent.',
+      ),
+    );
+  }
+  if (
+    (hasLeaseBoundActivity && report.sandboxLeaseClaimCalls !== 1) ||
+    (report.operationsPlanned === 0 && report.sandboxLeaseClaimCalls !== 0)
+  ) {
+    diagnostics.push(
+      studioDiagnostic(
+        'studio.receipt_invalid',
+        '/sandboxLeaseClaimCalls',
+        'Transport activity requires exactly one sandbox lease claim call.',
       ),
     );
   }
@@ -113,6 +139,7 @@ function semanticDiagnostics(report: Readonly<StudioTransportReport>) {
       report.chunksPlanned !== 0 ||
       report.chunksAttempted !== 0 ||
       report.chunksCompleted !== 0 ||
+      report.sandboxLeaseClaimCalls !== 0 ||
       report.mutationExecuteCalls !== 0 ||
       hasRecovery)
   ) {
@@ -129,6 +156,7 @@ function semanticDiagnostics(report: Readonly<StudioTransportReport>) {
     (report.operationsPlanned === 0 ||
       report.operationsAttempted !== report.operationsPlanned ||
       report.operationsAppliedBeforeFailure !== report.operationsPlanned ||
+      report.sandboxLeaseClaimCalls !== 1 ||
       report.chunksPlanned <
         Math.ceil(report.operationsPlanned / STUDIO_MCP_MAX_BATCH_OPERATIONS) ||
       report.chunksPlanned > report.operationsPlanned ||

@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
 import { validateRobloxSnapshot } from '../src/contract-validation.js';
-import { hashRobloxSnapshot, normalizeRobloxSnapshot } from '../src/normalize.js';
+import { diagnostic } from '../src/diagnostics.js';
+import {
+  hashRobloxChangeSet,
+  hashRobloxSnapshot,
+  normalizeRobloxSnapshot,
+} from '../src/normalize.js';
 import { planRobloxChangeSet, planRobloxSnapshotTransition } from '../src/reconcile.js';
 import {
   createInMemoryRobloxAdapter,
@@ -15,6 +20,7 @@ import type {
   RobloxAdapterScope,
   RobloxManagedNode,
   RobloxManifest,
+  RobloxMutationPreparationHook,
   RobloxSnapshot,
 } from '../src/types.js';
 import {
@@ -40,6 +46,19 @@ function scopeFor(manifest: Readonly<RobloxManifest>): RobloxAdapterScope {
   return {
     projectId: manifest.source.projectId,
     target: { service: 'Workspace' },
+  };
+}
+
+function adapterWithPreparation(
+  backing: InMemoryRobloxAdapter,
+  prepareForMutation: RobloxMutationPreparationHook,
+): RobloxAdapter {
+  return {
+    readSnapshot: (scope) => backing.readSnapshot(scope),
+    prepareForMutation,
+    createNode: (scope, node) => backing.createNode(scope, node),
+    updateNode: (scope, before, after) => backing.updateNode(scope, before, after),
+    deleteNode: (scope, before) => backing.deleteNode(scope, before),
   };
 }
 
@@ -229,6 +248,7 @@ describe('transaction protocol', () => {
       })),
     );
     expect(adapter.mutationLog.every((entry) => entry.outcome === 'applied')).toBe(true);
+    expect(adapter.snapshotReads).toBe(2);
   });
 
   it('applies only within the selected project scope', async () => {
@@ -320,6 +340,201 @@ describe('transaction protocol', () => {
       finalSnapshotHash: hashRobloxSnapshot(initial),
     });
     expect(result).not.toHaveProperty('rollback');
+  });
+
+  it('returns a no-op before optional mutation preparation', async () => {
+    const manifest = compilePrimitiveFixture();
+    const initial = snapshotFromManifest(manifest);
+    const plan = requirePlan(initial, manifest);
+    const backing = createInMemoryRobloxAdapter({ initialSnapshots: [initial] });
+    let preparationCalls = 0;
+    const adapter = adapterWithPreparation(backing, async () => {
+      preparationCalls += 1;
+      return { success: true };
+    });
+
+    const result = await applyRobloxChangeSet(adapter, plan.changeSet);
+
+    expect(result).toEqual(
+      expect.objectContaining({ success: true, status: 'noop', operationsAttempted: 0 }),
+    );
+    expect(preparationCalls).toBe(0);
+    expect(backing.snapshotReads).toBe(1);
+    expect(backing.mutationAttempts).toBe(0);
+  });
+
+  it('prepares after preflight and rereads the exact base before the first mutation', async () => {
+    const manifest = compilePrimitiveFixture();
+    const initial = emptySnapshotForManifest(manifest);
+    const plan = requirePlan(initial, manifest);
+    const backing = createInMemoryRobloxAdapter({ initialSnapshots: [initial] });
+    const events: string[] = [];
+    const adapter: RobloxAdapter = {
+      readSnapshot: async (scope): Promise<unknown> => {
+        events.push('read');
+        return backing.readSnapshot(scope);
+      },
+      prepareForMutation: async (input) => {
+        events.push('prepare');
+        expect(input.changeSetHash).toBe(hashRobloxChangeSet(plan.changeSet));
+        expect(input.initialSnapshotHash).toBe(plan.changeSet.preconditions.baseSnapshotHash);
+        expect(Object.isFrozen(input)).toBe(true);
+        expect(Object.isFrozen(input.changeSet)).toBe(true);
+        expect(Object.isFrozen(input.changeSet.operations)).toBe(true);
+        expect(Object.isFrozen(input.initialSnapshot)).toBe(true);
+        return { success: true };
+      },
+      createNode: async (scope, node): Promise<void> => {
+        events.push('mutation');
+        await backing.createNode(scope, node);
+      },
+      updateNode: async (scope, before, after): Promise<void> => {
+        events.push('mutation');
+        await backing.updateNode(scope, before, after);
+      },
+      deleteNode: async (scope, before): Promise<void> => {
+        events.push('mutation');
+        await backing.deleteNode(scope, before);
+      },
+    };
+
+    const result = await applyRobloxChangeSet(adapter, plan.changeSet);
+
+    expect(result.success).toBe(true);
+    expect(events.slice(0, 4)).toEqual(['read', 'prepare', 'read', 'mutation']);
+    expect(backing.snapshotReads).toBe(3);
+  });
+
+  it('returns a structured preparation failure without mutation or rollback', async () => {
+    const manifest = compilePrimitiveFixture();
+    const initial = emptySnapshotForManifest(manifest);
+    const plan = requirePlan(initial, manifest);
+    const backing = createInMemoryRobloxAdapter({ initialSnapshots: [initial] });
+    const adapter = adapterWithPreparation(backing, async () => ({
+      success: false,
+      diagnostics: [
+        diagnostic(
+          'transaction.apply_failed',
+          '/preparation',
+          'studio.sandbox_lease_conflict: The sandbox lease changed before claim.',
+        ),
+      ],
+    }));
+
+    const result = await applyRobloxChangeSet(adapter, plan.changeSet);
+
+    expect(result).toEqual(
+      expect.objectContaining({
+        success: false,
+        stage: 'apply',
+        operationsAttempted: 0,
+        rollback: { attempted: false, succeeded: false },
+        initialSnapshotHash: plan.changeSet.preconditions.baseSnapshotHash,
+        diagnostics: [
+          expect.objectContaining({
+            code: 'transaction.apply_failed',
+            path: '/preparation',
+            message: expect.stringContaining('studio.sandbox_lease_conflict'),
+          }),
+        ],
+      }),
+    );
+    expect(backing.snapshotReads).toBe(1);
+    expect(backing.mutationAttempts).toBe(0);
+  });
+
+  it('sanitizes a thrown preparation failure without mutation or rollback', async () => {
+    const manifest = compilePrimitiveFixture();
+    const initial = emptySnapshotForManifest(manifest);
+    const plan = requirePlan(initial, manifest);
+    const backing = createInMemoryRobloxAdapter({ initialSnapshots: [initial] });
+    const adapter = adapterWithPreparation(backing, async () => {
+      throw new Error('LEASE_PRIVATE_VALUE at private-machine.ts:4');
+    });
+
+    const result = await applyRobloxChangeSet(adapter, plan.changeSet);
+
+    expect(result).toEqual(
+      expect.objectContaining({
+        success: false,
+        stage: 'apply',
+        operationsAttempted: 0,
+        rollback: { attempted: false, succeeded: false },
+      }),
+    );
+    expect(JSON.stringify(result)).not.toContain('LEASE_PRIVATE_VALUE');
+    expect(JSON.stringify(result)).not.toContain('private-machine.ts');
+    expect(backing.snapshotReads).toBe(1);
+    expect(backing.mutationAttempts).toBe(0);
+  });
+
+  it('rejects a changed post-preparation base without mutation or rollback', async () => {
+    const manifest = compilePrimitiveFixture();
+    const initial = snapshotFromManifest(manifest);
+    const desired = manifestWithRenamedNode(manifest, 'plaza-floor', 'Authorized rename');
+    const plan = requirePlan(initial, desired);
+    const changed = snapshotWithRenamedNode(initial, 'plaza-floor', 'Concurrent rename');
+    let reads = 0;
+    let mutationCalls = 0;
+    const adapter: RobloxAdapter = {
+      readSnapshot: async (): Promise<unknown> => {
+        reads += 1;
+        return clone(reads === 1 ? initial : changed);
+      },
+      prepareForMutation: async () => ({ success: true }),
+      createNode: async (): Promise<void> => {
+        mutationCalls += 1;
+      },
+      updateNode: async (): Promise<void> => {
+        mutationCalls += 1;
+      },
+      deleteNode: async (): Promise<void> => {
+        mutationCalls += 1;
+      },
+    };
+
+    const result = await applyRobloxChangeSet(adapter, plan.changeSet);
+
+    expect(result).toEqual(
+      expect.objectContaining({
+        success: false,
+        stage: 'stale-check',
+        operationsAttempted: 0,
+        rollback: { attempted: false, succeeded: false },
+        initialSnapshotHash: hashRobloxSnapshot(initial),
+        observedFailureSnapshotHash: hashRobloxSnapshot(changed),
+      }),
+    );
+    expect(reads).toBe(2);
+    expect(mutationCalls).toBe(0);
+  });
+
+  it('does not prepare when pure preflight fails', async () => {
+    const manifest = compilePrimitiveFixture();
+    const initial = emptySnapshotForManifest(manifest);
+    const plan = requirePlan(initial, manifest);
+    const tampered = clone(plan.changeSet);
+    tampered.preconditions.desiredManifestHash = '0'.repeat(64);
+    const backing = createInMemoryRobloxAdapter({ initialSnapshots: [initial] });
+    let preparationCalls = 0;
+    const adapter = adapterWithPreparation(backing, async () => {
+      preparationCalls += 1;
+      return { success: true };
+    });
+
+    const result = await applyRobloxChangeSet(adapter, tampered);
+
+    expect(result).toEqual(
+      expect.objectContaining({
+        success: false,
+        stage: 'preflight',
+        operationsAttempted: 0,
+        rollback: { attempted: false, succeeded: false },
+      }),
+    );
+    expect(preparationCalls).toBe(0);
+    expect(backing.snapshotReads).toBe(1);
+    expect(backing.mutationAttempts).toBe(0);
   });
 
   it('preserves detailed malformed-operation diagnostics without reading the adapter', async () => {

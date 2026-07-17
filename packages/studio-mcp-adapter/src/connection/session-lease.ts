@@ -16,7 +16,13 @@ export interface StudioReconnectState {
 }
 
 export type StudioMcpClientFactory = () => Promise<StudioMcpClient>;
-export type StudioReconnectVerifier = (client: StudioMcpClient) => Promise<void>;
+export type StudioReconnectVerifier<T = void> = (client: StudioMcpClient) => Promise<T>;
+
+export interface StudioReconnectObservation<T> {
+  readonly client: StudioMcpClient;
+  /** Present only when a replacement client was verified before installation. */
+  readonly verified?: T;
+}
 
 export function createStudioReconnectState(): StudioReconnectState {
   return {
@@ -82,16 +88,16 @@ export class StudioExactSessionLease {
    * candidate is not installed until exact-ID selection and the caller's full
    * sandbox re-probe both succeed.
    */
-  public async clientForObservation(
+  public async clientForVerifiedObservation<T>(
     state: StudioReconnectState | undefined,
-    verify: StudioReconnectVerifier,
-  ): Promise<StudioMcpClient> {
+    verify: StudioReconnectVerifier<T>,
+  ): Promise<StudioReconnectObservation<T>> {
     if (this.#client.poisoned && state !== undefined && !state.needsReconnect) {
       state.needsReconnect = true;
       state.uncertainTransportEvents += 1;
     }
     const needsReconnect = state?.needsReconnect === true || this.#client.poisoned;
-    if (!needsReconnect) return this.currentClient();
+    if (!needsReconnect) return { client: this.currentClient() };
     if (state === undefined) {
       throw new StudioAdapterError([
         studioDiagnostic(
@@ -128,11 +134,11 @@ export class StudioExactSessionLease {
     try {
       candidate = await this.#connectClient();
       await selectStudioSession(candidate, this.#session.studioId);
-      await verify(candidate);
+      const verified = await verify(candidate);
       this.#client = candidate;
       state.needsReconnect = false;
       state.reconnectsSucceeded += 1;
-      return candidate;
+      return { client: candidate, verified };
     } catch (error) {
       if (candidate !== undefined) {
         try {
@@ -154,6 +160,13 @@ export class StudioExactSessionLease {
         ),
       ]);
     }
+  }
+
+  public async clientForObservation(
+    state: StudioReconnectState | undefined,
+    verify: StudioReconnectVerifier,
+  ): Promise<StudioMcpClient> {
+    return (await this.clientForVerifiedObservation(state, verify)).client;
   }
 
   public async close(): Promise<void> {

@@ -6,8 +6,9 @@ editable, testable, and performance-aware Roblox worlds.
 > **Status:** Milestones 0 through 3 are complete. Milestone 4 is the current implementation:
 > deterministic chunked Studio mutation with reconnectable, observation-gated compensation after an
 > uncertain MCP response. **It may read or mutate managed project state only in a new unsaved local
-> place (`PlaceId == 0`, `GameId == 0`), stopped in Edit mode, and selected by its exact Studio
-> ID.**
+> place (`PlaceId == 0`, `GameId == 0`), stopped in Edit mode, and selected by its exact Studio ID.
+> Every nonempty transaction also claims one private Workspace sandbox lease so reconnect and
+> compensation remain bound to that exact unsaved DataModel; the Studio ID alone is insufficient.**
 
 ## Product principles
 
@@ -103,7 +104,12 @@ Milestone 4 extends that accepted bridge with a reliability layer:
 - expected parent-state progression within and across chunks;
 - independent final snapshot verification after every successful forward transition;
 - client poisoning after a timeout, lost or malformed acknowledgment, or other uncertain mutation;
-- bounded reconnection to the exact original Studio ID with a renewed unsaved stopped-sandbox gate;
+- one private transaction-scoped Workspace sandbox lease, canonically compare-and-set after
+  preflight for every nonempty transaction and left in place for the next transaction to rotate;
+- zero sandbox-lease claims for a verified no-op;
+- lease-bound batches and complete snapshots, including final verification and compensation;
+- bounded reconnection to the exact original Studio ID with a renewed unsaved stopped-sandbox gate
+  and a same-call lease-bound snapshot proving the original unsaved DataModel is still loaded;
 - conservative compensation of an exact observed prefix, including a complete desired result after
   acknowledgment loss;
 - strict deterministic Studio Progress and Transport Reports; and
@@ -325,19 +331,26 @@ pnpm studio-mcp verify --studio-id <exact-studio-id> --manifest packages/archite
 `plan-live` and `apply` are intentionally separate. Mutation never auto-selects a session, and there
 is no `--force`, `--yes`, production-place bypass, custom MCP command, or raw Luau option. The
 complete Change Set hash remains the authorization unit; chunk hashes do not authorize mutation. The
-package generates only its audited fixed bridge actions and fixed `apply_chunk` program.
+package generates only its audited fixed bridge actions and fixed `apply_chunk` program. Exact
+Studio selection identifies the Studio target, not the unsaved DataModel inside it. A nonempty apply
+therefore claims and verifies one private transaction lease stored only in the fixed
+`WorldwrightStudioSandboxLeaseJson` attribute on `Workspace`. The lease is transport evidence, not
+creator approval, authentication, a signature, permanent object identity, or a substitute for
+snapshot hashes.
 
 Inspect current progress without mutation by supplying the exact reviewed base document as well as
 the Change Set:
 
 ```sh
-pnpm studio-mcp progress --studio-id <exact-studio-id> --base-snapshot .worldwright/live-milestone-4/base.snapshot.json --change-set .worldwright/live-milestone-4/cliffwatch.change-set.json
-pnpm studio-mcp progress --studio-id <exact-studio-id> --base-snapshot .worldwright/live-milestone-4/base.snapshot.json --change-set .worldwright/live-milestone-4/cliffwatch.change-set.json --json
+pnpm studio-mcp progress --studio-id <exact-studio-id> --sandbox-lease-id <64-lowercase-hex> --base-snapshot .worldwright/live-milestone-4/base.snapshot.json --change-set .worldwright/live-milestone-4/cliffwatch.change-set.json
+pnpm studio-mcp progress --studio-id <exact-studio-id> --sandbox-lease-id <64-lowercase-hex> --base-snapshot .worldwright/live-milestone-4/base.snapshot.json --change-set .worldwright/live-milestone-4/cliffwatch.change-set.json --json
 ```
 
 The command returns `base`, exact `prefix`, `complete`, or `unsafe`; it has no resume or recovery
-mutation option. A Change Set contains only its base hash, so the complete reviewed base snapshot is
-required to prove an exact prefix.
+mutation option. Its lease argument is required for authoritative recovery inspection but is never
+printed or placed in the Progress Report. The lease check and complete snapshot occur in one fixed
+`bound_snapshot` call. A Change Set contains only its base hash, so the complete reviewed base
+snapshot is also required to prove an exact prefix.
 
 Alternatively, use the complete real-Studio acceptance sequence instead of the manual `apply` above.
 First print and review the offline sequence envelope. It pins the allowed create or canonical no-op,
@@ -358,8 +371,10 @@ all evidence outputs exclusively before it connects or mutates.
 The Milestone 4 sequence asserts the actual mutation-call count, an independently verified no-op,
 one harmless update and inverse repair, and a testing-only lost acknowledgment. The latter must
 poison the old client, reconnect through a new local-stdio process to the exact same Studio ID,
-re-probe the sandbox, classify the exact observed prefix, compensate to the canonical base, and
-verify its complete hash. A viewport capture is evidence only, not a visual-quality claim.
+re-probe the sandbox, verify the original private lease and read the snapshot in one fixed call,
+classify the exact observed prefix, compensate under that same lease to the canonical base, and
+verify its complete hash. A missing, malformed, or different lease blocks classification and all
+compensation. A viewport capture is evidence only, not a visual-quality claim.
 
 ## Documentation
 
@@ -397,8 +412,9 @@ verify its complete hash. A viewport capture is evidence only, not a visual-qual
    safely, and record sanitized evidence (Milestone 3, complete).
 5. **Chunked Studio transactions and reconnectable recovery** - partition a complete authorized
    Change Set into deterministic bounded chunks, poison uncertain clients, reconnect only to the
-   exact sandbox, classify fresh state by exact prefix, and compensate conservatively to a verified
-   base (Milestone 4, current implementation).
+   exact Studio target and transaction-leased unsaved DataModel, classify lease-bound fresh state by
+   exact prefix, and compensate conservatively to a verified base (Milestone 4, current
+   implementation).
 6. **Live playtest observation and critique** - exercise traversal and interactions under separate
    authorization, collect structured evidence, and introduce The Critic without confusing a
    successful transaction with quality evaluation.

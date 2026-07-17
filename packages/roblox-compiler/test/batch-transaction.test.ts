@@ -234,6 +234,37 @@ function createBatchHarness(
 }
 
 describe('generic batched Roblox transactions', () => {
+  it('returns a no-op before optional preparation or batch planning', async () => {
+    const manifest = compilePrimitiveFixture();
+    const initial = snapshotFromManifest(manifest);
+    const plan = requirePlan(initial, manifest);
+    const harness = createBatchHarness(initial);
+    const plannerCalls: RobloxOperationBatchContext['phase'][] = [];
+    let preparationCalls = 0;
+    const adapter: RobloxOperationBatchAdapter = {
+      ...harness.adapter,
+      prepareForMutation: async () => {
+        preparationCalls += 1;
+        return { success: true };
+      },
+    };
+
+    const result = await applyRobloxChangeSetBatched(
+      adapter,
+      plan.changeSet,
+      fixedSizePlanner(32, plannerCalls),
+    );
+
+    expect(result).toEqual(
+      expect.objectContaining({ success: true, status: 'noop', operationsAttempted: 0 }),
+    );
+    expect(preparationCalls).toBe(0);
+    expect(plannerCalls).toEqual([]);
+    expect(harness.contexts).toEqual([]);
+    expect(harness.backing.snapshotReads).toBe(1);
+    expect(harness.backing.mutationAttempts).toBe(0);
+  });
+
   it('applies deterministic multi-operation batches and independently verifies the final snapshot', async () => {
     const manifest = compilePrimitiveFixture();
     const initial = emptySnapshotForManifest(manifest);
@@ -261,6 +292,39 @@ describe('generic batched Roblox transactions', () => {
     expect(hashRobloxSnapshot(await snapshotFromAdapter(harness.backing, scopeFor(manifest)))).toBe(
       plan.changeSet.preconditions.resultSnapshotHash,
     );
+  });
+
+  it('propagates preparation through the batch strategy before planning and applying', async () => {
+    const manifest = compilePrimitiveFixture();
+    const initial = emptySnapshotForManifest(manifest);
+    const plan = requirePlan(initial, manifest);
+    const harness = createBatchHarness(initial);
+    const events: string[] = [];
+    const adapter: RobloxOperationBatchAdapter = {
+      ...harness.adapter,
+      readSnapshot: async (scope): Promise<unknown> => {
+        events.push('read');
+        return harness.adapter.readSnapshot(scope);
+      },
+      prepareForMutation: async () => {
+        events.push('prepare');
+        return { success: true };
+      },
+      applyOperationBatch: async (scope, operations, context) => {
+        events.push('batch');
+        return harness.adapter.applyOperationBatch(scope, operations, context);
+      },
+    };
+    const planner: RobloxOperationBatchPlanner = (input) => {
+      events.push('plan');
+      return fixedSizePlanner(4)(input);
+    };
+
+    const result = await applyRobloxChangeSetBatched(adapter, plan.changeSet, planner);
+
+    expect(result.success).toBe(true);
+    expect(events.slice(0, 5)).toEqual(['read', 'prepare', 'read', 'plan', 'batch']);
+    expect(harness.backing.snapshotReads).toBe(3);
   });
 
   it('uses a trustworthy certain-failure prefix count and compensates only exact observed progress', async () => {

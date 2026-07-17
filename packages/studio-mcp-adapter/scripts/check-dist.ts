@@ -11,6 +11,7 @@ import {
 
 const cliUrl = new URL('../dist/cli.js', import.meta.url);
 const testingUrl = new URL('../dist/testing.js', import.meta.url);
+const diagnosticsUrl = new URL('../dist/diagnostics.js', import.meta.url);
 const cliPath = fileURLToPath(cliUrl);
 const courtyardManifestPath = fileURLToPath(
   new URL(
@@ -39,6 +40,17 @@ interface BuiltCliModule {
 
 interface BuiltTestingModule {
   connectStudioMcpForTesting(protocolFactory: () => unknown): Promise<unknown>;
+}
+
+interface BuiltDiagnosticsModule {
+  readonly StudioAdapterError: new (
+    diagnostics: readonly Readonly<{
+      code: string;
+      severity: 'error';
+      path: string;
+      message: string;
+    }>[],
+  ) => Error;
 }
 
 function assert(condition: boolean, message: string): asserts condition {
@@ -73,6 +85,10 @@ async function checkDist(): Promise<void> {
   assert(help.status === 0, `Compiled help exited ${help.status}.`);
   assert(help.stdout.includes('studio-mcp apply'), 'Compiled help omitted commands.');
   assert(help.stdout.includes('studio-mcp progress'), 'Compiled help omitted progress.');
+  assert(
+    help.stdout.includes('--sandbox-lease-id <64-lowercase-hex>'),
+    'Compiled help omitted the required progress sandbox lease.',
+  );
   assert(help.stderr === '', 'Compiled help wrote to stderr.');
 
   const usage = run([]);
@@ -92,6 +108,7 @@ async function checkDist(): Promise<void> {
 
   const builtCli = (await import(cliUrl.href)) as unknown as BuiltCliModule;
   const builtTesting = (await import(testingUrl.href)) as unknown as BuiltTestingModule;
+  const builtDiagnostics = (await import(diagnosticsUrl.href)) as unknown as BuiltDiagnosticsModule;
   const fakeProtocol = {
     async connect(): Promise<void> {},
     async listTools(): Promise<unknown> {
@@ -160,15 +177,36 @@ async function checkDist(): Promise<void> {
     'Built fake-MCP probe omitted its session.',
   );
 
+  const courtyardBaseSnapshot = JSON.parse(
+    await readFile(courtyardBaseSnapshotPath, 'utf8'),
+  ) as RobloxSnapshot;
+  const courtyardChangeSet = JSON.parse(
+    await readFile(courtyardCreateChangeSetPath, 'utf8'),
+  ) as RobloxChangeSet;
+  const changeSetHash = hashRobloxChangeSet(courtyardChangeSet);
+  const sandboxLeaseId = 'a'.repeat(64);
+  let boundSnapshotCalls = 0;
   const emptyAdapter = {
     async readSnapshot(): Promise<unknown> {
-      return {
-        schemaVersion: '0.1.0',
-        projectId: 'project-primitive-courtyard',
-        target: { service: 'Workspace' },
-        nodes: [],
-        unmanagedRoots: [],
-      };
+      return courtyardBaseSnapshot;
+    },
+    async readLeaseBoundSnapshot(
+      scope: Readonly<{ projectId: string; target: { service: string } }>,
+      requestedChangeSetHash: string,
+      requestedLeaseId: string,
+    ): Promise<RobloxSnapshot> {
+      boundSnapshotCalls += 1;
+      assert(
+        scope.projectId === courtyardChangeSet.preconditions.projectId &&
+          scope.target.service === 'Workspace',
+        'Built progress supplied the wrong lease-bound scope.',
+      );
+      assert(
+        requestedChangeSetHash === changeSetHash,
+        'Built progress supplied the wrong lease-bound Change Set hash.',
+      );
+      assert(requestedLeaseId === sandboxLeaseId, 'Built progress supplied the wrong lease ID.');
+      return courtyardBaseSnapshot;
     },
     async close(): Promise<void> {},
   };
@@ -200,6 +238,8 @@ async function checkDist(): Promise<void> {
       courtyardBaseSnapshotPath,
       '--change-set',
       courtyardCreateChangeSetPath,
+      '--sandbox-lease-id',
+      sandboxLeaseId,
       '--json',
     ],
     {
@@ -211,7 +251,7 @@ async function checkDist(): Promise<void> {
         throw new Error('Unexpected client connection.');
       },
       connectSelectedAdapter: async () => {
-        throw new Error('Unexpected selected adapter connection.');
+        throw new Error('Unexpected mutation-authorized adapter connection.');
       },
       connectReadOnlyAdapter: async () => emptyAdapter,
     },
@@ -222,16 +262,127 @@ async function checkDist(): Promise<void> {
     builtProgressOutput.stdout.includes('"classification": "base"'),
     'Built progress omitted the base classification.',
   );
+  assert(boundSnapshotCalls === 1, 'Built progress omitted its one lease-bound snapshot call.');
+  assert(
+    !builtProgressOutput.stdout.includes(sandboxLeaseId) &&
+      !builtProgressOutput.stderr.includes(sandboxLeaseId),
+    'Built progress exposed its private sandbox lease ID.',
+  );
+  const mismatchedLeaseId = 'b'.repeat(64);
+  let mismatchBoundSnapshotCalls = 0;
+  const mismatchAdapter = {
+    ...emptyAdapter,
+    async readLeaseBoundSnapshot(): Promise<never> {
+      mismatchBoundSnapshotCalls += 1;
+      throw new builtDiagnostics.StudioAdapterError([
+        {
+          code: 'studio.sandbox_identity_mismatch',
+          severity: 'error',
+          path: '/workspaceLease',
+          message: 'The selected Studio no longer contains the transaction sandbox.',
+        },
+      ]);
+    },
+  };
+  const builtMismatchProgressOutput = { stdout: '', stderr: '' };
+  const builtMismatchProgressStatus = await builtCli.runStudioMcpCli(
+    [
+      'progress',
+      '--studio-id',
+      'dist-studio',
+      '--base-snapshot',
+      courtyardBaseSnapshotPath,
+      '--change-set',
+      courtyardCreateChangeSetPath,
+      '--sandbox-lease-id',
+      mismatchedLeaseId,
+      '--json',
+    ],
+    {
+      writeStdout: (value) => (builtMismatchProgressOutput.stdout += value),
+      writeStderr: (value) => (builtMismatchProgressOutput.stderr += value),
+    },
+    {
+      connectClient: async () => {
+        throw new Error('Unexpected client connection.');
+      },
+      connectSelectedAdapter: async () => {
+        throw new Error('Unexpected mutation-authorized adapter connection.');
+      },
+      connectReadOnlyAdapter: async () => mismatchAdapter,
+    },
+  );
+  assert(
+    builtMismatchProgressStatus === 1,
+    `Built lease-mismatch progress exited ${builtMismatchProgressStatus}.`,
+  );
+  assert(
+    builtMismatchProgressOutput.stdout.includes('studio.sandbox_identity_mismatch'),
+    'Built lease-mismatch progress omitted its domain diagnostic.',
+  );
+  assert(
+    mismatchBoundSnapshotCalls === 1,
+    'Built lease-mismatch progress did not perform one bound snapshot attempt.',
+  );
+  assert(
+    !`${builtMismatchProgressOutput.stdout}${builtMismatchProgressOutput.stderr}`.includes(
+      mismatchedLeaseId,
+    ) &&
+      !`${builtMismatchProgressOutput.stdout}${builtMismatchProgressOutput.stderr}`.includes(
+        sandboxLeaseId,
+      ),
+    'Built lease-mismatch progress exposed a private sandbox lease ID.',
+  );
+  const invalidSandboxLeaseId = 'A'.repeat(64);
+  let invalidProgressConnected = false;
+  const builtInvalidProgressOutput = { stdout: '', stderr: '' };
+  const builtInvalidProgressStatus = await builtCli.runStudioMcpCli(
+    [
+      'progress',
+      '--studio-id',
+      'dist-studio',
+      '--base-snapshot',
+      courtyardBaseSnapshotPath,
+      '--change-set',
+      courtyardCreateChangeSetPath,
+      '--sandbox-lease-id',
+      invalidSandboxLeaseId,
+      '--json',
+    ],
+    {
+      writeStdout: (value) => (builtInvalidProgressOutput.stdout += value),
+      writeStderr: (value) => (builtInvalidProgressOutput.stderr += value),
+    },
+    {
+      connectClient: async () => {
+        throw new Error('Unexpected client connection.');
+      },
+      connectSelectedAdapter: async () => {
+        throw new Error('Unexpected mutation-authorized adapter connection.');
+      },
+      connectReadOnlyAdapter: async () => {
+        invalidProgressConnected = true;
+        throw new Error('Invalid progress must not connect.');
+      },
+    },
+  );
+  assert(
+    builtInvalidProgressStatus === 2,
+    `Built invalid progress exited ${builtInvalidProgressStatus}.`,
+  );
+  assert(!invalidProgressConnected, 'Built invalid progress connected before usage validation.');
+  assert(
+    builtInvalidProgressOutput.stdout.includes('studio.usage_invalid'),
+    'Built invalid progress omitted its stable usage diagnostic.',
+  );
+  assert(
+    !builtInvalidProgressOutput.stdout.includes(invalidSandboxLeaseId) &&
+      !builtInvalidProgressOutput.stderr.includes(invalidSandboxLeaseId),
+    'Built invalid progress exposed the rejected lease input.',
+  );
 
-  const courtyardBaseSnapshot = JSON.parse(
-    await readFile(courtyardBaseSnapshotPath, 'utf8'),
-  ) as RobloxSnapshot;
-  const courtyardChangeSet = JSON.parse(
-    await readFile(courtyardCreateChangeSetPath, 'utf8'),
-  ) as RobloxChangeSet;
   const simulated = simulateRobloxChangeSet(courtyardBaseSnapshot, courtyardChangeSet);
   assert(simulated.success, 'Built apply fixture did not simulate.');
-  const changeSetHash = hashRobloxChangeSet(courtyardChangeSet);
   const chunks = Math.ceil(courtyardChangeSet.operations.length / 32);
   const builtApplyAdapter = {
     async probeSelectedStudio(): Promise<unknown> {
@@ -269,6 +420,7 @@ async function checkDist(): Promise<void> {
           chunksPlanned: chunks,
           chunksAttempted: chunks,
           chunksCompleted: chunks,
+          sandboxLeaseClaimCalls: 1,
           mutationExecuteCalls: chunks,
           uncertainTransportEvents: 0,
           reconnectAttempts: 0,
@@ -313,7 +465,8 @@ async function checkDist(): Promise<void> {
   assert(builtApplyOutput.stderr === '', 'Built batch apply wrote to stderr in JSON mode.');
   assert(
     builtApplyOutput.stdout.includes('"finalOutcome": "applied"') &&
-      builtApplyOutput.stdout.includes(`"mutationExecuteCalls": ${chunks}`),
+      builtApplyOutput.stdout.includes(`"mutationExecuteCalls": ${chunks}`) &&
+      builtApplyOutput.stdout.includes('"sandboxLeaseClaimCalls": 1'),
     'Built batch apply omitted its strict transport report.',
   );
   assertNoStack(

@@ -171,12 +171,32 @@ export interface RobloxAdapterScope {
   readonly target: Readonly<RobloxTarget>;
 }
 
+export interface RobloxMutationPreparationInput {
+  readonly scope: Readonly<RobloxAdapterScope>;
+  readonly changeSet: Readonly<RobloxChangeSet>;
+  readonly changeSetHash: string;
+  readonly initialSnapshot: Readonly<RobloxSnapshot>;
+  readonly initialSnapshotHash: string;
+}
+
+export type RobloxMutationPreparationOutcome =
+  | { readonly success: true }
+  | {
+      readonly success: false;
+      readonly diagnostics: readonly RobloxDiagnostic[];
+    };
+
+export type RobloxMutationPreparationHook = (
+  input: Readonly<RobloxMutationPreparationInput>,
+) => Promise<RobloxMutationPreparationOutcome>;
+
 /**
  * A bounded future-implementation boundary for one project and target.
  * Implementations must faithfully apply only the fixed node class/property allowlist.
  */
 export interface RobloxAdapter {
   readSnapshot(scope: Readonly<RobloxAdapterScope>): Promise<unknown>;
+  prepareForMutation?: RobloxMutationPreparationHook;
   createNode(scope: Readonly<RobloxAdapterScope>, node: Readonly<RobloxManagedNode>): Promise<void>;
   updateNode(
     scope: Readonly<RobloxAdapterScope>,

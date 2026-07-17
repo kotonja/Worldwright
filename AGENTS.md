@@ -27,6 +27,10 @@ text-to-random-parts or text-to-mesh toy.
   reconnectable observation beneath that same boundary.
 - **Studio Batch Protocol** is the separate fixed `apply_chunk` request and response contract. A
   chunk is a transport unit; the complete Roblox Change Set remains the authorization unit.
+- **Studio Sandbox Lease** is one private adapter-owned, transaction-scoped canonical JSON attribute
+  on Workspace that binds nonempty mutation and recovery calls to the same unsaved DataModel. It is
+  transport evidence, not creator authorization, authentication, a signature, permanent Roblox
+  identity, a snapshot field, or a managed node.
 - **Studio Progress Report** classifies one fresh complete snapshot as the exact base, an exact
   canonical operation prefix, the complete result, or unsafe.
 - **Studio Transport Report** is the strict identity-free record of chunk, call, uncertainty,
@@ -86,6 +90,10 @@ Do not describe future systems as implemented.
   Batch Request and Response schemas. `src/batch/chunk.ts`, `request.ts`, `response.ts`,
   `program.ts`, and `transport.ts` define deterministic partitioning, expected parent-state
   progression, strict framing, fixed program construction, and Studio-specific batch reporting.
+- `packages/studio-mcp-adapter/src/sandbox-lease/contract-schema.ts` is the source for the separate
+  strict Workspace sandbox-lease record, request, and response schemas. The other files in
+  `src/sandbox-lease/` own canonical record validation, compare-and-set claim programs, exact lease
+  verification, and same-call bound snapshot construction.
 - `packages/studio-mcp-adapter/src/report-contract-schema.ts` is the source for the Studio Progress
   and Transport Report schemas. `progress-report.ts` and `transport-report.ts` define their
   normalization, validation, serialization, and hashing behavior. Keep these contracts separate from
@@ -97,14 +105,15 @@ Do not describe future systems as implemented.
   bounded replacement, exact-ID reselection, and observation-only reconnect behavior.
 - `packages/studio-mcp-adapter/src/bridge/program.ts` and the action-specific bridge builders define
   the only fixed Luau programs Worldwright may send: `probe`, `snapshot`, `create`, `update`,
-  `delete`, and the separately versioned fixed `apply_chunk` composition. `program.ts` also defines
+  `delete`, the separately versioned fixed `apply_chunk` composition, and the separate fixed
+  sandbox-lease `read_lease`, `claim_lease`, and `bound_snapshot` actions. `program.ts` also defines
   Studio-side raw metadata hashing, decoded-state checks, actual engine verification, and compact
   encoding. Never expose its source or accept caller-supplied Luau.
 - `packages/studio-mcp-adapter/src/engine-state.ts`, `snapshot.ts`, and `adapter.ts` define
   host-side canonical metadata hashing, compact transport integrity and reconstruction,
   unmanaged-root observation, compiler snapshot conversion, and the implementation of the compiler
-  sequential and optional batch adapter interfaces. Transaction safety remains in the compiler's
-  shared transaction engine.
+  sequential, optional batch, and optional pre-mutation preparation adapter interfaces. Transaction
+  safety remains in the compiler's shared transaction engine.
 - `docs/studio-mcp-adapter/0.1.0.md` documents the published adapter, bridge, receipt, CLI, sandbox,
   security, and limitation baseline. `docs/studio-mcp-adapter/0.2.0.md` documents batch, reconnect,
   progress, report, compatibility, and current limitation behavior. Update the applicable reference
@@ -219,6 +228,9 @@ Use the root scripts:
   unmanaged-root marker.
 - Validate a fresh complete snapshot and its hash before mutation. A stale change set must call no
   adapter mutation method.
+- Return a verified no-op before optional mutation preparation. For a nonempty prepared transaction,
+  read a second complete prepared snapshot and require the exact original base hash before the first
+  operation; preparation failure or a changed base attempts zero node operations and no rollback.
 - Apply operations in exact canonical order through either the sequential adapter or deterministic
   nonempty batches that flatten to that exact sequence, and only after pure simulation. Return
   success only after a complete result snapshot verifies against the expected hash.
@@ -243,15 +255,31 @@ Use the root scripts:
   `set_active_studio`, `get_studio_state`, and `execute_luau` before use, and validate every bounded
   tool result. Never silently guess arguments for an incompatible tool.
 - Require an exact discovered Studio ID for every mutating command, even when one Studio is
-  connected. Do not select by focus, display name, active status, or list order.
+  connected. Do not select by focus, display name, active status, or list order. The Studio ID
+  identifies the Studio target but is insufficient evidence that the same unsaved DataModel remains
+  loaded.
 - Read managed project state or mutate only in a new unsaved local sandbox with `PlaceId == 0`,
   `GameId == 0`, and Studio stopped in Edit mode. Never add a published-place or running-session
   bypass.
 - Generate Luau only from the audited fixed `probe`, `snapshot`, `create`, `update`, and `delete`
-  bridge builders or the separate fixed `apply_chunk` composition, plus schema-validated JSON and
-  deterministic safe literal encoding. Never expose raw `execute_luau`, arbitrary MCP tool calls,
-  dynamic evaluation, script creation, arbitrary classes, generic property setters, generic
-  attribute setters, assets, or network access.
+  bridge builders, the separate fixed `apply_chunk` composition, or the separate strict sandbox-
+  lease actions required to read, compare-and-set claim, and obtain a lease-bound snapshot, plus
+  schema-validated JSON and deterministic safe literal encoding. Never expose raw `execute_luau`,
+  arbitrary MCP tool calls, dynamic evaluation, script creation, arbitrary classes, generic property
+  setters, generic attribute setters, assets, or network access.
+- Authorize exactly one adapter-owned Workspace attribute: `WorldwrightStudioSandboxLeaseJson`.
+  Never allow a caller-selected attribute name or generic Workspace attribute API. Read and write it
+  only through the audited fixed lease protocol in an unsaved stopped sandbox; do not enumerate,
+  copy, clear, or alter unrelated Workspace attributes.
+- Rotate the sandbox lease once for every nonempty authorized transaction through canonical
+  compare-and-set against the exact previously observed valid record or explicit absence. Generate
+  the lease ID from 32 cryptographically random Node bytes. Leave the verified record on Workspace
+  after completion; the next nonempty transaction rotates it. A no-op performs zero lease claims.
+  Malformed existing lease data fails closed and is never overwritten.
+- After claiming the lease, retain it only in the private Studio transaction context. Require a
+  lease-bound second base snapshot before mutation and use that same lease for every forward batch,
+  final verification, failure observation, compensation batch, reconnect observation, and restored-
+  base verification. Never fall back to an unbound transaction snapshot.
 - Partition batches deterministically without reordering or splitting operations. Enforce at most 32
   node operations, at most 3 MiB of canonical batch request data, the existing 4 MiB outer payload
   bound, the 45-second batch timeout, and the existing 512-operation transaction limit. Reject one
@@ -263,6 +291,10 @@ Use the root scripts:
   authoritative end-of-chunk rebuild and complete requested-state verification before returning
   success. Keep per-operation security and operation-local restoration in the shared audited
   helpers.
+- Every batch request must carry the exact private sandbox lease ID, while chunk IDs and shareable
+  hashes must not. Before processing the first operation, fixed batch Luau must validate the current
+  canonical Workspace lease against its lease ID, project ID, and complete Change Set hash. Missing,
+  malformed, stale, or mismatched lease data performs zero operations and is not local restoration.
 - Treat the public managed attributes and canonical adapter-owned node-state metadata as necessary
   but insufficient evidence. Verify actual class, name, direct parent, public attributes, and every
   allowlisted engine property before returning a snapshot or targeting an operation. Drift fails
@@ -273,10 +305,10 @@ Use the root scripts:
   subtree. Mutation lookup must start at direct `Workspace` roots and descend only through the exact
   selected-project managed lineage. Never attribute, rename, move, clone, or destroy protected
   content, and block destructive changes to protected managed lineages.
-- Implement only the existing `RobloxAdapter` methods plus the optional generic compiler batch
-  method, and call the compiler's shared sequential or batched transaction entry point. Do not
-  duplicate stale checks, simulation, exact-prefix admissibility, compensation, or result
-  verification in the MCP package.
+- Implement only the existing `RobloxAdapter` methods plus the optional generic compiler batch and
+  pre-mutation preparation capabilities, and call the compiler's shared sequential or batched
+  transaction entry point. Do not duplicate stale checks, simulation, exact-prefix admissibility,
+  compensation, or result verification in the MCP package.
 - Treat every timed-out, rejected, closed, lost, malformed, mismatched, incomplete, or
   locally-unrestored mutation response as uncertain. Poison and close that client, send it no later
   tool call, and never retransmit its uncertain chunk. Require proof that the old owned process tree
@@ -285,8 +317,16 @@ Use the root scripts:
   later replacement attempts.
 - Reconnect for recovery observation only through a new default local-stdio process. Rediscover
   capabilities, require the exact original Studio ID, confirm it active, and re-probe zero
-  PlaceId/GameId and stopped Edit mode before reading state. Never select another or same-named
-  Studio, and never exceed two reconnect attempts per transaction.
+  PlaceId/GameId and stopped Edit mode. Then verify the exact original sandbox lease and obtain the
+  complete project snapshot together in one fixed `bound_snapshot` call before classification. Never
+  select another or same-named Studio, never use an unbound recovery snapshot, and never exceed two
+  reconnect attempts per transaction.
+- If the exact Studio ID now contains a missing, malformed, or different lease, another project, or
+  another Change Set, treat it as a different DataModel: perform zero compensation mutations, report
+  failed-unrestored with a strict sandbox-identity diagnostic, and never claim restoration.
+- Require `--sandbox-lease-id <64-lowercase-hex>` for authoritative `progress` classification. The
+  read-only command must use `bound_snapshot`, print no lease material, and provide no ignore,
+  force, adopt, clear, or resume option.
 - After uncertainty, report the forward transaction failed even when the complete desired state is
   observed. Version `0.1.0` compensates an exact admissible nonzero prefix, including the full
   result, back to the exact base; it does not resume forward automatically. Unsafe observations
@@ -300,7 +340,7 @@ Use the root scripts:
 - Bound operations, managed nodes, payloads, results, tool-call durations, image content, and
   adapter metadata. Sanitize diagnostics, receipts, and transport reports; never expose raw Luau,
   MCP messages, Studio output, stderr, credentials, Studio IDs in shareable reports, machine paths,
-  usernames, or environment dumps.
+  usernames, environment dumps, lease IDs, lease JSON, or previous Workspace lease contents.
 - Keep viewport captures, receipts, and sanitized live summaries under
   `.worldwright/live-milestone-4/` and untracked for Milestone 4. A capture is evidence, not a
   visual-quality claim.
@@ -330,13 +370,16 @@ Use the root scripts:
   create/update/delete failure cleanup, existing transaction compensation, receipts, capture,
   process cleanup, deterministic chunking, batch contracts and fixed programs, response prefixes,
   expected parent progression, client poisoning, exact-ID reconnection, reconnect bounds, reports,
-  progress CLI exit codes, confirmation, operation/payload bounds, and sanitization. CI must not
-  require Studio.
+  progress CLI exit codes, confirmation, operation/payload bounds, lease contracts, compare-and-set
+  rotation, lease-bound batches and snapshots, same-ID/different-DataModel rejection, preparation
+  ordering, no-op zero-claim behavior, and sanitization. CI must not require Studio.
 - A live Studio success claim requires an actual run against one unsaved local Edit-mode sandbox,
   exact canonical snapshot hash comparisons, actual chunk and mutation-execute call counts, at most
   16 forward mutation calls for the 400-create Cliffwatch transition, verified no-op and update
-  repair, controlled lost-acknowledgment exact-ID reconnect, exact-prefix classification, verified
-  compensation, and untracked evidence. Fake-client tests do not prove live acceptance.
+  repair, one lease claim per nonempty transaction, controlled lost-acknowledgment exact-ID
+  reconnect with same-call lease-bound observation, exact-prefix classification, verified
+  compensation, and untracked evidence with no shareable lease identifier. Fake-client tests do not
+  prove live acceptance.
 - Before claiming completion, run `pnpm check`. Also run a narrower command while iterating when it
   gives faster feedback.
 - Report every failed or skipped check honestly. Never claim a command passed unless it ran
@@ -371,8 +414,9 @@ transaction changes include verified rollback coverage; planner changes include 
 circulation, and offline pipeline coverage; Studio adapter changes preserve exact selection,
 sandbox, fixed-program, engine-verification, ownership, receipt, and compensation boundaries; batch
 changes preserve complete Change Set authorization, deterministic ordering and bounds, client
-poisoning, exact-ID reconnect, exact-prefix classification, no blind retry, no automatic resume,
-strict transport reporting, and actual live call-count evidence; the diff contains no unrelated
-files, tracked live evidence, or secrets; and implemented versus future Studio, playtesting, Forge,
-and Critic scope is stated accurately. If any required check or real live acceptance cannot run or
-fails, leave a clear record instead of declaring the live milestone complete.
+poisoning, exact-ID reconnect, same-DataModel sandbox leasing, lease-bound observation and mutation,
+exact-prefix classification, no blind retry, no automatic resume, strict identity-free transport
+reporting, and actual live call-count evidence; the diff contains no unrelated files, tracked live
+evidence, or secrets; and implemented versus future Studio, playtesting, Forge, and Critic scope is
+stated accurately. If any required check or real live acceptance cannot run or fails, leave a clear
+record instead of declaring the live milestone complete.

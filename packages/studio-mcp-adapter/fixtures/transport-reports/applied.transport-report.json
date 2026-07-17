@@ -15,6 +15,7 @@
   "operationsPlanned": 20,
   "reconnectAttempts": 0,
   "reconnectsSucceeded": 0,
+  "sandboxLeaseClaimCalls": 1,
   "schemaVersion": "0.1.0",
   "uncertainTransportEvents": 0
 }

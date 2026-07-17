@@ -1,0 +1,156 @@
+{
+  "$id": "urn:worldwright:studio-sandbox-lease-request:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "const": "read_lease",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "const": "claim_lease",
+          "type": "string"
+        },
+        "expectedLeasePresent": {
+          "type": "boolean"
+        },
+        "expectedLease": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "0.1.0",
+              "type": "string"
+            },
+            "leaseId": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "changeSetHash": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "leaseId",
+            "projectId",
+            "changeSetHash"
+          ]
+        },
+        "newLease": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "0.1.0",
+              "type": "string"
+            },
+            "leaseId": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "changeSetHash": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "leaseId",
+            "projectId",
+            "changeSetHash"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "expectedLeasePresent",
+        "newLease"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "const": "bound_snapshot",
+          "type": "string"
+        },
+        "lease": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "0.1.0",
+              "type": "string"
+            },
+            "leaseId": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "changeSetHash": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "leaseId",
+            "projectId",
+            "changeSetHash"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "lease"
+      ]
+    }
+  ]
+}

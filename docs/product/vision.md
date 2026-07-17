@@ -182,10 +182,13 @@ and optional untracked viewport evidence.
 Milestone 4, **chunked Studio transactions and reconnectable recovery**, is the current
 implementation. It adds deterministic bounded mutation chunks, one shared sequential/batch compiler
 transaction engine, exact-prefix classification, uncertain-client poisoning, exact-session
-reconnection with a renewed sandbox gate, conservative compensation, strict transport reports, and a
-read-only progress command. A real live acceptance claim requires an actual unsaved Studio run,
-reported mutation-call counts, exact-session reconnect proof, and exact snapshot-hash verification;
-offline fake-MCP tests do not substitute for it.
+reconnection with a renewed sandbox gate and transaction-scoped unsaved-DataModel lease,
+conservative compensation, strict transport reports, and a read-only progress command. Studio ID
+selects the target Studio but does not alone prove which unsaved DataModel remains loaded; reconnect
+observation verifies the original private lease and reads the snapshot in one fixed call. A real
+live acceptance claim requires an actual unsaved Studio run, reported mutation-call counts,
+exact-session reconnect proof, and exact snapshot-hash verification; offline fake-MCP tests do not
+substitute for it.
 
 ## Current repository non-goals
 

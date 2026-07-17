@@ -135,6 +135,7 @@ export function buildStudioBatchRequest(
   input: Readonly<{
     projectId: string;
     changeSetHash: string;
+    sandboxLeaseId: string;
     chunkIndex: number;
     operations: readonly StudioBatchOperation[];
   }>,
@@ -145,6 +146,7 @@ export function buildStudioBatchRequest(
     action: 'apply_chunk',
     projectId: input.projectId,
     changeSetHash: input.changeSetHash,
+    sandboxLeaseId: input.sandboxLeaseId,
     chunkId,
     chunkIndex: input.chunkIndex,
     operations: input.operations.map((operation) => structuredClone(operation)),

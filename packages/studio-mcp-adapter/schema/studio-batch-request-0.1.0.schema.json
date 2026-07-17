@@ -22,6 +22,10 @@
       "pattern": "^[0-9a-f]{64}$",
       "type": "string"
     },
+    "sandboxLeaseId": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
     "chunkId": {
       "pattern": "^[0-9a-f]{64}$",
       "type": "string"
@@ -10749,6 +10753,7 @@
     "action",
     "projectId",
     "changeSetHash",
+    "sandboxLeaseId",
     "chunkId",
     "chunkIndex",
     "operations"

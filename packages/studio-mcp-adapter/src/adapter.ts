@@ -10,6 +10,8 @@ import {
   type RobloxAdapterScope,
   type RobloxChangeOperation,
   type RobloxManagedNode,
+  type RobloxMutationPreparationInput,
+  type RobloxMutationPreparationOutcome,
   type RobloxOperationBatchAdapter,
   type RobloxOperationBatchContext,
   type RobloxSnapshot,
@@ -23,13 +25,15 @@ import { buildProbeProgram, buildSnapshotProgram } from './bridge/snapshot-progr
 import { buildUpdateProgram } from './bridge/update-program.js';
 import { STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS } from './constants.js';
 import {
-  createStudioReconnectState,
   StudioExactSessionLease,
   type StudioMcpClientFactory,
   type StudioReconnectState,
 } from './connection/session-lease.js';
-import { reconnectExactStudioSessionForObservation } from './connection/reconnect.js';
-import { StudioAdapterError, studioDiagnostic } from './diagnostics.js';
+import {
+  reconnectExactStudioSessionForObservation,
+  reconnectExactStudioSessionWithVerifiedObservation,
+} from './connection/reconnect.js';
+import { StudioAdapterError, studioDiagnostic, type StudioDiagnostic } from './diagnostics.js';
 import {
   captureStudioViewport,
   connectStudioMcp,
@@ -50,6 +54,19 @@ import {
   type StudioSessionSummary,
 } from './mcp/session.js';
 import { snapshotFromStudioCompact } from './snapshot.js';
+import {
+  buildBoundSandboxSnapshotRequest,
+  buildClaimSandboxLeaseRequest,
+  buildReadSandboxLeaseRequest,
+  createSandboxLeaseRecord,
+  generateSandboxLeaseId,
+  parseStudioSandboxLeaseResponse,
+  type SandboxLeaseIdFactory,
+  type StudioSandboxLeaseRecord,
+  type StudioSandboxLeaseRequest,
+  type StudioSandboxLeaseResponse,
+} from './sandbox-lease/index.js';
+import { buildSandboxLeaseProgram } from './sandbox-lease/program.js';
 import type { StudioTransportReport } from './report-types.js';
 import type { StudioBridgeResponse } from './types.js';
 
@@ -81,41 +98,9 @@ export interface StudioChangeSetApplyEvidence {
 interface StudioTransactionContext {
   readonly expectedNodes: Map<string, RobloxManagedNode>;
   readonly reconnectState: StudioReconnectState;
+  readonly sandboxLease: { record?: StudioSandboxLeaseRecord };
   readonly batchTransport?: StudioBatchTransactionTransport;
-}
-
-function createPostMutationFaultAdapter(
-  delegate: RobloxAdapter,
-  selectedOperation: StudioAdapterFaultOperation,
-): RobloxAdapter {
-  let thrown = false;
-  const throwAfter = async (
-    operation: StudioAdapterFaultOperation,
-    mutation: () => Promise<void>,
-  ): Promise<void> => {
-    await mutation();
-    if (!thrown && operation === selectedOperation) {
-      thrown = true;
-      throw new Error('Injected post-mutation test fault.');
-    }
-  };
-  return Object.freeze({
-    readSnapshot: (scope: Readonly<RobloxAdapterScope>): Promise<unknown> =>
-      delegate.readSnapshot(scope),
-    createNode: (
-      scope: Readonly<RobloxAdapterScope>,
-      node: Readonly<RobloxManagedNode>,
-    ): Promise<void> => throwAfter('create', () => delegate.createNode(scope, node)),
-    updateNode: (
-      scope: Readonly<RobloxAdapterScope>,
-      before: Readonly<RobloxManagedNode>,
-      after: Readonly<RobloxManagedNode>,
-    ): Promise<void> => throwAfter('update', () => delegate.updateNode(scope, before, after)),
-    deleteNode: (
-      scope: Readonly<RobloxAdapterScope>,
-      before: Readonly<RobloxManagedNode>,
-    ): Promise<void> => throwAfter('delete', () => delegate.deleteNode(scope, before)),
-  });
+  sandboxIdentityDiagnostic?: StudioDiagnostic;
 }
 
 function assertScope(scope: Readonly<RobloxAdapterScope>): void {
@@ -160,6 +145,7 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
   readonly #lease: StudioExactSessionLease;
   readonly #transactionContext = new AsyncLocalStorage<StudioTransactionContext>();
   readonly #mutationAuthorized: boolean;
+  readonly #sandboxLeaseIdFactory: SandboxLeaseIdFactory;
   #transactionTail: Promise<void> = Promise.resolve();
   #closing = false;
   #closePromise: Promise<void> | undefined;
@@ -171,6 +157,7 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     session: StudioSessionSummary,
     mutationAuthorized: boolean,
     connectClient: StudioMcpClientFactory = connectStudioMcp,
+    sandboxLeaseIdFactory: SandboxLeaseIdFactory = generateSandboxLeaseId,
   ) {
     if (token !== ADAPTER_CONSTRUCTION_TOKEN) {
       throw new StudioAdapterError([
@@ -183,9 +170,13 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     }
     this.#lease = new StudioExactSessionLease(client, session, connectClient);
     this.#mutationAuthorized = mutationAuthorized;
+    this.#sandboxLeaseIdFactory = sandboxLeaseIdFactory;
     const transactionAdapter = Object.freeze({
       readSnapshot: (scope: Readonly<RobloxAdapterScope>): Promise<unknown> =>
         this.#readSnapshot(scope),
+      prepareForMutation: (
+        input: Readonly<RobloxMutationPreparationInput>,
+      ): Promise<RobloxMutationPreparationOutcome> => this.#prepareForMutation(input),
       createNode: (
         scope: Readonly<RobloxAdapterScope>,
         node: Readonly<RobloxManagedNode>,
@@ -273,6 +264,48 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     return parseStudioBridgeResponse(text, action, expectedNodeId);
   }
 
+  async #runSandboxLeaseRequestOnClient(
+    client: StudioMcpClient,
+    request: Readonly<StudioSandboxLeaseRequest>,
+  ): Promise<StudioSandboxLeaseResponse> {
+    await selectStudioSession(client, this.#lease.studioId);
+    const text = await executeFixedStudioBridgeProgram(client, buildSandboxLeaseProgram(request));
+    return parseStudioSandboxLeaseResponse(text, request);
+  }
+
+  #requireSandboxLeaseSuccess(
+    response: Readonly<StudioSandboxLeaseResponse>,
+  ): asserts response is Extract<StudioSandboxLeaseResponse, { readonly ok: true }> {
+    if (response.ok) return;
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        response.diagnostic.code,
+        '/workspaceLease',
+        `The fixed Studio sandbox lease ${response.action} action failed (${response.diagnostic.code}).`,
+      ),
+    ]);
+  }
+
+  async #readLeaseBoundSnapshotOnClient(
+    client: StudioMcpClient,
+    scope: Readonly<RobloxAdapterScope>,
+    record: Readonly<StudioSandboxLeaseRecord>,
+  ): Promise<RobloxSnapshot> {
+    const request = buildBoundSandboxSnapshotRequest(record);
+    const response = await this.#runSandboxLeaseRequestOnClient(client, request);
+    this.#requireSandboxLeaseSuccess(response);
+    if (response.action !== 'bound_snapshot') {
+      throw new StudioAdapterError([
+        studioDiagnostic(
+          'studio.response_invalid',
+          '/action',
+          'Studio lease-bound snapshot response is invalid.',
+        ),
+      ]);
+    }
+    return snapshotFromStudioCompact(response.compactSnapshot, scope.projectId);
+  }
+
   async #reassertExactSession(): Promise<void> {
     await this.#lease.reassertExactSession();
   }
@@ -321,6 +354,107 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
 
   async #assertSandbox(): Promise<StudioSandboxProbe> {
     return assertSandboxStudioProbe(await this.#probeSelectedStudioUnlocked());
+  }
+
+  #preparationFailure(error: unknown): RobloxMutationPreparationOutcome {
+    const cause = error instanceof StudioAdapterError ? error.diagnostics[0] : undefined;
+    return {
+      success: false,
+      diagnostics: [
+        {
+          code: 'transaction.apply_failed',
+          severity: 'error',
+          path: '/preparation',
+          message:
+            cause === undefined
+              ? 'The Studio sandbox lease could not be prepared.'
+              : `${cause.code}: ${cause.message}`,
+        },
+      ],
+    };
+  }
+
+  async #prepareForMutation(
+    input: Readonly<RobloxMutationPreparationInput>,
+  ): Promise<RobloxMutationPreparationOutcome> {
+    const context = this.#transactionContext.getStore();
+    const transport = context?.batchTransport;
+    if (
+      context === undefined ||
+      transport === undefined ||
+      context.sandboxLease.record !== undefined
+    ) {
+      return this.#preparationFailure(
+        new StudioAdapterError([
+          studioDiagnostic(
+            'studio.usage_invalid',
+            '/preparation',
+            'Studio sandbox lease preparation requires one active transaction.',
+          ),
+        ]),
+      );
+    }
+
+    try {
+      const readRequest = buildReadSandboxLeaseRequest();
+      const readResponse = await this.#runSandboxLeaseRequestOnClient(
+        this.#lease.currentClient(),
+        readRequest,
+      );
+      this.#requireSandboxLeaseSuccess(readResponse);
+      if (readResponse.action !== 'read_lease') {
+        throw new StudioAdapterError([
+          studioDiagnostic(
+            'studio.response_invalid',
+            '/action',
+            'Studio sandbox lease read response is invalid.',
+          ),
+        ]);
+      }
+
+      const record = createSandboxLeaseRecord(
+        input.scope.projectId,
+        input.changeSetHash,
+        this.#sandboxLeaseIdFactory,
+      );
+      const claimRequest = buildClaimSandboxLeaseRequest(readResponse.lease, record);
+      const claimProgram = buildSandboxLeaseProgram(claimRequest);
+      const client = this.#lease.currentClient();
+      await selectStudioSession(client, this.#lease.studioId);
+      transport.recordSandboxLeaseClaimCall();
+
+      let claimResponse: StudioSandboxLeaseResponse;
+      try {
+        const text = await executeFixedStudioBridgeProgram(client, claimProgram);
+        try {
+          claimResponse = parseStudioSandboxLeaseResponse(text, claimRequest);
+        } catch (error) {
+          await this.#lease.markUncertainMutation(context.reconnectState);
+          throw error;
+        }
+      } catch (error) {
+        if (!context.reconnectState.needsReconnect) {
+          await this.#lease.markUncertainMutation(context.reconnectState);
+        }
+        throw error;
+      }
+      this.#requireSandboxLeaseSuccess(claimResponse);
+      if (claimResponse.action !== 'claim_lease') {
+        throw new StudioAdapterError([
+          studioDiagnostic(
+            'studio.response_invalid',
+            '/action',
+            'Studio sandbox lease claim response is invalid.',
+          ),
+        ]);
+      }
+
+      context.sandboxLease.record = record;
+      transport.bindSandboxLease(record);
+      return { success: true };
+    } catch (error) {
+      return this.#preparationFailure(error);
+    }
   }
 
   async #runAdapterOperation<T>(operation: () => Promise<T>): Promise<T> {
@@ -382,6 +516,34 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     assertScope(scope);
     return this.#runAdapterOperation(async () => {
       const context = this.#transactionContext.getStore();
+      const sandboxLease = context?.sandboxLease.record;
+      if (context !== undefined && sandboxLease !== undefined) {
+        try {
+          const observation = await reconnectExactStudioSessionWithVerifiedObservation(
+            this.#lease,
+            context.reconnectState,
+            async (candidate) => {
+              assertSandboxStudioProbe(await this.#probeClient(candidate));
+              return this.#readLeaseBoundSnapshotOnClient(candidate, scope, sandboxLease);
+            },
+          );
+          const snapshot =
+            observation.verified ??
+            (await this.#readLeaseBoundSnapshotOnClient(observation.client, scope, sandboxLease));
+          this.#replaceExpectedNodes(snapshot);
+          return snapshot;
+        } catch (error) {
+          if (error instanceof StudioAdapterError) {
+            const identityDiagnostic = error.diagnostics.find(
+              (entry) => entry.code === 'studio.sandbox_identity_mismatch',
+            );
+            if (identityDiagnostic !== undefined) {
+              context.sandboxIdentityDiagnostic = identityDiagnostic;
+            }
+          }
+          throw error;
+        }
+      }
       const client = await reconnectExactStudioSessionForObservation(
         this.#lease,
         context?.reconnectState,
@@ -405,6 +567,20 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
 
   public async readSnapshot(scope: Readonly<RobloxAdapterScope>): Promise<RobloxSnapshot> {
     return this.#readSnapshot(scope);
+  }
+
+  /** Authoritative read-only recovery observation bound to one private transaction lease. */
+  public async readLeaseBoundSnapshot(
+    scope: Readonly<RobloxAdapterScope>,
+    changeSetHash: string,
+    sandboxLeaseId: string,
+  ): Promise<RobloxSnapshot> {
+    assertScope(scope);
+    const record = createSandboxLeaseRecord(scope.projectId, changeSetHash, () => sandboxLeaseId);
+    return this.#serialized(async () => {
+      await this.#assertSandbox();
+      return this.#readLeaseBoundSnapshotOnClient(this.#lease.currentClient(), scope, record);
+    });
   }
 
   async #createNode(
@@ -559,14 +735,40 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
     });
     return this.#serialized(async () => {
       await this.#assertSandbox();
-      const result = await this.#transactionContext.run(
-        {
-          expectedNodes: transport.expectedNodes,
-          reconnectState: transport.reconnectState,
-          batchTransport: transport,
-        },
-        () => applyRobloxChangeSetBatched(batchAdapter, validation.value, transport.planBatches),
+      const transactionContext: StudioTransactionContext = {
+        expectedNodes: transport.expectedNodes,
+        reconnectState: transport.reconnectState,
+        sandboxLease: {},
+        batchTransport: transport,
+      };
+      const compilerResult = await this.#transactionContext.run(transactionContext, () =>
+        applyRobloxChangeSetBatched(batchAdapter, validation.value, transport.planBatches),
       );
+      const result: ApplyResult =
+        compilerResult.success || transactionContext.sandboxIdentityDiagnostic === undefined
+          ? compilerResult
+          : (() => {
+              const causeCode = compilerResult.rollback.attempted
+                ? ('transaction.rollback_failed' as const)
+                : ('transaction.apply_failed' as const);
+              const cause = {
+                code: causeCode,
+                severity: 'error' as const,
+                path: '/sandboxLease',
+                message: `${transactionContext.sandboxIdentityDiagnostic.code}: ${transactionContext.sandboxIdentityDiagnostic.message}`,
+              };
+              return {
+                ...compilerResult,
+                diagnostics: [...compilerResult.diagnostics, cause],
+                rollback:
+                  compilerResult.rollback.attempted && !compilerResult.rollback.succeeded
+                    ? {
+                        ...compilerResult.rollback,
+                        diagnostics: [...compilerResult.rollback.diagnostics, cause],
+                      }
+                    : compilerResult.rollback,
+              };
+            })();
       return { result, transportReport: transport.buildReport(result) };
     });
   }
@@ -585,32 +787,14 @@ export class StudioMcpRobloxAdapter implements RobloxAdapter {
         ),
       ]);
     }
-    const internalAdapter = internalStudioTransactionAdapters.get(this);
-    if (internalAdapter === undefined) {
-      throw new StudioAdapterError([
-        studioDiagnostic('studio.usage_invalid', '/adapter', 'The Studio adapter is invalid.'),
-      ]);
-    }
-    if (faultOperation === undefined) return (await this.#runDetailedTransaction(input)).result;
-    const transactionAdapter = createPostMutationFaultAdapter(internalAdapter, faultOperation);
-    const validation = validateRobloxChangeSet(input);
-    if (!validation.valid) return applyRobloxChangeSet(transactionAdapter, input);
-    if (validation.value.operations.length > STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS) {
-      throw new StudioAdapterError([
-        studioDiagnostic(
-          'studio.operation_limit_exceeded',
-          '/operations',
-          `Studio transactions are limited to ${STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS} operations.`,
-        ),
-      ]);
-    }
-    return this.#serialized(async () => {
-      await this.#assertSandbox();
-      return this.#transactionContext.run(
-        { expectedNodes: new Map(), reconnectState: createStudioReconnectState() },
-        () => applyRobloxChangeSet(transactionAdapter, validation.value),
-      );
-    });
+    return (
+      await this.#runDetailedTransaction(
+        input,
+        // The testing-only legacy helper now injects a lost fixed-batch
+        // acknowledgment so every Studio mutation remains lease-bound.
+        faultOperation !== undefined,
+      )
+    ).result;
   }
 
   public async captureViewport(
@@ -721,6 +905,7 @@ export function createStudioMcpAdapterForTesting(
   session: StudioSessionSummary,
   mutationAuthorized = true,
   connectClient?: StudioMcpClientFactory,
+  sandboxLeaseIdFactory?: SandboxLeaseIdFactory,
 ): StudioMcpRobloxAdapter {
   return new StudioMcpRobloxAdapter(
     ADAPTER_CONSTRUCTION_TOKEN,
@@ -728,5 +913,6 @@ export function createStudioMcpAdapterForTesting(
     session,
     mutationAuthorized,
     connectClient,
+    sandboxLeaseIdFactory,
   );
 }

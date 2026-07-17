@@ -12,6 +12,29 @@ afterEach(() => {
 });
 
 describe('exact Studio session reconnect lease', () => {
+  it('returns the verifier observation produced before installing a replacement client', async () => {
+    const initialProtocol = new FakeStudioProtocol();
+    const initialClient = await connectStudioMcpForTesting(() => initialProtocol);
+    const replacementProtocol = new FakeStudioProtocol();
+    const lease = new StudioExactSessionLease(
+      initialClient,
+      { studioId: 'studio-test', displayName: 'Unsaved Sandbox', active: true },
+      async () => connectStudioMcpForTesting(() => replacementProtocol),
+    );
+    const state = createStudioReconnectState();
+    await lease.markUncertainMutation(state);
+
+    const observation = await lease.clientForVerifiedObservation(state, async (candidate) => {
+      expect(candidate).not.toBe(initialClient);
+      return Object.freeze({ classificationInput: 'lease-bound-snapshot' as const });
+    });
+
+    expect(observation.client).not.toBe(initialClient);
+    expect(observation.verified).toEqual({ classificationInput: 'lease-bound-snapshot' });
+    expect(lease.currentClient()).toBe(observation.client);
+    await lease.close();
+  });
+
   it('closes the poisoned client before selecting the exact ID on a new connection', async () => {
     const initialProtocol = new FakeStudioProtocol();
     const initialClient = await connectStudioMcpForTesting(() => initialProtocol);

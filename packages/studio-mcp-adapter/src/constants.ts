@@ -7,6 +7,8 @@ export const STUDIO_APPLY_RECEIPT_VERSION = '0.1.0' as const;
 export const STUDIO_BATCH_PROTOCOL_VERSION = '0.1.0' as const;
 export const STUDIO_PROGRESS_REPORT_VERSION = '0.1.0' as const;
 export const STUDIO_TRANSPORT_REPORT_VERSION = '0.1.0' as const;
+export const STUDIO_SANDBOX_LEASE_PROTOCOL_VERSION = '0.1.0' as const;
+export const STUDIO_SANDBOX_LEASE_RECORD_VERSION = '0.1.0' as const;
 
 export const STUDIO_BRIDGE_REQUEST_SCHEMA_ID =
   'urn:worldwright:studio-bridge-request:0.1.0' as const;
@@ -20,6 +22,12 @@ export const STUDIO_PROGRESS_REPORT_SCHEMA_ID =
   'urn:worldwright:studio-progress-report:0.1.0' as const;
 export const STUDIO_TRANSPORT_REPORT_SCHEMA_ID =
   'urn:worldwright:studio-transport-report:0.1.0' as const;
+export const STUDIO_SANDBOX_LEASE_RECORD_SCHEMA_ID =
+  'urn:worldwright:studio-sandbox-lease-record:0.1.0' as const;
+export const STUDIO_SANDBOX_LEASE_REQUEST_SCHEMA_ID =
+  'urn:worldwright:studio-sandbox-lease-request:0.1.0' as const;
+export const STUDIO_SANDBOX_LEASE_RESPONSE_SCHEMA_ID =
+  'urn:worldwright:studio-sandbox-lease-response:0.1.0' as const;
 
 export const STUDIO_MCP_MAX_CHANGE_SET_OPERATIONS = 512;
 export const STUDIO_MCP_MAX_BATCH_OPERATIONS = 32;
@@ -31,6 +39,7 @@ export const STUDIO_MCP_MAX_PAYLOAD_BYTES = 4 * 1024 * 1024;
 export const STUDIO_MCP_MAX_RESULT_BYTES = 16 * 1024 * 1024;
 export const STUDIO_MCP_MAX_BRIDGE_TEXT_BYTES = 96 * 1024;
 export const STUDIO_MCP_MAX_NODE_STATE_BYTES = 256 * 1024;
+export const STUDIO_MCP_MAX_SANDBOX_LEASE_BYTES = 1024;
 export const STUDIO_MCP_MAX_INSTANCE_NAME_CODE_POINTS = 100;
 export const STUDIO_MCP_MAX_CAPTURE_BYTES = 16 * 1024 * 1024;
 export const STUDIO_MCP_VIEWPORT_MEDIA_TYPE = 'image/jpeg' as const;
@@ -44,6 +53,11 @@ export const STUDIO_MCP_SESSION_DISCOVERY_TIMEOUT_MS = 6_000;
 
 export const STUDIO_BRIDGE_RESPONSE_PREFIX = 'WORLDWRIGHT_STUDIO_BRIDGE_V1\n' as const;
 export const STUDIO_BATCH_RESPONSE_PREFIX = 'WORLDWRIGHT_STUDIO_BATCH_V1\n' as const;
+export const STUDIO_SANDBOX_LEASE_RESPONSE_PREFIX =
+  'WORLDWRIGHT_STUDIO_SANDBOX_LEASE_V1\n' as const;
+
+/** The sole adapter-owned Workspace attribute; it is not managed-node metadata. */
+export const STUDIO_SANDBOX_LEASE_ATTRIBUTE_NAME = 'WorldwrightStudioSandboxLeaseJson' as const;
 
 export const STUDIO_ADAPTER_ATTRIBUTE_NAMES = [
   'WorldwrightStudioAdapterVersion',
