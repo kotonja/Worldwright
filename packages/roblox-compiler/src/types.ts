@@ -134,10 +134,61 @@ export interface SimulationFailure {
 
 export type SimulationResult = SimulationSuccess | SimulationFailure;
 
+export type RobloxChangeSetProgressClassification = 'base' | 'prefix' | 'complete';
+
+export interface RobloxChangeSetProgressSuccess {
+  readonly success: true;
+  readonly classification: RobloxChangeSetProgressClassification;
+  readonly projectId: string;
+  readonly target: Readonly<RobloxTarget>;
+  readonly baseSnapshotHash: string;
+  readonly observedSnapshotHash: string;
+  readonly changeSetHash: string;
+  readonly operationsTotal: number;
+  readonly appliedPrefixLength: number;
+  readonly nextOperationId?: string;
+  readonly diagnostics: readonly RobloxDiagnostic[];
+}
+
+export interface RobloxChangeSetProgressFailure {
+  readonly success: false;
+  readonly classification: 'unsafe';
+  readonly diagnostics: readonly RobloxDiagnostic[];
+  readonly projectId?: string;
+  readonly target?: Readonly<RobloxTarget>;
+  readonly baseSnapshotHash?: string;
+  readonly observedSnapshotHash?: string;
+  readonly changeSetHash?: string;
+  readonly operationsTotal?: number;
+}
+
+export type RobloxChangeSetProgressResult =
+  | RobloxChangeSetProgressSuccess
+  | RobloxChangeSetProgressFailure;
+
 export interface RobloxAdapterScope {
   readonly projectId: string;
   readonly target: Readonly<RobloxTarget>;
 }
+
+export interface RobloxMutationPreparationInput {
+  readonly scope: Readonly<RobloxAdapterScope>;
+  readonly changeSet: Readonly<RobloxChangeSet>;
+  readonly changeSetHash: string;
+  readonly initialSnapshot: Readonly<RobloxSnapshot>;
+  readonly initialSnapshotHash: string;
+}
+
+export type RobloxMutationPreparationOutcome =
+  | { readonly success: true }
+  | {
+      readonly success: false;
+      readonly diagnostics: readonly RobloxDiagnostic[];
+    };
+
+export type RobloxMutationPreparationHook = (
+  input: Readonly<RobloxMutationPreparationInput>,
+) => Promise<RobloxMutationPreparationOutcome>;
 
 /**
  * A bounded future-implementation boundary for one project and target.
@@ -145,6 +196,7 @@ export interface RobloxAdapterScope {
  */
 export interface RobloxAdapter {
   readSnapshot(scope: Readonly<RobloxAdapterScope>): Promise<unknown>;
+  prepareForMutation?: RobloxMutationPreparationHook;
   createNode(scope: Readonly<RobloxAdapterScope>, node: Readonly<RobloxManagedNode>): Promise<void>;
   updateNode(
     scope: Readonly<RobloxAdapterScope>,

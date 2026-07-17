@@ -3,10 +3,12 @@
 Worldwright is an AI World Architect for compiling human intent and references into coherent,
 editable, testable, and performance-aware Roblox worlds.
 
-> **Status:** Milestones 0, 1, and 2 are complete. Milestone 3 is the current implementation: a
-> deliberately bounded transaction bridge to Roblox Studio's built-in MCP server. **It may read or
-> mutate managed project state only in a new unsaved local place (`PlaceId == 0`, `GameId == 0`),
-> stopped in Edit mode, and selected by its exact Studio ID.**
+> **Status:** Milestones 0 through 3 are complete. Milestone 4 is the current implementation:
+> deterministic chunked Studio mutation with reconnectable, observation-gated compensation after an
+> uncertain MCP response. **It may read or mutate managed project state only in a new unsaved local
+> place (`PlaceId == 0`, `GameId == 0`), stopped in Edit mode, and selected by its exact Studio ID.
+> Every nonempty transaction also claims one private Workspace sandbox lease so reconnect and
+> compensation remain bound to that exact unsaved DataModel; the Studio ID alone is insufficient.**
 
 ## Product principles
 
@@ -93,6 +95,33 @@ The public package API and CLI cannot accept raw Luau, arbitrary Studio tool cal
 classes or properties, scripts, assets, network endpoints, or a published-place bypass. Enabling
 Studio MCP remains privileged; creators should connect only trusted clients.
 
+Milestone 4 extends that accepted bridge with a reliability layer:
+
+- pure exact-prefix classification of a fresh observed snapshot against one complete Change Set;
+- one shared compiler transaction engine for compatible sequential and intentional batch adapters;
+- deterministic chunks of at most 32 node operations and 3 MiB of canonical request data;
+- a separate strict fixed `apply_chunk` bridge request and response protocol;
+- expected parent-state progression within and across chunks;
+- independent final snapshot verification after every successful forward transition;
+- client poisoning after a timeout, lost or malformed acknowledgment, or other uncertain mutation;
+- one private transaction-scoped Workspace sandbox lease, canonically compare-and-set after
+  preflight for every nonempty transaction and left in place for the next transaction to rotate;
+- zero sandbox-lease claims for a verified no-op;
+- lease-bound batches and complete snapshots, including final verification and compensation;
+- bounded reconnection to the exact original Studio ID with a renewed unsaved stopped-sandbox gate
+  and a same-call lease-bound snapshot proving the original unsaved DataModel is still loaded;
+- conservative compensation of an exact observed prefix, including a complete desired result after
+  acknowledgment loss;
+- strict deterministic Studio Progress and Transport Reports; and
+- a read-only `progress` CLI plus a separate real-Studio batch acceptance sequence.
+
+Milestone 3 remains accepted: it proved exact selection, fixed programs, engine-state verification,
+ownership protection, and verified compensation. Milestone 4 comes before playtesting because two
+bounded live attempts at the 400-node Cliffwatch build encountered intermittent timeouts during the
+old 400-call mutation phase. Chunking reduces that forward create to 13 bounded calls, while fresh
+observation and exact-prefix classification preserve the existing safety model if an acknowledgment
+is lost.
+
 ## Not implemented yet
 
 There is no Studio plugin, Forge interface, ChangeHistoryService integration, published-place
@@ -113,17 +142,21 @@ database, authentication, telemetry, analytics, or deployment integration.
 |   |   |-- 0001-worldspec-as-canonical-contract.md
 |   |   |-- 0002-declarative-roblox-manifest-and-transactions.md
 |   |   |-- 0003-deterministic-orthogonal-architecture-planning.md
-|   |   `-- 0004-use-studio-mcp-for-the-first-live-adapter.md
+|   |   |-- 0004-use-studio-mcp-for-the-first-live-adapter.md
+|   |   `-- 0005-chunk-studio-mutations-and-recover-by-observation.md
 |   |-- architecture/
 |   |   |-- architecture-planner.md
 |   |   |-- roblox-compiler.md
 |   |   |-- studio-mcp-adapter.md
+|   |   |-- studio-transaction-batching.md
 |   |   `-- system-overview.md
 |   |-- architecture-planner/0.1.0.md
 |   |-- product/vision.md
 |   |-- roblox-compiler/0.1.0.md
 |   |-- studio-mcp-adapter/
 |   |   |-- 0.1.0.md
+|   |   |-- 0.2.0.md
+|   |   |-- recovery.md
 |   |   `-- sandbox-setup.md
 |   `-- worldspec/0.1.0.md
 |-- packages/
@@ -177,25 +210,26 @@ version.
 
 ## Commands
 
-| Command                     | Purpose                                                                                            |
-| --------------------------- | -------------------------------------------------------------------------------------------------- |
-| `pnpm format`               | Format supported files with Prettier.                                                              |
-| `pnpm format:check`         | Check formatting without writing changes.                                                          |
-| `pnpm lint`                 | Run ESLint.                                                                                        |
-| `pnpm typecheck`            | Build dependencies, then type-check all workspace packages.                                        |
-| `pnpm test`                 | Build dependencies, then run all Vitest suites.                                                    |
-| `pnpm build`                | Compile all workspace packages with `tsc`.                                                         |
-| `pnpm test:dist`            | Build and smoke-test compiled CLIs and their documented exit codes.                                |
-| `pnpm schema:generate`      | Regenerate schemas for every package that owns schema artifacts.                                   |
-| `pnpm schema:check`         | Check all generated schemas for drift.                                                             |
-| `pnpm fixture:generate`     | Regenerate deterministic artifacts for every fixture-owning package.                               |
-| `pnpm fixture:check`        | Fail when any generated fixture artifact differs from its deterministic generator output.          |
-| `pnpm worldspec`            | Run the WorldSpec CLI.                                                                             |
-| `pnpm roblox-compiler`      | Run the offline Roblox compiler CLI.                                                               |
-| `pnpm architecture-planner` | Run the offline architectural blockout planner CLI.                                                |
-| `pnpm studio-mcp`           | Run the bounded local Studio MCP adapter CLI.                                                      |
-| `pnpm studio:live-smoke`    | Run explicit real-Studio acceptance in an unsaved sandbox; excluded from `pnpm check` and CI.      |
-| `pnpm check`                | Run formatting, lint, build, type, tests, schema and fixture drift, and distribution smoke checks. |
+| Command                        | Purpose                                                                                            |
+| ------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `pnpm format`                  | Format supported files with Prettier.                                                              |
+| `pnpm format:check`            | Check formatting without writing changes.                                                          |
+| `pnpm lint`                    | Run ESLint.                                                                                        |
+| `pnpm typecheck`               | Build dependencies, then type-check all workspace packages.                                        |
+| `pnpm test`                    | Build dependencies, then run all Vitest suites.                                                    |
+| `pnpm build`                   | Compile all workspace packages with `tsc`.                                                         |
+| `pnpm test:dist`               | Build and smoke-test compiled CLIs and their documented exit codes.                                |
+| `pnpm schema:generate`         | Regenerate schemas for every package that owns schema artifacts.                                   |
+| `pnpm schema:check`            | Check all generated schemas for drift.                                                             |
+| `pnpm fixture:generate`        | Regenerate deterministic artifacts for every fixture-owning package.                               |
+| `pnpm fixture:check`           | Fail when any generated fixture artifact differs from its deterministic generator output.          |
+| `pnpm worldspec`               | Run the WorldSpec CLI.                                                                             |
+| `pnpm roblox-compiler`         | Run the offline Roblox compiler CLI.                                                               |
+| `pnpm architecture-planner`    | Run the offline architectural blockout planner CLI.                                                |
+| `pnpm studio-mcp`              | Run the bounded local Studio MCP adapter CLI.                                                      |
+| `pnpm studio:live-smoke`       | Run explicit real-Studio acceptance in an unsaved sandbox; excluded from `pnpm check` and CI.      |
+| `pnpm studio:batch-live-smoke` | Review or run Milestone 4 batch and reconnect acceptance; excluded from `pnpm check` and CI.       |
+| `pnpm check`                   | Run formatting, lint, build, type, tests, schema and fixture drift, and distribution smoke checks. |
 
 The root fixture commands cover generated artifacts owned by the Roblox compiler, Architecture
 Planner, and Studio MCP Adapter. Authored fixture inputs remain unchanged and are never generated.
@@ -289,23 +323,43 @@ Copy the exact Studio ID. Plan against the checked-in Cliffwatch manifest, revie
 change set, and apply it only with its full lowercase SHA-256 confirmation hash:
 
 ```sh
-pnpm studio-mcp plan-live --studio-id <exact-studio-id> --manifest packages/architecture-planner/fixtures/manifest/cliffwatch-mansion-blockout.manifest.json --output .worldwright/live-milestone-3/cliffwatch.change-set.json
-pnpm studio-mcp apply --studio-id <exact-studio-id> --change-set .worldwright/live-milestone-3/cliffwatch.change-set.json --confirm <full-change-set-sha256> --receipt-output .worldwright/live-milestone-3/applied.receipt.json
+pnpm studio-mcp plan-live --studio-id <exact-studio-id> --manifest packages/architecture-planner/fixtures/manifest/cliffwatch-mansion-blockout.manifest.json --output .worldwright/live-milestone-4/cliffwatch.change-set.json
+pnpm studio-mcp apply --studio-id <exact-studio-id> --change-set .worldwright/live-milestone-4/cliffwatch.change-set.json --confirm <full-change-set-sha256> --receipt-output .worldwright/live-milestone-4/applied.receipt.json
 pnpm studio-mcp verify --studio-id <exact-studio-id> --manifest packages/architecture-planner/fixtures/manifest/cliffwatch-mansion-blockout.manifest.json
 ```
 
 `plan-live` and `apply` are intentionally separate. Mutation never auto-selects a session, and there
 is no `--force`, `--yes`, production-place bypass, custom MCP command, or raw Luau option. The
-package generates only its audited fixed bridge actions.
+complete Change Set hash remains the authorization unit; chunk hashes do not authorize mutation. The
+package generates only its audited fixed bridge actions and fixed `apply_chunk` program. Exact
+Studio selection identifies the Studio target, not the unsaved DataModel inside it. A nonempty apply
+therefore claims and verifies one private transaction lease stored only in the fixed
+`WorldwrightStudioSandboxLeaseJson` attribute on `Workspace`. The lease is transport evidence, not
+creator approval, authentication, a signature, permanent object identity, or a substitute for
+snapshot hashes.
+
+Inspect current progress without mutation by supplying the exact reviewed base document as well as
+the Change Set:
+
+```sh
+pnpm studio-mcp progress --studio-id <exact-studio-id> --sandbox-lease-id <64-lowercase-hex> --base-snapshot .worldwright/live-milestone-4/base.snapshot.json --change-set .worldwright/live-milestone-4/cliffwatch.change-set.json
+pnpm studio-mcp progress --studio-id <exact-studio-id> --sandbox-lease-id <64-lowercase-hex> --base-snapshot .worldwright/live-milestone-4/base.snapshot.json --change-set .worldwright/live-milestone-4/cliffwatch.change-set.json --json
+```
+
+The command returns `base`, exact `prefix`, `complete`, or `unsafe`; it has no resume or recovery
+mutation option. Its lease argument is required for authoritative recovery inspection but is never
+printed or placed in the Progress Report. The lease check and complete snapshot occur in one fixed
+`bound_snapshot` call. A Change Set contains only its base hash, so the complete reviewed base
+snapshot is also required to prove an exact prefix.
 
 Alternatively, use the complete real-Studio acceptance sequence instead of the manual `apply` above.
 First print and review the offline sequence envelope. It pins the allowed create or canonical no-op,
-one-node update, inverse repair, controlled fault, PNG capture, and final no-op hashes without
+one-node update, inverse repair, controlled fault, JPEG capture, and final no-op hashes without
 connecting to Studio. Then pass that envelope's complete hash explicitly:
 
 ```sh
-pnpm studio:live-smoke -- --review
-pnpm studio:live-smoke -- --studio-id <exact-studio-id> --confirm <full-reviewed-live-sequence-sha256>
+pnpm studio:batch-live-smoke -- --review
+pnpm studio:batch-live-smoke -- --studio-id <exact-studio-id> --confirm <full-reviewed-live-sequence-sha256>
 ```
 
 Follow the [sandbox setup guide](docs/studio-mcp-adapter/sandbox-setup.md). Do not test against an
@@ -314,6 +368,14 @@ logs. The acceptance command rejects prefixes and implicit approval, matches the
 to one reviewed transition, prints the complete selected-place plan before mutation, and reserves
 all evidence outputs exclusively before it connects or mutates.
 
+The Milestone 4 sequence asserts the actual mutation-call count, an independently verified no-op,
+one harmless update and inverse repair, and a testing-only lost acknowledgment. The latter must
+poison the old client, reconnect through a new local-stdio process to the exact same Studio ID,
+re-probe the sandbox, verify the original private lease and read the snapshot in one fixed call,
+classify the exact observed prefix, compensate under that same lease to the canonical base, and
+verify its complete hash. A missing, malformed, or different lease blocks classification and all
+compensation. A viewport capture is evidence only, not a visual-quality claim.
+
 ## Documentation
 
 - [Product vision](docs/product/vision.md)
@@ -321,14 +383,18 @@ all evidence outputs exclusively before it connects or mutates.
 - [Roblox compiler architecture](docs/architecture/roblox-compiler.md)
 - [Architecture planner](docs/architecture/architecture-planner.md)
 - [Studio MCP adapter architecture](docs/architecture/studio-mcp-adapter.md)
+- [Studio transaction batching and reconnectable recovery](docs/architecture/studio-transaction-batching.md)
 - [ADR 0001: WorldSpec is the canonical cross-system contract](docs/adr/0001-worldspec-as-canonical-contract.md)
 - [ADR 0002: Use a declarative Roblox manifest and transactional reconciliation](docs/adr/0002-declarative-roblox-manifest-and-transactions.md)
 - [ADR 0003: Use deterministic orthogonal planning before learned architectural generation](docs/adr/0003-deterministic-orthogonal-architecture-planning.md)
 - [ADR 0004: Use Roblox Studio MCP for the first live adapter](docs/adr/0004-use-studio-mcp-for-the-first-live-adapter.md)
+- [ADR 0005: Chunk Studio mutations and recover uncertain transport by observation](docs/adr/0005-chunk-studio-mutations-and-recover-by-observation.md)
 - [WorldSpec v0.1 reference](docs/worldspec/0.1.0.md)
 - [Roblox compiler v0.1 reference](docs/roblox-compiler/0.1.0.md)
 - [Architecture Planner v0.1 reference](docs/architecture-planner/0.1.0.md)
 - [Studio MCP Adapter v0.1 reference](docs/studio-mcp-adapter/0.1.0.md)
+- [Studio MCP Adapter v0.2 reference](docs/studio-mcp-adapter/0.2.0.md)
+- [Studio MCP transaction recovery runbook](docs/studio-mcp-adapter/recovery.md)
 - [Studio MCP sandbox setup](docs/studio-mcp-adapter/sandbox-setup.md)
 
 ## Roadmap
@@ -343,13 +409,19 @@ all evidence outputs exclusively before it connects or mutates.
    only).
 4. **Studio MCP transaction bridge** - select one exact unsaved local Edit-mode sandbox, observe and
    verify managed state, apply confirmed change sets through fixed bridge actions, compensate
-   safely, and record sanitized evidence (Milestone 3, current implementation).
-5. **Live playtest observation and critique** - exercise traversal and interactions under separate
+   safely, and record sanitized evidence (Milestone 3, complete).
+5. **Chunked Studio transactions and reconnectable recovery** - partition a complete authorized
+   Change Set into deterministic bounded chunks, poison uncertain clients, reconnect only to the
+   exact Studio target and transaction-leased unsaved DataModel, classify lease-bound fresh state by
+   exact prefix, and compensate conservatively to a verified base (Milestone 4, current
+   implementation).
+6. **Live playtest observation and critique** - exercise traversal and interactions under separate
    authorization, collect structured evidence, and introduce The Critic without confusing a
    successful transaction with quality evaluation.
-6. **Reference understanding** - extract evidence and style signals from images, plans, sketches,
+7. **Reference understanding** - extract evidence and style signals from images, plans, sketches,
    heightmaps, text, and existing places while preserving provenance.
-7. **Reference-to-Mansion vertical slice** - integrate the system to produce and iteratively improve
+8. **Reference-to-Mansion vertical slice** - integrate the system to produce and iteratively improve
    a complete mansion, interior, site, landscaping, lighting, interactions, and traversal.
 
-Roadmap items after the Studio MCP transaction bridge describe direction, not current capability.
+Roadmap items after chunked Studio recovery describe direction, not current capability. Playtesting,
+character navigation, console evaluation, and The Critic remain future work.

@@ -3,9 +3,25 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import type { ApplyResult, RobloxManifest } from '@worldwright/roblox-compiler';
+import {
+  classifyRobloxChangeSetProgress,
+  planRobloxChangeSet,
+  type ApplyResult,
+  type RobloxManifest,
+} from '@worldwright/roblox-compiler';
 
+import { chunkStudioBatchOperations } from '../src/batch/chunk.js';
+import { stringifyStudioBatchResponse } from '../src/batch/normalize.js';
+import { buildStudioBatchOperations } from '../src/batch/request.js';
 import { buildStudioApplyReceipt } from '../src/receipt.js';
+import {
+  buildStudioProgressReport,
+  stringifyStudioProgressReport,
+} from '../src/progress-report.js';
+import {
+  buildStudioTransportReport,
+  stringifyStudioTransportReport,
+} from '../src/transport-report.js';
 import { stringifyStudioApplyReceipt, stringifyStudioBridgeResponse } from '../src/normalize.js';
 import type { StudioBridgeResponse, StudioReceiptContext } from '../src/types.js';
 import { compactSnapshotFixture } from './compact-snapshot-fixture.js';
@@ -209,8 +225,98 @@ export function renderStudioBridgeFixtures(): readonly StudioFixtureArtifact[] {
   ];
 }
 
+function loadCourtyardManifest(): RobloxManifest {
+  return JSON.parse(
+    readFileSync(
+      new URL(
+        '../../roblox-compiler/fixtures/manifest/primitive-courtyard.manifest.json',
+        import.meta.url,
+      ),
+      'utf8',
+    ),
+  ) as RobloxManifest;
+}
+
+function renderStudioBatchAndReportFixtures(): readonly StudioFixtureArtifact[] {
+  const manifest = loadCourtyardManifest();
+  const base = {
+    schemaVersion: '0.1.0' as const,
+    projectId: manifest.source.projectId,
+    target: { service: 'Workspace' as const },
+    nodes: [],
+    unmanagedRoots: [],
+  };
+  const plan = planRobloxChangeSet(base, manifest);
+  if (!plan.success) throw new Error('Studio batch fixture planning invariant failed.');
+  const request = chunkStudioBatchOperations({
+    projectId: manifest.source.projectId,
+    changeSetHash: 'a'.repeat(64),
+    // A deterministic non-secret placeholder; generated fixtures never contain a real lease ID.
+    sandboxLeaseId: '0'.repeat(64),
+    operations: buildStudioBatchOperations(plan.changeSet.operations, []),
+  })[0]!.request;
+  const response = {
+    protocolVersion: '0.1.0' as const,
+    action: 'apply_chunk' as const,
+    ok: true as const,
+    changeSetHash: request.changeSetHash,
+    chunkId: request.chunkId,
+    chunkIndex: request.chunkIndex,
+    operationsAttempted: request.operations.length,
+    operationsApplied: request.operations.length,
+    completedOperationIds: request.operations.map((operation) => operation.operationId),
+  };
+  const progress = buildStudioProgressReport(
+    classifyRobloxChangeSetProgress(base, base, plan.changeSet),
+  );
+  const transport = buildStudioTransportReport(
+    {
+      changeSetHash: request.changeSetHash,
+      operationsPlanned: request.operations.length,
+      operationsAttempted: request.operations.length,
+      operationsAppliedBeforeFailure: request.operations.length,
+      chunksPlanned: 1,
+      chunksAttempted: 1,
+      chunksCompleted: 1,
+      sandboxLeaseClaimCalls: 1,
+      mutationExecuteCalls: 1,
+      uncertainTransportEvents: 0,
+      reconnectAttempts: 0,
+      reconnectsSucceeded: 0,
+      compensationOperationsAttempted: 0,
+      compensationOperationsApplied: 0,
+      compensationChunksAttempted: 0,
+      compensationChunksCompleted: 0,
+    },
+    'applied',
+  );
+  return [
+    {
+      label: 'Studio batch response',
+      path: fileURLToPath(new URL('../fixtures/batch/create.response.json', import.meta.url)),
+      content: stringifyStudioBatchResponse(response),
+    },
+    {
+      label: 'Studio base progress report',
+      path: fileURLToPath(new URL('../fixtures/progress/base.progress.json', import.meta.url)),
+      content: stringifyStudioProgressReport(progress),
+    },
+    {
+      label: 'Studio applied transport report',
+      path: fileURLToPath(
+        new URL('../fixtures/transport-reports/applied.transport-report.json', import.meta.url),
+      ),
+      content: stringifyStudioTransportReport(transport),
+    },
+  ];
+}
+
 export function renderStudioFixtures(): readonly StudioFixtureArtifact[] {
-  return [...renderStudioBridgeFixtures(), ...renderStudioReceiptFixtures()];
+  return [
+    ...renderStudioBridgeFixtures(),
+    ...renderStudioReceiptFixtures(),
+    ...renderStudioBatchAndReportFixtures(),
+  ];
 }
 
 export async function generateStudioFixtures(): Promise<void> {

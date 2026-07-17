@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:worldwright:studio-progress-report:0.1.0",
+  "title": "Worldwright Studio Progress Report 0.1.0",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "projectId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "target": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "service": {
+              "const": "Workspace",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service"
+          ]
+        },
+        "baseSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observedSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "operationsTotal": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "appliedPrefixLength": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "classification": {
+          "const": "base",
+          "type": "string"
+        },
+        "nextOperationId": {
+          "minLength": 1,
+          "maxLength": 135,
+          "pattern": "^(?:create|update|delete):[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "projectId",
+        "target",
+        "baseSnapshotHash",
+        "observedSnapshotHash",
+        "changeSetHash",
+        "operationsTotal",
+        "appliedPrefixLength",
+        "classification"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "projectId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "target": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "service": {
+              "const": "Workspace",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service"
+          ]
+        },
+        "baseSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observedSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "operationsTotal": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "appliedPrefixLength": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "classification": {
+          "const": "prefix",
+          "type": "string"
+        },
+        "nextOperationId": {
+          "minLength": 1,
+          "maxLength": 135,
+          "pattern": "^(?:create|update|delete):[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "projectId",
+        "target",
+        "baseSnapshotHash",
+        "observedSnapshotHash",
+        "changeSetHash",
+        "operationsTotal",
+        "appliedPrefixLength",
+        "classification",
+        "nextOperationId"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "projectId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "target": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "service": {
+              "const": "Workspace",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service"
+          ]
+        },
+        "baseSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observedSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "operationsTotal": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "appliedPrefixLength": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "classification": {
+          "const": "complete",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "projectId",
+        "target",
+        "baseSnapshotHash",
+        "observedSnapshotHash",
+        "changeSetHash",
+        "operationsTotal",
+        "appliedPrefixLength",
+        "classification"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "classification": {
+          "const": "unsafe",
+          "type": "string"
+        },
+        "projectId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "target": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "service": {
+              "const": "Workspace",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service"
+          ]
+        },
+        "baseSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "observedSnapshotHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "changeSetHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "operationsTotal": {
+          "minimum": 0,
+          "maximum": 512,
+          "type": "integer"
+        },
+        "diagnostics": {
+          "minItems": 1,
+          "maxItems": 32,
+          "type": "array",
+          "items": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "code": {
+                "pattern": "^progress\\.[a-z][a-z0-9_]*$",
+                "maxLength": 128,
+                "type": "string"
+              },
+              "severity": {
+                "const": "error",
+                "type": "string"
+              },
+              "path": {
+                "maxLength": 2048,
+                "type": "string"
+              },
+              "message": {
+                "minLength": 1,
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "relatedId": {
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "severity",
+              "path",
+              "message"
+            ]
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "classification",
+        "diagnostics"
+      ]
+    }
+  ]
+}

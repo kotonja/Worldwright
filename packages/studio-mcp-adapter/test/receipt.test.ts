@@ -346,6 +346,11 @@ describe('Studio Apply Receipts', () => {
 
   it('rejects unknown receipt fields and validates every generated fixture byte-for-byte', async () => {
     const receipt = buildStudioApplyReceipt(context(), success('applied'));
+    const privateLeaseId = '0123456789abcdef'.repeat(4);
+    expect(JSON.stringify(receipt)).not.toContain(privateLeaseId);
+    expect(validateStudioApplyReceipt({ ...receipt, sandboxLeaseId: privateLeaseId }).valid).toBe(
+      false,
+    );
     expect(
       validateStudioApplyReceipt({ ...receipt, timestamp: '2026-07-15T00:00:00Z' }).valid,
     ).toBe(false);

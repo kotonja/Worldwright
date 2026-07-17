@@ -38,6 +38,16 @@ export {
 } from './contract-schema.js';
 
 export type * from './types.js';
+export type {
+  RobloxOperationBatchAdapter,
+  RobloxOperationBatchCertainFailure,
+  RobloxOperationBatchContext,
+  RobloxOperationBatchOutcome,
+  RobloxOperationBatchPlanInput,
+  RobloxOperationBatchPlanner,
+  RobloxOperationBatchSuccess,
+  RobloxTransactionPhase,
+} from './batch-adapter.js';
 export { formatRobloxDiagnostics, hasErrorDiagnostics, sortDiagnostics } from './diagnostics.js';
 export type {
   RobloxDiagnostic,
@@ -66,4 +76,5 @@ export {
 } from './normalize.js';
 export { planRobloxChangeSet } from './reconcile.js';
 export { simulateRobloxChangeSet } from './simulate.js';
-export { applyRobloxChangeSet } from './transaction.js';
+export { classifyRobloxChangeSetProgress } from './progress.js';
+export { applyRobloxChangeSet, applyRobloxChangeSetBatched } from './transaction.js';

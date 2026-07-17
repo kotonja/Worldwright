@@ -2,12 +2,21 @@ export {
   STUDIO_ADAPTER_ATTRIBUTE_NAMES,
   STUDIO_APPLY_RECEIPT_SCHEMA_ID,
   STUDIO_APPLY_RECEIPT_VERSION,
+  STUDIO_BATCH_PROTOCOL_VERSION,
+  STUDIO_BATCH_REQUEST_SCHEMA_ID,
+  STUDIO_BATCH_RESPONSE_SCHEMA_ID,
   STUDIO_BRIDGE_ACTIONS,
   STUDIO_BRIDGE_PROTOCOL_VERSION,
   STUDIO_BRIDGE_REQUEST_SCHEMA_ID,
   STUDIO_BRIDGE_RESPONSE_PREFIX,
   STUDIO_BRIDGE_RESPONSE_SCHEMA_ID,
   STUDIO_MCP_ADAPTER_VERSION,
+  STUDIO_MCP_PACKAGE_VERSION,
+  STUDIO_STORED_METADATA_VERSION,
+  STUDIO_MCP_BATCH_TOOL_TIMEOUT_MS,
+  STUDIO_MCP_MAX_BATCH_OPERATIONS,
+  STUDIO_MCP_MAX_BATCH_PAYLOAD_BYTES,
+  STUDIO_MCP_MAX_RECONNECTS_PER_TRANSACTION,
   STUDIO_MCP_STARTUP_TIMEOUT_MS,
   STUDIO_MCP_CLOSE_TIMEOUT_MS,
   STUDIO_MCP_ENGINE_EPSILON,
@@ -24,7 +33,42 @@ export {
   STUDIO_MCP_SESSION_DISCOVERY_TIMEOUT_MS,
   STUDIO_MCP_TOOL_TIMEOUT_MS,
   STUDIO_MCP_VIEWPORT_MEDIA_TYPE,
+  STUDIO_PROGRESS_REPORT_SCHEMA_ID,
+  STUDIO_PROGRESS_REPORT_VERSION,
+  STUDIO_SANDBOX_LEASE_ATTRIBUTE_NAME,
+  STUDIO_SANDBOX_LEASE_PROTOCOL_VERSION,
+  STUDIO_SANDBOX_LEASE_RECORD_SCHEMA_ID,
+  STUDIO_SANDBOX_LEASE_RECORD_VERSION,
+  STUDIO_SANDBOX_LEASE_REQUEST_SCHEMA_ID,
+  STUDIO_SANDBOX_LEASE_RESPONSE_PREFIX,
+  STUDIO_SANDBOX_LEASE_RESPONSE_SCHEMA_ID,
+  STUDIO_TRANSPORT_REPORT_SCHEMA_ID,
+  STUDIO_TRANSPORT_REPORT_VERSION,
 } from './constants.js';
+
+export * from './sandbox-lease/index.js';
+
+export { StudioBatchRequestSchema, StudioBatchResponseSchema } from './batch/contract-schema.js';
+export type * from './batch/types.js';
+export {
+  normalizeStudioBatchOperation,
+  normalizeStudioBatchRequest,
+  normalizeStudioBatchResponse,
+  stringifyStudioBatchRequest,
+  stringifyStudioBatchResponse,
+} from './batch/normalize.js';
+export {
+  hashStudioBatchChunkIdentity,
+  hashStudioBatchRequest,
+  hashStudioBatchResponse,
+} from './batch/hashing.js';
+export {
+  validateStudioBatchRequest,
+  validateStudioBatchResponse,
+  validateStudioBatchResponseForRequest,
+} from './batch/validate.js';
+export { buildStudioBatchOperations, buildStudioBatchRequest } from './batch/request.js';
+export { chunkRobloxChangeSetOperations, chunkStudioBatchOperations } from './batch/chunk.js';
 
 export {
   StudioApplyReceiptSchema,
@@ -32,6 +76,25 @@ export {
   StudioBridgeResponseSchema,
 } from './contract-schema.js';
 export type * from './types.js';
+export type * from './report-types.js';
+export {
+  StudioProgressReportSchema,
+  StudioTransportReportSchema,
+} from './report-contract-schema.js';
+export {
+  buildStudioProgressReport,
+  hashStudioProgressReport,
+  normalizeStudioProgressReport,
+  stringifyStudioProgressReport,
+  validateStudioProgressReport,
+} from './progress-report.js';
+export {
+  buildStudioTransportReport,
+  hashStudioTransportReport,
+  normalizeStudioTransportReport,
+  stringifyStudioTransportReport,
+  validateStudioTransportReport,
+} from './transport-report.js';
 
 export {
   StudioAdapterError,
@@ -86,6 +149,7 @@ export {
   listConnectedStudioSessions,
   connectReadOnlyStudioMcpAdapter,
   connectSelectedStudioMcpAdapter,
+  type StudioChangeSetApplyEvidence,
 } from './adapter.js';
 export { buildStudioApplyReceipt } from './receipt.js';
 export { createViewportEvidence } from './capture.js';

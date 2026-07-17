@@ -1,4 +1,5 @@
-export const STUDIO_DIAGNOSTIC_CODES = [
+/** Frozen compatibility set used by the already-published Studio Bridge 0.1 schemas. */
+export const STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES = [
   'studio.mcp_start_failed',
   'studio.mcp_handshake_failed',
   'studio.tool_missing',
@@ -37,6 +38,16 @@ export const STUDIO_DIAGNOSTIC_CODES = [
   'studio.receipt_invalid',
   'studio.io_failed',
   'studio.usage_invalid',
+] as const;
+
+export type StudioBridgeV01DiagnosticCode = (typeof STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES)[number];
+
+/** Host diagnostics include additive protocols without widening Bridge 0.1 wire schemas. */
+export const STUDIO_DIAGNOSTIC_CODES = [
+  ...STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES,
+  'studio.sandbox_lease_conflict',
+  'studio.sandbox_lease_invalid',
+  'studio.sandbox_identity_mismatch',
 ] as const;
 
 export type StudioDiagnosticCode = (typeof STUDIO_DIAGNOSTIC_CODES)[number];

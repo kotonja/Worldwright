@@ -4,8 +4,10 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 
 import {
+  STUDIO_MCP_BATCH_TOOL_TIMEOUT_MS,
   STUDIO_MCP_CLOSE_TIMEOUT_MS,
   STUDIO_MCP_MAX_PAYLOAD_BYTES,
+  STUDIO_MCP_PACKAGE_VERSION,
   STUDIO_MCP_STARTUP_TIMEOUT_MS,
   STUDIO_MCP_TOOL_TIMEOUT_MS,
 } from '../constants.js';
@@ -32,6 +34,7 @@ export interface StudioMcpProtocol {
     tool: AllowedStudioMcpToolName,
     argumentsValue: Readonly<Record<string, unknown>>,
     signal: AbortSignal,
+    timeoutMs?: number,
   ): Promise<unknown>;
   close(): Promise<void>;
 }
@@ -61,6 +64,7 @@ interface StudioMcpClientPrivateOperations {
     timeoutMs?: number,
   ) => Promise<string>;
   readonly capabilities: StudioMcpCapabilities;
+  readonly poison: () => Promise<void>;
 }
 
 const studioMcpClientPrivateOperations = new WeakMap<
@@ -84,8 +88,27 @@ export function issueFixedStudioBridgeProgram(source: string): FixedStudioBridge
   return program;
 }
 
+/** @internal Batch programs include their inert request and must fit the existing outer bound. */
+export function issueFixedStudioBatchProgram(source: string): FixedStudioBridgeProgram {
+  if (source.length === 0 || Buffer.byteLength(source, 'utf8') > STUDIO_MCP_MAX_PAYLOAD_BYTES) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.payload_too_large',
+        '/program',
+        'The fixed Studio batch program is empty or exceeds the outer payload bound.',
+      ),
+    ]);
+  }
+  const program = Object.freeze({ source });
+  issuedFixedPrograms.add(program);
+  return program;
+}
+
 class SdkStudioMcpProtocol implements StudioMcpProtocol {
-  readonly #client = new Client({ name: 'worldwright-studio-mcp-adapter', version: '0.1.0' });
+  readonly #client = new Client({
+    name: 'worldwright-studio-mcp-adapter',
+    version: STUDIO_MCP_PACKAGE_VERSION,
+  });
   readonly #transport: StdioClientTransport;
 
   public constructor(command: StudioMcpCommand) {
@@ -114,10 +137,11 @@ class SdkStudioMcpProtocol implements StudioMcpProtocol {
     tool: AllowedStudioMcpToolName,
     argumentsValue: Readonly<Record<string, unknown>>,
     signal: AbortSignal,
+    timeoutMs = STUDIO_MCP_TOOL_TIMEOUT_MS,
   ): Promise<unknown> {
     return this.#client.callTool({ name: tool, arguments: { ...argumentsValue } }, undefined, {
       signal,
-      timeout: STUDIO_MCP_TOOL_TIMEOUT_MS,
+      timeout: timeoutMs,
     });
   }
 
@@ -141,6 +165,20 @@ class BoundedOperationTimeoutError extends Error {
   public constructor() {
     super('Bounded operation timed out.');
     this.name = 'BoundedOperationTimeoutError';
+  }
+}
+
+/** @internal Signals that a locally started MCP process may still be alive. */
+export class StudioMcpTerminationUnprovenError extends StudioAdapterError {
+  public constructor(path = '/client') {
+    super([
+      studioDiagnostic(
+        'studio.mcp_start_failed',
+        path,
+        'The failed Studio MCP process tree could not be proven terminated.',
+      ),
+    ]);
+    this.name = 'StudioMcpTerminationUnprovenError';
   }
 }
 
@@ -169,11 +207,11 @@ async function runBounded<T>(
   }
 }
 
-async function closeQuietly(protocol: StudioMcpProtocol): Promise<void> {
+async function closeFailedProtocol(protocol: StudioMcpProtocol): Promise<void> {
   try {
     await runBounded(STUDIO_MCP_CLOSE_TIMEOUT_MS, () => protocol.close());
   } catch {
-    // Preserve the original stable connection or handshake diagnostic.
+    throw new StudioMcpTerminationUnprovenError();
   }
 }
 
@@ -199,6 +237,8 @@ function validateStudioId(studioId: string): void {
 export class StudioMcpClient {
   readonly #protocol: StudioMcpProtocol;
   #closed = false;
+  #poisoned = false;
+  #terminationProven = false;
   public readonly capabilities: StudioMcpCapabilities;
 
   /** @internal The unexported construction token restricts this to safe package factories. */
@@ -223,7 +263,23 @@ export class StudioMcpClient {
       invokeText: (tool, argumentsValue, timeoutMs) =>
         this.#invokeText(tool, argumentsValue, timeoutMs),
       capabilities,
+      poison: () => this.#poison(),
     });
+  }
+
+  /** @internal Used only by the exact-session lease and offline tests. */
+  public get poisoned(): boolean {
+    return this.#poisoned;
+  }
+
+  /** @internal Used only by the exact-session lease and offline tests. */
+  public get closed(): boolean {
+    return this.#closed;
+  }
+
+  /** @internal Recovery may replace a poisoned lane only after owned-process termination is proven. */
+  public get terminationProven(): boolean {
+    return this.#terminationProven;
   }
 
   async #invokeText(
@@ -232,7 +288,12 @@ export class StudioMcpClient {
     timeoutMs = STUDIO_MCP_TOOL_TIMEOUT_MS,
   ): Promise<string> {
     const result = await this.#invoke(tool, argumentsValue, timeoutMs);
-    return readStudioMcpTextResult(result, tool).text;
+    try {
+      return readStudioMcpTextResult(result, tool).text;
+    } catch (error) {
+      if (tool === 'execute_luau') await this.#poison();
+      throw error;
+    }
   }
 
   async #invoke(
@@ -248,9 +309,9 @@ export class StudioMcpClient {
       ]);
     }
     try {
-      return await runBounded(
-        Math.min(STUDIO_MCP_TOOL_TIMEOUT_MS, Math.max(1, timeoutMs)),
-        (signal) => this.#protocol.invoke(tool, argumentsValue, signal),
+      const boundedTimeoutMs = Math.min(STUDIO_MCP_BATCH_TOOL_TIMEOUT_MS, Math.max(1, timeoutMs));
+      return await runBounded(boundedTimeoutMs, (signal) =>
+        this.#protocol.invoke(tool, argumentsValue, signal, boundedTimeoutMs),
       );
     } catch (error) {
       const timedOut = error instanceof BoundedOperationTimeoutError;
@@ -275,9 +336,30 @@ export class StudioMcpClient {
   }
 
   async #poison(): Promise<void> {
-    if (this.#closed) return;
+    if (this.#poisoned) {
+      if (this.#terminationProven) return;
+      throw new StudioAdapterError([
+        studioDiagnostic(
+          'studio.tool_call_failed',
+          '/client',
+          'The poisoned Studio MCP process tree could not be proven terminated.',
+        ),
+      ]);
+    }
+    this.#poisoned = true;
     this.#closed = true;
-    await closeQuietly(this.#protocol);
+    try {
+      await runBounded(STUDIO_MCP_CLOSE_TIMEOUT_MS, () => this.#protocol.close());
+      this.#terminationProven = true;
+    } catch {
+      throw new StudioAdapterError([
+        studioDiagnostic(
+          'studio.tool_call_failed',
+          '/client',
+          'The poisoned Studio MCP process tree could not be proven terminated.',
+        ),
+      ]);
+    }
   }
 
   public async listStudioSessionsText(timeoutMs = STUDIO_MCP_TOOL_TIMEOUT_MS): Promise<string> {
@@ -294,10 +376,22 @@ export class StudioMcpClient {
   }
 
   public async close(): Promise<void> {
-    if (this.#closed) return;
+    if (this.#closed) {
+      if (this.#poisoned && !this.#terminationProven) {
+        throw new StudioAdapterError([
+          studioDiagnostic(
+            'studio.tool_call_failed',
+            '/client',
+            'The poisoned Studio MCP process tree could not be proven terminated.',
+          ),
+        ]);
+      }
+      return;
+    }
     this.#closed = true;
     try {
       await runBounded(STUDIO_MCP_CLOSE_TIMEOUT_MS, () => this.#protocol.close());
+      this.#terminationProven = true;
     } catch (error) {
       throw new StudioAdapterError([
         studioDiagnostic(
@@ -335,6 +429,54 @@ export async function executeFixedStudioBridgeProgram(
     [sourceField]: program.source,
     datamodel_type: 'Edit',
   });
+}
+
+/** @internal Executes only an issued fixed program with the bounded batch timeout. */
+export async function executeFixedStudioBatchProgram(
+  client: StudioMcpClient,
+  program: FixedStudioBridgeProgram,
+): Promise<string> {
+  if (!issuedFixedPrograms.has(program)) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.usage_invalid',
+        '/program',
+        'Only a fixed Worldwright Studio bridge program may be executed.',
+      ),
+    ]);
+  }
+  const operations = studioMcpClientPrivateOperations.get(client);
+  if (operations === undefined) {
+    throw new StudioAdapterError([
+      studioDiagnostic('studio.usage_invalid', '/client', 'The Studio MCP client is invalid.'),
+    ]);
+  }
+  const sourceField = operations.capabilities.executeLuauSourceField;
+  const argumentsValue = {
+    [sourceField]: program.source,
+    datamodel_type: 'Edit',
+  };
+  if (Buffer.byteLength(JSON.stringify(argumentsValue), 'utf8') > STUDIO_MCP_MAX_PAYLOAD_BYTES) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.payload_too_large',
+        '/program',
+        'The fixed Studio batch program exceeds the outer MCP payload bound.',
+      ),
+    ]);
+  }
+  return operations.invokeText('execute_luau', argumentsValue, STUDIO_MCP_BATCH_TOOL_TIMEOUT_MS);
+}
+
+/** @internal Poison a privileged lane after an untrusted or lost mutation response. */
+export function poisonStudioMcpClient(client: StudioMcpClient): Promise<void> {
+  const operations = studioMcpClientPrivateOperations.get(client);
+  if (operations === undefined) {
+    throw new StudioAdapterError([
+      studioDiagnostic('studio.usage_invalid', '/client', 'The Studio MCP client is invalid.'),
+    ]);
+  }
+  return operations.poison();
 }
 
 /** @internal Package-private capture path; not exported from the package root. */
@@ -399,7 +541,7 @@ async function connectStudioMcpWithFactory(
     protocol = createdProtocol;
     await runBounded(STUDIO_MCP_STARTUP_TIMEOUT_MS, (signal) => createdProtocol.connect(signal));
   } catch (error) {
-    if (protocol !== undefined) await closeQuietly(protocol);
+    if (protocol !== undefined) await closeFailedProtocol(protocol);
     if (error instanceof StudioAdapterError) throw error;
     throw new StudioAdapterError([
       studioDiagnostic(
@@ -435,7 +577,7 @@ async function connectStudioMcpWithFactory(
       capabilities,
     );
   } catch (error) {
-    await closeQuietly(connectedProtocol);
+    await closeFailedProtocol(connectedProtocol);
     if (error instanceof StudioAdapterError) throw error;
     throw new StudioAdapterError([
       studioDiagnostic(

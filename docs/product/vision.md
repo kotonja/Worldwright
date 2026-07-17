@@ -173,12 +173,22 @@ doors, windows, aligned stairs, explicit circulation, compiler-ready WorldSpec e
 verification, and offline reconciliation and simulation. Its output is a coherent architectural
 blockout, not finished visual art.
 
-Milestone 3, **the Roblox Studio MCP transaction bridge**, is the current implementation. It adds a
-local-stdio MCP client, runtime capability checks, exact Studio-session selection, an unsaved-place
-and stopped-Edit-mode gate, fixed Luau actions, live snapshot extraction, actual engine-state and
+Milestone 3, **the Roblox Studio MCP transaction bridge**, is complete. It adds a local-stdio MCP
+client, runtime capability checks, exact Studio-session selection, an unsaved-place and
+stopped-Edit-mode gate, fixed Luau actions, live snapshot extraction, actual engine-state and
 unmanaged-root verification, an implementation of the existing adapter interface, strict receipts,
-and optional untracked viewport evidence. A real live acceptance claim requires an actual unsaved
-Studio run and exact snapshot-hash verification; offline fake-MCP tests do not substitute for it.
+and optional untracked viewport evidence.
+
+Milestone 4, **chunked Studio transactions and reconnectable recovery**, is the current
+implementation. It adds deterministic bounded mutation chunks, one shared sequential/batch compiler
+transaction engine, exact-prefix classification, uncertain-client poisoning, exact-session
+reconnection with a renewed sandbox gate and transaction-scoped unsaved-DataModel lease,
+conservative compensation, strict transport reports, and a read-only progress command. Studio ID
+selects the target Studio but does not alone prove which unsaved DataModel remains loaded; reconnect
+observation verifies the original private lease and reads the snapshot in one fixed call. A real
+live acceptance claim requires an actual unsaved Studio run, reported mutation-call counts,
+exact-session reconnect proof, and exact snapshot-hash verification; offline fake-MCP tests do not
+substitute for it.
 
 ## Current repository non-goals
 

@@ -285,10 +285,10 @@ from overwriting detected unrelated managed or unmanaged-root changes.
 
 These checks do not provide engine-level atomicity or transaction isolation. Any live adapter must
 serialize Worldwright transactions within one selected project scope and treat creator edits during
-an asynchronous transaction as a concurrency hazard. The Milestone 3 Studio adapter preserves that
-boundary for an exact unsaved sandbox. If causality cannot be established from the
-attempted-operation envelope, Worldwright reports rollback failure and leaves the unrelated state
-untouched.
+an asynchronous transaction as a concurrency hazard. The Studio adapter preserves that boundary for
+an exact unsaved sandbox. Milestone 4 further requires a fresh snapshot to equal an exact canonical
+operation prefix before compensation. If causality cannot be established, Worldwright reports
+rollback failure and leaves the unrelated state untouched.
 
 ## Adapter boundary
 
@@ -301,11 +301,13 @@ holds independent state, preserves unmanaged roots, enforces identity, parents, 
 ordering, and ownership rules, and can model failures before a call, after mutation, incorrect
 post-apply state, and rollback failure. It is a test double, not a production Studio adapter.
 
-The separate `StudioMcpRobloxAdapter` implements the same four methods through fixed bridge actions.
-It validates an exact Studio session, requires an unsaved stopped-Edit-mode sandbox, verifies actual
+The separate `StudioMcpRobloxAdapter` implements the same four methods through fixed bridge actions
+and the optional generic batch method through a separately versioned fixed `apply_chunk` program. It
+validates an exact Studio session, requires an unsaved stopped-Edit-mode sandbox, verifies actual
 engine state, and maps direct unmanaged roots. It still delegates stale checks, pure simulation,
-result verification, rollback admissibility, and compensation to this compiler executor. See
-[Studio MCP adapter architecture](studio-mcp-adapter.md).
+exact-prefix admissibility, result verification, and compensation to this compiler executor. See
+[Studio MCP adapter architecture](studio-mcp-adapter.md) and
+[Studio transaction batching](studio-transaction-batching.md).
 
 ## Studio mapping and future Forge integration
 

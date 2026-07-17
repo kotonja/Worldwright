@@ -241,7 +241,8 @@ describe('allowlisted Studio adapter operations', () => {
           (call) =>
             call.tool === 'execute_luau' &&
             typeof call.argumentsValue['code'] === 'string' &&
-            call.argumentsValue['code'].includes('"action": "create"'),
+            call.argumentsValue['code'].includes('"action": "apply_chunk"') &&
+            call.argumentsValue['code'].includes('"type": "create"'),
         ),
       ).toBe(true);
     } finally {
@@ -270,22 +271,30 @@ describe('allowlisted Studio adapter operations', () => {
     }
   });
 
-  it('creates each desired node with exactly one fixed mutation call', async () => {
+  it('creates all desired nodes through one deterministic fixed batch call', async () => {
     const manifest = loadCourtyardManifest();
     const plan = planRobloxChangeSet(emptySnapshot(manifest), manifest);
     if (!plan.success) throw new Error('Fixture plan failed.');
     const { adapter, protocol } = await createFakeStudioAdapter();
     try {
-      await expect(adapter.applyChangeSet(plan.changeSet)).resolves.toMatchObject({
-        success: true,
-      });
+      const applied = await adapter.applyChangeSetDetailed(plan.changeSet);
+      expect(applied.result).toMatchObject({ success: true });
       const fixedCreates = protocol.calls.filter(
         (call) =>
           call.tool === 'execute_luau' &&
           typeof call.argumentsValue['code'] === 'string' &&
-          call.argumentsValue['code'].includes('"action": "create"'),
+          call.argumentsValue['code'].includes('"action": "apply_chunk"') &&
+          call.argumentsValue['code'].includes('"type": "create"'),
       );
-      expect(fixedCreates).toHaveLength(manifest.nodes.length);
+      expect(fixedCreates).toHaveLength(1);
+      expect(applied.transportReport).toMatchObject({
+        operationsPlanned: manifest.nodes.length,
+        operationsAttempted: manifest.nodes.length,
+        chunksPlanned: 1,
+        chunksAttempted: 1,
+        mutationExecuteCalls: 1,
+        finalOutcome: 'applied',
+      });
       expect(protocol.nodes.size).toBe(manifest.nodes.length);
     } finally {
       await adapter.close();

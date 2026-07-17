@@ -1,0 +1,32 @@
+{
+  "action": "apply_chunk",
+  "changeSetHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "chunkId": "9a78e556eddb30f026b147aa18052b0633e6c0c05a6778a3ac6ffe7f1e3c2e86",
+  "chunkIndex": 0,
+  "completedOperationIds": [
+    "create:courtyard-world",
+    "create:courtyard-region",
+    "create:courtyard-structure",
+    "create:architectural-shell",
+    "create:courtyard-floor",
+    "create:courtyard-details",
+    "create:east-wall",
+    "create:entry-left-pier",
+    "create:entry-lintel",
+    "create:entry-right-pier",
+    "create:entry-roof-ramp",
+    "create:north-wall",
+    "create:northwest-buttress",
+    "create:plaza-floor",
+    "create:south-wall",
+    "create:west-wall",
+    "create:courtyard-guide-orb",
+    "create:fountain-basin",
+    "create:fountain-column",
+    "create:fountain-water"
+  ],
+  "ok": true,
+  "operationsApplied": 20,
+  "operationsAttempted": 20,
+  "protocolVersion": "0.1.0"
+}

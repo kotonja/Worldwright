@@ -133,7 +133,7 @@ describe('Studio adapter transaction integration', () => {
     }
   });
 
-  it('never reports compensation after an uncertain post-update transport rejection', async () => {
+  it('reconnects and verifies compensation after an uncertain post-update rejection', async () => {
     const original = loadCourtyardManifest();
     const modified = renamedManifest(original);
     const changeSet = planOrThrow(modified, original.nodes);
@@ -148,7 +148,7 @@ describe('Studio adapter transaction integration', () => {
         success: false,
         stage: 'apply',
         operationsAttempted: 1,
-        rollback: { attempted: true, succeeded: false },
+        rollback: { attempted: true, succeeded: true },
       });
       expect(
         protocol.nodes.get(
@@ -156,7 +156,7 @@ describe('Studio adapter transaction integration', () => {
         )?.name,
       ).toBe(
         changeSet.operations[0]!.type === 'update'
-          ? changeSet.operations[0]!.after.name
+          ? changeSet.operations[0]!.before.name
           : undefined,
       );
     } finally {
@@ -224,7 +224,8 @@ describe('Studio adapter transaction integration', () => {
           !delayed &&
           tool === 'execute_luau' &&
           typeof argumentsValue['code'] === 'string' &&
-          argumentsValue['code'].includes('"action": "create"')
+          argumentsValue['code'].includes('"action": "apply_chunk"') &&
+          argumentsValue['code'].includes('"type": "create"')
         ) {
           delayed = true;
           reportCreateStarted();
@@ -257,7 +258,7 @@ describe('Studio adapter transaction integration', () => {
     });
   });
 
-  it('never reports verified compensation after an uncertain timed-out mutation', async () => {
+  it('reconnects and restores after a timed-out completed batch mutation', async () => {
     vi.useFakeTimers();
     const manifest = loadCourtyardManifest();
     const changeSet = planOrThrow(manifest);
@@ -279,11 +280,13 @@ describe('Studio adapter transaction integration', () => {
           !delayed &&
           tool === 'execute_luau' &&
           typeof argumentsValue['code'] === 'string' &&
-          argumentsValue['code'].includes('"action": "create"')
+          argumentsValue['code'].includes('"action": "apply_chunk"') &&
+          argumentsValue['code'].includes('"type": "create"')
         ) {
           delayed = true;
           reportCreateStarted();
-          return new Promise<unknown>((resolve, reject) => {
+          await originalInvoke(tool, argumentsValue);
+          return new Promise<unknown>((_resolve, reject) => {
             signal.addEventListener(
               'abort',
               () => {
@@ -293,14 +296,6 @@ describe('Studio adapter transaction integration', () => {
               },
               { once: true },
             );
-            setTimeout(() => {
-              protocol.closed = false;
-              originalInvoke(tool, argumentsValue)
-                .then(resolve, reject)
-                .finally(() => {
-                  protocol.closed = true;
-                });
-            }, 30_001);
           });
         }
         return originalInvoke(tool, argumentsValue);
@@ -309,16 +304,16 @@ describe('Studio adapter transaction integration', () => {
 
     const applying = adapter.applyChangeSet(changeSet);
     await createStarted;
-    await vi.advanceTimersByTimeAsync(36_000);
+    await vi.advanceTimersByTimeAsync(46_000);
     const result = await applying;
     expect(result).toMatchObject({
       success: false,
       stage: 'apply',
-      rollback: { succeeded: false },
+      rollback: { succeeded: true },
     });
     if (result.success) throw new Error('Expected a timed-out transaction failure.');
-    expect(result.rollback.succeeded).toBe(false);
-    expect(protocol.nodes.size).toBe(1);
+    expect(result.rollback.succeeded).toBe(true);
+    expect(protocol.nodes.size).toBe(0);
     await adapter.close();
   });
 

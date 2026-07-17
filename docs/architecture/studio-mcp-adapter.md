@@ -2,10 +2,13 @@
 
 ## Implemented boundary
 
-Milestone 3 adds `@worldwright/studio-mcp-adapter`, Worldwright's first deliberately bounded live
-Roblox integration. It connects to Roblox Studio's built-in MCP server over a locally started stdio
-process, observes one exact Studio session, and implements the existing Roblox compiler
-`RobloxAdapter` interface with fixed Edit-mode Luau bridge programs.
+Milestone 3 added `@worldwright/studio-mcp-adapter`, Worldwright's first deliberately bounded live
+Roblox integration. Milestone 4 retains that boundary and adds deterministic fixed batch mutation,
+client poisoning, exact-session reconnection, transaction-scoped unsaved-DataModel leases, and
+observation-gated compensation. The package connects to Roblox Studio's built-in MCP server over a
+locally started stdio process, observes one exact Studio session, and implements the Roblox
+compiler's sequential and optional batch adapter interfaces with fixed Edit-mode Luau bridge
+programs.
 
 The package is not a general Studio automation client. It can inspect or mutate managed project
 state only in an unsaved local sandbox where `game.PlaceId == 0`, `game.GameId == 0`, and the data
@@ -24,12 +27,12 @@ flowchart TD
     Snapshot["Fresh Studio Scene Snapshot<br/>observed managed state"]
     Reconcile["Existing pure reconciler and simulator"]
     ChangeSet["Confirmed Roblox Change Set"]
-    Transaction["Existing applyRobloxChangeSet executor"]
-    Adapter["StudioMcpRobloxAdapter"]
-    Bridge["Fixed Edit-mode bridge<br/>probe, snapshot, create, update, delete"]
+    Transaction["Shared compiler transaction engine<br/>sequential or batch"]
+    Adapter["StudioMcpRobloxAdapter<br/>transaction-local batch transport"]
+    Bridge["Fixed Edit-mode bridge<br/>probe, snapshot, create, update, delete, apply_chunk"]
     Studio["Exact unsaved Studio sandbox"]
     Verify["Independent snapshot and exact hash verification"]
-    Receipt["Sanitized Studio Apply Receipt"]
+    Receipt["Studio Apply Receipt<br/>plus sanitized Transport Report"]
 
     Intent --> Compiler --> Manifest
     Studio --> Bridge --> Adapter --> Snapshot
@@ -340,8 +343,9 @@ checks so malformed or stale callers cannot turn deletion into arbitrary recursi
 ## Transaction integration and compensation
 
 The Studio adapter implements the compiler's existing `readSnapshot`, `createNode`, `updateNode`,
-and `deleteNode` methods. The Studio CLI passes it to the public `applyRobloxChangeSet`; it does not
-copy transaction logic into MCP code.
+and `deleteNode` methods plus its optional generic batch method. The Studio CLI uses the shared
+compiler transaction engine through `applyRobloxChangeSetBatched`; it does not copy transaction
+logic into MCP code. The original sequential `applyRobloxChangeSet` surface remains compatible.
 
 Before the first mutation, the executor reads a complete snapshot, validates it, compares its hash
 with `baseSnapshotHash`, and purely simulates the transition. A stale or invalid change set calls no
@@ -354,12 +358,23 @@ operations use the state established by earlier operations. Any executor snapsho
 compensation observation, replaces the cache with the newly verified complete observation. This adds
 operation-local parent preconditions without changing the compiler adapter or wire contracts.
 
-After sequential operations, a separate snapshot must equal `resultSnapshotHash`, and simulation
-must establish the relationship to `desiredManifestHash`. On apply or verification failure, the
-existing executor reads observed state and compensates only when that state is within the attempted
-operation envelope. Compensation is successful only when a complete final snapshot equals the exact
-initial hash. Creator edits can make rollback inadmissible; Worldwright then preserves the uncertain
-state and reports failure instead of overwriting it.
+After exact ordered sequential operations or deterministic chunks, a separate snapshot must equal
+`resultSnapshotHash`, and simulation must establish the relationship to `desiredManifestHash`. On
+apply or verification failure, the shared executor reads observed state and accepts only the exact
+base, an exact canonical operation prefix, or the complete result. It compensates only a nonzero
+prefix inside the attempted envelope. Compensation is successful only when a complete final snapshot
+equals the exact initial hash. Creator edits can make rollback inadmissible; Worldwright then
+preserves the uncertain state and reports failure instead of overwriting it.
+
+An uncertain mutation response poisons and closes the current MCP client. The next observation may
+use a new default local-stdio process only after exact original Studio-ID selection, a renewed
+unsaved stopped-sandbox probe, and one same-call verification of the original transaction lease plus
+its complete bound snapshot. Studio ID identifies the target Studio but is not sufficient identity
+for the unsaved DataModel loaded inside it. A lease mismatch blocks classification and compensation.
+The uncertain chunk is never retried, and Studio Batch Protocol `0.1.0` never automatically resumes
+forward work. See
+[Studio transaction batching and reconnectable recovery](studio-transaction-batching.md) for the
+current transport design.
 
 No ChangeHistoryService API participates in this protocol, and Studio undo is not transaction
 isolation.
@@ -382,7 +397,7 @@ outputs may be copied into a review after the usual check for other private loca
 receipts and probe output must not be committed or pasted into a pull request.
 
 When `screen_capture` is available, capture requires an explicit output path beneath the
-repository-owned `.worldwright/live-milestone-3/` and accepts only a structurally validated bounded
+repository-owned ignored live-evidence directory and accepts only a structurally validated bounded
 8-bit baseline-sequential JPEG with exact lowercase `image/jpeg`. Receipt outputs share the anchored
 path check; lexical and real-parent checks reject junction escapes. The CLI reserves the output
 before connection, writes decoded bytes once, and returns only media type, lowercase SHA-256, and
@@ -412,11 +427,14 @@ installation paths, and environment dumps remain outside the result boundary.
 
 ## Performance bounds
 
-Adapter `0.1.0` has explicit ceilings:
+The adapter has explicit ceilings:
 
 | Resource                           |   Limit |
 | ---------------------------------- | ------: |
 | Change-set operations              |     512 |
+| Operations per batch               |      32 |
+| Canonical batch request            |   3 MiB |
+| Reconnects per transaction         |       2 |
 | Managed nodes                      |   2,048 |
 | Workspace structural scan          |  65,536 |
 | Encoded state for one node         | 256 KiB |
@@ -430,6 +448,7 @@ Adapter `0.1.0` has explicit ceilings:
 | Process startup                    |    15 s |
 | Session discovery                  |     6 s |
 | Tool call                          |    30 s |
+| Batch tool call                    |    45 s |
 | Process close                      |     7 s |
 | Engine numeric epsilon             | 0.00001 |
 
@@ -441,13 +460,15 @@ bounded, selected-project managed hierarchy once per call; they do not repeatedl
 `Workspace` or cross an unmanaged boundary. Traversal is iterative rather than dependent on
 unbounded hierarchy depth.
 
-Version `0.1.0` intentionally uses one MCP `execute_luau` call per mutation. High-throughput batch
-application is future work and must retain operation-specific preconditions, attempted-order
-evidence, ownership protection, and exact verification.
+The original single-action protocol intentionally uses one MCP `execute_luau` call per mutation.
+Adapter package `0.2.0` adds a separate fixed `apply_chunk` protocol that applies at most 32 exact
+ordered node operations per mutation call while retaining complete preconditions, attempted-prefix
+evidence, ownership protection, and independent final verification.
 
 ## Future boundaries
 
-- A batch transport may reduce per-operation MCP overhead under a separately versioned bridge.
+- A future separately reviewed protocol may resume from an exact prefix; batch protocol `0.1.0`
+  always restores after uncertain forward progress.
 - A Forge plugin may add creator-native review and ChangeHistoryService recording around the safe
   transaction protocol; it cannot replace snapshot verification.
 - A playtest observer may later enter a running data model and collect traversal, interaction, and
@@ -457,6 +478,8 @@ evidence, ownership protection, and exact verification.
 - Atlas, reference understanding, asset routing or generation, broader place authorization, and
   production deployment remain future work.
 
-See [ADR 0004](../adr/0004-use-studio-mcp-for-the-first-live-adapter.md), the
-[Studio MCP Adapter 0.1 reference](../studio-mcp-adapter/0.1.0.md), and the
-[sandbox setup guide](../studio-mcp-adapter/sandbox-setup.md).
+See [ADR 0004](../adr/0004-use-studio-mcp-for-the-first-live-adapter.md),
+[ADR 0005](../adr/0005-chunk-studio-mutations-and-recover-by-observation.md), the
+[Studio MCP Adapter 0.1 reference](../studio-mcp-adapter/0.1.0.md), the
+[Studio MCP Adapter 0.2 reference](../studio-mcp-adapter/0.2.0.md), and the
+[recovery runbook](../studio-mcp-adapter/recovery.md).

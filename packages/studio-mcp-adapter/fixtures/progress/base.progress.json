@@ -1,0 +1,14 @@
+{
+  "appliedPrefixLength": 0,
+  "baseSnapshotHash": "e21bbcc440a018404bb769e891b9ad7fde5ff5e06f1570de55931f555ec972fe",
+  "changeSetHash": "a46bc68e6c4433f48ef7a14f5e3f73d3f54f9b4d4efd82324f02497297c697cd",
+  "classification": "base",
+  "nextOperationId": "create:courtyard-world",
+  "observedSnapshotHash": "e21bbcc440a018404bb769e891b9ad7fde5ff5e06f1570de55931f555ec972fe",
+  "operationsTotal": 20,
+  "projectId": "project-primitive-courtyard",
+  "schemaVersion": "0.1.0",
+  "target": {
+    "service": "Workspace"
+  }
+}
