@@ -6,6 +6,7 @@ import { validatePlaytestPlanAgainstSources } from '../src/plan/trusted.js';
 import {
   localToWorld,
   openingSidePoint,
+  rectangleCenterHasAgentClearance,
   safeStairHallPoint,
   stairHallApproachContainsPoint,
 } from '../src/plan/coordinates.js';
@@ -55,8 +56,8 @@ describe('Playtest source binding and coordinates', () => {
     const foyer = result.value.checkpoints.find(
       (checkpoint) => checkpoint.type === 'room_center' && checkpoint.roomId === 'foyer-grand',
     );
-    expect(foyer?.localPosition).toEqual({ x: -58.5, y: 3, z: 24.5 });
-    expect(foyer?.worldPosition).toEqual({ x: 295.5, y: 67, z: -238.5 });
+    expect(foyer?.localPosition).toEqual({ x: -59.5, y: 3, z: -24.5 });
+    expect(foyer?.worldPosition).toEqual({ x: 344.5, y: 67, z: -239.5 });
     const setup = result.value.checkpoints.find(
       (checkpoint) => checkpoint.id === result.value.setup.checkpointId,
     );
@@ -189,5 +190,15 @@ describe('Playtest source binding and coordinates', () => {
       expect(safeStairHallPoint(zHall, zRun, 'z', { x: 18, z: 10 })).toEqual({ x: 17.5, z: 10 });
       expect(stairHallApproachContainsPoint(zHall, zRun, 'z', { x: 10, z: 10 })).toBe(false);
     }
+  });
+
+  it('requires every deterministic stair-landing center to contain the fixed agent envelope', async () => {
+    const { architecturePlan } = await readArchitectureInputs();
+    const run = architecturePlan.stairRuns[0];
+    if (run === undefined) throw new Error('Stair coordinate fixture is incomplete.');
+    expect(rectangleCenterHasAgentClearance(run.landing.lower)).toBe(true);
+    expect(rectangleCenterHasAgentClearance(run.landing.upper)).toBe(true);
+    expect(rectangleCenterHasAgentClearance({ ...run.landing.lower, width: 2 })).toBe(false);
+    expect(rectangleCenterHasAgentClearance({ ...run.landing.lower, depth: 2 })).toBe(false);
   });
 });

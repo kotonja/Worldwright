@@ -140,6 +140,27 @@ describe('Studio playtest evidence helpers', () => {
     expect(evidence.entries).toHaveLength(0);
   });
 
+  it('accepts only exact empty runtime text as complete zero-entry evidence', () => {
+    expect(sanitizeStudioConsoleEvidence('legacy Edit text', '')).toMatchObject({
+      evidenceComplete: true,
+      newErrorCount: 0,
+      newWarningCount: 0,
+      entries: [],
+    });
+    expect(sanitizeStudioConsoleEvidence('legacy Edit text', ' ')).toMatchObject({
+      evidenceComplete: false,
+      newErrorCount: 0,
+      newWarningCount: 0,
+      entries: [],
+    });
+    expect(sanitizeStudioConsoleEvidence('', 'nonempty runtime text')).toMatchObject({
+      evidenceComplete: false,
+      newErrorCount: 0,
+      newWarningCount: 0,
+      entries: [],
+    });
+  });
+
   it('marks malformed, truncated, reordered, and oversized console evidence incomplete', () => {
     const entry = { message: 'one', severity: 'info', source: 'Edit' };
     expect(sanitizeStudioConsoleEvidence('plain output', 'plain output').evidenceComplete).toBe(

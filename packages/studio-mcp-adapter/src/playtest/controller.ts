@@ -461,6 +461,8 @@ export class StudioPlaytestController {
   readonly #lease: StudioExactSessionLease;
   readonly #context: PreparedControllerContext;
   readonly #reconnectState: StudioReconnectState = createStudioReconnectState();
+  readonly #stopPreparationReconnectState: StudioReconnectState = createStudioReconnectState();
+  readonly #stopReconnectState: StudioReconnectState = createStudioReconnectState();
   readonly #pathTargets = new Map<string, string>();
   readonly #navigationAttempts = new Set<string>();
   readonly #reachedSegments = new Set<string>();
@@ -648,9 +650,11 @@ export class StudioPlaytestController {
     }
   }
 
-  async #reconnectForRunningObservation(): Promise<StudioMcpClient> {
+  async #reconnectForRunningObservation(
+    reconnectState: StudioReconnectState = this.#reconnectState,
+  ): Promise<StudioMcpClient> {
     const observation = await this.#lease.clientForVerifiedObservation(
-      this.#reconnectState,
+      reconnectState,
       async (candidate) => {
         await this.#runningStateOnClient(candidate);
         return this.#identityProbe(candidate);
@@ -1109,16 +1113,16 @@ export class StudioPlaytestController {
       if (!stopClient.poisoned) throw error;
       // No Stop request has been sent. Replace only the poisoned read lane,
       // then re-prove the exact running identity before the one authorized Stop.
-      stopClient = await this.#reconnectForRunningObservation();
+      stopClient = await this.#reconnectForRunningObservation(this.#stopPreparationReconnectState);
     }
     this.#stopSequenceStarted = true;
     try {
       await invokeStudioPlaytestStartStop(stopClient, false, STUDIO_MCP_PLAYTEST_STOP_TIMEOUT_MS);
     } catch {
       acknowledgmentCertain = false;
-      await this.#lease.markUncertainMutation(this.#reconnectState);
+      await this.#lease.markUncertainMutation(this.#stopReconnectState);
       const observation = await this.#lease.clientForVerifiedObservation(
-        this.#reconnectState,
+        this.#stopReconnectState,
         async (candidate) => readStudioPlaytestSessionState(await candidate.getStudioStateText()),
       );
       if (observation.verified?.phase === 'running_server') {
@@ -1148,9 +1152,9 @@ export class StudioPlaytestController {
               'The single observed-state Stop did not restore Edit within the bounded wait.',
             );
           }
-          await this.#lease.markUncertainMutation(this.#reconnectState);
+          await this.#lease.markUncertainMutation(this.#stopReconnectState);
           const finalObservation = await this.#lease.clientForVerifiedObservation(
-            this.#reconnectState,
+            this.#stopReconnectState,
             async (candidate) =>
               readStudioPlaytestSessionState(await candidate.getStudioStateText()),
           );
@@ -1190,7 +1194,7 @@ export class StudioPlaytestController {
         // The Stop acknowledgment was certain, so reconnect only to classify
         // the exact session. Never issue a second Stop from this branch.
         const observation = await this.#lease.clientForVerifiedObservation(
-          this.#reconnectState,
+          this.#stopReconnectState,
           async (candidate) => readStudioPlaytestSessionState(await candidate.getStudioStateText()),
         );
         if (observation.verified?.phase !== 'stopped_edit') {

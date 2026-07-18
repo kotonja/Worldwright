@@ -24,13 +24,16 @@ import {
   type ArchitectureStairDirective,
 } from './entity-directive-schema.js';
 import { ARCHITECTURE_MAX_BAND_LENGTH_CELLS } from './allocation.js';
-import { validateArchitectureEntityDirective } from './directive-validation.js';
+import {
+  validateArchitectureEntityDirective,
+  validateArchitectureRelationshipDirective,
+} from './directive-validation.js';
 import { ARCHITECTURE_GENERATED_ID_PREFIX } from './generated-id.js';
 import {
   ARCHITECTURE_RELATIONSHIP_DIRECTIVE_KEY,
   type ArchitectureAdjacencyDirective,
 } from './relationship-directive-schema.js';
-import { validateArchitectureRelationshipDirective } from './directive-validation.js';
+import { calculateStairLandingDepth } from './stairs.js';
 
 export const ARCHITECTURE_MAX_FLOORS = 3;
 export const ARCHITECTURE_MAX_ROOMS_PER_FLOOR = 32;
@@ -759,9 +762,9 @@ export function extractArchitectureSourceProfile(input: unknown): ArchitectureSo
         ),
       );
     } else {
-      const landingDepth = Math.max(
+      const landingDepth = calculateStairLandingDepth(
+        stair.directive.coreLength,
         stair.directive.minimumTreadDepth,
-        Math.min(stair.directive.coreLength / 4, 2),
       );
       const availableRunLength = stair.directive.coreLength - 2 * landingDepth;
       if (stepCount * stair.directive.minimumTreadDepth > availableRunLength) {

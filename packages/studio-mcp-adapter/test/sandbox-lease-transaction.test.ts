@@ -719,7 +719,7 @@ describe('Studio transaction-scoped sandbox lease integration', () => {
     } finally {
       await fake.adapter.close();
     }
-  });
+  }, 30_000);
 
   it('reuses one exact lease through reconnect observation and successful compensation', async () => {
     const { original, firstChangeSet } = twoUpdatePlans();

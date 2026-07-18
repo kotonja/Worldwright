@@ -47,13 +47,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
           "z": -255.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
           "z": -255.5
         },
@@ -83,7 +83,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
           "z": -255.5
         },
@@ -109,15 +109,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "verticalError": 0
       },
@@ -145,9 +145,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -158,7 +158,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 17.001838135919304,
+        "totalPathDistance": 16.00195300580526,
         "waypointCount": 2,
         "waypointDigestSha256": "3e43a419bc3c0f1438fa9dca794523098008362f2535e91fee7f8d533536d1a8"
       },
@@ -172,15 +172,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
-          "z": -221.5
+          "z": -223.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
-          "z": -221.5
+          "z": -223.5
         },
         "verticalError": 0
       },
@@ -208,9 +208,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
-          "z": -221.5
+          "z": -223.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -221,7 +221,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 17.001838135919304,
+        "totalPathDistance": 16.00195300580526,
         "waypointCount": 2,
         "waypointDigestSha256": "b67eefb3ba89bfeba01b7143591aa5bf375ac43f3fd815dafb6df6df2e771896"
       },
@@ -234,15 +234,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
-          "z": -215.5
+          "z": -217.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
-          "z": -215.5
+          "z": -217.5
         },
         "verticalError": 0
       },
@@ -270,9 +270,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 295.25,
+          "x": 344.75,
           "y": 67,
-          "z": -215.5
+          "z": -217.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -296,15 +296,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "status": "reached",
         "targetPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "verticalError": 0
       },
@@ -332,9 +332,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -345,7 +345,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 22.0014204086918,
+        "totalPathDistance": 21.50145343924452,
         "waypointCount": 2,
         "waypointDigestSha256": "9916eabe62e018ff45639162fc8a7523d304810cd93bdcd87eec54badf6ec641"
       },
@@ -358,15 +358,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "status": "reached",
         "targetPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "verticalError": 0
       },
@@ -394,9 +394,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -420,15 +420,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "status": "reached",
         "targetPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "verticalError": 0
       },
@@ -456,9 +456,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -193.5
+          "z": -196
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -531,7 +531,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 13.729530217745982,
+        "totalPathDistance": 16.194134740701646,
         "waypointCount": 2,
         "waypointDigestSha256": "05a5b3fbde3b2c6bb62b9d2266c539eeeae27bd14ef30aefad74d6160ec1cd7f"
       },
@@ -545,13 +545,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
@@ -581,7 +581,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
@@ -607,13 +607,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
@@ -643,7 +643,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
@@ -669,13 +669,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -237.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -237.5
         },
@@ -705,7 +705,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -237.5
         },
@@ -731,13 +731,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
@@ -767,7 +767,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
@@ -793,13 +793,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
@@ -829,7 +829,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
@@ -918,13 +918,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -157
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -157
         },
@@ -954,7 +954,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -157
         },
@@ -980,13 +980,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -157
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -157
         },
@@ -1016,7 +1016,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -157
         },
@@ -1042,13 +1042,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -157
         },
         "status": "reached",
         "targetPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -157
         },
@@ -1078,7 +1078,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -157
         },
@@ -1104,13 +1104,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -157
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -157
         },
@@ -1140,7 +1140,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -157
         },
@@ -1166,13 +1166,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -157
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -157
         },
@@ -1202,7 +1202,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -157
         },
@@ -1291,15 +1291,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "status": "reached",
         "targetPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "verticalError": 0
       },
@@ -1327,9 +1327,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -1340,7 +1340,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 32.59601202601324,
+        "totalPathDistance": 29.107559155655764,
         "waypointCount": 2,
         "waypointDigestSha256": "9c8887c325fe65cb4f14656c807a0e8a11cef842c9b6edca9f50ea9f19408a49"
       },
@@ -1353,15 +1353,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "status": "reached",
         "targetPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "verticalError": 0
       },
@@ -1389,9 +1389,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -1415,15 +1415,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "status": "reached",
         "targetPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "verticalError": 0
       },
@@ -1451,9 +1451,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 295.5,
+          "x": 344.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -1477,15 +1477,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "status": "reached",
         "targetPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "verticalError": 0
       },
@@ -1513,9 +1513,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -1539,15 +1539,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "status": "reached",
         "targetPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "verticalError": 0
       },
@@ -1575,9 +1575,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -147.5
+          "z": -151
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -1650,7 +1650,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 32.59601202601324,
+        "totalPathDistance": 29.107559155655764,
         "waypointCount": 2,
         "waypointDigestSha256": "d9acf675463f229b8bef7788b976b8ae631e67876c90ef4efbc9d03b49dd84df"
       },
@@ -1664,13 +1664,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
@@ -1700,7 +1700,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
@@ -1726,13 +1726,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
@@ -1762,7 +1762,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
@@ -1788,13 +1788,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -197
         },
         "status": "reached",
         "targetPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -197
         },
@@ -1824,7 +1824,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -197
         },
@@ -1850,13 +1850,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
@@ -1886,7 +1886,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
@@ -1912,13 +1912,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
@@ -1948,7 +1948,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
@@ -2037,13 +2037,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -119
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -119
         },
@@ -2073,7 +2073,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -119
         },
@@ -2099,13 +2099,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -119
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -119
         },
@@ -2135,7 +2135,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -119
         },
@@ -2161,13 +2161,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -119
         },
         "status": "reached",
         "targetPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -119
         },
@@ -2197,7 +2197,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -119
         },
@@ -2223,13 +2223,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -119
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -119
         },
@@ -2259,7 +2259,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -119
         },
@@ -2285,13 +2285,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -119
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -119
         },
@@ -2321,7 +2321,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -119
         },
@@ -2410,15 +2410,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "verticalError": 0
       },
@@ -2446,9 +2446,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -2459,7 +2459,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 58.553394436189606,
+        "totalPathDistance": 59.552497848536966,
         "waypointCount": 2,
         "waypointDigestSha256": "03e66f51b96cb6ed5297226166164ef786486042203ba21af1b76626e7fc8e50"
       },
@@ -2521,7 +2521,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 58.553394436189606,
+        "totalPathDistance": 59.552497848536966,
         "waypointCount": 2,
         "waypointDigestSha256": "b60ebc9d2aa0fc8d9793b26db991932491da05f21e591e4bc99c891f0223f011"
       },
@@ -2535,15 +2535,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "status": "reached",
         "targetPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "verticalError": 0
       },
@@ -2571,9 +2571,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -2584,7 +2584,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 66.54509749034861,
+        "totalPathDistance": 64.5619857191521,
         "waypointCount": 2,
         "waypointDigestSha256": "57681fb7ba95eac99ee613ee1693b8b605e41170934ea0e7adc03d738996289a"
       },
@@ -2598,15 +2598,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 302,
+          "x": 338,
           "y": 68,
-          "z": -125
+          "z": -128
         },
         "status": "reached",
         "targetPosition": {
-          "x": 302,
+          "x": 338,
           "y": 68,
-          "z": -125
+          "z": -128
         },
         "verticalError": 0
       },
@@ -2634,9 +2634,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 302,
+          "x": 338,
           "y": 68,
-          "z": -125
+          "z": -128
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -2647,7 +2647,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 14.568802284333463,
+        "totalPathDistance": 15.337861650177967,
         "waypointCount": 2,
         "waypointDigestSha256": "a75ccf0c72a2daeb0a8eebcd01d831b14f43407c7d43a3d9613ccec2cfe6d344"
       },
@@ -2660,15 +2660,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "status": "reached",
         "targetPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "verticalError": 0
       },
@@ -2696,9 +2696,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -2709,7 +2709,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 14.568802284333463,
+        "totalPathDistance": 15.337861650177967,
         "waypointCount": 2,
         "waypointDigestSha256": "e302ee27441169a193fea0dcf1062f92c668e0e2006b4e867d6e6b4de1ec999d"
       },
@@ -2772,7 +2772,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 66.54509749034861,
+        "totalPathDistance": 64.5619857191521,
         "waypointCount": 2,
         "waypointDigestSha256": "36bb730312a454f8ff3dd78ff52257d6ceeacdd5a2483c5132411dad256dae5b"
       },
@@ -2786,15 +2786,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "verticalError": 0
       },
@@ -2822,9 +2822,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -2835,7 +2835,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 58.553394436189606,
+        "totalPathDistance": 59.552497848536966,
         "waypointCount": 2,
         "waypointDigestSha256": "5aff8e90b097d479a28c34b6e8c32d0b3a65e1dca27adc467f5af1ee0453f04d"
       },
@@ -2848,15 +2848,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "verticalError": 0
       },
@@ -2884,9 +2884,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -2910,15 +2910,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "verticalError": 0
       },
@@ -2946,9 +2946,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 317.5,
+          "x": 322.5,
           "y": 67,
-          "z": -238.5
+          "z": -239.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -3021,7 +3021,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 58.553394436189606,
+        "totalPathDistance": 59.552497848536966,
         "waypointCount": 2,
         "waypointDigestSha256": "4f8059600fc407ce2f7e961deee6aa72623351c3bf17ee4c1542951713f42564"
       },
@@ -3035,13 +3035,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
@@ -3071,7 +3071,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -197
         },
@@ -3097,13 +3097,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
@@ -3133,7 +3133,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -197
         },
@@ -3159,13 +3159,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -197
         },
         "status": "reached",
         "targetPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -197
         },
@@ -3195,7 +3195,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -197
         },
@@ -3221,13 +3221,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 344.75,
+          "x": 295.25,
           "y": 67,
           "z": -213.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 344.75,
+          "x": 295.25,
           "y": 67,
           "z": -213.5
         },
@@ -3257,7 +3257,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 344.75,
+          "x": 295.25,
           "y": 67,
           "z": -213.5
         },
@@ -3283,13 +3283,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 344.75,
+          "x": 295.25,
           "y": 67,
           "z": -219.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 344.75,
+          "x": 295.25,
           "y": 67,
           "z": -219.5
         },
@@ -3319,7 +3319,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 344.75,
+          "x": 295.25,
           "y": 67,
           "z": -219.5
         },
@@ -3345,13 +3345,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -237.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -237.5
         },
@@ -3381,7 +3381,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 344.5,
+          "x": 295.5,
           "y": 67,
           "z": -237.5
         },
@@ -3407,13 +3407,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
@@ -3443,7 +3443,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 328.5,
+          "x": 311.5,
           "y": 67,
           "z": -237.5
         },
@@ -3469,13 +3469,13 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
         "status": "reached",
         "targetPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
@@ -3505,7 +3505,7 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 322.5,
+          "x": 317.5,
           "y": 67,
           "z": -237.5
         },
@@ -3594,15 +3594,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "status": "reached",
         "targetPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "verticalError": 0
       },
@@ -3630,9 +3630,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 67,
-          "z": -114
+          "z": -116
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -3643,7 +3643,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 66.54509749034861,
+        "totalPathDistance": 64.5619857191521,
         "waypointCount": 2,
         "waypointDigestSha256": "dadf3f2142dad1738de9d32b3578af6c377c8a95e2f27ac1934cb75c74bd3927"
       },
@@ -3657,15 +3657,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 302,
+          "x": 338,
           "y": 68,
-          "z": -125
+          "z": -128
         },
         "status": "reached",
         "targetPosition": {
-          "x": 302,
+          "x": 338,
           "y": 68,
-          "z": -125
+          "z": -128
         },
         "verticalError": 0
       },
@@ -3693,9 +3693,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 302,
+          "x": 338,
           "y": 68,
-          "z": -125
+          "z": -128
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -3706,7 +3706,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 14.568802284333463,
+        "totalPathDistance": 15.337861650177967,
         "waypointCount": 2,
         "waypointDigestSha256": "14a85aafc9c9b35ee433002febb9fc83075d1ed24d03acc3e5ef30400b5cc7c9"
       },
@@ -3719,15 +3719,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 302,
+          "x": 338,
           "y": 87,
-          "z": -103
+          "z": -104
         },
         "status": "reached",
         "targetPosition": {
-          "x": 302,
+          "x": 338,
           "y": 87,
-          "z": -103
+          "z": -104
         },
         "verticalError": 0
       },
@@ -3755,9 +3755,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 302,
+          "x": 338,
           "y": 87,
-          "z": -103
+          "z": -104
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -3768,7 +3768,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 29.068883707497267,
+        "totalPathDistance": 30.610455730027933,
         "waypointCount": 2,
         "waypointDigestSha256": "e89f148f18c5f899ba5768eaaeaf5dbda9bf284c32901244d2f336946734648d"
       },
@@ -3781,15 +3781,15 @@
       "arrival": {
         "horizontalError": 0,
         "observedPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 87,
-          "z": -114
+          "z": -116
         },
         "status": "reached",
         "targetPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 87,
-          "z": -114
+          "z": -116
         },
         "verticalError": 0
       },
@@ -3817,9 +3817,9 @@
       "navigation": {
         "acknowledgmentCertain": true,
         "finalPosition": {
-          "x": 311.5,
+          "x": 328.5,
           "y": 87,
-          "z": -114
+          "z": -116
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -3830,7 +3830,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 14.534441853748634,
+        "totalPathDistance": 15.305227865013967,
         "waypointCount": 2,
         "waypointDigestSha256": "3bdc6020e99327cc5b31f3edb16945a27bbf51a1541f647c02f0ccf3ccd61eec"
       },
@@ -3893,7 +3893,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 66.54509749034861,
+        "totalPathDistance": 64.5619857191521,
         "waypointCount": 2,
         "waypointDigestSha256": "020e99149cbabb03bd04d3a45591a11ba6b40e858109ae46d1370c6d904a0f9a"
       },
@@ -3909,13 +3909,13 @@
         "observedPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "verticalError": 0
       },
@@ -3945,7 +3945,7 @@
         "finalPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -3956,7 +3956,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 55.556277773083394,
+        "totalPathDistance": 51.56064390598705,
         "waypointCount": 2,
         "waypointDigestSha256": "7ede57eaf296576469c2f172fd6778ff5ccfffbef61e723e3d5b43e9581b4a5f"
       },
@@ -3971,13 +3971,13 @@
         "observedPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "verticalError": 0
       },
@@ -4007,7 +4007,7 @@
         "finalPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4033,13 +4033,13 @@
         "observedPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "verticalError": 0
       },
@@ -4069,7 +4069,7 @@
         "finalPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4095,13 +4095,13 @@
         "observedPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "verticalError": 0
       },
@@ -4131,7 +4131,7 @@
         "finalPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4157,13 +4157,13 @@
         "observedPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "verticalError": 0
       },
@@ -4193,7 +4193,7 @@
         "finalPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -235.5
+          "z": -231.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4266,7 +4266,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 55.556277773083394,
+        "totalPathDistance": 51.56064390598705,
         "waypointCount": 2,
         "waypointDigestSha256": "12c195d5b51fa5af4f1ced98a6ce8264cb0a9ba8f0ef4d3d9256ea041af4a115"
       },
@@ -4282,13 +4282,13 @@
         "observedPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "verticalError": 0
       },
@@ -4318,7 +4318,7 @@
         "finalPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4329,7 +4329,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 9.82344135219425,
+        "totalPathDistance": 3.5355339059327378,
         "waypointCount": 2,
         "waypointDigestSha256": "41f7857b0998e7bf10ab19abfc5f210bc4db8eeaeb27de8d6c460f2b1e237d9d"
       },
@@ -4344,13 +4344,13 @@
         "observedPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "verticalError": 0
       },
@@ -4380,7 +4380,7 @@
         "finalPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4406,13 +4406,13 @@
         "observedPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "verticalError": 0
       },
@@ -4442,7 +4442,7 @@
         "finalPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4468,13 +4468,13 @@
         "observedPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "verticalError": 0
       },
@@ -4504,7 +4504,7 @@
         "finalPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4530,13 +4530,13 @@
         "observedPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "verticalError": 0
       },
@@ -4566,7 +4566,7 @@
         "finalPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -189.5
+          "z": -177.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4639,7 +4639,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 9.82344135219425,
+        "totalPathDistance": 3.5355339059327378,
         "waypointCount": 2,
         "waypointDigestSha256": "1358d4975ccdd6ecf362f1557cd4b956ba7f2e39fa367bbe35c141d114cc19aa"
       },
@@ -4655,13 +4655,13 @@
         "observedPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "verticalError": 0
       },
@@ -4691,7 +4691,7 @@
         "finalPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4702,7 +4702,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 3.5355339059327378,
+        "totalPathDistance": 11.76860229593982,
         "waypointCount": 2,
         "waypointDigestSha256": "daa4fd048e30d5ab52935f23f8b6aada581420333e0229e89176e0c316c467e4"
       },
@@ -4717,13 +4717,13 @@
         "observedPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "verticalError": 0
       },
@@ -4753,7 +4753,7 @@
         "finalPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4779,13 +4779,13 @@
         "observedPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "verticalError": 0
       },
@@ -4815,7 +4815,7 @@
         "finalPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -177.5
+          "z": -191.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4841,13 +4841,13 @@
         "observedPosition": {
           "x": 344.75,
           "y": 87,
-          "z": -198.5
+          "z": -207.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 344.75,
           "y": 87,
-          "z": -198.5
+          "z": -207.5
         },
         "verticalError": 0
       },
@@ -4877,7 +4877,7 @@
         "finalPosition": {
           "x": 344.75,
           "y": 87,
-          "z": -198.5
+          "z": -207.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4888,7 +4888,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 21.001488042517366,
+        "totalPathDistance": 16.00195300580526,
         "waypointCount": 2,
         "waypointDigestSha256": "e08d3068a323c3e3e5059fffd06e131f5cf93243cc0c67409ee499996b14f485"
       },
@@ -4903,13 +4903,13 @@
         "observedPosition": {
           "x": 344.75,
           "y": 87,
-          "z": -204.5
+          "z": -213.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 344.75,
           "y": 87,
-          "z": -204.5
+          "z": -213.5
         },
         "verticalError": 0
       },
@@ -4939,7 +4939,7 @@
         "finalPosition": {
           "x": 344.75,
           "y": 87,
-          "z": -204.5
+          "z": -213.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -4965,13 +4965,13 @@
         "observedPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "verticalError": 0
       },
@@ -5001,7 +5001,7 @@
         "finalPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5012,7 +5012,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 25.50122546074992,
+        "totalPathDistance": 21.001488042517366,
         "waypointCount": 2,
         "waypointDigestSha256": "98206f11389ae804ec258b3476f0feef7a9575af82f421d38efa8de358e7c015"
       },
@@ -5027,13 +5027,13 @@
         "observedPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "verticalError": 0
       },
@@ -5063,7 +5063,7 @@
         "finalPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5089,13 +5089,13 @@
         "observedPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "verticalError": 0
       },
@@ -5125,7 +5125,7 @@
         "finalPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -230
+          "z": -234.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5198,7 +5198,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 50.06246098625196,
+        "totalPathDistance": 54.55730931781735,
         "waypointCount": 2,
         "waypointDigestSha256": "8a306497c4b36c84fef7916de2c72d0507ffd24979579e03796760a228922706"
       },
@@ -5214,13 +5214,13 @@
         "observedPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "status": "reached",
         "targetPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "verticalError": 0
       },
@@ -5250,7 +5250,7 @@
         "finalPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5261,7 +5261,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 33.593154064481645,
+        "totalPathDistance": 54.057839394485605,
         "waypointCount": 2,
         "waypointDigestSha256": "1e9b7cf8a336d03b94c3c6918284642c28b15e374dbd5d90d125d449a3236698"
       },
@@ -5276,13 +5276,13 @@
         "observedPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "status": "reached",
         "targetPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "verticalError": 0
       },
@@ -5312,7 +5312,7 @@
         "finalPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5338,13 +5338,13 @@
         "observedPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "status": "reached",
         "targetPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "verticalError": 0
       },
@@ -5374,7 +5374,7 @@
         "finalPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5400,13 +5400,13 @@
         "observedPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "status": "reached",
         "targetPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "verticalError": 0
       },
@@ -5436,7 +5436,7 @@
         "finalPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5462,13 +5462,13 @@
         "observedPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "status": "reached",
         "targetPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "verticalError": 0
       },
@@ -5498,7 +5498,7 @@
         "finalPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5571,7 +5571,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 33.593154064481645,
+        "totalPathDistance": 54.057839394485605,
         "waypointCount": 2,
         "waypointDigestSha256": "9b5bea9e7e94218133d6d278cff548ff29b2521196a7d3b32cf57983fbabbeb4"
       },
@@ -5587,13 +5587,13 @@
         "observedPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "verticalError": 0
       },
@@ -5623,7 +5623,7 @@
         "finalPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5634,7 +5634,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 52.55949010407159,
+        "totalPathDistance": 28.60943900183993,
         "waypointCount": 2,
         "waypointDigestSha256": "0266144ca7c753f65f628eb0aeee2b3364af07c4810acf66385dd5fe12efbf8c"
       },
@@ -5649,13 +5649,13 @@
         "observedPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "verticalError": 0
       },
@@ -5685,7 +5685,7 @@
         "finalPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5711,13 +5711,13 @@
         "observedPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "verticalError": 0
       },
@@ -5747,7 +5747,7 @@
         "finalPosition": {
           "x": 344.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5773,13 +5773,13 @@
         "observedPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "verticalError": 0
       },
@@ -5809,7 +5809,7 @@
         "finalPosition": {
           "x": 328.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5835,13 +5835,13 @@
         "observedPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "verticalError": 0
       },
@@ -5871,7 +5871,7 @@
         "finalPosition": {
           "x": 322.5,
           "y": 87,
-          "z": -127.5
+          "z": -151.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -5944,7 +5944,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 52.55949010407159,
+        "totalPathDistance": 28.60943900183993,
         "waypointCount": 2,
         "waypointDigestSha256": "8f275bee0aa60c8f0484620bb41f3ef11ca5bf98e88b6b0dcc86e74836d121e2"
       },
@@ -5960,13 +5960,13 @@
         "observedPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "status": "reached",
         "targetPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "verticalError": 0
       },
@@ -5996,7 +5996,7 @@
         "finalPosition": {
           "x": 317.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -6007,7 +6007,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 33.593154064481645,
+        "totalPathDistance": 54.057839394485605,
         "waypointCount": 2,
         "waypointDigestSha256": "8af8442027bfbed51dc688202aa9af4cc6e9e4053fd66b6d04bc63735c6e03a0"
       },
@@ -6022,13 +6022,13 @@
         "observedPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "status": "reached",
         "targetPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "verticalError": 0
       },
@@ -6058,7 +6058,7 @@
         "finalPosition": {
           "x": 311.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -6084,13 +6084,13 @@
         "observedPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "status": "reached",
         "targetPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "verticalError": 0
       },
@@ -6120,7 +6120,7 @@
         "finalPosition": {
           "x": 295.5,
           "y": 87,
-          "z": -146.5
+          "z": -126
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -6146,13 +6146,13 @@
         "observedPosition": {
           "x": 295.25,
           "y": 87,
-          "z": -163.5
+          "z": -147.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 295.25,
           "y": 87,
-          "z": -163.5
+          "z": -147.5
         },
         "verticalError": 0
       },
@@ -6182,7 +6182,7 @@
         "finalPosition": {
           "x": 295.25,
           "y": 87,
-          "z": -163.5
+          "z": -147.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -6193,7 +6193,7 @@
       "path": {
         "jumpWaypointCount": 0,
         "status": "success",
-        "totalPathDistance": 17.001838135919304,
+        "totalPathDistance": 21.50145343924452,
         "waypointCount": 2,
         "waypointDigestSha256": "edf63cd469643f764f8c6318fdfc69d9d56b880bd8205c655073df753fc1da36"
       },
@@ -6208,13 +6208,13 @@
         "observedPosition": {
           "x": 295.25,
           "y": 87,
-          "z": -169.5
+          "z": -153.5
         },
         "status": "reached",
         "targetPosition": {
           "x": 295.25,
           "y": 87,
-          "z": -169.5
+          "z": -153.5
         },
         "verticalError": 0
       },
@@ -6244,7 +6244,7 @@
         "finalPosition": {
           "x": 295.25,
           "y": 87,
-          "z": -169.5
+          "z": -153.5
         },
         "finalVelocityMagnitude": 0,
         "horizontalError": 0,
@@ -6271,24 +6271,24 @@
     "excludedFromScoring": true,
     "failureCode": "none",
     "requestedPosition": {
-      "x": 295.25,
+      "x": 344.75,
       "y": 67,
       "z": -259.75
     },
     "succeeded": true,
     "verifiedPosition": {
-      "x": 295.25,
+      "x": 344.75,
       "y": 67,
       "z": -259.75
     }
   },
   "source": {
-    "architecturePlanSha256": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
+    "architecturePlanSha256": "91a51142e062074da55ee8431184389820c826af588995b13c4b874ff133ad84",
     "manifestRootNodeId": "world-cliffwatch",
-    "manifestSourceWorldSpecSha256": "32bc5200164018ce525c24ddd5aa426c0e333c2b73b04ce6d98646a70b89bf68",
-    "playtestPlanSha256": "b4a89b6c9f9fe65016bb4909af5f6b130b5dee00e2a098372c92768501bde013",
+    "manifestSourceWorldSpecSha256": "cc8a24bd1220a301851c7e66fa5f6ecf5c2c03fdde6e854f0bf0da7a5ad07ebe",
+    "playtestPlanSha256": "4f441eb9359b17d6fb7fd0c041fcd10cfa5acac904b7faeaf67fe9aad3dbd21c",
     "projectId": "project-cliffwatch-mansion",
-    "robloxManifestSha256": "bb09960abd823e3e5513b8b4c1f6d715b68eb16233cc6061dac00d665086915d"
+    "robloxManifestSha256": "e2d317df935c1c192a7a2d18a46233c1e1b3ae17d9c115927563c8c05511ea9f"
   },
   "start": {
     "acknowledgmentCertain": true,

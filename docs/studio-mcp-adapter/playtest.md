@@ -181,7 +181,8 @@ total bytes, severity, and source are capped.
 Raw output remains ignored private evidence. Strict reports receive only evidence ID, severity,
 source classification, message hash, fixed classification, and baseline-difference status. Unsafe
 differencing caused by truncation, reordering, or incompatible structure becomes incomplete
-evidence.
+evidence. The current built-in MCP's exact empty-text result is accepted as complete zero-entry
+runtime evidence; every nonempty unstructured result still fails closed.
 
 ## Viewport evidence
 
@@ -198,6 +199,14 @@ If acknowledgment is uncertain, recovery reconnects to the exact Studio and obse
 Edit permits integrity verification. Still playing permits one observed-state-based Stop only after
 the fixed identity probe reproves the original run. An unverified running session receives no Stop,
 and no path loops indefinitely.
+
+Mandatory Stop recovery owns two non-resettable phase-local states. Pre-Stop identity recovery and
+subsequent Stop-outcome resolution are each capped by the existing two-attempt local replacement
+bound. Start, traversal, navigation, capture, or console recovery can therefore never consume the
+capacity needed to reselect the exact Studio, re-prove the running identity, and resolve Stop.
+Cleanup may replace at most four local-stdio clients across both phases, but this separation does
+not authorize an additional blind Stop: the normal request and the single observed-state-based
+request remain the only possible Stop actions.
 
 After Edit is restored, the controller reproves the zero-ID stopped sandbox, obtains one same-lease
 bound snapshot, requires exact equality with the pre-play snapshot hash, and requires final Manifest

@@ -427,6 +427,12 @@ Use the root scripts:
   through a new default local-stdio client, exact Studio reselection, observed state, and a fresh
   identity probe before any observed-state-justified second Stop. After Edit returns, require the
   exact lease-bound pre/post snapshot hash match and a final zero-operation Manifest reconciliation.
+- Keep the compiler transaction reconnect limit separate from playtest cleanup. One playtest
+  controller owns non-resettable ordinary-run, pre-Stop identity-recovery, and Stop-outcome-
+  resolution states. The two cleanup states are each capped at two local-stdio replacement attempts,
+  so earlier Start, traversal, navigation, capture, or console recovery cannot consume mandatory
+  Stop capacity. Cleanup may replace at most four clients across those phases, may send at most two
+  Stop commands, and must never send Stop into an unverified run.
 
 ## Tests and documentation
 

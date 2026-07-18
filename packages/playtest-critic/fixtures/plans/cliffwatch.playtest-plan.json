@@ -70,7 +70,7 @@
       "id": "pt-corridor-door-00fb51af2b64bba68592",
       "level": 1,
       "localPosition": {
-        "x": -55.5,
+        "x": -51.5,
         "y": 23,
         "z": 2.5
       },
@@ -82,7 +82,7 @@
       "worldPosition": {
         "x": 317.5,
         "y": 87,
-        "z": -235.5
+        "z": -231.5
       }
     },
     {
@@ -92,7 +92,7 @@
       "id": "pt-corridor-door-06c4de0f7ce68202543d",
       "level": 1,
       "localPosition": {
-        "x": 2.5,
+        "x": -11.5,
         "y": 23,
         "z": -2.5
       },
@@ -104,7 +104,7 @@
       "worldPosition": {
         "x": 322.5,
         "y": 87,
-        "z": -177.5
+        "z": -191.5
       }
     },
     {
@@ -114,9 +114,9 @@
       "id": "pt-corridor-door-101f55558bc94e7e047d",
       "level": 0,
       "localPosition": {
-        "x": 32.5,
+        "x": 29,
         "y": 3,
-        "z": 2.5
+        "z": -2.5
       },
       "openingId": "archgen-opening-corridor-door-library-west",
       "required": true,
@@ -124,9 +124,9 @@
       "sourceSemanticId": "archgen-opening-corridor-door-library-west",
       "type": "corridor",
       "worldPosition": {
-        "x": 317.5,
+        "x": 322.5,
         "y": 67,
-        "z": -147.5
+        "z": -151
       }
     },
     {
@@ -136,7 +136,7 @@
       "id": "pt-corridor-door-13aa8edba73ccd40ada3",
       "level": 1,
       "localPosition": {
-        "x": -9.5,
+        "x": 2.5,
         "y": 23,
         "z": 2.5
       },
@@ -148,7 +148,7 @@
       "worldPosition": {
         "x": 317.5,
         "y": 87,
-        "z": -189.5
+        "z": -177.5
       }
     },
     {
@@ -158,7 +158,7 @@
       "id": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
       "level": 1,
       "localPosition": {
-        "x": 52.5,
+        "x": 28.5,
         "y": 23,
         "z": -2.5
       },
@@ -170,7 +170,7 @@
       "worldPosition": {
         "x": 322.5,
         "y": 87,
-        "z": -127.5
+        "z": -151.5
       }
     },
     {
@@ -180,7 +180,7 @@
       "id": "pt-corridor-door-5f0e3119b05998c0aceb",
       "level": 1,
       "localPosition": {
-        "x": 33.5,
+        "x": 54,
         "y": 23,
         "z": 2.5
       },
@@ -192,7 +192,7 @@
       "worldPosition": {
         "x": 317.5,
         "y": 87,
-        "z": -146.5
+        "z": -126
       }
     },
     {
@@ -202,9 +202,9 @@
       "id": "pt-corridor-door-5f2af3207aa2d5782a55",
       "level": 0,
       "localPosition": {
-        "x": -13.5,
+        "x": -16,
         "y": 3,
-        "z": 2.5
+        "z": -2.5
       },
       "openingId": "archgen-opening-corridor-door-ballroom",
       "required": true,
@@ -212,9 +212,9 @@
       "sourceSemanticId": "archgen-opening-corridor-door-ballroom",
       "type": "corridor",
       "worldPosition": {
-        "x": 317.5,
+        "x": 322.5,
         "y": 67,
-        "z": -193.5
+        "z": -196
       }
     },
     {
@@ -226,7 +226,7 @@
       "localPosition": {
         "x": -17,
         "y": 3,
-        "z": -2.5
+        "z": 2.5
       },
       "openingId": "archgen-opening-corridor-door-kitchen-service",
       "required": true,
@@ -234,7 +234,7 @@
       "sourceSemanticId": "archgen-opening-corridor-door-kitchen-service",
       "type": "corridor",
       "worldPosition": {
-        "x": 322.5,
+        "x": 317.5,
         "y": 67,
         "z": -197
       }
@@ -248,7 +248,7 @@
       "localPosition": {
         "x": 23,
         "y": 3,
-        "z": -2.5
+        "z": 2.5
       },
       "openingId": "archgen-opening-corridor-door-drawing-room",
       "required": true,
@@ -256,7 +256,7 @@
       "sourceSemanticId": "archgen-opening-corridor-door-drawing-room",
       "type": "corridor",
       "worldPosition": {
-        "x": 322.5,
+        "x": 317.5,
         "y": 67,
         "z": -157
       }
@@ -270,7 +270,7 @@
       "localPosition": {
         "x": 61,
         "y": 3,
-        "z": -2.5
+        "z": 2.5
       },
       "openingId": "archgen-opening-corridor-door-study-ground",
       "required": true,
@@ -278,7 +278,7 @@
       "sourceSemanticId": "archgen-opening-corridor-door-study-ground",
       "type": "corridor",
       "worldPosition": {
-        "x": 322.5,
+        "x": 317.5,
         "y": 67,
         "z": -119
       }
@@ -290,9 +290,9 @@
       "id": "pt-corridor-door-aeaadeb44af15f0030fe",
       "level": 0,
       "localPosition": {
-        "x": -58.5,
+        "x": -59.5,
         "y": 3,
-        "z": 2.5
+        "z": -2.5
       },
       "openingId": "archgen-opening-corridor-door-foyer-grand",
       "required": true,
@@ -300,9 +300,9 @@
       "sourceSemanticId": "archgen-opening-corridor-door-foyer-grand",
       "type": "corridor",
       "worldPosition": {
-        "x": 317.5,
+        "x": 322.5,
         "y": 67,
-        "z": -238.5
+        "z": -239.5
       }
     },
     {
@@ -314,7 +314,7 @@
       "localPosition": {
         "x": -57.5,
         "y": 3,
-        "z": -2.5
+        "z": 2.5
       },
       "openingId": "archgen-opening-corridor-door-dining-room",
       "required": true,
@@ -322,7 +322,7 @@
       "sourceSemanticId": "archgen-opening-corridor-door-dining-room",
       "type": "corridor",
       "worldPosition": {
-        "x": 322.5,
+        "x": 317.5,
         "y": 67,
         "z": -237.5
       }
@@ -334,7 +334,7 @@
       "id": "pt-corridor-door-ff6f32ebad46f7f236f1",
       "level": 1,
       "localPosition": {
-        "x": -50,
+        "x": -54.5,
         "y": 23,
         "z": -2.5
       },
@@ -346,7 +346,7 @@
       "worldPosition": {
         "x": 322.5,
         "y": 87,
-        "z": -230
+        "z": -234.5
       }
     },
     {
@@ -357,7 +357,7 @@
       "localPosition": {
         "x": -79.75,
         "y": 3,
-        "z": 24.75
+        "z": -24.75
       },
       "openingId": "archgen-opening-exterior-entrance-foyer-grand",
       "required": true,
@@ -366,7 +366,7 @@
       "sourceSemanticId": "archgen-opening-exterior-entrance-foyer-grand",
       "type": "exterior_entrance",
       "worldPosition": {
-        "x": 295.25,
+        "x": 344.75,
         "y": 67,
         "z": -259.75
       }
@@ -377,9 +377,9 @@
       "id": "pt-hall-1b39ca3e3ca81d33f9e9",
       "level": 1,
       "localPosition": {
-        "x": 66,
+        "x": 64,
         "y": 23,
-        "z": 8.5
+        "z": -8.5
       },
       "openingId": "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
       "required": true,
@@ -388,9 +388,9 @@
       "stairRunId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
       "type": "stair_hall",
       "worldPosition": {
-        "x": 311.5,
+        "x": 328.5,
         "y": 87,
-        "z": -114
+        "z": -116
       }
     },
     {
@@ -399,9 +399,9 @@
       "id": "pt-hall-2577b130ad62c393d982",
       "level": 0,
       "localPosition": {
-        "x": 66,
+        "x": 64,
         "y": 3,
-        "z": 8.5
+        "z": -8.5
       },
       "openingId": "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
       "required": true,
@@ -410,9 +410,9 @@
       "stairRunId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
       "type": "stair_hall",
       "worldPosition": {
-        "x": 311.5,
+        "x": 328.5,
         "y": 67,
-        "z": -114
+        "z": -116
       }
     },
     {
@@ -422,9 +422,9 @@
       "landing": "lower",
       "level": 0,
       "localPosition": {
-        "x": 55,
+        "x": 52,
         "y": 4,
-        "z": 18
+        "z": -18
       },
       "required": true,
       "sourceFloorId": "floor-ground",
@@ -432,9 +432,9 @@
       "stairRunId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
       "type": "stair_landing",
       "worldPosition": {
-        "x": 302,
+        "x": 338,
         "y": 68,
-        "z": -125
+        "z": -128
       }
     },
     {
@@ -444,9 +444,9 @@
       "landing": "upper",
       "level": 1,
       "localPosition": {
-        "x": 77,
+        "x": 76,
         "y": 23,
-        "z": 18
+        "z": -18
       },
       "required": true,
       "sourceFloorId": "floor-upper",
@@ -454,9 +454,9 @@
       "stairRunId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
       "type": "stair_landing",
       "worldPosition": {
-        "x": 302,
+        "x": 338,
         "y": 87,
-        "z": -103
+        "z": -104
       }
     },
     {
@@ -464,9 +464,9 @@
       "id": "pt-room-00e3d8bbdc6cbddc8c69",
       "level": 0,
       "localPosition": {
-        "x": -58.5,
+        "x": -59.5,
         "y": 3,
-        "z": 24.5
+        "z": -24.5
       },
       "required": true,
       "roomId": "foyer-grand",
@@ -474,9 +474,9 @@
       "sourceSemanticId": "foyer-grand",
       "type": "room_center",
       "worldPosition": {
-        "x": 295.5,
+        "x": 344.5,
         "y": 67,
-        "z": -238.5
+        "z": -239.5
       }
     },
     {
@@ -484,7 +484,7 @@
       "id": "pt-room-094573d2142793d7ea4d",
       "level": 1,
       "localPosition": {
-        "x": -55.5,
+        "x": -51.5,
         "y": 23,
         "z": 24.5
       },
@@ -496,7 +496,7 @@
       "worldPosition": {
         "x": 295.5,
         "y": 87,
-        "z": -235.5
+        "z": -231.5
       }
     },
     {
@@ -504,9 +504,9 @@
       "id": "pt-room-0fb5a11fcf5e4901c072",
       "level": 0,
       "localPosition": {
-        "x": 32.5,
+        "x": 29,
         "y": 3,
-        "z": 24.5
+        "z": -24.5
       },
       "required": true,
       "roomId": "library-west",
@@ -514,9 +514,9 @@
       "sourceSemanticId": "library-west",
       "type": "room_center",
       "worldPosition": {
-        "x": 295.5,
+        "x": 344.5,
         "y": 67,
-        "z": -147.5
+        "z": -151
       }
     },
     {
@@ -524,7 +524,7 @@
       "id": "pt-room-30b9d34214d4c33af87b",
       "level": 1,
       "localPosition": {
-        "x": 33.5,
+        "x": 54,
         "y": 23,
         "z": 24.5
       },
@@ -536,7 +536,7 @@
       "worldPosition": {
         "x": 295.5,
         "y": 87,
-        "z": -146.5
+        "z": -126
       }
     },
     {
@@ -546,7 +546,7 @@
       "localPosition": {
         "x": 61,
         "y": 3,
-        "z": -24.5
+        "z": 24.5
       },
       "required": true,
       "roomId": "study-ground",
@@ -554,7 +554,7 @@
       "sourceSemanticId": "study-ground",
       "type": "room_center",
       "worldPosition": {
-        "x": 344.5,
+        "x": 295.5,
         "y": 67,
         "z": -119
       }
@@ -564,9 +564,9 @@
       "id": "pt-room-34c0e24aebc5a8b37b1e",
       "level": 0,
       "localPosition": {
-        "x": -13.5,
+        "x": -16,
         "y": 3,
-        "z": 24.5
+        "z": -24.5
       },
       "required": true,
       "roomId": "ballroom",
@@ -574,9 +574,9 @@
       "sourceSemanticId": "ballroom",
       "type": "room_center",
       "worldPosition": {
-        "x": 295.5,
+        "x": 344.5,
         "y": 67,
-        "z": -193.5
+        "z": -196
       }
     },
     {
@@ -586,7 +586,7 @@
       "localPosition": {
         "x": -17,
         "y": 3,
-        "z": -24.5
+        "z": 24.5
       },
       "required": true,
       "roomId": "kitchen-service",
@@ -594,7 +594,7 @@
       "sourceSemanticId": "kitchen-service",
       "type": "room_center",
       "worldPosition": {
-        "x": 344.5,
+        "x": 295.5,
         "y": 67,
         "z": -197
       }
@@ -604,7 +604,7 @@
       "id": "pt-room-4174a3773febf6902d1c",
       "level": 1,
       "localPosition": {
-        "x": 52.5,
+        "x": 28.5,
         "y": 23,
         "z": -24.5
       },
@@ -616,7 +616,7 @@
       "worldPosition": {
         "x": 344.5,
         "y": 87,
-        "z": -127.5
+        "z": -151.5
       }
     },
     {
@@ -626,7 +626,7 @@
       "localPosition": {
         "x": -57.5,
         "y": 3,
-        "z": -24.5
+        "z": 24.5
       },
       "required": true,
       "roomId": "dining-room",
@@ -634,7 +634,7 @@
       "sourceSemanticId": "dining-room",
       "type": "room_center",
       "worldPosition": {
-        "x": 344.5,
+        "x": 295.5,
         "y": 67,
         "z": -237.5
       }
@@ -644,7 +644,7 @@
       "id": "pt-room-a4d6e14310c58d94c6e2",
       "level": 1,
       "localPosition": {
-        "x": -9.5,
+        "x": 2.5,
         "y": 23,
         "z": 24.5
       },
@@ -656,7 +656,7 @@
       "worldPosition": {
         "x": 295.5,
         "y": 87,
-        "z": -189.5
+        "z": -177.5
       }
     },
     {
@@ -664,7 +664,7 @@
       "id": "pt-room-cbb2d3d792956cce6bd6",
       "level": 1,
       "localPosition": {
-        "x": 2.5,
+        "x": -11.5,
         "y": 23,
         "z": -24.5
       },
@@ -676,7 +676,7 @@
       "worldPosition": {
         "x": 344.5,
         "y": 87,
-        "z": -177.5
+        "z": -191.5
       }
     },
     {
@@ -686,7 +686,7 @@
       "localPosition": {
         "x": 23,
         "y": 3,
-        "z": -24.5
+        "z": 24.5
       },
       "required": true,
       "roomId": "drawing-room",
@@ -694,7 +694,7 @@
       "sourceSemanticId": "drawing-room",
       "type": "room_center",
       "worldPosition": {
-        "x": 344.5,
+        "x": 295.5,
         "y": 67,
         "z": -157
       }
@@ -704,7 +704,7 @@
       "id": "pt-room-ed9971f3ebbc40058e8e",
       "level": 1,
       "localPosition": {
-        "x": -50,
+        "x": -54.5,
         "y": 23,
         "z": -24.5
       },
@@ -716,7 +716,7 @@
       "worldPosition": {
         "x": 344.5,
         "y": 87,
-        "z": -230
+        "z": -234.5
       }
     },
     {
@@ -725,9 +725,9 @@
       "id": "pt-threshold-00203090ef2bf694daba",
       "level": 0,
       "localPosition": {
-        "x": -58.5,
+        "x": -59.5,
         "y": 3,
-        "z": 8.5
+        "z": -8.5
       },
       "openingId": "archgen-opening-corridor-door-foyer-grand",
       "required": true,
@@ -736,9 +736,9 @@
       "sourceSemanticId": "archgen-opening-corridor-door-foyer-grand",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 311.5,
+        "x": 328.5,
         "y": 67,
-        "z": -238.5
+        "z": -239.5
       }
     },
     {
@@ -747,7 +747,7 @@
       "id": "pt-threshold-05a5934ced18112765f5",
       "level": 1,
       "localPosition": {
-        "x": 16.5,
+        "x": 32.5,
         "y": 23,
         "z": 24.75
       },
@@ -760,7 +760,7 @@
       "worldPosition": {
         "x": 295.25,
         "y": 87,
-        "z": -163.5
+        "z": -147.5
       }
     },
     {
@@ -769,7 +769,7 @@
       "id": "pt-threshold-0a658967c1cf5228e0c6",
       "level": 1,
       "localPosition": {
-        "x": -50,
+        "x": -54.5,
         "y": 23,
         "z": -8.5
       },
@@ -782,7 +782,7 @@
       "worldPosition": {
         "x": 328.5,
         "y": 87,
-        "z": -230
+        "z": -234.5
       }
     },
     {
@@ -791,9 +791,9 @@
       "id": "pt-threshold-0f47be5009f48ba6f990",
       "level": 0,
       "localPosition": {
-        "x": -13.5,
+        "x": -16,
         "y": 3,
-        "z": 8.5
+        "z": -8.5
       },
       "openingId": "archgen-opening-corridor-door-ballroom",
       "required": true,
@@ -802,9 +802,9 @@
       "sourceSemanticId": "archgen-opening-corridor-door-ballroom",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 311.5,
+        "x": 328.5,
         "y": 67,
-        "z": -193.5
+        "z": -196
       }
     },
     {
@@ -813,7 +813,7 @@
       "id": "pt-threshold-29e7c6b7384d15dee849",
       "level": 1,
       "localPosition": {
-        "x": -24.5,
+        "x": -33.5,
         "y": 23,
         "z": -24.75
       },
@@ -826,7 +826,7 @@
       "worldPosition": {
         "x": 344.75,
         "y": 87,
-        "z": -204.5
+        "z": -213.5
       }
     },
     {
@@ -835,7 +835,7 @@
       "id": "pt-threshold-2eb7c645b7299218bbc9",
       "level": 1,
       "localPosition": {
-        "x": -18.5,
+        "x": -27.5,
         "y": 23,
         "z": -24.75
       },
@@ -848,7 +848,7 @@
       "worldPosition": {
         "x": 344.75,
         "y": 87,
-        "z": -198.5
+        "z": -207.5
       }
     },
     {
@@ -857,9 +857,9 @@
       "id": "pt-threshold-38017d5819cfde0ea397",
       "level": 0,
       "localPosition": {
-        "x": -35.5,
+        "x": -37.5,
         "y": 3,
-        "z": 24.75
+        "z": -24.75
       },
       "openingId": "archgen-opening-room-door-relationship-foyer-ballroom",
       "required": true,
@@ -868,9 +868,9 @@
       "sourceSemanticId": "archgen-opening-room-door-relationship-foyer-ballroom",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 295.25,
+        "x": 344.75,
         "y": 67,
-        "z": -215.5
+        "z": -217.5
       }
     },
     {
@@ -879,7 +879,7 @@
       "id": "pt-threshold-41823333384441ed77a5",
       "level": 1,
       "localPosition": {
-        "x": 33.5,
+        "x": 54,
         "y": 23,
         "z": 8.5
       },
@@ -892,7 +892,7 @@
       "worldPosition": {
         "x": 311.5,
         "y": 87,
-        "z": -146.5
+        "z": -126
       }
     },
     {
@@ -901,7 +901,7 @@
       "id": "pt-threshold-4d183f2a18ce13a23457",
       "level": 1,
       "localPosition": {
-        "x": -9.5,
+        "x": 2.5,
         "y": 23,
         "z": 8.5
       },
@@ -914,7 +914,7 @@
       "worldPosition": {
         "x": 311.5,
         "y": 87,
-        "z": -189.5
+        "z": -177.5
       }
     },
     {
@@ -923,7 +923,7 @@
       "id": "pt-threshold-5a5308ba1b5044d22926",
       "level": 1,
       "localPosition": {
-        "x": 10.5,
+        "x": 26.5,
         "y": 23,
         "z": 24.75
       },
@@ -936,7 +936,7 @@
       "worldPosition": {
         "x": 295.25,
         "y": 87,
-        "z": -169.5
+        "z": -153.5
       }
     },
     {
@@ -947,7 +947,7 @@
       "localPosition": {
         "x": 61,
         "y": 3,
-        "z": -8.5
+        "z": 8.5
       },
       "openingId": "archgen-opening-corridor-door-study-ground",
       "required": true,
@@ -956,7 +956,7 @@
       "sourceSemanticId": "archgen-opening-corridor-door-study-ground",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 328.5,
+        "x": 311.5,
         "y": 67,
         "z": -119
       }
@@ -969,7 +969,7 @@
       "localPosition": {
         "x": -57.5,
         "y": 3,
-        "z": -8.5
+        "z": 8.5
       },
       "openingId": "archgen-opening-corridor-door-dining-room",
       "required": true,
@@ -978,7 +978,7 @@
       "sourceSemanticId": "archgen-opening-corridor-door-dining-room",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 328.5,
+        "x": 311.5,
         "y": 67,
         "z": -237.5
       }
@@ -989,7 +989,7 @@
       "id": "pt-threshold-94dec9a9e5de3e241f42",
       "level": 1,
       "localPosition": {
-        "x": 2.5,
+        "x": -11.5,
         "y": 23,
         "z": -8.5
       },
@@ -1002,7 +1002,7 @@
       "worldPosition": {
         "x": 328.5,
         "y": 87,
-        "z": -177.5
+        "z": -191.5
       }
     },
     {
@@ -1013,7 +1013,7 @@
       "localPosition": {
         "x": -75.5,
         "y": 3,
-        "z": 24.75
+        "z": -24.75
       },
       "openingId": "archgen-opening-exterior-entrance-foyer-grand",
       "required": true,
@@ -1022,7 +1022,7 @@
       "sourceSemanticId": "archgen-opening-exterior-entrance-foyer-grand",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 295.25,
+        "x": 344.75,
         "y": 67,
         "z": -255.5
       }
@@ -1035,7 +1035,7 @@
       "localPosition": {
         "x": -33.5,
         "y": 3,
-        "z": -24.75
+        "z": 24.75
       },
       "openingId": "archgen-opening-room-door-relationship-dining-kitchen",
       "required": true,
@@ -1044,7 +1044,7 @@
       "sourceSemanticId": "archgen-opening-room-door-relationship-dining-kitchen",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 344.75,
+        "x": 295.25,
         "y": 67,
         "z": -213.5
       }
@@ -1055,9 +1055,9 @@
       "id": "pt-threshold-c634897bddc407334253",
       "level": 0,
       "localPosition": {
-        "x": 32.5,
+        "x": 29,
         "y": 3,
-        "z": 8.5
+        "z": -8.5
       },
       "openingId": "archgen-opening-corridor-door-library-west",
       "required": true,
@@ -1066,9 +1066,9 @@
       "sourceSemanticId": "archgen-opening-corridor-door-library-west",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 311.5,
+        "x": 328.5,
         "y": 67,
-        "z": -147.5
+        "z": -151
       }
     },
     {
@@ -1077,7 +1077,7 @@
       "id": "pt-threshold-d5e0e210906425ebd5f2",
       "level": 1,
       "localPosition": {
-        "x": 52.5,
+        "x": 28.5,
         "y": 23,
         "z": -8.5
       },
@@ -1090,7 +1090,7 @@
       "worldPosition": {
         "x": 328.5,
         "y": 87,
-        "z": -127.5
+        "z": -151.5
       }
     },
     {
@@ -1099,9 +1099,9 @@
       "id": "pt-threshold-e68ef673dd3bb7ef421e",
       "level": 0,
       "localPosition": {
-        "x": -41.5,
+        "x": -43.5,
         "y": 3,
-        "z": 24.75
+        "z": -24.75
       },
       "openingId": "archgen-opening-room-door-relationship-foyer-ballroom",
       "required": true,
@@ -1110,9 +1110,9 @@
       "sourceSemanticId": "archgen-opening-room-door-relationship-foyer-ballroom",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 295.25,
+        "x": 344.75,
         "y": 67,
-        "z": -221.5
+        "z": -223.5
       }
     },
     {
@@ -1121,7 +1121,7 @@
       "id": "pt-threshold-ec0ab684497be36b2b03",
       "level": 1,
       "localPosition": {
-        "x": -55.5,
+        "x": -51.5,
         "y": 23,
         "z": 8.5
       },
@@ -1134,7 +1134,7 @@
       "worldPosition": {
         "x": 311.5,
         "y": 87,
-        "z": -235.5
+        "z": -231.5
       }
     },
     {
@@ -1145,7 +1145,7 @@
       "localPosition": {
         "x": 23,
         "y": 3,
-        "z": -8.5
+        "z": 8.5
       },
       "openingId": "archgen-opening-corridor-door-drawing-room",
       "required": true,
@@ -1154,7 +1154,7 @@
       "sourceSemanticId": "archgen-opening-corridor-door-drawing-room",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 328.5,
+        "x": 311.5,
         "y": 67,
         "z": -157
       }
@@ -1167,7 +1167,7 @@
       "localPosition": {
         "x": -17,
         "y": 3,
-        "z": -8.5
+        "z": 8.5
       },
       "openingId": "archgen-opening-corridor-door-kitchen-service",
       "required": true,
@@ -1176,7 +1176,7 @@
       "sourceSemanticId": "archgen-opening-corridor-door-kitchen-service",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 328.5,
+        "x": 311.5,
         "y": 67,
         "z": -197
       }
@@ -1189,7 +1189,7 @@
       "localPosition": {
         "x": -39.5,
         "y": 3,
-        "z": -24.75
+        "z": 24.75
       },
       "openingId": "archgen-opening-room-door-relationship-dining-kitchen",
       "required": true,
@@ -1198,7 +1198,7 @@
       "sourceSemanticId": "archgen-opening-room-door-relationship-dining-kitchen",
       "type": "opening_threshold",
       "worldPosition": {
-        "x": 344.75,
+        "x": 295.25,
         "y": 67,
         "z": -219.5
       }
@@ -2859,23 +2859,23 @@
     "exteriorEntranceOpeningId": "archgen-opening-exterior-entrance-foyer-grand",
     "sourceFloorId": "floor-ground",
     "worldPosition": {
-      "x": 295.25,
+      "x": 344.75,
       "y": 67,
       "z": -259.75
     }
   },
   "source": {
     "architecturePlanSchemaVersion": "0.1.0",
-    "architecturePlanSha256": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
+    "architecturePlanSha256": "91a51142e062074da55ee8431184389820c826af588995b13c4b874ff133ad84",
     "architecturePlannerVersion": "0.1.0",
     "buildingEntityId": "mansion-cliffwatch",
     "expectedManagedInstanceCount": 400,
     "manifestRootNodeId": "world-cliffwatch",
-    "manifestSourceWorldSpecSha256": "32bc5200164018ce525c24ddd5aa426c0e333c2b73b04ce6d98646a70b89bf68",
+    "manifestSourceWorldSpecSha256": "cc8a24bd1220a301851c7e66fa5f6ecf5c2c03fdde6e854f0bf0da7a5ad07ebe",
     "projectId": "project-cliffwatch-mansion",
     "robloxCompilerVersion": "0.1.0",
     "robloxManifestSchemaVersion": "0.1.0",
-    "robloxManifestSha256": "bb09960abd823e3e5513b8b4c1f6d715b68eb16233cc6061dac00d665086915d",
-    "sourceWorldSpecSha256": "613c8dd7b39c0e13d9eb3d23c901c8bb5bc98d75a97452a1a5dbd32338964bbd"
+    "robloxManifestSha256": "e2d317df935c1c192a7a2d18a46233c1e1b3ae17d9c115927563c8c05511ea9f",
+    "sourceWorldSpecSha256": "8297a149d98084f7ebdc65d47a371fd8f0480aaf1718e7d093d8279d65146d0e"
   }
 }

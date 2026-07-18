@@ -88,7 +88,7 @@ async function buildScaleSource(): Promise<WorldSpec> {
             mode: 'stair',
             floorIds: [...floorIds],
             coreWidth: 14,
-            coreLength: 24,
+            coreLength: 28,
             preferredSide: 'auto',
             position: 'rear',
             maximumRiserHeight: 1,

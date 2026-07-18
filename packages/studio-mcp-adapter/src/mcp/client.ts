@@ -580,16 +580,19 @@ function isBoundedConsoleOutput(value: unknown): value is readonly unknown[] {
   );
 }
 
-function isExactStartStopAcknowledgment(value: unknown): boolean {
+function isExactStartStopAcknowledgment(value: unknown, text: string, isStart: boolean): boolean {
+  if (text === (isStart ? 'Game Started' : 'Game Stopped')) return true;
   if (isExactJsonRecord(value, ['success', 'message'])) {
     return (
       value.success === true &&
-      (value.message === 'Playtest started in play mode' ||
-        value.message === 'Playtest stop signal sent.' ||
-        value.message === 'Playtest stopped via StudioTestService.')
+      (isStart
+        ? value.message === 'Playtest started in play mode'
+        : value.message === 'Playtest stop signal sent.' ||
+          value.message === 'Playtest stopped via StudioTestService.')
     );
   }
   return (
+    !isStart &&
     isExactJsonRecord(value, ['success', 'output', 'outputCount', 'message']) &&
     value.success === true &&
     (value.message === 'Playtest stop signal sent.' ||
@@ -601,7 +604,8 @@ function isExactStartStopAcknowledgment(value: unknown): boolean {
   );
 }
 
-function isExactNavigationAcknowledgment(value: unknown): boolean {
+function isExactNavigationAcknowledgment(value: unknown, text: string): boolean {
+  if (text === 'Success') return true;
   if (isExactJsonRecord(value, ['success', 'message'])) {
     return value.success === true && value.message === 'Navigation command sent';
   }
@@ -620,6 +624,7 @@ function isExactNavigationAcknowledgment(value: unknown): boolean {
 function assertExactPlaytestMutationAcknowledgment(
   tool: StudioPlaytestMutationTool,
   text: string,
+  argumentsValue: Readonly<Record<string, unknown>>,
 ): void {
   let value: unknown;
   try {
@@ -629,8 +634,9 @@ function assertExactPlaytestMutationAcknowledgment(
   }
   const valid =
     tool === 'start_stop_play'
-      ? isExactStartStopAcknowledgment(value)
-      : isExactNavigationAcknowledgment(value);
+      ? typeof argumentsValue.is_start === 'boolean' &&
+        isExactStartStopAcknowledgment(value, text, argumentsValue.is_start)
+      : isExactNavigationAcknowledgment(value, text);
   if (!valid) {
     throw new StudioAdapterError([
       studioDiagnostic(
@@ -653,7 +659,7 @@ async function invokeUncertainPlaytestAction(
   try {
     const result = await operations.invoke(tool, argumentsValue, timeoutMs);
     const acknowledgment = readStudioMcpTextResult(result, tool);
-    assertExactPlaytestMutationAcknowledgment(tool, acknowledgment.text);
+    assertExactPlaytestMutationAcknowledgment(tool, acknowledgment.text, argumentsValue);
   } catch (error) {
     if (!client.poisoned) await operations.poison();
     throw error;

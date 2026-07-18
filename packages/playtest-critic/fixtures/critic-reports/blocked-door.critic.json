@@ -1460,13 +1460,13 @@
   },
   "schemaVersion": "0.1.0",
   "source": {
-    "architecturePlanSha256": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
+    "architecturePlanSha256": "91a51142e062074da55ee8431184389820c826af588995b13c4b874ff133ad84",
     "playtestPlanSchemaVersion": "0.1.0",
-    "playtestPlanSha256": "b4a89b6c9f9fe65016bb4909af5f6b130b5dee00e2a098372c92768501bde013",
+    "playtestPlanSha256": "4f441eb9359b17d6fb7fd0c041fcd10cfa5acac904b7faeaf67fe9aad3dbd21c",
     "playtestRunReportSchemaVersion": "0.1.0",
-    "playtestRunReportSha256": "535acf2f175a263f261d1097f77ae17648219bf913688a95c41cf4a129fed91e",
+    "playtestRunReportSha256": "e67ef07f88b803bec22d0e379d104d85e2bb555498d181f40b35b909d878e2e1",
     "projectId": "project-cliffwatch-mansion",
-    "robloxManifestSha256": "bb09960abd823e3e5513b8b4c1f6d715b68eb16233cc6061dac00d665086915d"
+    "robloxManifestSha256": "e2d317df935c1c192a7a2d18a46233c1e1b3ae17d9c115927563c8c05511ea9f"
   },
   "status": "fail"
 }

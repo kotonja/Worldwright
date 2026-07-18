@@ -206,6 +206,13 @@ mandatory in a `finally` path. The normal path sends one Stop and polls for Edit
 is uncertain, the controller reconnects to the exact Studio and observes state. It sends at most one
 additional Stop only when Studio is still playing and the original run identity is reverified.
 
+Playtest cleanup does not share the ordinary run reconnect allowance. Its non-resettable pre-Stop
+identity-recovery and Stop-outcome-resolution states are independently capped at two local-stdio
+replacement attempts, so earlier Start, traversal, navigation, capture, or console failures cannot
+exhaust mandatory cleanup. The two cleanup phases permit at most four replacement clients in total
+while the controller still sends at most two Stop commands and never sends one into an unverified
+run.
+
 After Edit returns, Worldwright reproves the unsaved gate, reads one same-lease bound snapshot,
 requires its hash to equal the pre-play Edit hash, and reconciles the desired Manifest to exactly
 zero operations. A failed or unverified Stop, changed lease, changed snapshot, or nonzero final

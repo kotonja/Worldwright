@@ -36,6 +36,17 @@ export function rectangleContainsPoint(
   );
 }
 
+/** The fixed agent must fit around a rectangle's deterministic center on both horizontal axes. */
+export function rectangleCenterHasAgentClearance(
+  rectangle: Readonly<ArchitectureRectangle>,
+): boolean {
+  return rectangleContainsPoint(
+    rectangle,
+    rectangleCenter(rectangle),
+    PLAYTEST_AGENT_PROFILE.radius,
+  );
+}
+
 export function localToWorld(
   plan: Readonly<ArchitecturePlan>,
   point: Readonly<LocalPoint>,

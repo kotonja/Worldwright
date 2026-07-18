@@ -27,6 +27,7 @@ import {
   localToWorld,
   openingSidePoint,
   rectangleCenter,
+  rectangleCenterHasAgentClearance,
   rootLocalY,
   safeStairHallPoint,
   stairHallApproachContainsPoint,
@@ -413,6 +414,14 @@ function addStairMicrograph(
     upperAnchor === undefined
   ) {
     throw new Error(`Stair circulation edge ${edge.id} does not resolve.`);
+  }
+  if (
+    !rectangleCenterHasAgentClearance(run.landing.lower) ||
+    !rectangleCenterHasAgentClearance(run.landing.upper)
+  ) {
+    throw new Error(
+      `Stair run ${run.id} landing centers do not contain the fixed agent clearance envelope.`,
+    );
   }
   const lowerCenter = rectangleCenter(run.landing.lower);
   const upperCenter = rectangleCenter(run.landing.upper);

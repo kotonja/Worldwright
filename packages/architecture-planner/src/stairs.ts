@@ -129,6 +129,14 @@ function landings(
     : { lower: positiveLanding, upper: negativeLanding };
 }
 
+/**
+ * Reserve a deterministic landing deep enough for the fixed architectural
+ * traversal envelope when the authored core can accommodate it.
+ */
+export function calculateStairLandingDepth(runLength: number, minimumTreadDepth: number): number {
+  return Math.max(minimumTreadDepth, Math.min(runLength / 4, 4));
+}
+
 /** Builds aligned, deterministic straight stair runs for every adjacent floor pair. */
 export function buildStairRuns(
   input: Readonly<StairRunBuildInput>,
@@ -143,7 +151,7 @@ export function buildStairRuns(
   const runs: ArchitectureStairRun[] = [];
   const runLength = input.corridorAxis === 'x' ? input.core.width : input.core.depth;
   const clearWidth = input.corridorAxis === 'x' ? input.core.depth : input.core.width;
-  const landingDepth = Math.max(input.minimumTreadDepth, Math.min(runLength / 4, 2));
+  const landingDepth = calculateStairLandingDepth(runLength, input.minimumTreadDepth);
 
   for (let index = 0; index + 1 < floors.length; index += 1) {
     const from = floors[index];

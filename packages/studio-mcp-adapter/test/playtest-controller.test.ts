@@ -635,6 +635,22 @@ async function runOneSegment(
   });
 }
 
+async function exhaustTraversalReconnects(
+  testController: Awaited<ReturnType<typeof controller>>,
+  state: SharedPlaytestState,
+): Promise<void> {
+  await testController.setupCharacter();
+  for (const segment of FIXTURE.playtestPlan.segments.slice(0, 2)) {
+    await testController.probeNextPath(segment.id);
+    state.loseNavigationAcknowledgment = true;
+    await expect(testController.navigateSegment(segment.id)).resolves.toMatchObject({
+      acknowledgmentCertain: false,
+      independentlyReached: true,
+    });
+    await testController.observeClearance(segment.id);
+  }
+}
+
 describe('Studio playtest controller state machine', () => {
   it('runs one Start, one path/navigation sequence, sanitized console evidence, and verified Stop', async () => {
     const state = shared();
@@ -658,6 +674,74 @@ describe('Studio playtest controller state machine', () => {
         editIntegrity: { exactMatch: true, finalManifestNoopOperationCount: 0 },
       });
       expect(state).toMatchObject({ startCalls: 1, navigationCalls: 1, stopCalls: 1 });
+    } finally {
+      await testController.close();
+    }
+  });
+
+  it('accepts the current exact Studio plain-text playtest acknowledgments', async () => {
+    const state = shared({
+      startAcknowledgmentText: 'Game Started',
+      navigationAcknowledgmentText: 'Success',
+      stopAcknowledgmentText: 'Game Stopped',
+    });
+    const testController = await controller(state);
+    try {
+      await expect(testController.start()).resolves.toMatchObject({ acknowledgmentCertain: true });
+      await testController.waitForCharacter();
+      await testController.setupCharacter();
+      for (const segment of FIXTURE.playtestPlan.segments.slice(0, 2)) {
+        await testController.probeNextPath(segment.id);
+        await expect(testController.navigateSegment(segment.id)).resolves.toMatchObject({
+          acknowledgmentCertain: true,
+          independentlyReached: true,
+        });
+        await expect(testController.observeClearance(segment.id)).resolves.toMatchObject({
+          supported: true,
+          bodyClear: true,
+          headClear: true,
+        });
+      }
+      await expect(testController.stopAndVerify()).resolves.toMatchObject({
+        stop: { acknowledgmentCertain: true, observedEditRestored: true },
+        editIntegrity: { exactMatch: true, finalManifestNoopOperationCount: 0 },
+      });
+      expect(state).toMatchObject({ startCalls: 1, navigationCalls: 2, stopCalls: 1 });
+    } finally {
+      await testController.close();
+    }
+  });
+
+  it('does not accept swapped current Studio Start and Stop acknowledgments as certain', async () => {
+    const state = shared({
+      startAcknowledgmentText: 'Game Stopped',
+      stopAcknowledgmentText: 'Game Started',
+    });
+    const testController = await controller(state);
+    try {
+      await expect(testController.start()).resolves.toMatchObject({ acknowledgmentCertain: false });
+      await expect(testController.stopAndVerify()).resolves.toMatchObject({
+        stop: { acknowledgmentCertain: false, observedEditRestored: true },
+      });
+      expect(state).toMatchObject({ startCalls: 1, stopCalls: 1 });
+    } finally {
+      await testController.close();
+    }
+  });
+
+  it('keeps near-match plain navigation acknowledgments uncertain', async () => {
+    const state = shared({ navigationAcknowledgmentText: 'Success ' });
+    const testController = await controller(state);
+    try {
+      await testController.start();
+      await testController.setupCharacter();
+      const segmentId = FIXTURE.playtestPlan.segments[0]!.id;
+      await testController.probeNextPath(segmentId);
+      await expect(testController.navigateSegment(segmentId)).resolves.toMatchObject({
+        acknowledgmentCertain: false,
+        independentlyReached: true,
+      });
+      expect(state.navigationCalls).toBe(1);
     } finally {
       await testController.close();
     }
@@ -757,11 +841,48 @@ describe('Studio playtest controller state machine', () => {
     }
   });
 
+  it('reserves complete bounded Stop recovery after traversal exhausts its reconnect allowance', async () => {
+    const state = shared({ stopFailuresBeforeStopping: 1, loseStopAcknowledgment: true });
+    const testController = await controller(state);
+    try {
+      await testController.start();
+      await exhaustTraversalReconnects(testController, state);
+      state.identityProbeFailuresRemaining = 1;
+      await expect(testController.stopAndVerify()).resolves.toMatchObject({
+        stop: {
+          acknowledgmentCertain: false,
+          observedEditRestored: true,
+          identityVerifiedBeforeSecondStop: true,
+        },
+        editIntegrity: { exactMatch: true, finalManifestNoopOperationCount: 0 },
+      });
+      expect(state).toMatchObject({ navigationCalls: 2, stopCalls: 2, running: false });
+    } finally {
+      await testController.close();
+    }
+  });
+
+  it('keeps the complete four-replacement cleanup envelope bounded across close re-entry', async () => {
+    const state = shared({
+      stopFailuresBeforeStopping: 1,
+      loseStopAcknowledgment: true,
+    });
+    const testController = await controller(state);
+    await testController.start();
+    await exhaustTraversalReconnects(testController, state);
+    state.identityProbeFailuresRemaining = 2;
+    await expect(testController.stopAndVerify()).rejects.toThrow();
+    expect(state.stopCalls).toBe(0);
+    await testController.close();
+    expect(state).toMatchObject({ navigationCalls: 2, stopCalls: 2, running: false });
+  });
+
   it('reconnects only for observation after a certain Stop acknowledgment loses its state lane', async () => {
     const state = shared();
     const testController = await controller(state);
     try {
       await testController.start();
+      await exhaustTraversalReconnects(testController, state);
       state.studioStateFailuresRemaining = 1;
       await expect(testController.stopAndVerify()).resolves.toMatchObject({
         stop: {
@@ -856,6 +977,7 @@ describe('Studio playtest controller state machine', () => {
       await expect(testController.start()).rejects.toThrow(/uncertain Start/u);
       await expect(testController.start()).rejects.toThrow(/at most once/u);
       expect(state.startCalls).toBe(1);
+      expect(state.stopCalls).toBe(0);
     } finally {
       await testController.close();
     }
@@ -1073,6 +1195,8 @@ describe('Studio playtest controller state machine', () => {
     const state = shared({ stopFailuresBeforeStopping: 2 });
     const testController = await controller(state);
     await testController.start();
+    await exhaustTraversalReconnects(testController, state);
+    state.identityProbeFailuresRemaining = 1;
     await expect(testController.stopAndVerify()).rejects.toThrow(/uncertain observed-state Stop/u);
     expect(state.stopCalls).toBe(2);
     await testController.close();

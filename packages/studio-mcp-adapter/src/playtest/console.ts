@@ -28,6 +28,7 @@ interface PrivateStudioConsoleEntry {
 export interface StudioConsoleObservation {
   readonly valid: boolean;
   readonly complete: boolean;
+  readonly exactEmptyText: boolean;
   readonly evidenceSha256: string;
   readonly entries: readonly PrivateStudioConsoleEntry[];
 }
@@ -142,6 +143,7 @@ function invalidObservation(text: string): StudioConsoleObservation {
   return Object.freeze({
     valid: false,
     complete: false,
+    exactEmptyText: false,
     evidenceSha256: sha256(text),
     entries: Object.freeze([]),
   });
@@ -154,6 +156,18 @@ export function observeStudioConsoleText(
 ): StudioConsoleObservation {
   if (Buffer.byteLength(text, 'utf8') > STUDIO_MCP_PLAYTEST_MAX_CONSOLE_TOTAL_BYTES) {
     return invalidObservation(text);
+  }
+  // The current built-in Studio MCP returns exact empty text when the selected
+  // DataModel has no console entries. Keep this compatibility case exact: any
+  // nonempty unstructured text continues to fail closed below.
+  if (text === '') {
+    return Object.freeze({
+      valid: true,
+      complete: true,
+      exactEmptyText: true,
+      evidenceSha256: sha256(text),
+      entries: Object.freeze([]),
+    });
   }
   let parsed: unknown;
   try {
@@ -192,6 +206,7 @@ export function observeStudioConsoleText(
   return Object.freeze({
     valid: true,
     complete,
+    exactEmptyText: false,
     evidenceSha256: sha256(text),
     entries: Object.freeze(entries as PrivateStudioConsoleEntry[]),
   });
@@ -230,8 +245,13 @@ export function sanitizeStudioConsoleObservations(
     baseline.entries.every(
       (entry, index) => fingerprint(entry) === fingerprint(final.entries[index]!),
     );
+  // An exact empty final Server result proves that the running DataModel
+  // retained no console entries, even when the separate Edit baseline used a
+  // nonempty legacy text presentation. No other unstructured result receives
+  // this exception.
   const evidenceComplete =
-    baseline.valid && final.valid && baseline.complete && final.complete && prefixMatches;
+    (final.valid && final.complete && final.exactEmptyText) ||
+    (baseline.valid && final.valid && baseline.complete && final.complete && prefixMatches);
   const newEntries = evidenceComplete ? final.entries.slice(baseline.entries.length) : [];
   const sortedSummary = newEntries
     .map((entry, index) => ({ entry, index }))
