@@ -133,7 +133,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "corridor",
           "schemaVersion": "0.1.0",
@@ -189,7 +189,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "corridor",
           "schemaVersion": "0.1.0",
@@ -222,7 +222,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -254,7 +254,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -287,7 +287,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -319,7 +319,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -352,7 +352,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -385,7 +385,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -417,7 +417,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -450,7 +450,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -482,7 +482,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -515,7 +515,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -547,7 +547,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -580,7 +580,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -612,7 +612,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -645,7 +645,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -677,7 +677,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -710,7 +710,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -743,7 +743,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -776,7 +776,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -809,7 +809,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -841,7 +841,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "door-opening",
           "schemaVersion": "0.1.0",
@@ -874,7 +874,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -907,7 +907,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -940,7 +940,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -973,7 +973,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1005,7 +1005,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1037,7 +1037,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1069,7 +1069,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1102,7 +1102,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1135,7 +1135,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1168,7 +1168,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1200,7 +1200,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1232,7 +1232,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1264,7 +1264,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1297,7 +1297,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1330,7 +1330,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1363,7 +1363,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1396,7 +1396,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1429,7 +1429,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1461,7 +1461,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1493,7 +1493,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1526,7 +1526,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1559,7 +1559,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1592,7 +1592,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1624,7 +1624,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1656,7 +1656,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1689,7 +1689,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1722,7 +1722,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1755,7 +1755,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1788,7 +1788,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1820,7 +1820,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1852,7 +1852,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1885,7 +1885,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1918,7 +1918,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1950,7 +1950,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -1982,7 +1982,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -2014,7 +2014,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-opening",
           "schemaVersion": "0.1.0",
@@ -2047,7 +2047,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "slab-group",
           "schemaVersion": "0.1.0",
@@ -2079,7 +2079,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "slab-group",
           "schemaVersion": "0.1.0",
@@ -2136,7 +2136,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "slab-panel",
           "schemaVersion": "0.1.0",
@@ -2176,7 +2176,7 @@
       },
       "transform": {
         "position": {
-          "x": 339.5,
+          "x": 337,
           "y": 83.5,
           "z": -180
         },
@@ -2195,7 +2195,7 @@
         "size": {
           "x": 160,
           "y": 1,
-          "z": 51
+          "z": 56
         }
       },
       "tags": [
@@ -2204,7 +2204,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "slab-panel",
           "schemaVersion": "0.1.0",
@@ -2244,7 +2244,7 @@
       },
       "transform": {
         "position": {
-          "x": 287.5,
+          "x": 285,
           "y": 83.5,
           "z": -180
         },
@@ -2263,7 +2263,7 @@
         "size": {
           "x": 160,
           "y": 1,
-          "z": 25
+          "z": 20
         }
       },
       "tags": [
@@ -2272,7 +2272,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "slab-panel",
           "schemaVersion": "0.1.0",
@@ -2312,7 +2312,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 83.5,
           "z": -193
         },
@@ -2340,7 +2340,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "slab-panel",
           "schemaVersion": "0.1.0",
@@ -2380,7 +2380,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 83.5,
           "z": -101
         },
@@ -2408,7 +2408,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "slab-panel",
           "schemaVersion": "0.1.0",
@@ -2476,7 +2476,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair_hall",
           "schemaVersion": "0.1.0",
@@ -2532,7 +2532,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair_hall",
           "schemaVersion": "0.1.0",
@@ -2546,7 +2546,7 @@
       }
     },
     {
-      "id": "archgen-stair-landing-stair-main-floor-ground-54-6-2-14-d12a5e5872b9a866",
+      "id": "archgen-stair-landing-stair-main-floor-ground-54-11-2-14-f197268fff79525d",
       "kind": "object",
       "name": "Stair Landing Level 0",
       "parentId": "stair-main",
@@ -2560,7 +2560,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 64.5,
           "z": -125
         },
@@ -2588,7 +2588,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-landing",
           "schemaVersion": "0.1.0",
@@ -2614,7 +2614,7 @@
       }
     },
     {
-      "id": "archgen-stair-landing-stair-main-floor-upper-76-6-2-14-2ccbcdf675c99a68",
+      "id": "archgen-stair-landing-stair-main-floor-upper-76-11-2-14-7101997bd97bc30b",
       "kind": "object",
       "name": "Stair Landing Level 1",
       "parentId": "stair-main",
@@ -2628,7 +2628,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 83.5,
           "z": -103
         },
@@ -2656,7 +2656,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-landing",
           "schemaVersion": "0.1.0",
@@ -2700,7 +2700,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-run",
           "schemaVersion": "0.1.0",
@@ -2728,7 +2728,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 64.5,
           "z": -123.5
         },
@@ -2756,7 +2756,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -2796,7 +2796,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 69,
           "z": -114.5
         },
@@ -2824,7 +2824,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -2864,7 +2864,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 69.5,
           "z": -113.5
         },
@@ -2892,7 +2892,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -2932,7 +2932,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 70,
           "z": -112.5
         },
@@ -2960,7 +2960,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3000,7 +3000,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 70.5,
           "z": -111.5
         },
@@ -3028,7 +3028,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3068,7 +3068,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 71,
           "z": -110.5
         },
@@ -3096,7 +3096,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3136,7 +3136,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 71.5,
           "z": -109.5
         },
@@ -3164,7 +3164,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3204,7 +3204,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 72,
           "z": -108.5
         },
@@ -3232,7 +3232,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3272,7 +3272,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 72.5,
           "z": -107.5
         },
@@ -3300,7 +3300,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3340,7 +3340,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 73,
           "z": -106.5
         },
@@ -3368,7 +3368,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3408,7 +3408,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 73.5,
           "z": -105.5
         },
@@ -3436,7 +3436,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3476,7 +3476,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 65,
           "z": -122.5
         },
@@ -3504,7 +3504,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3544,7 +3544,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 74,
           "z": -104.5
         },
@@ -3572,7 +3572,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3612,7 +3612,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 65.5,
           "z": -121.5
         },
@@ -3640,7 +3640,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3680,7 +3680,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 66,
           "z": -120.5
         },
@@ -3708,7 +3708,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3748,7 +3748,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 66.5,
           "z": -119.5
         },
@@ -3776,7 +3776,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3816,7 +3816,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 67,
           "z": -118.5
         },
@@ -3844,7 +3844,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3884,7 +3884,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 67.5,
           "z": -117.5
         },
@@ -3912,7 +3912,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -3952,7 +3952,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 68,
           "z": -116.5
         },
@@ -3980,7 +3980,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -4020,7 +4020,7 @@
       },
       "transform": {
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 68.5,
           "z": -115.5
         },
@@ -4048,7 +4048,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "stair-step",
           "schemaVersion": "0.1.0",
@@ -4094,7 +4094,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4128,7 +4128,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4161,7 +4161,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4195,7 +4195,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4228,7 +4228,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4261,7 +4261,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4295,7 +4295,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4329,7 +4329,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4362,7 +4362,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4395,7 +4395,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4429,7 +4429,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4463,7 +4463,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4497,7 +4497,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4531,7 +4531,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4564,7 +4564,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4598,7 +4598,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4631,7 +4631,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4665,7 +4665,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4698,7 +4698,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4732,7 +4732,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4765,7 +4765,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4798,7 +4798,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4832,7 +4832,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4866,7 +4866,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4900,7 +4900,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4934,7 +4934,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -4968,7 +4968,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5002,7 +5002,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5036,7 +5036,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5069,7 +5069,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5102,7 +5102,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5136,7 +5136,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5170,7 +5170,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5203,7 +5203,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5237,7 +5237,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5271,7 +5271,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5304,7 +5304,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5337,7 +5337,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5371,7 +5371,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5404,7 +5404,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5437,7 +5437,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5471,7 +5471,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5504,7 +5504,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5538,7 +5538,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5571,7 +5571,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5605,7 +5605,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5638,7 +5638,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5671,7 +5671,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5704,7 +5704,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5737,7 +5737,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5770,7 +5770,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5803,7 +5803,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5837,7 +5837,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "logical-wall",
           "schemaVersion": "0.1.0",
@@ -5894,7 +5894,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -5963,7 +5963,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6032,7 +6032,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6101,7 +6101,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6170,7 +6170,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6239,7 +6239,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6307,7 +6307,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6375,7 +6375,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6443,7 +6443,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6512,7 +6512,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6581,7 +6581,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6650,7 +6650,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6718,7 +6718,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6786,7 +6786,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6854,7 +6854,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6922,7 +6922,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -6990,7 +6990,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7058,7 +7058,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7127,7 +7127,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7196,7 +7196,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7265,7 +7265,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7334,7 +7334,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7402,7 +7402,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7470,7 +7470,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7538,7 +7538,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7606,7 +7606,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7675,7 +7675,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7744,7 +7744,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7813,7 +7813,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7882,7 +7882,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -7951,7 +7951,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8020,7 +8020,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8089,7 +8089,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8158,7 +8158,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8227,7 +8227,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8296,7 +8296,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8365,7 +8365,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8434,7 +8434,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8503,7 +8503,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8572,7 +8572,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8641,7 +8641,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8710,7 +8710,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8779,7 +8779,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8848,7 +8848,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8917,7 +8917,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -8986,7 +8986,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9055,7 +9055,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9124,7 +9124,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9193,7 +9193,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9262,7 +9262,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9330,7 +9330,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9398,7 +9398,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9466,7 +9466,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9534,7 +9534,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9602,7 +9602,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9670,7 +9670,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9738,7 +9738,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9807,7 +9807,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9876,7 +9876,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -9945,7 +9945,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10014,7 +10014,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10083,7 +10083,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10152,7 +10152,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10221,7 +10221,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10290,7 +10290,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10359,7 +10359,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10428,7 +10428,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10497,7 +10497,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10566,7 +10566,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10635,7 +10635,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10703,7 +10703,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10771,7 +10771,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10839,7 +10839,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10907,7 +10907,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -10975,7 +10975,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11043,7 +11043,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11111,7 +11111,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11180,7 +11180,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11248,7 +11248,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11316,7 +11316,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11384,7 +11384,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11452,7 +11452,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11520,7 +11520,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11588,7 +11588,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11656,7 +11656,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11724,7 +11724,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11792,7 +11792,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11860,7 +11860,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11929,7 +11929,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -11998,7 +11998,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12067,7 +12067,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12136,7 +12136,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12205,7 +12205,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12274,7 +12274,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12343,7 +12343,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12411,7 +12411,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12479,7 +12479,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12548,7 +12548,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12617,7 +12617,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12686,7 +12686,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12755,7 +12755,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12824,7 +12824,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12893,7 +12893,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -12962,7 +12962,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13031,7 +13031,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13100,7 +13100,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13169,7 +13169,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13238,7 +13238,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13307,7 +13307,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13376,7 +13376,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13444,7 +13444,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13512,7 +13512,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13580,7 +13580,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13648,7 +13648,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13716,7 +13716,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13784,7 +13784,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13853,7 +13853,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13922,7 +13922,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -13991,7 +13991,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14060,7 +14060,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14129,7 +14129,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14198,7 +14198,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14266,7 +14266,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14334,7 +14334,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14402,7 +14402,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14471,7 +14471,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14540,7 +14540,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14609,7 +14609,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14678,7 +14678,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14747,7 +14747,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14816,7 +14816,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14884,7 +14884,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -14952,7 +14952,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15021,7 +15021,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15090,7 +15090,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15159,7 +15159,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15228,7 +15228,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15297,7 +15297,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15366,7 +15366,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15435,7 +15435,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15503,7 +15503,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15571,7 +15571,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15639,7 +15639,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15707,7 +15707,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15775,7 +15775,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15843,7 +15843,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15911,7 +15911,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -15979,7 +15979,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16047,7 +16047,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16115,7 +16115,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16183,7 +16183,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16251,7 +16251,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16319,7 +16319,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16387,7 +16387,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16455,7 +16455,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16523,7 +16523,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16591,7 +16591,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16660,7 +16660,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16729,7 +16729,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16798,7 +16798,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16867,7 +16867,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -16936,7 +16936,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17005,7 +17005,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17074,7 +17074,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17143,7 +17143,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17212,7 +17212,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17281,7 +17281,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17349,7 +17349,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17418,7 +17418,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17487,7 +17487,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17556,7 +17556,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17625,7 +17625,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17694,7 +17694,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17763,7 +17763,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17832,7 +17832,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17901,7 +17901,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -17970,7 +17970,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18039,7 +18039,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18108,7 +18108,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18177,7 +18177,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18246,7 +18246,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18314,7 +18314,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18382,7 +18382,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18450,7 +18450,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18518,7 +18518,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18586,7 +18586,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18654,7 +18654,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18722,7 +18722,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18790,7 +18790,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18858,7 +18858,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18926,7 +18926,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -18995,7 +18995,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19063,7 +19063,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19131,7 +19131,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19199,7 +19199,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19267,7 +19267,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19335,7 +19335,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19403,7 +19403,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19471,7 +19471,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19539,7 +19539,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19608,7 +19608,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "wall-panel",
           "schemaVersion": "0.1.0",
@@ -19677,7 +19677,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -19746,7 +19746,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -19815,7 +19815,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -19884,7 +19884,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -19952,7 +19952,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20020,7 +20020,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20088,7 +20088,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20157,7 +20157,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20226,7 +20226,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20295,7 +20295,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20363,7 +20363,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20431,7 +20431,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20499,7 +20499,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20568,7 +20568,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20637,7 +20637,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20706,7 +20706,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20775,7 +20775,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20844,7 +20844,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20912,7 +20912,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -20980,7 +20980,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21049,7 +21049,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21118,7 +21118,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21187,7 +21187,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21255,7 +21255,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21323,7 +21323,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21392,7 +21392,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21461,7 +21461,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21530,7 +21530,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21599,7 +21599,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21667,7 +21667,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21735,7 +21735,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21804,7 +21804,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21873,7 +21873,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -21941,7 +21941,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -22009,7 +22009,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -22077,7 +22077,7 @@
       ],
       "attributes": {
         "worldwright.architecture.generated": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "role": "window-glass",
           "schemaVersion": "0.1.0",
@@ -22850,7 +22850,7 @@
           "yawDegrees": 90
         },
         "worldwright.architecture.result": {
-          "architecturePlanHash": "9a3136061b4f2845d2328c519078b7cc28bf2ca14b7f1154071826a02c272c52",
+          "architecturePlanHash": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
           "plannerVersion": "0.1.0",
           "schemaVersion": "0.1.0",
           "sourceWorldSpecHash": "613c8dd7b39c0e13d9eb3d23c901c8bb5bc98d75a97452a1a5dbd32338964bbd"

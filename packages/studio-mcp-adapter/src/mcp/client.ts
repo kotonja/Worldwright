@@ -8,6 +8,8 @@ import {
   STUDIO_MCP_CLOSE_TIMEOUT_MS,
   STUDIO_MCP_MAX_PAYLOAD_BYTES,
   STUDIO_MCP_PACKAGE_VERSION,
+  STUDIO_MCP_PLAYTEST_MAX_CONSOLE_ENTRIES,
+  STUDIO_MCP_PLAYTEST_MAX_CONSOLE_MESSAGE_BYTES,
   STUDIO_MCP_STARTUP_TIMEOUT_MS,
   STUDIO_MCP_TOOL_TIMEOUT_MS,
 } from '../constants.js';
@@ -26,6 +28,11 @@ import {
 } from './result.js';
 import { readStudioMcpToolListEnvelope } from './tool-schema.js';
 import { terminateOwnedWindowsProcessTree } from './process-tree.js';
+import {
+  discoverStudioPlaytestMcpCapabilities,
+  type StudioPlaytestMcpCapabilities,
+} from '../playtest/capabilities.js';
+import type { StudioPlaytestVector } from '../playtest/types.js';
 
 export interface StudioMcpProtocol {
   connect(signal: AbortSignal): Promise<void>;
@@ -49,7 +56,12 @@ export interface FixedStudioBridgeProgram {
   readonly source: string;
 }
 
+export interface FixedStudioPlaytestProgram {
+  readonly source: string;
+}
+
 const issuedFixedPrograms = new WeakSet<object>();
+const issuedFixedPlaytestPrograms = new WeakSet<object>();
 const STUDIO_MCP_CLIENT_CONSTRUCTION_TOKEN = Symbol('worldwright.studioMcp.clientConstruction');
 
 interface StudioMcpClientPrivateOperations {
@@ -64,6 +76,7 @@ interface StudioMcpClientPrivateOperations {
     timeoutMs?: number,
   ) => Promise<string>;
   readonly capabilities: StudioMcpCapabilities;
+  readonly playtestCapabilities?: StudioPlaytestMcpCapabilities;
   readonly poison: () => Promise<void>;
 }
 
@@ -101,6 +114,22 @@ export function issueFixedStudioBatchProgram(source: string): FixedStudioBridgeP
   }
   const program = Object.freeze({ source });
   issuedFixedPrograms.add(program);
+  return program;
+}
+
+/** @internal Called only by the fixed Server playtest program builder. */
+export function issueFixedStudioPlaytestProgram(source: string): FixedStudioPlaytestProgram {
+  if (source.length === 0 || Buffer.byteLength(source, 'utf8') > STUDIO_MCP_MAX_PAYLOAD_BYTES * 2) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.payload_too_large',
+        '/program',
+        'The fixed Studio playtest program is empty or exceeds the bounded program size.',
+      ),
+    ]);
+  }
+  const program = Object.freeze({ source });
+  issuedFixedPlaytestPrograms.add(program);
   return program;
 }
 
@@ -246,6 +275,7 @@ export class StudioMcpClient {
     token: symbol,
     protocol: StudioMcpProtocol,
     capabilities: StudioMcpCapabilities,
+    playtestCapabilities?: StudioPlaytestMcpCapabilities,
   ) {
     if (token !== STUDIO_MCP_CLIENT_CONSTRUCTION_TOKEN) {
       throw new StudioAdapterError([
@@ -263,6 +293,7 @@ export class StudioMcpClient {
       invokeText: (tool, argumentsValue, timeoutMs) =>
         this.#invokeText(tool, argumentsValue, timeoutMs),
       capabilities,
+      ...(playtestCapabilities === undefined ? {} : { playtestCapabilities }),
       poison: () => this.#poison(),
     });
   }
@@ -468,6 +499,212 @@ export async function executeFixedStudioBatchProgram(
   return operations.invokeText('execute_luau', argumentsValue, STUDIO_MCP_BATCH_TOOL_TIMEOUT_MS);
 }
 
+function requirePlaytestOperations(client: StudioMcpClient): StudioMcpClientPrivateOperations & {
+  readonly playtestCapabilities: StudioPlaytestMcpCapabilities;
+} {
+  const operations = studioMcpClientPrivateOperations.get(client);
+  if (operations?.playtestCapabilities === undefined) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.playtest_capability_unavailable',
+        '/client',
+        'The Studio MCP client did not complete the playtest capability handshake.',
+      ),
+    ]);
+  }
+  return operations as StudioMcpClientPrivateOperations & {
+    readonly playtestCapabilities: StudioPlaytestMcpCapabilities;
+  };
+}
+
+/** @internal Executes only a branded fixed playtest program against the Server data model. */
+export async function executeFixedStudioPlaytestProgram(
+  client: StudioMcpClient,
+  program: FixedStudioPlaytestProgram,
+): Promise<string> {
+  if (!issuedFixedPlaytestPrograms.has(program)) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.usage_invalid',
+        '/program',
+        'Only a fixed Worldwright Studio playtest program may be executed.',
+      ),
+    ]);
+  }
+  const operations = requirePlaytestOperations(client);
+  return operations.invokeText('execute_luau', {
+    [operations.playtestCapabilities.executeLuauSourceField]: program.source,
+    datamodel_type: 'Server',
+  });
+}
+
+type StudioPlaytestMutationTool = 'start_stop_play' | 'character_navigation';
+
+function isExactJsonRecord(
+  value: unknown,
+  keys: readonly string[],
+): value is Record<string, unknown> {
+  if (
+    typeof value !== 'object' ||
+    value === null ||
+    Array.isArray(value) ||
+    Object.getPrototypeOf(value) !== Object.prototype ||
+    Object.getOwnPropertySymbols(value).length !== 0
+  ) {
+    return false;
+  }
+  const names = Object.getOwnPropertyNames(value);
+  if (names.length !== keys.length || names.some((name) => !keys.includes(name))) return false;
+  return names.every((name) => {
+    const descriptor = Object.getOwnPropertyDescriptor(value, name);
+    return descriptor !== undefined && descriptor.enumerable && 'value' in descriptor;
+  });
+}
+
+function isBoundedConsoleOutput(value: unknown): value is readonly unknown[] {
+  return (
+    Array.isArray(value) &&
+    value.length <= STUDIO_MCP_PLAYTEST_MAX_CONSOLE_ENTRIES &&
+    value.every(
+      (entry) =>
+        isExactJsonRecord(entry, ['message', 'messageType', 'timestamp']) &&
+        typeof entry.message === 'string' &&
+        Buffer.byteLength(entry.message, 'utf8') <= STUDIO_MCP_PLAYTEST_MAX_CONSOLE_MESSAGE_BYTES &&
+        typeof entry.messageType === 'string' &&
+        entry.messageType.length > 0 &&
+        entry.messageType.length <= 128 &&
+        typeof entry.timestamp === 'number' &&
+        Number.isFinite(entry.timestamp) &&
+        entry.timestamp >= 0,
+    )
+  );
+}
+
+function isExactStartStopAcknowledgment(value: unknown): boolean {
+  if (isExactJsonRecord(value, ['success', 'message'])) {
+    return (
+      value.success === true &&
+      (value.message === 'Playtest started in play mode' ||
+        value.message === 'Playtest stop signal sent.' ||
+        value.message === 'Playtest stopped via StudioTestService.')
+    );
+  }
+  return (
+    isExactJsonRecord(value, ['success', 'output', 'outputCount', 'message']) &&
+    value.success === true &&
+    (value.message === 'Playtest stop signal sent.' ||
+      value.message === 'Playtest stopped via StudioTestService.') &&
+    isBoundedConsoleOutput(value.output) &&
+    typeof value.outputCount === 'number' &&
+    Number.isSafeInteger(value.outputCount) &&
+    value.outputCount === value.output.length
+  );
+}
+
+function isExactNavigationAcknowledgment(value: unknown): boolean {
+  if (isExactJsonRecord(value, ['success', 'message'])) {
+    return value.success === true && value.message === 'Navigation command sent';
+  }
+  return (
+    isExactJsonRecord(value, ['success', 'method', 'position']) &&
+    value.success === true &&
+    (value.method === 'direct' || value.method === 'pathfinding') &&
+    Array.isArray(value.position) &&
+    value.position.length === 3 &&
+    value.position.every(
+      (coordinate) => typeof coordinate === 'number' && Number.isFinite(coordinate),
+    )
+  );
+}
+
+function assertExactPlaytestMutationAcknowledgment(
+  tool: StudioPlaytestMutationTool,
+  text: string,
+): void {
+  let value: unknown;
+  try {
+    value = JSON.parse(text) as unknown;
+  } catch {
+    value = undefined;
+  }
+  const valid =
+    tool === 'start_stop_play'
+      ? isExactStartStopAcknowledgment(value)
+      : isExactNavigationAcknowledgment(value);
+  if (!valid) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.response_invalid',
+        `/tools/${tool}/content`,
+        `Studio tool ${tool} returned an ambiguous mutation acknowledgment.`,
+        { toolName: tool },
+      ),
+    ]);
+  }
+}
+
+async function invokeUncertainPlaytestAction(
+  client: StudioMcpClient,
+  tool: StudioPlaytestMutationTool,
+  argumentsValue: Readonly<Record<string, unknown>>,
+  timeoutMs: number,
+): Promise<void> {
+  const operations = requirePlaytestOperations(client);
+  try {
+    const result = await operations.invoke(tool, argumentsValue, timeoutMs);
+    const acknowledgment = readStudioMcpTextResult(result, tool);
+    assertExactPlaytestMutationAcknowledgment(tool, acknowledgment.text);
+  } catch (error) {
+    if (!client.poisoned) await operations.poison();
+    throw error;
+  }
+}
+
+/** @internal One non-idempotent Start or Stop acknowledgment; observed state remains authoritative. */
+export function invokeStudioPlaytestStartStop(
+  client: StudioMcpClient,
+  isStart: boolean,
+  timeoutMs: number,
+): Promise<void> {
+  return invokeUncertainPlaytestAction(client, 'start_stop_play', { is_start: isStart }, timeoutMs);
+}
+
+/** @internal One non-idempotent Client navigation request to an exact world position. */
+export function invokeStudioCharacterNavigation(
+  client: StudioMcpClient,
+  position: Readonly<StudioPlaytestVector>,
+  timeoutMs: number,
+): Promise<void> {
+  if (![position.x, position.y, position.z].every(Number.isFinite)) {
+    throw new StudioAdapterError([
+      studioDiagnostic(
+        'studio.playtest_probe_invalid',
+        '/navigation/position',
+        'Studio character navigation requires one finite world position.',
+      ),
+    ]);
+  }
+  const operations = requirePlaytestOperations(client);
+  return invokeUncertainPlaytestAction(
+    client,
+    'character_navigation',
+    {
+      datamodel_type: 'Client',
+      x: position.x,
+      y: position.y,
+      z: position.z,
+      speed_multiplier: operations.playtestCapabilities.navigationSpeedMultiplier,
+    },
+    timeoutMs,
+  );
+}
+
+/** @internal Raw console text stays inside the bounded sanitizer and ignored live evidence path. */
+export async function readStudioConsoleText(client: StudioMcpClient): Promise<string> {
+  const operations = requirePlaytestOperations(client);
+  return operations.invokeText('get_console_output', {});
+}
+
 /** @internal Poison a privileged lane after an untrusted or lost mutation response. */
 export function poisonStudioMcpClient(client: StudioMcpClient): Promise<void> {
   const operations = studioMcpClientPrivateOperations.get(client);
@@ -533,6 +770,7 @@ export async function captureStudioViewport(
 
 async function connectStudioMcpWithFactory(
   protocolFactory?: StudioMcpProtocolFactory,
+  requirePlaytest = false,
 ): Promise<StudioMcpClient> {
   let protocol: StudioMcpProtocol | undefined;
   try {
@@ -571,10 +809,14 @@ async function connectStudioMcpWithFactory(
       ]);
     }
     const capabilities = discoverStudioMcpCapabilities(advertisedTools);
+    const playtestCapabilities = requirePlaytest
+      ? discoverStudioPlaytestMcpCapabilities(advertisedTools)
+      : undefined;
     return new StudioMcpClient(
       STUDIO_MCP_CLIENT_CONSTRUCTION_TOKEN,
       connectedProtocol,
       capabilities,
+      playtestCapabilities,
     );
   } catch (error) {
     await closeFailedProtocol(connectedProtocol);
@@ -599,9 +841,21 @@ export function connectStudioMcp(): Promise<StudioMcpClient> {
   return connectStudioMcpWithFactory();
 }
 
+/** @internal Connect and require the additional privileged playtest tool surface. */
+export function connectStudioPlaytestMcp(): Promise<StudioMcpClient> {
+  return connectStudioMcpWithFactory(undefined, true);
+}
+
 /** @internal Exported only from the package testing subpath. */
 export function connectStudioMcpForTesting(
   protocolFactory: StudioMcpProtocolFactory,
 ): Promise<StudioMcpClient> {
   return connectStudioMcpWithFactory(protocolFactory);
+}
+
+/** @internal Exported only from the testing subpath. */
+export function connectStudioPlaytestMcpForTesting(
+  protocolFactory: StudioMcpProtocolFactory,
+): Promise<StudioMcpClient> {
+  return connectStudioMcpWithFactory(protocolFactory, true);
 }

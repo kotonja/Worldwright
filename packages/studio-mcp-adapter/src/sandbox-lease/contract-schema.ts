@@ -33,6 +33,9 @@ export const StudioSandboxLeaseRecordSchema = leaseRecordSchema({
   $schema: JSON_SCHEMA_DRAFT_2020_12,
 });
 
+/** Reusable unanchored form for strict protocols that carry the private record. */
+export const StudioSandboxLeaseRecordPayloadSchema = leaseRecordSchema();
+
 const requestBase = {
   protocolVersion: Type.Literal(STUDIO_SANDBOX_LEASE_PROTOCOL_VERSION),
 } as const;

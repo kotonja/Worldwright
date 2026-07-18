@@ -10,9 +10,14 @@ import {
 } from './adapter.js';
 export {
   connectStudioMcpForTesting,
+  connectStudioPlaytestMcpForTesting,
   type StudioMcpProtocol,
   type StudioMcpProtocolFactory,
 } from './mcp/client.js';
+export {
+  createStudioPlaytestControllerForTesting,
+  type StudioPlaytestControllerTestingOptions,
+} from './playtest/controller.js';
 
 export type { StudioAdapterFaultOperation } from './adapter.js';
 

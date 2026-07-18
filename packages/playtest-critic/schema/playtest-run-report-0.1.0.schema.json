@@ -1,0 +1,655 @@
+{
+  "$id": "urn:worldwright:playtest-run-report:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": "0.1.0", "type": "string" },
+    "criticVersion": { "const": "0.1.0", "type": "string" },
+    "source": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "playtestPlanSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "architecturePlanSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "robloxManifestSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "projectId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "manifestRootNodeId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "manifestSourceWorldSpecSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" }
+      },
+      "required": [
+        "playtestPlanSha256",
+        "architecturePlanSha256",
+        "robloxManifestSha256",
+        "projectId",
+        "manifestRootNodeId",
+        "manifestSourceWorldSpecSha256"
+      ]
+    },
+    "environment": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "placeId": { "const": 0, "type": "number" },
+        "gameId": { "const": 0, "type": "number" },
+        "editBaseSnapshotSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "managedNodeCount": { "minimum": 1, "maximum": 4096, "type": "integer" },
+        "playDataModelsUsed": {
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "const": "Edit", "type": "string" },
+              { "const": "Server", "type": "string" },
+              { "const": "Client", "type": "string" }
+            ]
+          }
+        },
+        "exactStudioSelected": { "const": true, "type": "boolean" },
+        "sandboxLeaseVerified": { "const": true, "type": "boolean" }
+      },
+      "required": [
+        "placeId",
+        "gameId",
+        "editBaseSnapshotSha256",
+        "managedNodeCount",
+        "playDataModelsUsed",
+        "exactStudioSelected",
+        "sandboxLeaseVerified"
+      ]
+    },
+    "start": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "requested": { "type": "boolean" },
+        "acknowledgmentCertain": { "type": "boolean" },
+        "observedPlayRunning": { "type": "boolean" },
+        "identityProbePassed": { "type": "boolean" },
+        "characterReady": { "type": "boolean" },
+        "failureCode": {
+          "anyOf": [
+            { "const": "none", "type": "string" },
+            { "const": "start-uncertain", "type": "string" },
+            { "const": "play-not-observed", "type": "string" },
+            { "const": "identity-unproved", "type": "string" },
+            { "const": "character-missing", "type": "string" },
+            { "const": "setup-failed", "type": "string" },
+            { "const": "path-failed", "type": "string" },
+            { "const": "navigation-failed", "type": "string" },
+            { "const": "arrival-missed", "type": "string" },
+            { "const": "character-dead", "type": "string" },
+            { "const": "character-fell", "type": "string" },
+            { "const": "wrong-floor", "type": "string" },
+            { "const": "support-missing", "type": "string" },
+            { "const": "head-blocked", "type": "string" },
+            { "const": "body-blocked", "type": "string" },
+            { "const": "stop-uncertain", "type": "string" },
+            { "const": "edit-not-restored", "type": "string" },
+            { "const": "edit-snapshot-changed", "type": "string" }
+          ]
+        }
+      },
+      "required": [
+        "requested",
+        "acknowledgmentCertain",
+        "observedPlayRunning",
+        "identityProbePassed",
+        "characterReady",
+        "failureCode"
+      ]
+    },
+    "setup": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "attempted": { "type": "boolean" },
+        "succeeded": { "type": "boolean" },
+        "requestedPosition": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "z": { "type": "number" }
+          },
+          "required": ["x", "y", "z"]
+        },
+        "verifiedPosition": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "z": { "type": "number" }
+          },
+          "required": ["x", "y", "z"]
+        },
+        "excludedFromScoring": { "const": true, "type": "boolean" },
+        "failureCode": {
+          "anyOf": [
+            { "const": "none", "type": "string" },
+            { "const": "start-uncertain", "type": "string" },
+            { "const": "play-not-observed", "type": "string" },
+            { "const": "identity-unproved", "type": "string" },
+            { "const": "character-missing", "type": "string" },
+            { "const": "setup-failed", "type": "string" },
+            { "const": "path-failed", "type": "string" },
+            { "const": "navigation-failed", "type": "string" },
+            { "const": "arrival-missed", "type": "string" },
+            { "const": "character-dead", "type": "string" },
+            { "const": "character-fell", "type": "string" },
+            { "const": "wrong-floor", "type": "string" },
+            { "const": "support-missing", "type": "string" },
+            { "const": "head-blocked", "type": "string" },
+            { "const": "body-blocked", "type": "string" },
+            { "const": "stop-uncertain", "type": "string" },
+            { "const": "edit-not-restored", "type": "string" },
+            { "const": "edit-snapshot-changed", "type": "string" }
+          ]
+        }
+      },
+      "required": [
+        "attempted",
+        "succeeded",
+        "requestedPosition",
+        "excludedFromScoring",
+        "failureCode"
+      ]
+    },
+    "segmentResults": {
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "segmentId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "sequence": { "minimum": 0, "maximum": 255, "type": "integer" },
+          "fromCheckpointId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "toCheckpointId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "traversal": {
+            "anyOf": [
+              { "const": "door", "type": "string" },
+              { "const": "open", "type": "string" },
+              { "const": "corridor", "type": "string" },
+              { "const": "stair", "type": "string" }
+            ]
+          },
+          "path": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "status": {
+                "anyOf": [
+                  { "const": "not_attempted", "type": "string" },
+                  { "const": "success", "type": "string" },
+                  { "const": "failed", "type": "string" }
+                ]
+              },
+              "waypointCount": { "minimum": 0, "maximum": 128, "type": "integer" },
+              "totalPathDistance": { "minimum": 0, "type": "number" },
+              "jumpWaypointCount": { "minimum": 0, "maximum": 128, "type": "integer" },
+              "waypointDigestSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" }
+            },
+            "required": ["status", "waypointCount", "totalPathDistance", "jumpWaypointCount"]
+          },
+          "navigation": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "requestedOnce": { "type": "boolean" },
+              "acknowledgmentCertain": { "type": "boolean" },
+              "independentlyReached": { "type": "boolean" },
+              "finalPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "horizontalError": { "minimum": 0, "type": "number" },
+              "verticalError": { "minimum": 0, "type": "number" },
+              "finalVelocityMagnitude": { "minimum": 0, "type": "number" }
+            },
+            "required": ["requestedOnce", "acknowledgmentCertain", "independentlyReached"]
+          },
+          "arrival": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "status": {
+                "anyOf": [
+                  { "const": "not_observed", "type": "string" },
+                  { "const": "reached", "type": "string" },
+                  { "const": "missed", "type": "string" }
+                ]
+              },
+              "targetPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "observedPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "horizontalError": { "minimum": 0, "type": "number" },
+              "verticalError": { "minimum": 0, "type": "number" }
+            },
+            "required": ["status", "targetPosition"]
+          },
+          "character": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "observed": { "type": "boolean" },
+              "alive": { "type": "boolean" },
+              "health": { "minimum": 0, "type": "number" },
+              "maximumHealth": { "minimum": 0, "type": "number" },
+              "humanoidState": {
+                "anyOf": [
+                  { "const": "unknown", "type": "string" },
+                  { "const": "running", "type": "string" },
+                  { "const": "running_no_physics", "type": "string" },
+                  { "const": "landed", "type": "string" },
+                  { "const": "freefall", "type": "string" },
+                  { "const": "falling_down", "type": "string" },
+                  { "const": "dead", "type": "string" }
+                ]
+              },
+              "fallDetected": { "type": "boolean" },
+              "expectedLevel": { "minimum": 0, "maximum": 2, "type": "integer" },
+              "observedLevel": { "minimum": 0, "maximum": 2, "type": "integer" }
+            },
+            "required": [
+              "observed",
+              "alive",
+              "health",
+              "maximumHealth",
+              "humanoidState",
+              "fallDetected",
+              "expectedLevel"
+            ]
+          },
+          "clearance": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "observed": { "type": "boolean" },
+              "supported": { "type": "boolean" },
+              "headClear": { "type": "boolean" },
+              "bodyClear": { "type": "boolean" },
+              "supportEntityId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "managedBlockerIds": {
+                "maxItems": 64,
+                "uniqueItems": true,
+                "type": "array",
+                "items": {
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                }
+              },
+              "unmanagedBlockerCount": { "minimum": 0, "maximum": 64, "type": "integer" }
+            },
+            "required": [
+              "observed",
+              "supported",
+              "headClear",
+              "bodyClear",
+              "managedBlockerIds",
+              "unmanagedBlockerCount"
+            ]
+          },
+          "viewportEvidenceId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "failureCodes": {
+            "maxItems": 16,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "anyOf": [
+                { "const": "none", "type": "string" },
+                { "const": "start-uncertain", "type": "string" },
+                { "const": "play-not-observed", "type": "string" },
+                { "const": "identity-unproved", "type": "string" },
+                { "const": "character-missing", "type": "string" },
+                { "const": "setup-failed", "type": "string" },
+                { "const": "path-failed", "type": "string" },
+                { "const": "navigation-failed", "type": "string" },
+                { "const": "arrival-missed", "type": "string" },
+                { "const": "character-dead", "type": "string" },
+                { "const": "character-fell", "type": "string" },
+                { "const": "wrong-floor", "type": "string" },
+                { "const": "support-missing", "type": "string" },
+                { "const": "head-blocked", "type": "string" },
+                { "const": "body-blocked", "type": "string" },
+                { "const": "stop-uncertain", "type": "string" },
+                { "const": "edit-not-restored", "type": "string" },
+                { "const": "edit-snapshot-changed", "type": "string" }
+              ]
+            }
+          }
+        },
+        "required": [
+          "segmentId",
+          "sequence",
+          "fromCheckpointId",
+          "toCheckpointId",
+          "traversal",
+          "path",
+          "navigation",
+          "arrival",
+          "character",
+          "clearance",
+          "failureCodes"
+        ]
+      }
+    },
+    "consoleEvidence": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "baselineEvidenceSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "finalEvidenceSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "evidenceComplete": { "type": "boolean" },
+        "newErrorCount": { "minimum": 0, "maximum": 512, "type": "integer" },
+        "newWarningCount": { "minimum": 0, "maximum": 512, "type": "integer" },
+        "entries": {
+          "maxItems": 64,
+          "type": "array",
+          "items": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "evidenceId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "severity": {
+                "anyOf": [
+                  { "const": "error", "type": "string" },
+                  { "const": "warning", "type": "string" },
+                  { "const": "info", "type": "string" }
+                ]
+              },
+              "dataModelSource": {
+                "anyOf": [
+                  { "const": "Edit", "type": "string" },
+                  { "const": "Server", "type": "string" }
+                ]
+              },
+              "messageSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+              "classificationCode": {
+                "anyOf": [
+                  { "const": "console-error", "type": "string" },
+                  { "const": "console-warning", "type": "string" },
+                  { "const": "console-information", "type": "string" },
+                  { "const": "console-output", "type": "string" }
+                ]
+              },
+              "isNew": { "type": "boolean" }
+            },
+            "required": [
+              "evidenceId",
+              "severity",
+              "dataModelSource",
+              "messageSha256",
+              "classificationCode",
+              "isNew"
+            ]
+          }
+        }
+      },
+      "required": [
+        "baselineEvidenceSha256",
+        "finalEvidenceSha256",
+        "evidenceComplete",
+        "newErrorCount",
+        "newWarningCount",
+        "entries"
+      ]
+    },
+    "viewportEvidence": {
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "evidenceId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "checkpointId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "mediaType": { "const": "image/jpeg", "type": "string" },
+          "sha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+          "byteLength": { "minimum": 1, "maximum": 4194304, "type": "integer" }
+        },
+        "required": ["evidenceId", "checkpointId", "mediaType", "sha256", "byteLength"]
+      }
+    },
+    "coverage": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "requiredCheckpointCount": { "minimum": 0, "maximum": 128, "type": "integer" },
+        "reachedCheckpointCount": { "minimum": 0, "maximum": 128, "type": "integer" },
+        "missedCheckpointIds": {
+          "maxItems": 128,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        },
+        "requiredRoomCount": { "minimum": 0, "maximum": 128, "type": "integer" },
+        "reachedRoomCount": { "minimum": 0, "maximum": 128, "type": "integer" },
+        "missedRoomIds": {
+          "maxItems": 128,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        },
+        "requiredFloorCount": { "minimum": 0, "maximum": 3, "type": "integer" },
+        "reachedFloorCount": { "minimum": 0, "maximum": 3, "type": "integer" },
+        "missedFloorIds": {
+          "maxItems": 3,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        },
+        "requiredStairRunCount": { "minimum": 0, "maximum": 8, "type": "integer" },
+        "traversedStairRunCount": { "minimum": 0, "maximum": 8, "type": "integer" },
+        "missedStairRunIds": {
+          "maxItems": 8,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "requiredCheckpointCount",
+        "reachedCheckpointCount",
+        "missedCheckpointIds",
+        "requiredRoomCount",
+        "reachedRoomCount",
+        "missedRoomIds",
+        "requiredFloorCount",
+        "reachedFloorCount",
+        "missedFloorIds",
+        "requiredStairRunCount",
+        "traversedStairRunCount",
+        "missedStairRunIds"
+      ]
+    },
+    "stop": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "requested": { "type": "boolean" },
+        "acknowledgmentCertain": { "type": "boolean" },
+        "observedEditRestored": { "type": "boolean" },
+        "identityVerifiedBeforeSecondStop": { "type": "boolean" },
+        "failureCode": {
+          "anyOf": [
+            { "const": "none", "type": "string" },
+            { "const": "start-uncertain", "type": "string" },
+            { "const": "play-not-observed", "type": "string" },
+            { "const": "identity-unproved", "type": "string" },
+            { "const": "character-missing", "type": "string" },
+            { "const": "setup-failed", "type": "string" },
+            { "const": "path-failed", "type": "string" },
+            { "const": "navigation-failed", "type": "string" },
+            { "const": "arrival-missed", "type": "string" },
+            { "const": "character-dead", "type": "string" },
+            { "const": "character-fell", "type": "string" },
+            { "const": "wrong-floor", "type": "string" },
+            { "const": "support-missing", "type": "string" },
+            { "const": "head-blocked", "type": "string" },
+            { "const": "body-blocked", "type": "string" },
+            { "const": "stop-uncertain", "type": "string" },
+            { "const": "edit-not-restored", "type": "string" },
+            { "const": "edit-snapshot-changed", "type": "string" }
+          ]
+        }
+      },
+      "required": [
+        "requested",
+        "acknowledgmentCertain",
+        "observedEditRestored",
+        "identityVerifiedBeforeSecondStop",
+        "failureCode"
+      ]
+    },
+    "editIntegrity": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "prePlayEditSnapshotSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "postPlayEditSnapshotSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "exactMatch": { "type": "boolean" },
+        "finalManifestNoopOperationCount": { "minimum": 0, "maximum": 512, "type": "integer" }
+      },
+      "required": ["prePlayEditSnapshotSha256", "exactMatch", "finalManifestNoopOperationCount"]
+    },
+    "summary": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "status": {
+          "anyOf": [
+            { "const": "completed", "type": "string" },
+            { "const": "aborted", "type": "string" },
+            { "const": "failed_to_start", "type": "string" },
+            { "const": "failed_to_stop", "type": "string" }
+          ]
+        },
+        "segmentsPlanned": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "segmentsAttempted": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "segmentsReached": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "allRequiredCoverageReached": { "type": "boolean" },
+        "characterSurvived": { "type": "boolean" },
+        "pathFailures": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "arrivalFailures": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "clearanceFailures": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "consoleErrors": { "minimum": 0, "maximum": 512, "type": "integer" },
+        "consoleWarnings": { "minimum": 0, "maximum": 512, "type": "integer" },
+        "editIntegrityPassed": { "type": "boolean" }
+      },
+      "required": [
+        "status",
+        "segmentsPlanned",
+        "segmentsAttempted",
+        "segmentsReached",
+        "allRequiredCoverageReached",
+        "characterSurvived",
+        "pathFailures",
+        "arrivalFailures",
+        "clearanceFailures",
+        "consoleErrors",
+        "consoleWarnings",
+        "editIntegrityPassed"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "criticVersion",
+    "source",
+    "environment",
+    "start",
+    "setup",
+    "segmentResults",
+    "consoleEvidence",
+    "viewportEvidence",
+    "coverage",
+    "stop",
+    "editIntegrity",
+    "summary"
+  ]
+}

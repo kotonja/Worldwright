@@ -861,6 +861,7 @@ export function runStudioBatchDoubleLostAcknowledgmentForTesting(
 async function connectWithSession(
   select: (client: StudioMcpClient) => Promise<StudioSessionSummary>,
   mutationAuthorized: boolean,
+  sandboxLeaseIdFactory?: SandboxLeaseIdFactory,
 ): Promise<StudioMcpRobloxAdapter> {
   const client = await connectStudioMcp();
   try {
@@ -870,6 +871,8 @@ async function connectWithSession(
       client,
       session,
       mutationAuthorized,
+      connectStudioMcp,
+      sandboxLeaseIdFactory,
     );
   } catch (error) {
     await client.close().catch(() => undefined);
@@ -880,6 +883,23 @@ async function connectWithSession(
 /** Mutation-safe connection: the caller must supply one exact connected Studio ID. */
 export function connectSelectedStudioMcpAdapter(studioId: string): Promise<StudioMcpRobloxAdapter> {
   return connectWithSession((client) => selectStudioSession(client, studioId), true);
+}
+
+/**
+ * @internal Live Milestone 5 acceptance only. This is deliberately absent from
+ * the package root so ordinary callers cannot choose transaction lease IDs.
+ */
+export function connectSelectedStudioMcpAdapterWithSandboxLeaseForLivePlaytest(
+  studioId: string,
+  sandboxLeaseId: string,
+): Promise<StudioMcpRobloxAdapter> {
+  // Reuse the strict lease contract without retaining or presenting the value.
+  createSandboxLeaseRecord('live-playtest-lease-validation', '0'.repeat(64), () => sandboxLeaseId);
+  return connectWithSession(
+    (client) => selectStudioSession(client, studioId),
+    true,
+    () => sandboxLeaseId,
+  );
 }
 
 /** Read-only connection: omission is allowed only when exactly one Studio is connected. */

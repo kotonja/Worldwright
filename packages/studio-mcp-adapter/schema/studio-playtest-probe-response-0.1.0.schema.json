@@ -1,0 +1,520 @@
+{
+  "$id": "urn:worldwright:studio-playtest-probe-response:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        },
+        "action": {
+          "const": "identity_probe",
+          "type": "string"
+        },
+        "projectIdentityMatched": {
+          "const": true,
+          "type": "boolean"
+        },
+        "rootIdentityMatched": {
+          "const": true,
+          "type": "boolean"
+        },
+        "managedNodeCount": {
+          "minimum": 1,
+          "maximum": 2048,
+          "type": "integer"
+        },
+        "playerCount": {
+          "minimum": 0,
+          "maximum": 16,
+          "type": "integer"
+        },
+        "characterReady": {
+          "type": "boolean"
+        },
+        "dataModelType": {
+          "const": "Server",
+          "type": "string"
+        },
+        "playRunning": {
+          "const": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "ok",
+        "action",
+        "projectIdentityMatched",
+        "rootIdentityMatched",
+        "managedNodeCount",
+        "playerCount",
+        "characterReady",
+        "dataModelType",
+        "playRunning"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        },
+        "action": {
+          "const": "character_setup",
+          "type": "string"
+        },
+        "position": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "y": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "z": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        "linearVelocityMagnitude": {
+          "minimum": 0,
+          "maximum": 10000000,
+          "type": "number"
+        },
+        "angularVelocityMagnitude": {
+          "minimum": 0,
+          "maximum": 10000000,
+          "type": "number"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "ok",
+        "action",
+        "position",
+        "linearVelocityMagnitude",
+        "angularVelocityMagnitude"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        },
+        "action": {
+          "const": "player_state",
+          "type": "string"
+        },
+        "position": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "y": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "z": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        "linearVelocityMagnitude": {
+          "minimum": 0,
+          "maximum": 10000000,
+          "type": "number"
+        },
+        "health": {
+          "minimum": 0,
+          "maximum": 10000000,
+          "type": "number"
+        },
+        "maximumHealth": {
+          "minimum": 0,
+          "maximum": 10000000,
+          "type": "number"
+        },
+        "humanoidState": {
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+          "type": "string"
+        },
+        "floorMaterial": {
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+          "type": "string"
+        },
+        "hasHumanoidRootPart": {
+          "const": true,
+          "type": "boolean"
+        },
+        "alive": {
+          "type": "boolean"
+        },
+        "supported": {
+          "type": "boolean"
+        },
+        "supportDistance": {
+          "minimum": 0,
+          "maximum": 10000000,
+          "type": "number"
+        },
+        "managedSupportEntityId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "currentLevel": {
+          "minimum": -128,
+          "maximum": 128,
+          "type": "integer"
+        },
+        "currentFloorId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "ok",
+        "action",
+        "position",
+        "linearVelocityMagnitude",
+        "health",
+        "maximumHealth",
+        "humanoidState",
+        "floorMaterial",
+        "hasHumanoidRootPart",
+        "alive",
+        "supported"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        },
+        "action": {
+          "const": "path_probe",
+          "type": "string"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "success",
+              "type": "string"
+            },
+            {
+              "const": "no_path",
+              "type": "string"
+            },
+            {
+              "const": "computation_failed",
+              "type": "string"
+            },
+            {
+              "const": "waypoint_limit_exceeded",
+              "type": "string"
+            },
+            {
+              "const": "jump_required",
+              "type": "string"
+            }
+          ]
+        },
+        "waypointCount": {
+          "minimum": 0,
+          "maximum": 128,
+          "type": "integer"
+        },
+        "waypoints": {
+          "maxItems": 128,
+          "type": "array",
+          "items": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "x": {
+                "minimum": -1000000,
+                "maximum": 1000000,
+                "type": "number"
+              },
+              "y": {
+                "minimum": -1000000,
+                "maximum": 1000000,
+                "type": "number"
+              },
+              "z": {
+                "minimum": -1000000,
+                "maximum": 1000000,
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "z"
+            ]
+          }
+        },
+        "totalPathDistance": {
+          "minimum": 0,
+          "maximum": 10000000,
+          "type": "number"
+        },
+        "requiresJump": {
+          "type": "boolean"
+        },
+        "jumpWaypointCount": {
+          "minimum": 0,
+          "maximum": 128,
+          "type": "integer"
+        },
+        "fromCheckpointId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "targetCheckpointId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "ok",
+        "action",
+        "status",
+        "waypointCount",
+        "waypoints",
+        "totalPathDistance",
+        "requiresJump",
+        "jumpWaypointCount",
+        "fromCheckpointId",
+        "targetCheckpointId"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "ok": {
+          "const": true,
+          "type": "boolean"
+        },
+        "action": {
+          "const": "clearance_probe",
+          "type": "string"
+        },
+        "checkpointId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "supported": {
+          "type": "boolean"
+        },
+        "supportDistance": {
+          "minimum": 0,
+          "maximum": 10000000,
+          "type": "number"
+        },
+        "managedSupportEntityId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "bodyClear": {
+          "type": "boolean"
+        },
+        "headClear": {
+          "type": "boolean"
+        },
+        "unmanagedBlockerCount": {
+          "minimum": 0,
+          "maximum": 64,
+          "type": "integer"
+        },
+        "managedBlockerIds": {
+          "maxItems": 64,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "ok",
+        "action",
+        "checkpointId",
+        "supported",
+        "bodyClear",
+        "headClear",
+        "unmanagedBlockerCount",
+        "managedBlockerIds"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "action": {
+          "anyOf": [
+            {
+              "const": "identity_probe",
+              "type": "string"
+            },
+            {
+              "const": "character_setup",
+              "type": "string"
+            },
+            {
+              "const": "player_state",
+              "type": "string"
+            },
+            {
+              "const": "path_probe",
+              "type": "string"
+            },
+            {
+              "const": "clearance_probe",
+              "type": "string"
+            }
+          ]
+        },
+        "ok": {
+          "const": false,
+          "type": "boolean"
+        },
+        "diagnostic": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "code": {
+              "anyOf": [
+                {
+                  "const": "studio.playtest_probe_invalid",
+                  "type": "string"
+                },
+                {
+                  "const": "studio.playtest_identity_mismatch",
+                  "type": "string"
+                },
+                {
+                  "const": "studio.playtest_character_unavailable",
+                  "type": "string"
+                },
+                {
+                  "const": "studio.playtest_path_failed",
+                  "type": "string"
+                },
+                {
+                  "const": "studio.playtest_clearance_failed",
+                  "type": "string"
+                },
+                {
+                  "const": "studio.published_place_forbidden",
+                  "type": "string"
+                },
+                {
+                  "const": "studio.node_limit_exceeded",
+                  "type": "string"
+                }
+              ]
+            },
+            "message": {
+              "minLength": 1,
+              "maxLength": 256,
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "action",
+        "ok",
+        "diagnostic"
+      ]
+    }
+  ]
+}

@@ -841,6 +841,7 @@ export class FakeStudioProtocol {
       case 'inspect_instance':
         return this.#text('{}');
     }
+    throw new Error(`Unexpected fake Studio tool: ${tool}.`);
   }
 
   public async close(): Promise<void> {

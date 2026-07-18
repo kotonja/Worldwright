@@ -1,0 +1,251 @@
+{
+  "$id": "urn:worldwright:critic-report:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": "0.1.0", "type": "string" },
+    "criticVersion": { "const": "0.1.0", "type": "string" },
+    "source": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "playtestPlanSchemaVersion": { "const": "0.1.0", "type": "string" },
+        "playtestPlanSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "playtestRunReportSchemaVersion": { "const": "0.1.0", "type": "string" },
+        "playtestRunReportSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "architecturePlanSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "robloxManifestSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "projectId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "playtestPlanSchemaVersion",
+        "playtestPlanSha256",
+        "playtestRunReportSchemaVersion",
+        "playtestRunReportSha256",
+        "architecturePlanSha256",
+        "robloxManifestSha256",
+        "projectId"
+      ]
+    },
+    "status": {
+      "anyOf": [
+        { "const": "pass", "type": "string" },
+        { "const": "pass_with_warnings", "type": "string" },
+        { "const": "fail", "type": "string" }
+      ]
+    },
+    "findings": {
+      "maxItems": 4116,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "code": {
+            "anyOf": [
+              { "const": "critic.run_incomplete", "type": "string" },
+              { "const": "critic.play_simulation_identity_unproved", "type": "string" },
+              { "const": "critic.playtest_start_failed", "type": "string" },
+              { "const": "critic.character_missing", "type": "string" },
+              { "const": "critic.character_dead", "type": "string" },
+              { "const": "critic.character_fell", "type": "string" },
+              { "const": "critic.setup_failed", "type": "string" },
+              { "const": "critic.path_not_successful", "type": "string" },
+              { "const": "critic.path_requires_jump", "type": "string" },
+              { "const": "critic.arrival_not_reached", "type": "string" },
+              { "const": "critic.wrong_floor", "type": "string" },
+              { "const": "critic.checkpoint_not_reached", "type": "string" },
+              { "const": "critic.room_not_reached", "type": "string" },
+              { "const": "critic.floor_not_reached", "type": "string" },
+              { "const": "critic.stair_not_traversed", "type": "string" },
+              { "const": "critic.head_clearance_blocked", "type": "string" },
+              { "const": "critic.body_clearance_blocked", "type": "string" },
+              { "const": "critic.support_missing", "type": "string" },
+              { "const": "critic.console_error_new", "type": "string" },
+              { "const": "critic.console_evidence_incomplete", "type": "string" },
+              { "const": "critic.playtest_stop_failed", "type": "string" },
+              { "const": "critic.edit_not_restored", "type": "string" },
+              { "const": "critic.edit_snapshot_changed", "type": "string" },
+              { "const": "critic.manifest_not_noop", "type": "string" },
+              { "const": "critic.console_warning_new", "type": "string" },
+              { "const": "critic.arrival_velocity_high", "type": "string" },
+              { "const": "critic.unmanaged_blocker_nearby", "type": "string" },
+              { "const": "critic.navigation_ack_uncertain", "type": "string" },
+              { "const": "critic.path_detour_high", "type": "string" },
+              { "const": "critic.capture_unavailable", "type": "string" }
+            ]
+          },
+          "severity": {
+            "anyOf": [
+              { "const": "error", "type": "string" },
+              { "const": "warning", "type": "string" }
+            ]
+          },
+          "category": {
+            "anyOf": [
+              { "const": "identity", "type": "string" },
+              { "const": "playtest_start", "type": "string" },
+              { "const": "character", "type": "string" },
+              { "const": "pathfinding", "type": "string" },
+              { "const": "navigation", "type": "string" },
+              { "const": "clearance", "type": "string" },
+              { "const": "circulation", "type": "string" },
+              { "const": "stairs", "type": "string" },
+              { "const": "console", "type": "string" },
+              { "const": "evidence", "type": "string" },
+              { "const": "playtest_stop", "type": "string" },
+              { "const": "edit_integrity", "type": "string" }
+            ]
+          },
+          "message": { "minLength": 1, "maxLength": 256, "type": "string" },
+          "relatedFloorLevel": { "minimum": 0, "maximum": 2, "type": "integer" },
+          "relatedSourceIds": {
+            "maxItems": 64,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          },
+          "relatedCheckpointIds": {
+            "maxItems": 64,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          },
+          "relatedSegmentIds": {
+            "maxItems": 64,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          },
+          "evidenceIds": {
+            "maxItems": 64,
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            }
+          },
+          "suggestionCode": {
+            "anyOf": [
+              { "const": "inspect-opening-clearance", "type": "string" },
+              { "const": "widen-corridor", "type": "string" },
+              { "const": "inspect-stair-geometry", "type": "string" },
+              { "const": "inspect-floor-support", "type": "string" },
+              { "const": "inspect-collision-volume", "type": "string" },
+              { "const": "inspect-spawn-or-setup", "type": "string" },
+              { "const": "inspect-console-error", "type": "string" },
+              { "const": "rerun-with-complete-evidence", "type": "string" },
+              { "const": "restore-edit-snapshot", "type": "string" },
+              { "const": "inspect-playtest-state", "type": "string" }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "severity",
+          "category",
+          "message",
+          "relatedSourceIds",
+          "relatedCheckpointIds",
+          "relatedSegmentIds",
+          "evidenceIds",
+          "suggestionCode"
+        ]
+      }
+    },
+    "metrics": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "requiredCheckpoints": { "minimum": 0, "maximum": 128, "type": "integer" },
+        "reachedCheckpoints": { "minimum": 0, "maximum": 128, "type": "integer" },
+        "requiredRooms": { "minimum": 0, "maximum": 128, "type": "integer" },
+        "reachedRooms": { "minimum": 0, "maximum": 128, "type": "integer" },
+        "requiredFloors": { "minimum": 0, "maximum": 3, "type": "integer" },
+        "reachedFloors": { "minimum": 0, "maximum": 3, "type": "integer" },
+        "requiredStairs": { "minimum": 0, "maximum": 8, "type": "integer" },
+        "traversedStairs": { "minimum": 0, "maximum": 8, "type": "integer" },
+        "pathSuccessCount": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "pathFailureCount": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "arrivalSuccessCount": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "arrivalFailureCount": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "clearanceSuccessCount": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "clearanceFailureCount": { "minimum": 0, "maximum": 256, "type": "integer" },
+        "consoleErrorCount": { "minimum": 0, "maximum": 512, "type": "integer" },
+        "consoleWarningCount": { "minimum": 0, "maximum": 512, "type": "integer" },
+        "editHashMatch": { "type": "boolean" }
+      },
+      "required": [
+        "requiredCheckpoints",
+        "reachedCheckpoints",
+        "requiredRooms",
+        "reachedRooms",
+        "requiredFloors",
+        "reachedFloors",
+        "requiredStairs",
+        "traversedStairs",
+        "pathSuccessCount",
+        "pathFailureCount",
+        "arrivalSuccessCount",
+        "arrivalFailureCount",
+        "clearanceSuccessCount",
+        "clearanceFailureCount",
+        "consoleErrorCount",
+        "consoleWarningCount",
+        "editHashMatch"
+      ]
+    },
+    "evidenceCompleteness": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "segmentEvidenceComplete": { "type": "boolean" },
+        "consoleEvidenceComplete": { "type": "boolean" },
+        "viewportEvidenceComplete": { "type": "boolean" },
+        "stopEvidenceComplete": { "type": "boolean" },
+        "editIntegrityEvidenceComplete": { "type": "boolean" }
+      },
+      "required": [
+        "segmentEvidenceComplete",
+        "consoleEvidenceComplete",
+        "viewportEvidenceComplete",
+        "stopEvidenceComplete",
+        "editIntegrityEvidenceComplete"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "criticVersion",
+    "source",
+    "status",
+    "findings",
+    "metrics",
+    "evidenceCompleteness"
+  ]
+}

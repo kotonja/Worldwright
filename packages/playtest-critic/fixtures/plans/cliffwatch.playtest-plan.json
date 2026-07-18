@@ -1,0 +1,2881 @@
+{
+  "agent": {
+    "arrivalHorizontalTolerance": 4,
+    "arrivalVerticalTolerance": 5,
+    "canClimb": false,
+    "canJump": false,
+    "height": 5,
+    "maximumFallBelowFloor": 12,
+    "maximumHorizontalSpeed": 32,
+    "radius": 2,
+    "rootHeightAboveFinishedFloor": 3,
+    "waypointSpacing": 4
+  },
+  "captureCheckpoints": [
+    "pt-exterior-30166f89e55490bce030",
+    "pt-room-00e3d8bbdc6cbddc8c69",
+    "pt-corridor-bb9892f0eb69d2e3f8c6",
+    "pt-hall-2577b130ad62c393d982",
+    "pt-corridor-6b3a51ffbaae625e6fd4",
+    "pt-hall-1b39ca3e3ca81d33f9e9",
+    "pt-threshold-5a5308ba1b5044d22926"
+  ],
+  "checkpoints": [
+    {
+      "circulationNodeId": "archgen-corridor-floor-upper",
+      "corridorId": "archgen-corridor-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "level": 1,
+      "localPosition": {
+        "x": 0,
+        "y": 23,
+        "z": 0
+      },
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-corridor-floor-upper",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 320,
+        "y": 87,
+        "z": -180
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-ground",
+      "corridorId": "archgen-corridor-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "level": 0,
+      "localPosition": {
+        "x": 0,
+        "y": 3,
+        "z": 0
+      },
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-corridor-floor-ground",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 320,
+        "y": 67,
+        "z": -180
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-upper",
+      "corridorId": "archgen-corridor-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-corridor-door-00fb51af2b64bba68592",
+      "level": 1,
+      "localPosition": {
+        "x": -55.5,
+        "y": 23,
+        "z": 2.5
+      },
+      "openingId": "archgen-opening-corridor-door-east-bedroom",
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-east-bedroom",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 317.5,
+        "y": 87,
+        "z": -235.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-upper",
+      "corridorId": "archgen-corridor-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-corridor-door-06c4de0f7ce68202543d",
+      "level": 1,
+      "localPosition": {
+        "x": 2.5,
+        "y": 23,
+        "z": -2.5
+      },
+      "openingId": "archgen-opening-corridor-door-primary-bath",
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-primary-bath",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 322.5,
+        "y": 87,
+        "z": -177.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-ground",
+      "corridorId": "archgen-corridor-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-corridor-door-101f55558bc94e7e047d",
+      "level": 0,
+      "localPosition": {
+        "x": 32.5,
+        "y": 3,
+        "z": 2.5
+      },
+      "openingId": "archgen-opening-corridor-door-library-west",
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-library-west",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 317.5,
+        "y": 67,
+        "z": -147.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-upper",
+      "corridorId": "archgen-corridor-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "level": 1,
+      "localPosition": {
+        "x": -9.5,
+        "y": 23,
+        "z": 2.5
+      },
+      "openingId": "archgen-opening-corridor-door-guest-sitting-room",
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-guest-sitting-room",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 317.5,
+        "y": 87,
+        "z": -189.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-upper",
+      "corridorId": "archgen-corridor-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "level": 1,
+      "localPosition": {
+        "x": 52.5,
+        "y": 23,
+        "z": -2.5
+      },
+      "openingId": "archgen-opening-corridor-door-west-bedroom",
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-west-bedroom",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 322.5,
+        "y": 87,
+        "z": -127.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-upper",
+      "corridorId": "archgen-corridor-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "level": 1,
+      "localPosition": {
+        "x": 33.5,
+        "y": 23,
+        "z": 2.5
+      },
+      "openingId": "archgen-opening-corridor-door-upper-study",
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-upper-study",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 317.5,
+        "y": 87,
+        "z": -146.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-ground",
+      "corridorId": "archgen-corridor-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-corridor-door-5f2af3207aa2d5782a55",
+      "level": 0,
+      "localPosition": {
+        "x": -13.5,
+        "y": 3,
+        "z": 2.5
+      },
+      "openingId": "archgen-opening-corridor-door-ballroom",
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-ballroom",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 317.5,
+        "y": 67,
+        "z": -193.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-ground",
+      "corridorId": "archgen-corridor-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-corridor-door-75b15660d8af13e68c97",
+      "level": 0,
+      "localPosition": {
+        "x": -17,
+        "y": 3,
+        "z": -2.5
+      },
+      "openingId": "archgen-opening-corridor-door-kitchen-service",
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-kitchen-service",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 322.5,
+        "y": 67,
+        "z": -197
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-ground",
+      "corridorId": "archgen-corridor-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-corridor-door-84d1efd5ab620c094445",
+      "level": 0,
+      "localPosition": {
+        "x": 23,
+        "y": 3,
+        "z": -2.5
+      },
+      "openingId": "archgen-opening-corridor-door-drawing-room",
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-drawing-room",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 322.5,
+        "y": 67,
+        "z": -157
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-ground",
+      "corridorId": "archgen-corridor-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "level": 0,
+      "localPosition": {
+        "x": 61,
+        "y": 3,
+        "z": -2.5
+      },
+      "openingId": "archgen-opening-corridor-door-study-ground",
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-study-ground",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 322.5,
+        "y": 67,
+        "z": -119
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-ground",
+      "corridorId": "archgen-corridor-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "level": 0,
+      "localPosition": {
+        "x": -58.5,
+        "y": 3,
+        "z": 2.5
+      },
+      "openingId": "archgen-opening-corridor-door-foyer-grand",
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-foyer-grand",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 317.5,
+        "y": 67,
+        "z": -238.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-ground",
+      "corridorId": "archgen-corridor-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-corridor-door-dd894c56d1472e519aa8",
+      "level": 0,
+      "localPosition": {
+        "x": -57.5,
+        "y": 3,
+        "z": -2.5
+      },
+      "openingId": "archgen-opening-corridor-door-dining-room",
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-dining-room",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 322.5,
+        "y": 67,
+        "z": -237.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-corridor-floor-upper",
+      "corridorId": "archgen-corridor-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-corridor-door-ff6f32ebad46f7f236f1",
+      "level": 1,
+      "localPosition": {
+        "x": -50,
+        "y": 23,
+        "z": -2.5
+      },
+      "openingId": "archgen-opening-corridor-door-primary-bedroom",
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-primary-bedroom",
+      "type": "corridor",
+      "worldPosition": {
+        "x": 322.5,
+        "y": 87,
+        "z": -230
+      }
+    },
+    {
+      "circulationNodeId": "archgen-exterior-entrance-mansion-cliffwatch",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-exterior-30166f89e55490bce030",
+      "level": 0,
+      "localPosition": {
+        "x": -79.75,
+        "y": 3,
+        "z": 24.75
+      },
+      "openingId": "archgen-opening-exterior-entrance-foyer-grand",
+      "required": true,
+      "roomId": "foyer-grand",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-exterior-entrance-foyer-grand",
+      "type": "exterior_entrance",
+      "worldPosition": {
+        "x": 295.25,
+        "y": 67,
+        "z": -259.75
+      }
+    },
+    {
+      "circulationNodeId": "archgen-stair-hall-stair-main-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-hall-1b39ca3e3ca81d33f9e9",
+      "level": 1,
+      "localPosition": {
+        "x": 66,
+        "y": 23,
+        "z": 8.5
+      },
+      "openingId": "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-stair-hall-stair-main-floor-upper",
+      "stairRunId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "type": "stair_hall",
+      "worldPosition": {
+        "x": 311.5,
+        "y": 87,
+        "z": -114
+      }
+    },
+    {
+      "circulationNodeId": "archgen-stair-hall-stair-main-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-hall-2577b130ad62c393d982",
+      "level": 0,
+      "localPosition": {
+        "x": 66,
+        "y": 3,
+        "z": 8.5
+      },
+      "openingId": "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-stair-hall-stair-main-floor-ground",
+      "stairRunId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "type": "stair_hall",
+      "worldPosition": {
+        "x": 311.5,
+        "y": 67,
+        "z": -114
+      }
+    },
+    {
+      "circulationNodeId": "archgen-stair-hall-stair-main-floor-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-landing-lower-be01fc21e7f00aac1107",
+      "landing": "lower",
+      "level": 0,
+      "localPosition": {
+        "x": 55,
+        "y": 4,
+        "z": 18
+      },
+      "required": true,
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "stairRunId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "type": "stair_landing",
+      "worldPosition": {
+        "x": 302,
+        "y": 68,
+        "z": -125
+      }
+    },
+    {
+      "circulationNodeId": "archgen-stair-hall-stair-main-floor-upper",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-landing-upper-be01fc21e7f00aac1107",
+      "landing": "upper",
+      "level": 1,
+      "localPosition": {
+        "x": 77,
+        "y": 23,
+        "z": 18
+      },
+      "required": true,
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "stairRunId": "archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "type": "stair_landing",
+      "worldPosition": {
+        "x": 302,
+        "y": 87,
+        "z": -103
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-room-00e3d8bbdc6cbddc8c69",
+      "level": 0,
+      "localPosition": {
+        "x": -58.5,
+        "y": 3,
+        "z": 24.5
+      },
+      "required": true,
+      "roomId": "foyer-grand",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "foyer-grand",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 295.5,
+        "y": 67,
+        "z": -238.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-room-094573d2142793d7ea4d",
+      "level": 1,
+      "localPosition": {
+        "x": -55.5,
+        "y": 23,
+        "z": 24.5
+      },
+      "required": true,
+      "roomId": "east-bedroom",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "east-bedroom",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 295.5,
+        "y": 87,
+        "z": -235.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-room-0fb5a11fcf5e4901c072",
+      "level": 0,
+      "localPosition": {
+        "x": 32.5,
+        "y": 3,
+        "z": 24.5
+      },
+      "required": true,
+      "roomId": "library-west",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "library-west",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 295.5,
+        "y": 67,
+        "z": -147.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-room-30b9d34214d4c33af87b",
+      "level": 1,
+      "localPosition": {
+        "x": 33.5,
+        "y": 23,
+        "z": 24.5
+      },
+      "required": true,
+      "roomId": "upper-study",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "upper-study",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 295.5,
+        "y": 87,
+        "z": -146.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-room-3354dec30903d716740f",
+      "level": 0,
+      "localPosition": {
+        "x": 61,
+        "y": 3,
+        "z": -24.5
+      },
+      "required": true,
+      "roomId": "study-ground",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "study-ground",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 344.5,
+        "y": 67,
+        "z": -119
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-room-34c0e24aebc5a8b37b1e",
+      "level": 0,
+      "localPosition": {
+        "x": -13.5,
+        "y": 3,
+        "z": 24.5
+      },
+      "required": true,
+      "roomId": "ballroom",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "ballroom",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 295.5,
+        "y": 67,
+        "z": -193.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-room-3feb1c7d4d47b3cb20cf",
+      "level": 0,
+      "localPosition": {
+        "x": -17,
+        "y": 3,
+        "z": -24.5
+      },
+      "required": true,
+      "roomId": "kitchen-service",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "kitchen-service",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 344.5,
+        "y": 67,
+        "z": -197
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-room-4174a3773febf6902d1c",
+      "level": 1,
+      "localPosition": {
+        "x": 52.5,
+        "y": 23,
+        "z": -24.5
+      },
+      "required": true,
+      "roomId": "west-bedroom",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "west-bedroom",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 344.5,
+        "y": 87,
+        "z": -127.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-room-94042af14807184b573b",
+      "level": 0,
+      "localPosition": {
+        "x": -57.5,
+        "y": 3,
+        "z": -24.5
+      },
+      "required": true,
+      "roomId": "dining-room",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "dining-room",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 344.5,
+        "y": 67,
+        "z": -237.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-room-a4d6e14310c58d94c6e2",
+      "level": 1,
+      "localPosition": {
+        "x": -9.5,
+        "y": 23,
+        "z": 24.5
+      },
+      "required": true,
+      "roomId": "guest-sitting-room",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "guest-sitting-room",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 295.5,
+        "y": 87,
+        "z": -189.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-room-cbb2d3d792956cce6bd6",
+      "level": 1,
+      "localPosition": {
+        "x": 2.5,
+        "y": 23,
+        "z": -24.5
+      },
+      "required": true,
+      "roomId": "primary-bath",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "primary-bath",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 344.5,
+        "y": 87,
+        "z": -177.5
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-room-e0d8bae31431d1dbdb19",
+      "level": 0,
+      "localPosition": {
+        "x": 23,
+        "y": 3,
+        "z": -24.5
+      },
+      "required": true,
+      "roomId": "drawing-room",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "drawing-room",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 344.5,
+        "y": 67,
+        "z": -157
+      }
+    },
+    {
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-room-ed9971f3ebbc40058e8e",
+      "level": 1,
+      "localPosition": {
+        "x": -50,
+        "y": 23,
+        "z": -24.5
+      },
+      "required": true,
+      "roomId": "primary-bedroom",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "primary-bedroom",
+      "type": "room_center",
+      "worldPosition": {
+        "x": 344.5,
+        "y": 87,
+        "z": -230
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-foyer-grand",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-00203090ef2bf694daba",
+      "level": 0,
+      "localPosition": {
+        "x": -58.5,
+        "y": 3,
+        "z": 8.5
+      },
+      "openingId": "archgen-opening-corridor-door-foyer-grand",
+      "required": true,
+      "roomId": "foyer-grand",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-foyer-grand",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 311.5,
+        "y": 67,
+        "z": -238.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-upper-study-sitting",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-05a5934ced18112765f5",
+      "level": 1,
+      "localPosition": {
+        "x": 16.5,
+        "y": 23,
+        "z": 24.75
+      },
+      "openingId": "archgen-opening-room-door-relationship-upper-study-sitting",
+      "required": true,
+      "roomId": "upper-study",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-room-door-relationship-upper-study-sitting",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 295.25,
+        "y": 87,
+        "z": -163.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bedroom",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-0a658967c1cf5228e0c6",
+      "level": 1,
+      "localPosition": {
+        "x": -50,
+        "y": 23,
+        "z": -8.5
+      },
+      "openingId": "archgen-opening-corridor-door-primary-bedroom",
+      "required": true,
+      "roomId": "primary-bedroom",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-primary-bedroom",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 328.5,
+        "y": 87,
+        "z": -230
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-ballroom",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-0f47be5009f48ba6f990",
+      "level": 0,
+      "localPosition": {
+        "x": -13.5,
+        "y": 3,
+        "z": 8.5
+      },
+      "openingId": "archgen-opening-corridor-door-ballroom",
+      "required": true,
+      "roomId": "ballroom",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-ballroom",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 311.5,
+        "y": 67,
+        "z": -193.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-primary-suite",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-29e7c6b7384d15dee849",
+      "level": 1,
+      "localPosition": {
+        "x": -24.5,
+        "y": 23,
+        "z": -24.75
+      },
+      "openingId": "archgen-opening-room-door-relationship-primary-suite",
+      "required": true,
+      "roomId": "primary-bedroom",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-room-door-relationship-primary-suite",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 344.75,
+        "y": 87,
+        "z": -204.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-primary-suite",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-2eb7c645b7299218bbc9",
+      "level": 1,
+      "localPosition": {
+        "x": -18.5,
+        "y": 23,
+        "z": -24.75
+      },
+      "openingId": "archgen-opening-room-door-relationship-primary-suite",
+      "required": true,
+      "roomId": "primary-bath",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-room-door-relationship-primary-suite",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 344.75,
+        "y": 87,
+        "z": -198.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-foyer-ballroom",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-38017d5819cfde0ea397",
+      "level": 0,
+      "localPosition": {
+        "x": -35.5,
+        "y": 3,
+        "z": 24.75
+      },
+      "openingId": "archgen-opening-room-door-relationship-foyer-ballroom",
+      "required": true,
+      "roomId": "ballroom",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-room-door-relationship-foyer-ballroom",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 295.25,
+        "y": 67,
+        "z": -215.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-41823333384441ed77a5",
+      "level": 1,
+      "localPosition": {
+        "x": 33.5,
+        "y": 23,
+        "z": 8.5
+      },
+      "openingId": "archgen-opening-corridor-door-upper-study",
+      "required": true,
+      "roomId": "upper-study",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-upper-study",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 311.5,
+        "y": 87,
+        "z": -146.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-guest-sitting-room",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-4d183f2a18ce13a23457",
+      "level": 1,
+      "localPosition": {
+        "x": -9.5,
+        "y": 23,
+        "z": 8.5
+      },
+      "openingId": "archgen-opening-corridor-door-guest-sitting-room",
+      "required": true,
+      "roomId": "guest-sitting-room",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-guest-sitting-room",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 311.5,
+        "y": 87,
+        "z": -189.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-upper-study-sitting",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-5a5308ba1b5044d22926",
+      "level": 1,
+      "localPosition": {
+        "x": 10.5,
+        "y": 23,
+        "z": 24.75
+      },
+      "openingId": "archgen-opening-room-door-relationship-upper-study-sitting",
+      "required": true,
+      "roomId": "guest-sitting-room",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-room-door-relationship-upper-study-sitting",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 295.25,
+        "y": 87,
+        "z": -169.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-study-ground",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-6bb151fd984ae3a8be5c",
+      "level": 0,
+      "localPosition": {
+        "x": 61,
+        "y": 3,
+        "z": -8.5
+      },
+      "openingId": "archgen-opening-corridor-door-study-ground",
+      "required": true,
+      "roomId": "study-ground",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-study-ground",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 328.5,
+        "y": 67,
+        "z": -119
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-829a120dea7e506fec45",
+      "level": 0,
+      "localPosition": {
+        "x": -57.5,
+        "y": 3,
+        "z": -8.5
+      },
+      "openingId": "archgen-opening-corridor-door-dining-room",
+      "required": true,
+      "roomId": "dining-room",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-dining-room",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 328.5,
+        "y": 67,
+        "z": -237.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bath",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-94dec9a9e5de3e241f42",
+      "level": 1,
+      "localPosition": {
+        "x": 2.5,
+        "y": 23,
+        "z": -8.5
+      },
+      "openingId": "archgen-opening-corridor-door-primary-bath",
+      "required": true,
+      "roomId": "primary-bath",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-primary-bath",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 328.5,
+        "y": 87,
+        "z": -177.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-exterior-entrance-foyer-grand",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-a9bfadb38c3b135d1328",
+      "level": 0,
+      "localPosition": {
+        "x": -75.5,
+        "y": 3,
+        "z": 24.75
+      },
+      "openingId": "archgen-opening-exterior-entrance-foyer-grand",
+      "required": true,
+      "roomId": "foyer-grand",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-exterior-entrance-foyer-grand",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 295.25,
+        "y": 67,
+        "z": -255.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-dining-kitchen",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-b01826ad61d4613ae65b",
+      "level": 0,
+      "localPosition": {
+        "x": -33.5,
+        "y": 3,
+        "z": -24.75
+      },
+      "openingId": "archgen-opening-room-door-relationship-dining-kitchen",
+      "required": true,
+      "roomId": "kitchen-service",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-room-door-relationship-dining-kitchen",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 344.75,
+        "y": 67,
+        "z": -213.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-library-west",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-c634897bddc407334253",
+      "level": 0,
+      "localPosition": {
+        "x": 32.5,
+        "y": 3,
+        "z": 8.5
+      },
+      "openingId": "archgen-opening-corridor-door-library-west",
+      "required": true,
+      "roomId": "library-west",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-library-west",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 311.5,
+        "y": 67,
+        "z": -147.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-west-bedroom",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-d5e0e210906425ebd5f2",
+      "level": 1,
+      "localPosition": {
+        "x": 52.5,
+        "y": 23,
+        "z": -8.5
+      },
+      "openingId": "archgen-opening-corridor-door-west-bedroom",
+      "required": true,
+      "roomId": "west-bedroom",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-west-bedroom",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 328.5,
+        "y": 87,
+        "z": -127.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-foyer-ballroom",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-e68ef673dd3bb7ef421e",
+      "level": 0,
+      "localPosition": {
+        "x": -41.5,
+        "y": 3,
+        "z": 24.75
+      },
+      "openingId": "archgen-opening-room-door-relationship-foyer-ballroom",
+      "required": true,
+      "roomId": "foyer-grand",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-room-door-relationship-foyer-ballroom",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 295.25,
+        "y": 67,
+        "z": -221.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-east-bedroom",
+      "expectedFinishedFloorElevation": 84,
+      "id": "pt-threshold-ec0ab684497be36b2b03",
+      "level": 1,
+      "localPosition": {
+        "x": -55.5,
+        "y": 23,
+        "z": 8.5
+      },
+      "openingId": "archgen-opening-corridor-door-east-bedroom",
+      "required": true,
+      "roomId": "east-bedroom",
+      "sourceFloorId": "floor-upper",
+      "sourceSemanticId": "archgen-opening-corridor-door-east-bedroom",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 311.5,
+        "y": 87,
+        "z": -235.5
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-drawing-room",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "level": 0,
+      "localPosition": {
+        "x": 23,
+        "y": 3,
+        "z": -8.5
+      },
+      "openingId": "archgen-opening-corridor-door-drawing-room",
+      "required": true,
+      "roomId": "drawing-room",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-drawing-room",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 328.5,
+        "y": 67,
+        "z": -157
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-f9f00655483fbfaece19",
+      "level": 0,
+      "localPosition": {
+        "x": -17,
+        "y": 3,
+        "z": -8.5
+      },
+      "openingId": "archgen-opening-corridor-door-kitchen-service",
+      "required": true,
+      "roomId": "kitchen-service",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-corridor-door-kitchen-service",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 328.5,
+        "y": 67,
+        "z": -197
+      }
+    },
+    {
+      "circulationNodeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-dining-kitchen",
+      "expectedFinishedFloorElevation": 64,
+      "id": "pt-threshold-fea3d932615e68bf7553",
+      "level": 0,
+      "localPosition": {
+        "x": -39.5,
+        "y": 3,
+        "z": -24.75
+      },
+      "openingId": "archgen-opening-room-door-relationship-dining-kitchen",
+      "required": true,
+      "roomId": "dining-room",
+      "sourceFloorId": "floor-ground",
+      "sourceSemanticId": "archgen-opening-room-door-relationship-dining-kitchen",
+      "type": "opening_threshold",
+      "worldPosition": {
+        "x": 344.75,
+        "y": 67,
+        "z": -219.5
+      }
+    }
+  ],
+  "criticVersion": "0.1.0",
+  "limits": {
+    "maximumCaptures": 8,
+    "maximumCharacterLoadWaitMilliseconds": 60000,
+    "maximumCheckpoints": 128,
+    "maximumConsoleEvidenceEntries": 512,
+    "maximumNavigationWaitMillisecondsPerSegment": 45000,
+    "maximumPathWaypointsRetainedPerSegment": 128,
+    "maximumRouteSegments": 256,
+    "maximumSanitizedConsoleSummaryEntries": 64,
+    "maximumStartStopTransitionWaitMilliseconds": 60000,
+    "maximumTotalPlaytestWaitMilliseconds": 900000
+  },
+  "requiredCoverage": {
+    "checkpoints": {
+      "count": 55,
+      "ids": [
+        "pt-corridor-6b3a51ffbaae625e6fd4",
+        "pt-corridor-bb9892f0eb69d2e3f8c6",
+        "pt-corridor-door-00fb51af2b64bba68592",
+        "pt-corridor-door-06c4de0f7ce68202543d",
+        "pt-corridor-door-101f55558bc94e7e047d",
+        "pt-corridor-door-13aa8edba73ccd40ada3",
+        "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+        "pt-corridor-door-5f0e3119b05998c0aceb",
+        "pt-corridor-door-5f2af3207aa2d5782a55",
+        "pt-corridor-door-75b15660d8af13e68c97",
+        "pt-corridor-door-84d1efd5ab620c094445",
+        "pt-corridor-door-a8d9a0d0508d596cb8f3",
+        "pt-corridor-door-aeaadeb44af15f0030fe",
+        "pt-corridor-door-dd894c56d1472e519aa8",
+        "pt-corridor-door-ff6f32ebad46f7f236f1",
+        "pt-exterior-30166f89e55490bce030",
+        "pt-hall-1b39ca3e3ca81d33f9e9",
+        "pt-hall-2577b130ad62c393d982",
+        "pt-landing-lower-be01fc21e7f00aac1107",
+        "pt-landing-upper-be01fc21e7f00aac1107",
+        "pt-room-00e3d8bbdc6cbddc8c69",
+        "pt-room-094573d2142793d7ea4d",
+        "pt-room-0fb5a11fcf5e4901c072",
+        "pt-room-30b9d34214d4c33af87b",
+        "pt-room-3354dec30903d716740f",
+        "pt-room-34c0e24aebc5a8b37b1e",
+        "pt-room-3feb1c7d4d47b3cb20cf",
+        "pt-room-4174a3773febf6902d1c",
+        "pt-room-94042af14807184b573b",
+        "pt-room-a4d6e14310c58d94c6e2",
+        "pt-room-cbb2d3d792956cce6bd6",
+        "pt-room-e0d8bae31431d1dbdb19",
+        "pt-room-ed9971f3ebbc40058e8e",
+        "pt-threshold-00203090ef2bf694daba",
+        "pt-threshold-05a5934ced18112765f5",
+        "pt-threshold-0a658967c1cf5228e0c6",
+        "pt-threshold-0f47be5009f48ba6f990",
+        "pt-threshold-29e7c6b7384d15dee849",
+        "pt-threshold-2eb7c645b7299218bbc9",
+        "pt-threshold-38017d5819cfde0ea397",
+        "pt-threshold-41823333384441ed77a5",
+        "pt-threshold-4d183f2a18ce13a23457",
+        "pt-threshold-5a5308ba1b5044d22926",
+        "pt-threshold-6bb151fd984ae3a8be5c",
+        "pt-threshold-829a120dea7e506fec45",
+        "pt-threshold-94dec9a9e5de3e241f42",
+        "pt-threshold-a9bfadb38c3b135d1328",
+        "pt-threshold-b01826ad61d4613ae65b",
+        "pt-threshold-c634897bddc407334253",
+        "pt-threshold-d5e0e210906425ebd5f2",
+        "pt-threshold-e68ef673dd3bb7ef421e",
+        "pt-threshold-ec0ab684497be36b2b03",
+        "pt-threshold-f5ff7ce6ff8b289f7f77",
+        "pt-threshold-f9f00655483fbfaece19",
+        "pt-threshold-fea3d932615e68bf7553"
+      ]
+    },
+    "corridors": {
+      "count": 2,
+      "ids": [
+        "archgen-corridor-floor-ground",
+        "archgen-corridor-floor-upper"
+      ]
+    },
+    "floors": {
+      "count": 2,
+      "ids": [
+        "floor-ground",
+        "floor-upper"
+      ]
+    },
+    "openings": {
+      "count": 20,
+      "ids": [
+        "archgen-opening-corridor-door-ballroom",
+        "archgen-opening-corridor-door-dining-room",
+        "archgen-opening-corridor-door-drawing-room",
+        "archgen-opening-corridor-door-east-bedroom",
+        "archgen-opening-corridor-door-foyer-grand",
+        "archgen-opening-corridor-door-guest-sitting-room",
+        "archgen-opening-corridor-door-kitchen-service",
+        "archgen-opening-corridor-door-library-west",
+        "archgen-opening-corridor-door-primary-bath",
+        "archgen-opening-corridor-door-primary-bedroom",
+        "archgen-opening-corridor-door-study-ground",
+        "archgen-opening-corridor-door-upper-study",
+        "archgen-opening-corridor-door-west-bedroom",
+        "archgen-opening-exterior-entrance-foyer-grand",
+        "archgen-opening-room-door-relationship-dining-kitchen",
+        "archgen-opening-room-door-relationship-foyer-ballroom",
+        "archgen-opening-room-door-relationship-primary-suite",
+        "archgen-opening-room-door-relationship-upper-study-sitting",
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper"
+      ]
+    },
+    "rooms": {
+      "count": 13,
+      "ids": [
+        "ballroom",
+        "dining-room",
+        "drawing-room",
+        "east-bedroom",
+        "foyer-grand",
+        "guest-sitting-room",
+        "kitchen-service",
+        "library-west",
+        "primary-bath",
+        "primary-bedroom",
+        "study-ground",
+        "upper-study",
+        "west-bedroom"
+      ]
+    },
+    "segments": {
+      "count": 100,
+      "ids": [
+        "pt-segment-045ed4dae3f5f7c8ba21",
+        "pt-segment-097b506120dad9ecb2c6",
+        "pt-segment-0b3e902763a7f5623c09",
+        "pt-segment-10dcb779818c6b44939a",
+        "pt-segment-116c9d55785e6c75b942",
+        "pt-segment-11ff237d8e39e95f9601",
+        "pt-segment-135dd97147f43c62b709",
+        "pt-segment-139ba7dc24dc32a8d6b7",
+        "pt-segment-13eb63a7d07be123eae2",
+        "pt-segment-16c14ca3bfa86eda6b61",
+        "pt-segment-1b3694bfb4d0dd83d970",
+        "pt-segment-1bd7d18dd142b244facb",
+        "pt-segment-1c56d903e04bf20b4f9c",
+        "pt-segment-1cad8297351067e76612",
+        "pt-segment-1d97141209044ec06cf8",
+        "pt-segment-2014863b6cbf06ffceb0",
+        "pt-segment-221522f3d35c340f8a56",
+        "pt-segment-24d0bcb31f17cc1629b8",
+        "pt-segment-251633e24bed54a60fd4",
+        "pt-segment-263d26515b53fbd92d98",
+        "pt-segment-2894a3c84611c311bd75",
+        "pt-segment-29f2b8c43cd0d570695b",
+        "pt-segment-2a87f77ef017490a4e72",
+        "pt-segment-2d6acddb562d3566e3c8",
+        "pt-segment-3077bb4618b1fe501cd6",
+        "pt-segment-32ed53320eb333b0a070",
+        "pt-segment-38a7e04ee0a7025a42fb",
+        "pt-segment-3ccc1170b275e1a7dbd9",
+        "pt-segment-3fb20a45f003a3a418f7",
+        "pt-segment-4447f7d5cbd4979180f0",
+        "pt-segment-463516cfaa55f7f2cf5b",
+        "pt-segment-489f7995bca2766a88f9",
+        "pt-segment-48e16bd10906a2054988",
+        "pt-segment-492724459be10221136c",
+        "pt-segment-4ba480cae2129796f47e",
+        "pt-segment-5847e6ea209f1040a6b3",
+        "pt-segment-58607e2a81a991293912",
+        "pt-segment-594dc99cc51308ec681e",
+        "pt-segment-5ca83a7df8f5860497cd",
+        "pt-segment-5e831348514b641313f8",
+        "pt-segment-61adbdc7271b635bb2a5",
+        "pt-segment-6274d02151926b2491cf",
+        "pt-segment-692ba9bc7db55929c5aa",
+        "pt-segment-6b25a79809bc7f84e92d",
+        "pt-segment-6ee5feaa00884537a0ad",
+        "pt-segment-701279d3cbbec3b51041",
+        "pt-segment-82e9d06a0e3aaf154a9f",
+        "pt-segment-83f469ba35153067b3ef",
+        "pt-segment-8430591d1e97dcbde24c",
+        "pt-segment-859d5b21399b1cafed58",
+        "pt-segment-8b647289dc67af6357b2",
+        "pt-segment-8f73fc5ed02516346cd1",
+        "pt-segment-922056336b0b8a397839",
+        "pt-segment-98f586e6bd0c5e6b6e5c",
+        "pt-segment-9a754ff064720eff861a",
+        "pt-segment-9cd8ba69c7b66fd5ab72",
+        "pt-segment-9e19a342f5d113a6796f",
+        "pt-segment-a07c61a6689f7b576fae",
+        "pt-segment-a450064715e7d8a44056",
+        "pt-segment-a4d20fbe6b3f64260b2f",
+        "pt-segment-a61fd2733e7e1c6ed11c",
+        "pt-segment-a6d77c66b328340348e6",
+        "pt-segment-a6e1e960648f3b4cb364",
+        "pt-segment-a7f9092c388135bafdd0",
+        "pt-segment-ab432eb64cf9c9f6e7f0",
+        "pt-segment-adf6587541d8bb5012d9",
+        "pt-segment-aeeac9d09aa984d338b4",
+        "pt-segment-afa1ecf682b4b14f0eca",
+        "pt-segment-b0cdc0fd5491387f3208",
+        "pt-segment-b2d291a96e2231f80eba",
+        "pt-segment-baea1fa88cc9596cfd01",
+        "pt-segment-bc25c265617e8595f6cd",
+        "pt-segment-bf13596542fac843d5a5",
+        "pt-segment-bffab15b7dfedba53958",
+        "pt-segment-c74fd889684196e861f8",
+        "pt-segment-c7dd78bc981853e57798",
+        "pt-segment-c8d964e247e9fd0aa9c9",
+        "pt-segment-cc915e1ab3d92513baee",
+        "pt-segment-cca7fc690e9f37ce8a36",
+        "pt-segment-cdb740b7f813676527d9",
+        "pt-segment-cff1d1ece31f0961d8ce",
+        "pt-segment-d1d0b24d8fd8334d9b9b",
+        "pt-segment-d254a3550760e18c6f6a",
+        "pt-segment-d6acb8876feb602ffd33",
+        "pt-segment-d6c88ea8bd29f9e893e9",
+        "pt-segment-de96f31a2059473d404d",
+        "pt-segment-e1615df3f35bb0f1daae",
+        "pt-segment-e6374d86de9b591d550a",
+        "pt-segment-e964f500433e099a1ee0",
+        "pt-segment-edf6b65418037d417a14",
+        "pt-segment-ee24f2bad08bc6621025",
+        "pt-segment-f140f616807cfb10bf06",
+        "pt-segment-f2148fc4223b31d5d5fb",
+        "pt-segment-f797e880b3d8151e8028",
+        "pt-segment-f91319ae72d71bae5857",
+        "pt-segment-f9436e96853a7b2365fa",
+        "pt-segment-fa629ca8e17d9da4cdb5",
+        "pt-segment-fbb1698779fa8d9ab729",
+        "pt-segment-fc07e0cd32b6c0050968",
+        "pt-segment-fedf9fc39457417a0f17"
+      ]
+    },
+    "stairRuns": {
+      "count": 1,
+      "ids": [
+        "archgen-stair-run-stair-main-floor-ground-floor-upper"
+      ]
+    }
+  },
+  "schemaVersion": "0.1.0",
+  "segments": [
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-exterior-30166f89e55490bce030",
+      "id": "pt-segment-097b506120dad9ecb2c6",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 0,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-exterior-entrance-foyer-grand",
+      "toCheckpointId": "pt-threshold-a9bfadb38c3b135d1328",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-a9bfadb38c3b135d1328",
+      "id": "pt-segment-f91319ae72d71bae5857",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 1,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-exterior-entrance-foyer-grand",
+      "toCheckpointId": "pt-room-00e3d8bbdc6cbddc8c69",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-00e3d8bbdc6cbddc8c69",
+      "id": "pt-segment-fa629ca8e17d9da4cdb5",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 2,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-foyer-ballroom",
+      "toCheckpointId": "pt-threshold-e68ef673dd3bb7ef421e",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-e68ef673dd3bb7ef421e",
+      "id": "pt-segment-bf13596542fac843d5a5",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 3,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-foyer-ballroom",
+      "toCheckpointId": "pt-threshold-38017d5819cfde0ea397",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-38017d5819cfde0ea397",
+      "id": "pt-segment-6b25a79809bc7f84e92d",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 4,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-foyer-ballroom",
+      "toCheckpointId": "pt-room-34c0e24aebc5a8b37b1e",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-34c0e24aebc5a8b37b1e",
+      "id": "pt-segment-edf6b65418037d417a14",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 5,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-ballroom",
+      "toCheckpointId": "pt-threshold-0f47be5009f48ba6f990",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-0f47be5009f48ba6f990",
+      "id": "pt-segment-a6d77c66b328340348e6",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 6,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-ballroom",
+      "toCheckpointId": "pt-corridor-door-5f2af3207aa2d5782a55",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-5f2af3207aa2d5782a55",
+      "id": "pt-segment-cff1d1ece31f0961d8ce",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 7,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-ballroom",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-b0cdc0fd5491387f3208",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 8,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "id": "pt-segment-48e16bd10906a2054988",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 9,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "id": "pt-segment-38a7e04ee0a7025a42fb",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 10,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-room-94042af14807184b573b",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-94042af14807184b573b",
+      "id": "pt-segment-adf6587541d8bb5012d9",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 11,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "id": "pt-segment-bc25c265617e8595f6cd",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 12,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "id": "pt-segment-2894a3c84611c311bd75",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 13,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-692ba9bc7db55929c5aa",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 14,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-drawing-room",
+      "toCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "id": "pt-segment-4ba480cae2129796f47e",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 15,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-drawing-room",
+      "toCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "id": "pt-segment-9cd8ba69c7b66fd5ab72",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 16,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-drawing-room",
+      "toCheckpointId": "pt-room-e0d8bae31431d1dbdb19",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-e0d8bae31431d1dbdb19",
+      "id": "pt-segment-5847e6ea209f1040a6b3",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 17,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-drawing-room",
+      "toCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "id": "pt-segment-5ca83a7df8f5860497cd",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 18,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-drawing-room",
+      "toCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "id": "pt-segment-10dcb779818c6b44939a",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 19,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-drawing-room",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-83f469ba35153067b3ef",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 20,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-library-west",
+      "toCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "id": "pt-segment-3fb20a45f003a3a418f7",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 21,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-library-west",
+      "toCheckpointId": "pt-threshold-c634897bddc407334253",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-c634897bddc407334253",
+      "id": "pt-segment-3077bb4618b1fe501cd6",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 22,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-library-west",
+      "toCheckpointId": "pt-room-0fb5a11fcf5e4901c072",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-0fb5a11fcf5e4901c072",
+      "id": "pt-segment-cdb740b7f813676527d9",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 23,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-library-west",
+      "toCheckpointId": "pt-threshold-c634897bddc407334253",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-c634897bddc407334253",
+      "id": "pt-segment-1d97141209044ec06cf8",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 24,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-library-west",
+      "toCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "id": "pt-segment-c7dd78bc981853e57798",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 25,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-library-west",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-a6e1e960648f3b4cb364",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 26,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "id": "pt-segment-d254a3550760e18c6f6a",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 27,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "id": "pt-segment-fc07e0cd32b6c0050968",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 28,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "id": "pt-segment-bffab15b7dfedba53958",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 29,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "id": "pt-segment-cc915e1ab3d92513baee",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 30,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "id": "pt-segment-d6c88ea8bd29f9e893e9",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 31,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-baea1fa88cc9596cfd01",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 32,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-study-ground",
+      "toCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "id": "pt-segment-859d5b21399b1cafed58",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 33,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-study-ground",
+      "toCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "id": "pt-segment-1cad8297351067e76612",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 34,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-study-ground",
+      "toCheckpointId": "pt-room-3354dec30903d716740f",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-3354dec30903d716740f",
+      "id": "pt-segment-29f2b8c43cd0d570695b",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 35,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-study-ground",
+      "toCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "id": "pt-segment-1bd7d18dd142b244facb",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 36,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-study-ground",
+      "toCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "id": "pt-segment-aeeac9d09aa984d338b4",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 37,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-study-ground",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-463516cfaa55f7f2cf5b",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 38,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-foyer-grand",
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "id": "pt-segment-f2148fc4223b31d5d5fb",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 39,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-foyer-grand",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-045ed4dae3f5f7c8ba21",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 40,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "open"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "id": "pt-segment-de96f31a2059473d404d",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 41,
+      "sourceCirculationEdgeId": "archgen-circulation-stair-run-archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "toCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "id": "pt-segment-489f7995bca2766a88f9",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 42,
+      "sourceCirculationEdgeId": "archgen-circulation-stair-run-archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "stair"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "id": "pt-segment-cca7fc690e9f37ce8a36",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 43,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "open"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-2d6acddb562d3566e3c8",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 44,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-foyer-grand",
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "id": "pt-segment-2014863b6cbf06ffceb0",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 45,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-foyer-grand",
+      "toCheckpointId": "pt-threshold-00203090ef2bf694daba",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-00203090ef2bf694daba",
+      "id": "pt-segment-1b3694bfb4d0dd83d970",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 46,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-foyer-grand",
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "id": "pt-segment-24d0bcb31f17cc1629b8",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 47,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-foyer-grand",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-5e831348514b641313f8",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 48,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "id": "pt-segment-32ed53320eb333b0a070",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 49,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "id": "pt-segment-f9436e96853a7b2365fa",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 50,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-kitchen-service",
+      "toCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "id": "pt-segment-ab432eb64cf9c9f6e7f0",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 51,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-dining-kitchen",
+      "toCheckpointId": "pt-threshold-b01826ad61d4613ae65b",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-b01826ad61d4613ae65b",
+      "id": "pt-segment-922056336b0b8a397839",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 52,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-dining-kitchen",
+      "toCheckpointId": "pt-threshold-fea3d932615e68bf7553",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-fea3d932615e68bf7553",
+      "id": "pt-segment-a61fd2733e7e1c6ed11c",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 53,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-dining-kitchen",
+      "toCheckpointId": "pt-room-94042af14807184b573b",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-room-94042af14807184b573b",
+      "id": "pt-segment-f797e880b3d8151e8028",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 54,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "id": "pt-segment-e964f500433e099a1ee0",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 55,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "id": "pt-segment-251633e24bed54a60fd4",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 56,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-dining-room",
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "id": "pt-segment-16c14ca3bfa86eda6b61",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 57,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "open"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 0,
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "id": "pt-segment-221522f3d35c340f8a56",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 58,
+      "sourceCirculationEdgeId": "archgen-circulation-stair-run-archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "toCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 0,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "id": "pt-segment-0b3e902763a7f5623c09",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 59,
+      "sourceCirculationEdgeId": "archgen-circulation-stair-run-archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "toCheckpointId": "pt-landing-upper-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-landing-upper-be01fc21e7f00aac1107",
+      "id": "pt-segment-d6acb8876feb602ffd33",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 60,
+      "sourceCirculationEdgeId": "archgen-circulation-stair-run-archgen-stair-run-stair-main-floor-ground-floor-upper",
+      "toCheckpointId": "pt-hall-1b39ca3e3ca81d33f9e9",
+      "traversal": "stair"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-hall-1b39ca3e3ca81d33f9e9",
+      "id": "pt-segment-8f73fc5ed02516346cd1",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 61,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "open"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "id": "pt-segment-d1d0b24d8fd8334d9b9b",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 62,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-east-bedroom",
+      "toCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "id": "pt-segment-c8d964e247e9fd0aa9c9",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 63,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-east-bedroom",
+      "toCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "id": "pt-segment-13eb63a7d07be123eae2",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 64,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-east-bedroom",
+      "toCheckpointId": "pt-room-094573d2142793d7ea4d",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-room-094573d2142793d7ea4d",
+      "id": "pt-segment-6ee5feaa00884537a0ad",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 65,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-east-bedroom",
+      "toCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "id": "pt-segment-701279d3cbbec3b51041",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 66,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-east-bedroom",
+      "toCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "id": "pt-segment-58607e2a81a991293912",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 67,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-east-bedroom",
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "id": "pt-segment-594dc99cc51308ec681e",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 68,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-guest-sitting-room",
+      "toCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "id": "pt-segment-6274d02151926b2491cf",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 69,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-guest-sitting-room",
+      "toCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "id": "pt-segment-fedf9fc39457417a0f17",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 70,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-guest-sitting-room",
+      "toCheckpointId": "pt-room-a4d6e14310c58d94c6e2",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-room-a4d6e14310c58d94c6e2",
+      "id": "pt-segment-11ff237d8e39e95f9601",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 71,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-guest-sitting-room",
+      "toCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "id": "pt-segment-82e9d06a0e3aaf154a9f",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 72,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-guest-sitting-room",
+      "toCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "id": "pt-segment-8430591d1e97dcbde24c",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 73,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-guest-sitting-room",
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "id": "pt-segment-263d26515b53fbd92d98",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 74,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bath",
+      "toCheckpointId": "pt-corridor-door-06c4de0f7ce68202543d",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-06c4de0f7ce68202543d",
+      "id": "pt-segment-a7f9092c388135bafdd0",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 75,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bath",
+      "toCheckpointId": "pt-threshold-94dec9a9e5de3e241f42",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-94dec9a9e5de3e241f42",
+      "id": "pt-segment-135dd97147f43c62b709",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 76,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bath",
+      "toCheckpointId": "pt-room-cbb2d3d792956cce6bd6",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-room-cbb2d3d792956cce6bd6",
+      "id": "pt-segment-f140f616807cfb10bf06",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 77,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-primary-suite",
+      "toCheckpointId": "pt-threshold-2eb7c645b7299218bbc9",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-2eb7c645b7299218bbc9",
+      "id": "pt-segment-4447f7d5cbd4979180f0",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 78,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-primary-suite",
+      "toCheckpointId": "pt-threshold-29e7c6b7384d15dee849",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-29e7c6b7384d15dee849",
+      "id": "pt-segment-a450064715e7d8a44056",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 79,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-primary-suite",
+      "toCheckpointId": "pt-room-ed9971f3ebbc40058e8e",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-room-ed9971f3ebbc40058e8e",
+      "id": "pt-segment-a07c61a6689f7b576fae",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 80,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bedroom",
+      "toCheckpointId": "pt-threshold-0a658967c1cf5228e0c6",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-0a658967c1cf5228e0c6",
+      "id": "pt-segment-c74fd889684196e861f8",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 81,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bedroom",
+      "toCheckpointId": "pt-corridor-door-ff6f32ebad46f7f236f1",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-ff6f32ebad46f7f236f1",
+      "id": "pt-segment-61adbdc7271b635bb2a5",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 82,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-primary-bedroom",
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "id": "pt-segment-e1615df3f35bb0f1daae",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 83,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "id": "pt-segment-9e19a342f5d113a6796f",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 84,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "id": "pt-segment-9a754ff064720eff861a",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 85,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "id": "pt-segment-8b647289dc67af6357b2",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 86,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "id": "pt-segment-1c56d903e04bf20b4f9c",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 87,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "id": "pt-segment-492724459be10221136c",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 88,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "id": "pt-segment-e6374d86de9b591d550a",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 89,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-west-bedroom",
+      "toCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "id": "pt-segment-116c9d55785e6c75b942",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 90,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-west-bedroom",
+      "toCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "id": "pt-segment-b2d291a96e2231f80eba",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 91,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-west-bedroom",
+      "toCheckpointId": "pt-room-4174a3773febf6902d1c",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-room-4174a3773febf6902d1c",
+      "id": "pt-segment-ee24f2bad08bc6621025",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 92,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-west-bedroom",
+      "toCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "id": "pt-segment-fbb1698779fa8d9ab729",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 93,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-west-bedroom",
+      "toCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "id": "pt-segment-a4d20fbe6b3f64260b2f",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 94,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-west-bedroom",
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "id": "pt-segment-2a87f77ef017490a4e72",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 95,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "corridor"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "id": "pt-segment-98f586e6bd0c5e6b6e5c",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 96,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "id": "pt-segment-afa1ecf682b4b14f0eca",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 97,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-corridor-door-upper-study",
+      "toCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "id": "pt-segment-139ba7dc24dc32a8d6b7",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 98,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-upper-study-sitting",
+      "toCheckpointId": "pt-threshold-05a5934ced18112765f5",
+      "traversal": "door"
+    },
+    {
+      "clearanceVerificationRequired": true,
+      "expectedFromLevel": 1,
+      "expectedToLevel": 1,
+      "fromCheckpointId": "pt-threshold-05a5934ced18112765f5",
+      "id": "pt-segment-3ccc1170b275e1a7dbd9",
+      "independentArrivalVerificationRequired": true,
+      "maximumNavigationAttempts": 1,
+      "pathfindingRequired": true,
+      "sequence": 99,
+      "sourceCirculationEdgeId": "archgen-circulation-opening-archgen-opening-room-door-relationship-upper-study-sitting",
+      "toCheckpointId": "pt-threshold-5a5308ba1b5044d22926",
+      "traversal": "door"
+    }
+  ],
+  "setup": {
+    "checkpointId": "pt-exterior-30166f89e55490bce030",
+    "entranceRoomId": "foyer-grand",
+    "excludedFromScoring": true,
+    "expectedFinishedFloorElevation": 64,
+    "expectedLevel": 0,
+    "exteriorEntranceOpeningId": "archgen-opening-exterior-entrance-foyer-grand",
+    "sourceFloorId": "floor-ground",
+    "worldPosition": {
+      "x": 295.25,
+      "y": 67,
+      "z": -259.75
+    }
+  },
+  "source": {
+    "architecturePlanSchemaVersion": "0.1.0",
+    "architecturePlanSha256": "f272ece2137773269ade78d3b32c94324626078a13f311770fa901c12f5654f0",
+    "architecturePlannerVersion": "0.1.0",
+    "buildingEntityId": "mansion-cliffwatch",
+    "expectedManagedInstanceCount": 400,
+    "manifestRootNodeId": "world-cliffwatch",
+    "manifestSourceWorldSpecSha256": "32bc5200164018ce525c24ddd5aa426c0e333c2b73b04ce6d98646a70b89bf68",
+    "projectId": "project-cliffwatch-mansion",
+    "robloxCompilerVersion": "0.1.0",
+    "robloxManifestSchemaVersion": "0.1.0",
+    "robloxManifestSha256": "bb09960abd823e3e5513b8b4c1f6d715b68eb16233cc6061dac00d665086915d",
+    "sourceWorldSpecSha256": "613c8dd7b39c0e13d9eb3d23c901c8bb5bc98d75a97452a1a5dbd32338964bbd"
+  }
+}

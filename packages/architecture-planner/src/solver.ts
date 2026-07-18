@@ -376,20 +376,24 @@ function candidateStairCoreRectangle(
   const coreWidthCells = profile.stair.directive.coreWidth / gridSize;
   const coreLengthCells = profile.stair.directive.coreLength / gridSize;
   const interiorWallCells = profile.building.interiorWallThickness / gridSize;
+  // A straight run occupies the full stair-core width. Retain one door-width
+  // floor-level lane between the corridor and core so the explicit centered
+  // stair-hall opening can reach the first and final tread from the side.
+  const accessLaneCells = profile.building.defaultDoorWidth / gridSize;
   const atNegativeEnd = profile.building.entranceEnd === 'positive';
   if (candidate.corridorAxis === 'x') {
     const x = atNegativeEnd ? corridor.x : corridor.x + corridor.width - coreLengthCells;
     const z =
       candidate.stairSide === 'negative'
-        ? corridor.z - interiorWallCells - coreWidthCells
-        : corridor.z + corridor.depth + interiorWallCells;
+        ? corridor.z - interiorWallCells - accessLaneCells - coreWidthCells
+        : corridor.z + corridor.depth + interiorWallCells + accessLaneCells;
     return { x, z, width: coreLengthCells, depth: coreWidthCells };
   }
   const z = atNegativeEnd ? corridor.z : corridor.z + corridor.depth - coreLengthCells;
   const x =
     candidate.stairSide === 'negative'
-      ? corridor.x - interiorWallCells - coreWidthCells
-      : corridor.x + corridor.width + interiorWallCells;
+      ? corridor.x - interiorWallCells - accessLaneCells - coreWidthCells
+      : corridor.x + corridor.width + interiorWallCells + accessLaneCells;
   return { x, z, width: coreWidthCells, depth: coreLengthCells };
 }
 
@@ -512,9 +516,11 @@ function solveFloorCandidates(
     profile.stair?.directive.coreWidth === undefined
       ? 0
       : profile.stair.directive.coreWidth / gridSize;
+  const stairAccessLaneCells =
+    profile.stair === undefined ? 0 : profile.building.defaultDoorWidth / gridSize;
   if (
     candidate.stairSide !== undefined &&
-    stairWidthCells >
+    stairWidthCells + stairAccessLaneCells >
       (candidate.stairSide === 'negative'
         ? candidate.negativeBandDepthCells
         : candidate.positiveBandDepthCells)

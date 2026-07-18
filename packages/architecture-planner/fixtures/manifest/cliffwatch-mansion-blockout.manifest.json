@@ -976,7 +976,7 @@
         },
         "material": "WoodPlanks",
         "position": {
-          "x": 339.5,
+          "x": 337,
           "y": 83.5,
           "z": -180
         },
@@ -989,7 +989,7 @@
         "size": {
           "x": 160,
           "y": 1,
-          "z": 51
+          "z": 56
         },
         "transparency": 0
       }
@@ -1020,7 +1020,7 @@
         },
         "material": "WoodPlanks",
         "position": {
-          "x": 287.5,
+          "x": 285,
           "y": 83.5,
           "z": -180
         },
@@ -1033,7 +1033,7 @@
         "size": {
           "x": 160,
           "y": 1,
-          "z": 25
+          "z": 20
         },
         "transparency": 0
       }
@@ -1064,7 +1064,7 @@
         },
         "material": "WoodPlanks",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 83.5,
           "z": -193
         },
@@ -1108,7 +1108,7 @@
         },
         "material": "WoodPlanks",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 83.5,
           "z": -101
         },
@@ -1159,14 +1159,14 @@
     {
       "attributes": {
         "WorldwrightCompilerVersion": "0.1.0",
-        "WorldwrightEntityId": "archgen-stair-landing-stair-main-floor-ground-54-6-2-14-d12a5e5872b9a866",
+        "WorldwrightEntityId": "archgen-stair-landing-stair-main-floor-ground-54-11-2-14-f197268fff79525d",
         "WorldwrightEntityKind": "object",
         "WorldwrightManaged": true,
         "WorldwrightProjectId": "project-cliffwatch-mansion"
       },
       "className": "Part",
       "entityKind": "object",
-      "id": "archgen-stair-landing-stair-main-floor-ground-54-6-2-14-d12a5e5872b9a866",
+      "id": "archgen-stair-landing-stair-main-floor-ground-54-11-2-14-f197268fff79525d",
       "name": "Stair Landing Level 0",
       "parentId": "stair-main",
       "properties": {
@@ -1182,7 +1182,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 64.5,
           "z": -125
         },
@@ -1203,14 +1203,14 @@
     {
       "attributes": {
         "WorldwrightCompilerVersion": "0.1.0",
-        "WorldwrightEntityId": "archgen-stair-landing-stair-main-floor-upper-76-6-2-14-2ccbcdf675c99a68",
+        "WorldwrightEntityId": "archgen-stair-landing-stair-main-floor-upper-76-11-2-14-7101997bd97bc30b",
         "WorldwrightEntityKind": "object",
         "WorldwrightManaged": true,
         "WorldwrightProjectId": "project-cliffwatch-mansion"
       },
       "className": "Part",
       "entityKind": "object",
-      "id": "archgen-stair-landing-stair-main-floor-upper-76-6-2-14-2ccbcdf675c99a68",
+      "id": "archgen-stair-landing-stair-main-floor-upper-76-11-2-14-7101997bd97bc30b",
       "name": "Stair Landing Level 1",
       "parentId": "stair-main",
       "properties": {
@@ -1226,7 +1226,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 83.5,
           "z": -103
         },
@@ -1285,7 +1285,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 64.5,
           "z": -123.5
         },
@@ -1329,7 +1329,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 69,
           "z": -114.5
         },
@@ -1373,7 +1373,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 69.5,
           "z": -113.5
         },
@@ -1417,7 +1417,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 70,
           "z": -112.5
         },
@@ -1461,7 +1461,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 70.5,
           "z": -111.5
         },
@@ -1505,7 +1505,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 71,
           "z": -110.5
         },
@@ -1549,7 +1549,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 71.5,
           "z": -109.5
         },
@@ -1593,7 +1593,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 72,
           "z": -108.5
         },
@@ -1637,7 +1637,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 72.5,
           "z": -107.5
         },
@@ -1681,7 +1681,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 73,
           "z": -106.5
         },
@@ -1725,7 +1725,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 73.5,
           "z": -105.5
         },
@@ -1769,7 +1769,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 65,
           "z": -122.5
         },
@@ -1813,7 +1813,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 74,
           "z": -104.5
         },
@@ -1857,7 +1857,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 65.5,
           "z": -121.5
         },
@@ -1901,7 +1901,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 66,
           "z": -120.5
         },
@@ -1945,7 +1945,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 66.5,
           "z": -119.5
         },
@@ -1989,7 +1989,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 67,
           "z": -118.5
         },
@@ -2033,7 +2033,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 67.5,
           "z": -117.5
         },
@@ -2077,7 +2077,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 68,
           "z": -116.5
         },
@@ -2121,7 +2121,7 @@
         },
         "material": "Wood",
         "position": {
-          "x": 307,
+          "x": 302,
           "y": 68.5,
           "z": -115.5
         },
@@ -13654,7 +13654,7 @@
         "WorldwrightEntityKind": "world",
         "WorldwrightManaged": true,
         "WorldwrightProjectId": "project-cliffwatch-mansion",
-        "WorldwrightSourceHash": "90210ae55809a0e9b0ec596c301dcb047cd473f642682f5e2f376856ac7ef646"
+        "WorldwrightSourceHash": "32bc5200164018ce525c24ddd5aa426c0e333c2b73b04ce6d98646a70b89bf68"
       },
       "className": "Folder",
       "entityKind": "world",
@@ -13667,7 +13667,7 @@
   "schemaVersion": "0.1.0",
   "source": {
     "projectId": "project-cliffwatch-mansion",
-    "worldSpecHash": "90210ae55809a0e9b0ec596c301dcb047cd473f642682f5e2f376856ac7ef646",
+    "worldSpecHash": "32bc5200164018ce525c24ddd5aa426c0e333c2b73b04ce6d98646a70b89bf68",
     "worldSpecSchemaVersion": "0.1.0"
   },
   "target": {

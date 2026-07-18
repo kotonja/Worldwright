@@ -306,7 +306,7 @@
         "depth": 14,
         "width": 24,
         "x": 54,
-        "z": 6
+        "z": 11
       },
       "stairRunIds": [
         "archgen-stair-run-stair-main-floor-ground-floor-upper"
@@ -401,7 +401,7 @@
         "depth": 14,
         "width": 24,
         "x": 54,
-        "z": 6
+        "z": 11
       },
       "stairRunIds": [
         "archgen-stair-run-stair-main-floor-ground-floor-upper"
@@ -1526,7 +1526,7 @@
         "depth": 14,
         "width": 24,
         "x": 54,
-        "z": 6
+        "z": 11
       },
       "direction": "positive_x",
       "fromFloorId": "floor-ground",
@@ -1536,13 +1536,13 @@
           "depth": 14,
           "width": 2,
           "x": 54,
-          "z": 6
+          "z": 11
         },
         "upper": {
           "depth": 14,
           "width": 2,
           "x": 76,
-          "z": 6
+          "z": 11
         }
       },
       "riserHeight": 1,

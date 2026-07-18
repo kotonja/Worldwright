@@ -150,6 +150,62 @@ export function schemaAcceptsString(value: unknown): boolean {
   );
 }
 
+export function schemaAcceptsBoolean(value: unknown): boolean {
+  if (!isRecord(value)) return false;
+  return (
+    value.type === 'boolean' && hasOnlyKeys(value, new Set([...SCHEMA_ANNOTATION_KEYS, 'type']))
+  );
+}
+
+export function schemaAcceptsNumber(value: unknown): boolean {
+  if (!isRecord(value)) return false;
+  return (
+    value.type === 'number' && hasOnlyKeys(value, new Set([...SCHEMA_ANNOTATION_KEYS, 'type']))
+  );
+}
+
+export function schemaAcceptsExactNumber(value: unknown, expected: number): boolean {
+  if (!isRecord(value) || !Number.isFinite(expected)) return false;
+  const allowed = new Set([
+    ...SCHEMA_ANNOTATION_KEYS,
+    'const',
+    'enum',
+    'exclusiveMaximum',
+    'exclusiveMinimum',
+    'maximum',
+    'minimum',
+    'multipleOf',
+    'type',
+  ]);
+  if (
+    !hasOnlyKeys(value, allowed) ||
+    (value.type !== undefined && value.type !== 'number') ||
+    (value.type === undefined && value.const === undefined && value.enum === undefined)
+  ) {
+    return false;
+  }
+  if (value.const !== undefined && value.const !== expected) return false;
+  if (value.enum !== undefined && (!Array.isArray(value.enum) || !value.enum.includes(expected))) {
+    return false;
+  }
+  if (typeof value.minimum === 'number' && expected < value.minimum) return false;
+  if (typeof value.maximum === 'number' && expected > value.maximum) return false;
+  if (typeof value.exclusiveMinimum === 'number' && expected <= value.exclusiveMinimum)
+    return false;
+  if (typeof value.exclusiveMaximum === 'number' && expected >= value.exclusiveMaximum)
+    return false;
+  if (
+    value.multipleOf !== undefined &&
+    (typeof value.multipleOf !== 'number' ||
+      !Number.isFinite(value.multipleOf) ||
+      value.multipleOf <= 0 ||
+      expected / value.multipleOf !== Math.trunc(expected / value.multipleOf))
+  ) {
+    return false;
+  }
+  return value.type === 'number' || value.const === expected || Array.isArray(value.enum);
+}
+
 export function schemaAcceptsExactString(value: unknown, expected: string): boolean {
   if (!isRecord(value)) return false;
   const allowed = new Set([

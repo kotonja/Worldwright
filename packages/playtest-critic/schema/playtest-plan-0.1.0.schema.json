@@ -1,0 +1,812 @@
+{
+  "$id": "urn:worldwright:playtest-plan:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": "0.1.0", "type": "string" },
+    "criticVersion": { "const": "0.1.0", "type": "string" },
+    "source": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "architecturePlanSchemaVersion": { "const": "0.1.0", "type": "string" },
+        "architecturePlannerVersion": { "const": "0.1.0", "type": "string" },
+        "architecturePlanSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "sourceWorldSpecSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "projectId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "buildingEntityId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "robloxManifestSchemaVersion": { "const": "0.1.0", "type": "string" },
+        "robloxCompilerVersion": { "const": "0.1.0", "type": "string" },
+        "robloxManifestSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "manifestSourceWorldSpecSha256": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+        "manifestRootNodeId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "expectedManagedInstanceCount": { "minimum": 1, "maximum": 4096, "type": "integer" }
+      },
+      "required": [
+        "architecturePlanSchemaVersion",
+        "architecturePlannerVersion",
+        "architecturePlanSha256",
+        "sourceWorldSpecSha256",
+        "projectId",
+        "buildingEntityId",
+        "robloxManifestSchemaVersion",
+        "robloxCompilerVersion",
+        "robloxManifestSha256",
+        "manifestSourceWorldSpecSha256",
+        "manifestRootNodeId",
+        "expectedManagedInstanceCount"
+      ]
+    },
+    "agent": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "radius": { "const": 2, "type": "number" },
+        "height": { "const": 5, "type": "number" },
+        "canJump": { "const": false, "type": "boolean" },
+        "canClimb": { "const": false, "type": "boolean" },
+        "waypointSpacing": { "const": 4, "type": "number" },
+        "arrivalHorizontalTolerance": { "const": 4, "type": "number" },
+        "arrivalVerticalTolerance": { "const": 5, "type": "number" },
+        "maximumHorizontalSpeed": { "const": 32, "type": "number" },
+        "maximumFallBelowFloor": { "const": 12, "type": "number" },
+        "rootHeightAboveFinishedFloor": { "const": 3, "type": "number" }
+      },
+      "required": [
+        "radius",
+        "height",
+        "canJump",
+        "canClimb",
+        "waypointSpacing",
+        "arrivalHorizontalTolerance",
+        "arrivalVerticalTolerance",
+        "maximumHorizontalSpeed",
+        "maximumFallBelowFloor",
+        "rootHeightAboveFinishedFloor"
+      ]
+    },
+    "setup": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "checkpointId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "worldPosition": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "z": { "type": "number" }
+          },
+          "required": ["x", "y", "z"]
+        },
+        "expectedLevel": { "minimum": 0, "maximum": 2, "type": "integer" },
+        "sourceFloorId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "expectedFinishedFloorElevation": { "type": "number" },
+        "exteriorEntranceOpeningId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "entranceRoomId": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "excludedFromScoring": { "const": true, "type": "boolean" }
+      },
+      "required": [
+        "checkpointId",
+        "worldPosition",
+        "expectedLevel",
+        "sourceFloorId",
+        "expectedFinishedFloorElevation",
+        "exteriorEntranceOpeningId",
+        "entranceRoomId",
+        "excludedFromScoring"
+      ]
+    },
+    "checkpoints": {
+      "minItems": 1,
+      "maxItems": 128,
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceSemanticId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceFloorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "level": { "minimum": 0, "maximum": 2, "type": "integer" },
+              "localPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "worldPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "expectedFinishedFloorElevation": { "type": "number" },
+              "required": { "type": "boolean" },
+              "type": { "const": "exterior_entrance", "type": "string" },
+              "openingId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "circulationNodeId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "roomId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "sourceSemanticId",
+              "sourceFloorId",
+              "level",
+              "localPosition",
+              "worldPosition",
+              "expectedFinishedFloorElevation",
+              "required",
+              "type",
+              "openingId",
+              "circulationNodeId",
+              "roomId"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceSemanticId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceFloorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "level": { "minimum": 0, "maximum": 2, "type": "integer" },
+              "localPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "worldPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "expectedFinishedFloorElevation": { "type": "number" },
+              "required": { "type": "boolean" },
+              "type": { "const": "opening_threshold", "type": "string" },
+              "openingId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "circulationNodeId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "roomId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "sourceSemanticId",
+              "sourceFloorId",
+              "level",
+              "localPosition",
+              "worldPosition",
+              "expectedFinishedFloorElevation",
+              "required",
+              "type",
+              "openingId",
+              "circulationNodeId",
+              "roomId"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceSemanticId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceFloorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "level": { "minimum": 0, "maximum": 2, "type": "integer" },
+              "localPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "worldPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "expectedFinishedFloorElevation": { "type": "number" },
+              "required": { "type": "boolean" },
+              "type": { "const": "room_center", "type": "string" },
+              "roomId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "sourceSemanticId",
+              "sourceFloorId",
+              "level",
+              "localPosition",
+              "worldPosition",
+              "expectedFinishedFloorElevation",
+              "required",
+              "type",
+              "roomId"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceSemanticId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceFloorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "level": { "minimum": 0, "maximum": 2, "type": "integer" },
+              "localPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "worldPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "expectedFinishedFloorElevation": { "type": "number" },
+              "required": { "type": "boolean" },
+              "type": { "const": "corridor", "type": "string" },
+              "corridorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "circulationNodeId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "openingId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "sourceSemanticId",
+              "sourceFloorId",
+              "level",
+              "localPosition",
+              "worldPosition",
+              "expectedFinishedFloorElevation",
+              "required",
+              "type",
+              "corridorId",
+              "circulationNodeId"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceSemanticId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceFloorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "level": { "minimum": 0, "maximum": 2, "type": "integer" },
+              "localPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "worldPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "expectedFinishedFloorElevation": { "type": "number" },
+              "required": { "type": "boolean" },
+              "type": { "const": "stair_hall", "type": "string" },
+              "circulationNodeId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "stairRunId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "openingId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "sourceSemanticId",
+              "sourceFloorId",
+              "level",
+              "localPosition",
+              "worldPosition",
+              "expectedFinishedFloorElevation",
+              "required",
+              "type",
+              "circulationNodeId",
+              "stairRunId",
+              "openingId"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "id": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceSemanticId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sourceFloorId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "level": { "minimum": 0, "maximum": 2, "type": "integer" },
+              "localPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "worldPosition": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "x": { "type": "number" },
+                  "y": { "type": "number" },
+                  "z": { "type": "number" }
+                },
+                "required": ["x", "y", "z"]
+              },
+              "expectedFinishedFloorElevation": { "type": "number" },
+              "required": { "type": "boolean" },
+              "type": { "const": "stair_landing", "type": "string" },
+              "circulationNodeId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "stairRunId": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "landing": {
+                "anyOf": [
+                  { "const": "lower", "type": "string" },
+                  { "const": "upper", "type": "string" }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "sourceSemanticId",
+              "sourceFloorId",
+              "level",
+              "localPosition",
+              "worldPosition",
+              "expectedFinishedFloorElevation",
+              "required",
+              "type",
+              "circulationNodeId",
+              "stairRunId",
+              "landing"
+            ]
+          }
+        ]
+      }
+    },
+    "segments": {
+      "minItems": 1,
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "sequence": { "minimum": 0, "maximum": 255, "type": "integer" },
+          "fromCheckpointId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "toCheckpointId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "sourceCirculationEdgeId": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "traversal": {
+            "anyOf": [
+              { "const": "door", "type": "string" },
+              { "const": "open", "type": "string" },
+              { "const": "corridor", "type": "string" },
+              { "const": "stair", "type": "string" }
+            ]
+          },
+          "expectedFromLevel": { "minimum": 0, "maximum": 2, "type": "integer" },
+          "expectedToLevel": { "minimum": 0, "maximum": 2, "type": "integer" },
+          "maximumNavigationAttempts": { "const": 1, "type": "number" },
+          "pathfindingRequired": { "const": true, "type": "boolean" },
+          "independentArrivalVerificationRequired": { "const": true, "type": "boolean" },
+          "clearanceVerificationRequired": { "const": true, "type": "boolean" }
+        },
+        "required": [
+          "id",
+          "sequence",
+          "fromCheckpointId",
+          "toCheckpointId",
+          "sourceCirculationEdgeId",
+          "traversal",
+          "expectedFromLevel",
+          "expectedToLevel",
+          "maximumNavigationAttempts",
+          "pathfindingRequired",
+          "independentArrivalVerificationRequired",
+          "clearanceVerificationRequired"
+        ]
+      }
+    },
+    "captureCheckpoints": {
+      "maxItems": 8,
+      "uniqueItems": true,
+      "type": "array",
+      "items": { "maxLength": 128, "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$", "type": "string" }
+    },
+    "requiredCoverage": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "rooms": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "ids": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "count": { "minimum": 0, "maximum": 4096, "type": "integer" }
+          },
+          "required": ["ids", "count"]
+        },
+        "floors": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "ids": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "count": { "minimum": 0, "maximum": 4096, "type": "integer" }
+          },
+          "required": ["ids", "count"]
+        },
+        "corridors": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "ids": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "count": { "minimum": 0, "maximum": 4096, "type": "integer" }
+          },
+          "required": ["ids", "count"]
+        },
+        "stairRuns": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "ids": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "count": { "minimum": 0, "maximum": 4096, "type": "integer" }
+          },
+          "required": ["ids", "count"]
+        },
+        "openings": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "ids": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "count": { "minimum": 0, "maximum": 4096, "type": "integer" }
+          },
+          "required": ["ids", "count"]
+        },
+        "checkpoints": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "ids": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "count": { "minimum": 0, "maximum": 4096, "type": "integer" }
+          },
+          "required": ["ids", "count"]
+        },
+        "segments": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "ids": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "count": { "minimum": 0, "maximum": 4096, "type": "integer" }
+          },
+          "required": ["ids", "count"]
+        }
+      },
+      "required": [
+        "rooms",
+        "floors",
+        "corridors",
+        "stairRuns",
+        "openings",
+        "checkpoints",
+        "segments"
+      ]
+    },
+    "limits": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "maximumCheckpoints": { "const": 128, "type": "number" },
+        "maximumRouteSegments": { "const": 256, "type": "number" },
+        "maximumCaptures": { "const": 8, "type": "number" },
+        "maximumPathWaypointsRetainedPerSegment": { "const": 128, "type": "number" },
+        "maximumConsoleEvidenceEntries": { "const": 512, "type": "number" },
+        "maximumSanitizedConsoleSummaryEntries": { "const": 64, "type": "number" },
+        "maximumNavigationWaitMillisecondsPerSegment": { "const": 45000, "type": "number" },
+        "maximumTotalPlaytestWaitMilliseconds": { "const": 900000, "type": "number" },
+        "maximumCharacterLoadWaitMilliseconds": { "const": 60000, "type": "number" },
+        "maximumStartStopTransitionWaitMilliseconds": { "const": 60000, "type": "number" }
+      },
+      "required": [
+        "maximumCheckpoints",
+        "maximumRouteSegments",
+        "maximumCaptures",
+        "maximumPathWaypointsRetainedPerSegment",
+        "maximumConsoleEvidenceEntries",
+        "maximumSanitizedConsoleSummaryEntries",
+        "maximumNavigationWaitMillisecondsPerSegment",
+        "maximumTotalPlaytestWaitMilliseconds",
+        "maximumCharacterLoadWaitMilliseconds",
+        "maximumStartStopTransitionWaitMilliseconds"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "criticVersion",
+    "source",
+    "agent",
+    "setup",
+    "checkpoints",
+    "segments",
+    "captureCheckpoints",
+    "requiredCoverage",
+    "limits"
+  ]
+}
