@@ -1,0 +1,4584 @@
+{
+  "consoleEvidence": {
+    "baselineEvidenceSha256": "117eb34b8e9b8d1c8f5cf258e1f869d27a6ad8e359a0a186841a151047465dd8",
+    "entries": [],
+    "evidenceComplete": true,
+    "finalEvidenceSha256": "2323a38bf7becc2690dccbf3389e088ac44546250e4b40828dccea1cbd71e29a",
+    "newErrorCount": 0,
+    "newWarningCount": 0
+  },
+  "coverage": {
+    "missedCheckpointIds": [
+      "pt-corridor-6b3a51ffbaae625e6fd4",
+      "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "pt-corridor-door-00fb51af2b64bba68592",
+      "pt-corridor-door-06c4de0f7ce68202543d",
+      "pt-corridor-door-101f55558bc94e7e047d",
+      "pt-corridor-door-13aa8edba73ccd40ada3",
+      "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "pt-corridor-door-5f0e3119b05998c0aceb",
+      "pt-corridor-door-5f2af3207aa2d5782a55",
+      "pt-corridor-door-75b15660d8af13e68c97",
+      "pt-corridor-door-84d1efd5ab620c094445",
+      "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "pt-corridor-door-aeaadeb44af15f0030fe",
+      "pt-corridor-door-dd894c56d1472e519aa8",
+      "pt-corridor-door-ff6f32ebad46f7f236f1",
+      "pt-hall-1b39ca3e3ca81d33f9e9",
+      "pt-hall-2577b130ad62c393d982",
+      "pt-landing-lower-be01fc21e7f00aac1107",
+      "pt-landing-upper-be01fc21e7f00aac1107",
+      "pt-room-00e3d8bbdc6cbddc8c69",
+      "pt-room-094573d2142793d7ea4d",
+      "pt-room-0fb5a11fcf5e4901c072",
+      "pt-room-30b9d34214d4c33af87b",
+      "pt-room-3354dec30903d716740f",
+      "pt-room-34c0e24aebc5a8b37b1e",
+      "pt-room-3feb1c7d4d47b3cb20cf",
+      "pt-room-4174a3773febf6902d1c",
+      "pt-room-94042af14807184b573b",
+      "pt-room-a4d6e14310c58d94c6e2",
+      "pt-room-cbb2d3d792956cce6bd6",
+      "pt-room-e0d8bae31431d1dbdb19",
+      "pt-room-ed9971f3ebbc40058e8e",
+      "pt-threshold-00203090ef2bf694daba",
+      "pt-threshold-05a5934ced18112765f5",
+      "pt-threshold-0a658967c1cf5228e0c6",
+      "pt-threshold-0f47be5009f48ba6f990",
+      "pt-threshold-29e7c6b7384d15dee849",
+      "pt-threshold-2eb7c645b7299218bbc9",
+      "pt-threshold-38017d5819cfde0ea397",
+      "pt-threshold-41823333384441ed77a5",
+      "pt-threshold-4d183f2a18ce13a23457",
+      "pt-threshold-5a5308ba1b5044d22926",
+      "pt-threshold-6bb151fd984ae3a8be5c",
+      "pt-threshold-829a120dea7e506fec45",
+      "pt-threshold-94dec9a9e5de3e241f42",
+      "pt-threshold-a9bfadb38c3b135d1328",
+      "pt-threshold-b01826ad61d4613ae65b",
+      "pt-threshold-c634897bddc407334253",
+      "pt-threshold-d5e0e210906425ebd5f2",
+      "pt-threshold-e68ef673dd3bb7ef421e",
+      "pt-threshold-ec0ab684497be36b2b03",
+      "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "pt-threshold-f9f00655483fbfaece19",
+      "pt-threshold-fea3d932615e68bf7553"
+    ],
+    "missedFloorIds": [
+      "floor-upper"
+    ],
+    "missedRoomIds": [
+      "ballroom",
+      "dining-room",
+      "drawing-room",
+      "east-bedroom",
+      "foyer-grand",
+      "guest-sitting-room",
+      "kitchen-service",
+      "library-west",
+      "primary-bath",
+      "primary-bedroom",
+      "study-ground",
+      "upper-study",
+      "west-bedroom"
+    ],
+    "missedStairRunIds": [
+      "archgen-stair-run-stair-main-floor-ground-floor-upper"
+    ],
+    "reachedCheckpointCount": 1,
+    "reachedFloorCount": 1,
+    "reachedRoomCount": 0,
+    "requiredCheckpointCount": 55,
+    "requiredFloorCount": 2,
+    "requiredRoomCount": 13,
+    "requiredStairRunCount": 1,
+    "traversedStairRunCount": 0
+  },
+  "criticVersion": "0.1.0",
+  "editIntegrity": {
+    "exactMatch": true,
+    "finalManifestNoopOperationCount": 0,
+    "postPlayEditSnapshotSha256": "b399e37bfe4234f94279c61c630a128e6a37ee99ff3fa460cbf690d5dba836a4",
+    "prePlayEditSnapshotSha256": "b399e37bfe4234f94279c61c630a128e6a37ee99ff3fa460cbf690d5dba836a4"
+  },
+  "environment": {
+    "editBaseSnapshotSha256": "b399e37bfe4234f94279c61c630a128e6a37ee99ff3fa460cbf690d5dba836a4",
+    "exactStudioSelected": true,
+    "gameId": 0,
+    "managedNodeCount": 400,
+    "placeId": 0,
+    "playDataModelsUsed": [
+      "Edit",
+      "Server"
+    ],
+    "sandboxLeaseVerified": true
+  },
+  "schemaVersion": "0.1.0",
+  "segmentResults": [
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -255.5
+        }
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [
+        "path-failed"
+      ],
+      "fromCheckpointId": "pt-exterior-30166f89e55490bce030",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "failed",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-097b506120dad9ecb2c6",
+      "sequence": 0,
+      "toCheckpointId": "pt-threshold-a9bfadb38c3b135d1328",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -239.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-a9bfadb38c3b135d1328",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-f91319ae72d71bae5857",
+      "sequence": 1,
+      "toCheckpointId": "pt-room-00e3d8bbdc6cbddc8c69",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -223.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-00e3d8bbdc6cbddc8c69",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-fa629ca8e17d9da4cdb5",
+      "sequence": 2,
+      "toCheckpointId": "pt-threshold-e68ef673dd3bb7ef421e",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -217.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-e68ef673dd3bb7ef421e",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-bf13596542fac843d5a5",
+      "sequence": 3,
+      "toCheckpointId": "pt-threshold-38017d5819cfde0ea397",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -196
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-38017d5819cfde0ea397",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-6b25a79809bc7f84e92d",
+      "sequence": 4,
+      "toCheckpointId": "pt-room-34c0e24aebc5a8b37b1e",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -196
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-34c0e24aebc5a8b37b1e",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-edf6b65418037d417a14",
+      "sequence": 5,
+      "toCheckpointId": "pt-threshold-0f47be5009f48ba6f990",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -196
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-0f47be5009f48ba6f990",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-a6d77c66b328340348e6",
+      "sequence": 6,
+      "toCheckpointId": "pt-corridor-door-5f2af3207aa2d5782a55",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-5f2af3207aa2d5782a55",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-cff1d1ece31f0961d8ce",
+      "sequence": 7,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-b0cdc0fd5491387f3208",
+      "sequence": 8,
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-48e16bd10906a2054988",
+      "sequence": 9,
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -237.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-38a7e04ee0a7025a42fb",
+      "sequence": 10,
+      "toCheckpointId": "pt-room-94042af14807184b573b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-94042af14807184b573b",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-adf6587541d8bb5012d9",
+      "sequence": 11,
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-bc25c265617e8595f6cd",
+      "sequence": 12,
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-2894a3c84611c311bd75",
+      "sequence": 13,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -157
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-692ba9bc7db55929c5aa",
+      "sequence": 14,
+      "toCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -157
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-4ba480cae2129796f47e",
+      "sequence": 15,
+      "toCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -157
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-9cd8ba69c7b66fd5ab72",
+      "sequence": 16,
+      "toCheckpointId": "pt-room-e0d8bae31431d1dbdb19",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -157
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-e0d8bae31431d1dbdb19",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-5847e6ea209f1040a6b3",
+      "sequence": 17,
+      "toCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -157
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-5ca83a7df8f5860497cd",
+      "sequence": 18,
+      "toCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-10dcb779818c6b44939a",
+      "sequence": 19,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -151
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-83f469ba35153067b3ef",
+      "sequence": 20,
+      "toCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -151
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-3fb20a45f003a3a418f7",
+      "sequence": 21,
+      "toCheckpointId": "pt-threshold-c634897bddc407334253",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -151
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-c634897bddc407334253",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-3077bb4618b1fe501cd6",
+      "sequence": 22,
+      "toCheckpointId": "pt-room-0fb5a11fcf5e4901c072",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -151
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-0fb5a11fcf5e4901c072",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-cdb740b7f813676527d9",
+      "sequence": 23,
+      "toCheckpointId": "pt-threshold-c634897bddc407334253",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -151
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-c634897bddc407334253",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-1d97141209044ec06cf8",
+      "sequence": 24,
+      "toCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-c7dd78bc981853e57798",
+      "sequence": 25,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-a6e1e960648f3b4cb364",
+      "sequence": 26,
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-d254a3550760e18c6f6a",
+      "sequence": 27,
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -197
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-fc07e0cd32b6c0050968",
+      "sequence": 28,
+      "toCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-bffab15b7dfedba53958",
+      "sequence": 29,
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-cc915e1ab3d92513baee",
+      "sequence": 30,
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-d6c88ea8bd29f9e893e9",
+      "sequence": 31,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -119
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-baea1fa88cc9596cfd01",
+      "sequence": 32,
+      "toCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -119
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-859d5b21399b1cafed58",
+      "sequence": 33,
+      "toCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -119
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-1cad8297351067e76612",
+      "sequence": 34,
+      "toCheckpointId": "pt-room-3354dec30903d716740f",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -119
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-3354dec30903d716740f",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-29f2b8c43cd0d570695b",
+      "sequence": 35,
+      "toCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -119
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-1bd7d18dd142b244facb",
+      "sequence": 36,
+      "toCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-aeeac9d09aa984d338b4",
+      "sequence": 37,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-463516cfaa55f7f2cf5b",
+      "sequence": 38,
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-f2148fc4223b31d5d5fb",
+      "sequence": 39,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-045ed4dae3f5f7c8ba21",
+      "sequence": 40,
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "open"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 338,
+          "y": 68,
+          "z": -128
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-de96f31a2059473d404d",
+      "sequence": 41,
+      "toCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-489f7995bca2766a88f9",
+      "sequence": 42,
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "stair"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-cca7fc690e9f37ce8a36",
+      "sequence": 43,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "open"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-2d6acddb562d3566e3c8",
+      "sequence": 44,
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -239.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-2014863b6cbf06ffceb0",
+      "sequence": 45,
+      "toCheckpointId": "pt-threshold-00203090ef2bf694daba",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-00203090ef2bf694daba",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-1b3694bfb4d0dd83d970",
+      "sequence": 46,
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-24d0bcb31f17cc1629b8",
+      "sequence": 47,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-5e831348514b641313f8",
+      "sequence": 48,
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-32ed53320eb333b0a070",
+      "sequence": 49,
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -197
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-f9436e96853a7b2365fa",
+      "sequence": 50,
+      "toCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.25,
+          "y": 67,
+          "z": -213.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-ab432eb64cf9c9f6e7f0",
+      "sequence": 51,
+      "toCheckpointId": "pt-threshold-b01826ad61d4613ae65b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.25,
+          "y": 67,
+          "z": -219.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-b01826ad61d4613ae65b",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-922056336b0b8a397839",
+      "sequence": 52,
+      "toCheckpointId": "pt-threshold-fea3d932615e68bf7553",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -237.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-fea3d932615e68bf7553",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-a61fd2733e7e1c6ed11c",
+      "sequence": 53,
+      "toCheckpointId": "pt-room-94042af14807184b573b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-94042af14807184b573b",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-f797e880b3d8151e8028",
+      "sequence": 54,
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-e964f500433e099a1ee0",
+      "sequence": 55,
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-251633e24bed54a60fd4",
+      "sequence": 56,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-16c14ca3bfa86eda6b61",
+      "sequence": 57,
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "open"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 338,
+          "y": 68,
+          "z": -128
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-221522f3d35c340f8a56",
+      "sequence": 58,
+      "toCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 338,
+          "y": 87,
+          "z": -104
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-0b3e902763a7f5623c09",
+      "sequence": 59,
+      "toCheckpointId": "pt-landing-upper-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -116
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-landing-upper-be01fc21e7f00aac1107",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-d6acb8876feb602ffd33",
+      "sequence": 60,
+      "toCheckpointId": "pt-hall-1b39ca3e3ca81d33f9e9",
+      "traversal": "stair"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-hall-1b39ca3e3ca81d33f9e9",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-8f73fc5ed02516346cd1",
+      "sequence": 61,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "open"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -231.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-d1d0b24d8fd8334d9b9b",
+      "sequence": 62,
+      "toCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -231.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-c8d964e247e9fd0aa9c9",
+      "sequence": 63,
+      "toCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -231.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-13eb63a7d07be123eae2",
+      "sequence": 64,
+      "toCheckpointId": "pt-room-094573d2142793d7ea4d",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -231.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-094573d2142793d7ea4d",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-6ee5feaa00884537a0ad",
+      "sequence": 65,
+      "toCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -231.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-701279d3cbbec3b51041",
+      "sequence": 66,
+      "toCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-58607e2a81a991293912",
+      "sequence": 67,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -177.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-594dc99cc51308ec681e",
+      "sequence": 68,
+      "toCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -177.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-6274d02151926b2491cf",
+      "sequence": 69,
+      "toCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -177.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-fedf9fc39457417a0f17",
+      "sequence": 70,
+      "toCheckpointId": "pt-room-a4d6e14310c58d94c6e2",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -177.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-a4d6e14310c58d94c6e2",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-11ff237d8e39e95f9601",
+      "sequence": 71,
+      "toCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -177.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-82e9d06a0e3aaf154a9f",
+      "sequence": 72,
+      "toCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-8430591d1e97dcbde24c",
+      "sequence": 73,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -191.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-263d26515b53fbd92d98",
+      "sequence": 74,
+      "toCheckpointId": "pt-corridor-door-06c4de0f7ce68202543d",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -191.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-06c4de0f7ce68202543d",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-a7f9092c388135bafdd0",
+      "sequence": 75,
+      "toCheckpointId": "pt-threshold-94dec9a9e5de3e241f42",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -191.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-94dec9a9e5de3e241f42",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-135dd97147f43c62b709",
+      "sequence": 76,
+      "toCheckpointId": "pt-room-cbb2d3d792956cce6bd6",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 87,
+          "z": -207.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-cbb2d3d792956cce6bd6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-f140f616807cfb10bf06",
+      "sequence": 77,
+      "toCheckpointId": "pt-threshold-2eb7c645b7299218bbc9",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 87,
+          "z": -213.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-2eb7c645b7299218bbc9",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-4447f7d5cbd4979180f0",
+      "sequence": 78,
+      "toCheckpointId": "pt-threshold-29e7c6b7384d15dee849",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -234.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-29e7c6b7384d15dee849",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-a450064715e7d8a44056",
+      "sequence": 79,
+      "toCheckpointId": "pt-room-ed9971f3ebbc40058e8e",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -234.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-ed9971f3ebbc40058e8e",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-a07c61a6689f7b576fae",
+      "sequence": 80,
+      "toCheckpointId": "pt-threshold-0a658967c1cf5228e0c6",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -234.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-0a658967c1cf5228e0c6",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-c74fd889684196e861f8",
+      "sequence": 81,
+      "toCheckpointId": "pt-corridor-door-ff6f32ebad46f7f236f1",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-ff6f32ebad46f7f236f1",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-61adbdc7271b635bb2a5",
+      "sequence": 82,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-e1615df3f35bb0f1daae",
+      "sequence": 83,
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-9e19a342f5d113a6796f",
+      "sequence": 84,
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -126
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-9a754ff064720eff861a",
+      "sequence": 85,
+      "toCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-8b647289dc67af6357b2",
+      "sequence": 86,
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-1c56d903e04bf20b4f9c",
+      "sequence": 87,
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-492724459be10221136c",
+      "sequence": 88,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -151.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-e6374d86de9b591d550a",
+      "sequence": 89,
+      "toCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -151.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-116c9d55785e6c75b942",
+      "sequence": 90,
+      "toCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -151.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-b2d291a96e2231f80eba",
+      "sequence": 91,
+      "toCheckpointId": "pt-room-4174a3773febf6902d1c",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -151.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-4174a3773febf6902d1c",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-ee24f2bad08bc6621025",
+      "sequence": 92,
+      "toCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -151.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-fbb1698779fa8d9ab729",
+      "sequence": 93,
+      "toCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-a4d20fbe6b3f64260b2f",
+      "sequence": 94,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-2a87f77ef017490a4e72",
+      "sequence": 95,
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-98f586e6bd0c5e6b6e5c",
+      "sequence": 96,
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -126
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-afa1ecf682b4b14f0eca",
+      "sequence": 97,
+      "toCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.25,
+          "y": 87,
+          "z": -147.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-139ba7dc24dc32a8d6b7",
+      "sequence": 98,
+      "toCheckpointId": "pt-threshold-05a5934ced18112765f5",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "status": "not_observed",
+        "targetPosition": {
+          "x": 295.25,
+          "y": 87,
+          "z": -153.5
+        }
+      },
+      "character": {
+        "alive": false,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 0,
+        "humanoidState": "unknown",
+        "maximumHealth": 0,
+        "observed": false
+      },
+      "clearance": {
+        "bodyClear": false,
+        "headClear": false,
+        "managedBlockerIds": [],
+        "observed": false,
+        "supported": false,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-05a5934ced18112765f5",
+      "navigation": {
+        "acknowledgmentCertain": false,
+        "independentlyReached": false,
+        "requestedOnce": false
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "not_attempted",
+        "totalPathDistance": 0,
+        "waypointCount": 0
+      },
+      "segmentId": "pt-segment-3ccc1170b275e1a7dbd9",
+      "sequence": 99,
+      "toCheckpointId": "pt-threshold-5a5308ba1b5044d22926",
+      "traversal": "door"
+    }
+  ],
+  "setup": {
+    "attempted": true,
+    "excludedFromScoring": true,
+    "failureCode": "none",
+    "requestedPosition": {
+      "x": 344.75,
+      "y": 67,
+      "z": -259.75
+    },
+    "succeeded": true,
+    "verifiedPosition": {
+      "x": 344.75,
+      "y": 67,
+      "z": -259.75
+    }
+  },
+  "source": {
+    "architecturePlanSha256": "91a51142e062074da55ee8431184389820c826af588995b13c4b874ff133ad84",
+    "manifestRootNodeId": "world-cliffwatch",
+    "manifestSourceWorldSpecSha256": "cc8a24bd1220a301851c7e66fa5f6ecf5c2c03fdde6e854f0bf0da7a5ad07ebe",
+    "playtestPlanSha256": "4f441eb9359b17d6fb7fd0c041fcd10cfa5acac904b7faeaf67fe9aad3dbd21c",
+    "projectId": "project-cliffwatch-mansion",
+    "robloxManifestSha256": "e2d317df935c1c192a7a2d18a46233c1e1b3ae17d9c115927563c8c05511ea9f"
+  },
+  "start": {
+    "acknowledgmentCertain": true,
+    "characterReady": true,
+    "failureCode": "none",
+    "identityProbePassed": true,
+    "observedPlayRunning": true,
+    "requested": true
+  },
+  "stop": {
+    "acknowledgmentCertain": true,
+    "failureCode": "none",
+    "identityVerifiedBeforeSecondStop": false,
+    "observedEditRestored": true,
+    "requested": true
+  },
+  "summary": {
+    "allRequiredCoverageReached": false,
+    "arrivalFailures": 0,
+    "characterSurvived": true,
+    "clearanceFailures": 0,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "editIntegrityPassed": true,
+    "pathFailures": 1,
+    "segmentsAttempted": 1,
+    "segmentsPlanned": 100,
+    "segmentsReached": 0,
+    "status": "aborted"
+  },
+  "viewportEvidence": [
+    {
+      "byteLength": 1056,
+      "checkpointId": "pt-exterior-30166f89e55490bce030",
+      "evidenceId": "evidence-viewport-5553858e4d933952",
+      "mediaType": "image/jpeg",
+      "sha256": "c0bb28a7c244cbf5919afe5fc196e638d2a9afc1f596c2eafcd03bbb09bfc984"
+    }
+  ]
+}

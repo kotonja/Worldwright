@@ -1,0 +1,45 @@
+{
+  "name": "@worldwright/playtest-critic",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic architectural playtest planning and pure Critic evaluation for Worldwright.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "playtest-critic": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "fixture:check": "tsx scripts/check-fixtures.ts",
+    "fixture:generate": "tsx scripts/generate-fixtures.ts",
+    "schema:check": "tsx scripts/check-schemas.ts",
+    "schema:generate": "tsx scripts/generate-schemas.ts",
+    "test": "vitest run",
+    "test:dist": "tsx scripts/check-dist.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "playtest-critic": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "0.34.38",
+    "@worldwright/architecture-planner": "workspace:*",
+    "@worldwright/roblox-compiler": "workspace:*",
+    "ajv": "8.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "@worldwright/worldspec": "workspace:*",
+    "prettier": "3.6.2",
+    "tsx": "4.20.3",
+    "vitest": "3.2.4"
+  }
+}

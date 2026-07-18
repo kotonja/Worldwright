@@ -53,6 +53,25 @@ describe('bounded deterministic architecture solver', () => {
     expect(first.layout.floors).toHaveLength(2);
     expect(first.layout.floors.every((floor) => floor.stairCoreCells !== undefined)).toBe(true);
     expect(first.layout.floors[0]?.stairCoreCells).toEqual(first.layout.floors[1]?.stairCoreCells);
+    const accessLaneCells = profile.building.defaultDoorWidth / profile.building.gridSize;
+    const wallCells = profile.building.interiorWallThickness / profile.building.gridSize;
+    for (const floor of first.layout.floors) {
+      const core = floor.stairCoreCells;
+      const side = first.layout.stairSide;
+      expect(core).toBeDefined();
+      expect(side).toBeDefined();
+      if (core === undefined || side === undefined) continue;
+      const corridor = floor.corridorCells;
+      const observedLane =
+        first.layout.corridorAxis === 'x'
+          ? side === 'negative'
+            ? corridor.z - wallCells - (core.z + core.depth)
+            : core.z - (corridor.z + corridor.depth + wallCells)
+          : side === 'negative'
+            ? corridor.x - wallCells - (core.x + core.width)
+            : core.x - (corridor.x + corridor.width + wallCells);
+      expect(observedLane).toBe(accessLaneCells);
+    }
     expect(
       first.layout.floors
         .flatMap((floor) => floor.rooms)

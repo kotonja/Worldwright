@@ -1,0 +1,1472 @@
+{
+  "criticVersion": "0.1.0",
+  "evidenceCompleteness": {
+    "consoleEvidenceComplete": true,
+    "editIntegrityEvidenceComplete": true,
+    "segmentEvidenceComplete": false,
+    "stopEvidenceComplete": true,
+    "viewportEvidenceComplete": false
+  },
+  "findings": [
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-0f74cf94274d33d5c091",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-a8d9a0d0508d596cb8f3"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "archgen-opening-corridor-door-study-ground",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-12a9137c1fac8a69297c",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-101f55558bc94e7e047d"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "archgen-opening-corridor-door-library-west",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-1f29cb424221bddbf3ed",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-84d1efd5ab620c094445"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "archgen-opening-corridor-door-drawing-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-56727ce276a04bdf6d8b",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-75b15660d8af13e68c97"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "archgen-opening-corridor-door-kitchen-service",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-a0f3c5cbc19225538087",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-aeaadeb44af15f0030fe"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "archgen-opening-corridor-door-foyer-grand",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-bbf719ecfbb779a2d3be",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-bb9892f0eb69d2e3f8c6"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-da718cf6a5de07bc6d9d",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-5f2af3207aa2d5782a55"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "archgen-opening-corridor-door-ballroom",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-f0c29a9570f09f077a94",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-dd894c56d1472e519aa8"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "archgen-opening-corridor-door-dining-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-37e1990ddc43a1733309",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-0f47be5009f48ba6f990"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-ballroom",
+        "ballroom",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-56d4448ddd0414e63afe",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-829a120dea7e506fec45"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-dining-room",
+        "dining-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-15dd3137789db4b37b62",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-f5ff7ce6ff8b289f7f77"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-drawing-room",
+        "drawing-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-cfebe758b5c2528a7363",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-00203090ef2bf694daba"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-foyer-grand",
+        "floor-ground",
+        "foyer-grand"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-2a24c1c185cec56cf6e6",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-f9f00655483fbfaece19"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-kitchen-service",
+        "floor-ground",
+        "kitchen-service"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-5d656db7154637f4badb",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-c634897bddc407334253"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-library-west",
+        "floor-ground",
+        "library-west"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-cc5d3c699e2e7e8c0521",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-6bb151fd984ae3a8be5c"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-study-ground",
+        "floor-ground",
+        "study-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-489910283b45dd8f03db",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-a9bfadb38c3b135d1328"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-exterior-entrance-foyer-grand",
+        "floor-ground",
+        "foyer-grand"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-07a471f752db3af42d52",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-fea3d932615e68bf7553"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-dining-kitchen",
+        "dining-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-60da14f4f21609dbc76e",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-b01826ad61d4613ae65b"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-dining-kitchen",
+        "floor-ground",
+        "kitchen-service"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-38091d7f2253eff409f5",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-e68ef673dd3bb7ef421e"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-foyer-ballroom",
+        "floor-ground",
+        "foyer-grand"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-95161d89666ae07e5dae",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-38017d5819cfde0ea397"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-foyer-ballroom",
+        "ballroom",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-3ea5a093de40d72e1896",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-hall-2577b130ad62c393d982"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+        "archgen-stair-hall-stair-main-floor-ground",
+        "archgen-stair-run-stair-main-floor-ground-floor-upper",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-c0f753de7b412227a578",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-landing-lower-be01fc21e7f00aac1107"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-stair-run-stair-main-floor-ground-floor-upper",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-06f0619e079194d4c6ca",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-34c0e24aebc5a8b37b1e"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "ballroom",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-c8c7d6db7e3a979f54ed",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-34c0e24aebc5a8b37b1e"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "ballroom",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-a26081fd84b5f0c927ca",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-94042af14807184b573b"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "dining-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-e200bafed910e8df8d30",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-94042af14807184b573b"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "dining-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-9ab3860e19575b3dd9f6",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-e0d8bae31431d1dbdb19"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "drawing-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-9e2279fb22b8f57dd3fd",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-e0d8bae31431d1dbdb19"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "drawing-room",
+        "floor-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-080c5f388604400085ff",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-3feb1c7d4d47b3cb20cf"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "kitchen-service"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-2a635246c6e4042ec712",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-0fb5a11fcf5e4901c072"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "library-west"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-54de57c5d9a8a592e2e1",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-3354dec30903d716740f"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "study-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-d18313a92d888db1dd6f",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-00e3d8bbdc6cbddc8c69"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "foyer-grand"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-4b09d5f11f77b8be948d",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-00e3d8bbdc6cbddc8c69"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "foyer-grand"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-60e52349b6cf8f2a1a23",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-3354dec30903d716740f"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "study-ground"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-9b6f4d0ac26b2f5ed0ee",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-3feb1c7d4d47b3cb20cf"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "kitchen-service"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-d6d5647f5a115f739045",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-0fb5a11fcf5e4901c072"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "library-west"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-29de03e28d0996d3cede",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-06c4de0f7ce68202543d"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "archgen-opening-corridor-door-primary-bath",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-37faf09fa97afa175f4b",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-13aa8edba73ccd40ada3"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "archgen-opening-corridor-door-guest-sitting-room",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-39fe38613528cce9636d",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-00fb51af2b64bba68592"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "archgen-opening-corridor-door-east-bedroom",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-4c59e872b7c2ef30c563",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-6b3a51ffbaae625e6fd4"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-511e010d2b0e097ac193",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-3f5a60f3b43d6f6eca7d"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "archgen-opening-corridor-door-west-bedroom",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-67d59f3ddf86ffd54572",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-5f0e3119b05998c0aceb"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "archgen-opening-corridor-door-upper-study",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-dd8ce2d7bf8130729663",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-door-ff6f32ebad46f7f236f1"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "archgen-opening-corridor-door-primary-bedroom",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.floor_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-13969f8970b0b3f6cf06",
+      "message": "A required floor was not reached.",
+      "relatedCheckpointIds": [
+        "pt-corridor-6b3a51ffbaae625e6fd4"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-stair-geometry"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-1ff818b533208c5b6376",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-ec0ab684497be36b2b03"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-east-bedroom",
+        "east-bedroom",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-2fad2c2dbacf3abbe61c",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-4d183f2a18ce13a23457"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-guest-sitting-room",
+        "floor-upper",
+        "guest-sitting-room"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-3f55b3b056e9948d5ef1",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-94dec9a9e5de3e241f42"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-primary-bath",
+        "floor-upper",
+        "primary-bath"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-ffdf73f455f853b80d5a",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-0a658967c1cf5228e0c6"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-primary-bedroom",
+        "floor-upper",
+        "primary-bedroom"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-054909134b5792f48aa4",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-41823333384441ed77a5"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-upper-study",
+        "floor-upper",
+        "upper-study"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-801a067f1e8150f7fd34",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-d5e0e210906425ebd5f2"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-corridor-door-west-bedroom",
+        "floor-upper",
+        "west-bedroom"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-43c016d2a04d3fd1af77",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-2eb7c645b7299218bbc9"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-primary-suite",
+        "floor-upper",
+        "primary-bath"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-e41f8f5c55432d55a0c6",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-29e7c6b7384d15dee849"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-primary-suite",
+        "floor-upper",
+        "primary-bedroom"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-7bcc730400754e23b25e",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-05a5934ced18112765f5"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-upper-study-sitting",
+        "floor-upper",
+        "upper-study"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-86eb80bb569f580e513e",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-threshold-5a5308ba1b5044d22926"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-upper-study-sitting",
+        "floor-upper",
+        "guest-sitting-room"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-240dced4d838ea8ef399",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-hall-1b39ca3e3ca81d33f9e9"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+        "archgen-stair-hall-stair-main-floor-upper",
+        "archgen-stair-run-stair-main-floor-ground-floor-upper",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-653ac4123f4331b4fa06",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-landing-upper-be01fc21e7f00aac1107"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-stair-run-stair-main-floor-ground-floor-upper",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-d49cd04df0b8b36c30d2",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-094573d2142793d7ea4d"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "east-bedroom",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-ac23c9e369c1a3aa964c",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-094573d2142793d7ea4d"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "east-bedroom",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-03a50ca5c537c19ced01",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-ed9971f3ebbc40058e8e"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "primary-bedroom"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-1147bb98da8d36520847",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-a4d6e14310c58d94c6e2"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "guest-sitting-room"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-c3367a11a8859843a5c6",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-30b9d34214d4c33af87b"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "upper-study"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-d309046a73ca0d301b2a",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-4174a3773febf6902d1c"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "west-bedroom"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.checkpoint_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-e55c6e82080f0f4cb23a",
+      "message": "A required architectural checkpoint was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-cbb2d3d792956cce6bd6"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "primary-bath"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-2c5b626fa4506b90946a",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-30b9d34214d4c33af87b"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "upper-study"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-4c92676a1c21b8e9f2c3",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-a4d6e14310c58d94c6e2"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "guest-sitting-room"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-81261faceeb47bc331dd",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-ed9971f3ebbc40058e8e"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "primary-bedroom"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-c69d885ab4fb370e3630",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-4174a3773febf6902d1c"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "west-bedroom"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "circulation",
+      "code": "critic.room_not_reached",
+      "evidenceIds": [],
+      "id": "critic-finding-d17c4aa67d502b5f39b6",
+      "message": "A required room was not reached.",
+      "relatedCheckpointIds": [
+        "pt-room-cbb2d3d792956cce6bd6"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-upper",
+        "primary-bath"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "evidence",
+      "code": "critic.run_incomplete",
+      "evidenceIds": [],
+      "id": "critic-finding-c39efd1494959857103d",
+      "message": "The playtest run did not complete.",
+      "relatedCheckpointIds": [],
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [],
+      "severity": "error",
+      "suggestionCode": "rerun-with-complete-evidence"
+    },
+    {
+      "category": "pathfinding",
+      "code": "critic.path_not_successful",
+      "evidenceIds": [],
+      "id": "critic-finding-3d6c20d7931b3b2ba8bd",
+      "message": "A required path preflight was not successful.",
+      "relatedCheckpointIds": [
+        "pt-threshold-a9bfadb38c3b135d1328"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [
+        "pt-segment-097b506120dad9ecb2c6"
+      ],
+      "relatedSourceIds": [
+        "archgen-circulation-opening-archgen-opening-exterior-entrance-foyer-grand",
+        "archgen-opening-exterior-entrance-foyer-grand",
+        "floor-ground",
+        "foyer-grand"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-opening-clearance"
+    },
+    {
+      "category": "stairs",
+      "code": "critic.stair_not_traversed",
+      "evidenceIds": [],
+      "id": "critic-finding-f0ebc8ede77dfe5c0282",
+      "message": "A required stair run was not traversed.",
+      "relatedCheckpointIds": [
+        "pt-hall-1b39ca3e3ca81d33f9e9"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+        "archgen-stair-hall-stair-main-floor-upper",
+        "archgen-stair-run-stair-main-floor-ground-floor-upper",
+        "floor-upper"
+      ],
+      "severity": "error",
+      "suggestionCode": "inspect-stair-geometry"
+    },
+    {
+      "category": "evidence",
+      "code": "critic.capture_unavailable",
+      "evidenceIds": [],
+      "id": "critic-finding-61058a5e0f97aca2f9c6",
+      "message": "A nonessential viewport capture was unavailable.",
+      "relatedCheckpointIds": [
+        "pt-corridor-bb9892f0eb69d2e3f8c6"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-ground",
+        "floor-ground"
+      ],
+      "severity": "warning",
+      "suggestionCode": "rerun-with-complete-evidence"
+    },
+    {
+      "category": "evidence",
+      "code": "critic.capture_unavailable",
+      "evidenceIds": [],
+      "id": "critic-finding-f6c6ae4f6c714efd0dd0",
+      "message": "A nonessential viewport capture was unavailable.",
+      "relatedCheckpointIds": [
+        "pt-hall-2577b130ad62c393d982"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-ground",
+        "archgen-stair-hall-stair-main-floor-ground",
+        "archgen-stair-run-stair-main-floor-ground-floor-upper",
+        "floor-ground"
+      ],
+      "severity": "warning",
+      "suggestionCode": "rerun-with-complete-evidence"
+    },
+    {
+      "category": "evidence",
+      "code": "critic.capture_unavailable",
+      "evidenceIds": [],
+      "id": "critic-finding-40f6145ee9d0107238f1",
+      "message": "A nonessential viewport capture was unavailable.",
+      "relatedCheckpointIds": [
+        "pt-room-00e3d8bbdc6cbddc8c69"
+      ],
+      "relatedFloorLevel": 0,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "floor-ground",
+        "foyer-grand"
+      ],
+      "severity": "warning",
+      "suggestionCode": "rerun-with-complete-evidence"
+    },
+    {
+      "category": "evidence",
+      "code": "critic.capture_unavailable",
+      "evidenceIds": [],
+      "id": "critic-finding-b6f59260064258e038ad",
+      "message": "A nonessential viewport capture was unavailable.",
+      "relatedCheckpointIds": [
+        "pt-corridor-6b3a51ffbaae625e6fd4"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-corridor-floor-upper",
+        "floor-upper"
+      ],
+      "severity": "warning",
+      "suggestionCode": "rerun-with-complete-evidence"
+    },
+    {
+      "category": "evidence",
+      "code": "critic.capture_unavailable",
+      "evidenceIds": [],
+      "id": "critic-finding-e340025370c5af406919",
+      "message": "A nonessential viewport capture was unavailable.",
+      "relatedCheckpointIds": [
+        "pt-threshold-5a5308ba1b5044d22926"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-room-door-relationship-upper-study-sitting",
+        "floor-upper",
+        "guest-sitting-room"
+      ],
+      "severity": "warning",
+      "suggestionCode": "rerun-with-complete-evidence"
+    },
+    {
+      "category": "evidence",
+      "code": "critic.capture_unavailable",
+      "evidenceIds": [],
+      "id": "critic-finding-38b4f5bda36229c35c56",
+      "message": "A nonessential viewport capture was unavailable.",
+      "relatedCheckpointIds": [
+        "pt-hall-1b39ca3e3ca81d33f9e9"
+      ],
+      "relatedFloorLevel": 1,
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [
+        "archgen-opening-stair-hall-archgen-stair-hall-stair-main-floor-upper",
+        "archgen-stair-hall-stair-main-floor-upper",
+        "archgen-stair-run-stair-main-floor-ground-floor-upper",
+        "floor-upper"
+      ],
+      "severity": "warning",
+      "suggestionCode": "rerun-with-complete-evidence"
+    }
+  ],
+  "metrics": {
+    "arrivalFailureCount": 0,
+    "arrivalSuccessCount": 0,
+    "clearanceFailureCount": 0,
+    "clearanceSuccessCount": 0,
+    "consoleErrorCount": 0,
+    "consoleWarningCount": 0,
+    "editHashMatch": true,
+    "pathFailureCount": 1,
+    "pathSuccessCount": 0,
+    "reachedCheckpoints": 1,
+    "reachedFloors": 1,
+    "reachedRooms": 0,
+    "requiredCheckpoints": 55,
+    "requiredFloors": 2,
+    "requiredRooms": 13,
+    "requiredStairs": 1,
+    "traversedStairs": 0
+  },
+  "schemaVersion": "0.1.0",
+  "source": {
+    "architecturePlanSha256": "91a51142e062074da55ee8431184389820c826af588995b13c4b874ff133ad84",
+    "playtestPlanSchemaVersion": "0.1.0",
+    "playtestPlanSha256": "4f441eb9359b17d6fb7fd0c041fcd10cfa5acac904b7faeaf67fe9aad3dbd21c",
+    "playtestRunReportSchemaVersion": "0.1.0",
+    "playtestRunReportSha256": "e67ef07f88b803bec22d0e379d104d85e2bb555498d181f40b35b909d878e2e1",
+    "projectId": "project-cliffwatch-mansion",
+    "robloxManifestSha256": "e2d317df935c1c192a7a2d18a46233c1e1b3ae17d9c115927563c8c05511ea9f"
+  },
+  "status": "fail"
+}

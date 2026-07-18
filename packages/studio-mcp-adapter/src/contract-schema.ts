@@ -23,9 +23,9 @@ import {
 } from './constants.js';
 import {
   STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES,
-  STUDIO_DIAGNOSTIC_CODES,
+  STUDIO_PROTOCOL_V0_1_DIAGNOSTIC_CODES,
   type StudioBridgeV01DiagnosticCode,
-  type StudioDiagnosticCode,
+  type StudioProtocolV01DiagnosticCode,
 } from './diagnostics.js';
 
 const JSON_SCHEMA_DRAFT_2020_12 = 'https://json-schema.org/draft/2020-12/schema';
@@ -352,9 +352,9 @@ export const StudioBridgeDiagnosticSchema = Type.Object(
   { additionalProperties: false },
 );
 /** Additive protocol diagnostic contract; Bridge 0.1 continues using its frozen enum above. */
-export const StudioProtocolDiagnosticCodeSchema = Type.Unsafe<StudioDiagnosticCode>({
+export const StudioProtocolDiagnosticCodeSchema = Type.Unsafe<StudioProtocolV01DiagnosticCode>({
   type: 'string',
-  enum: [...STUDIO_DIAGNOSTIC_CODES],
+  enum: [...STUDIO_PROTOCOL_V0_1_DIAGNOSTIC_CODES],
 });
 export const StudioProtocolDiagnosticSchema = Type.Object(
   {

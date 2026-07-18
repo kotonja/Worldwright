@@ -1,0 +1,56 @@
+{
+  "criticVersion": "0.1.0",
+  "evidenceCompleteness": {
+    "consoleEvidenceComplete": true,
+    "editIntegrityEvidenceComplete": true,
+    "segmentEvidenceComplete": true,
+    "stopEvidenceComplete": true,
+    "viewportEvidenceComplete": true
+  },
+  "findings": [
+    {
+      "category": "console",
+      "code": "critic.console_error_new",
+      "evidenceIds": [
+        "evidence-console-error-0001"
+      ],
+      "id": "critic-finding-b4e84e3548440ec36cd7",
+      "message": "A new Studio console error was observed.",
+      "relatedCheckpointIds": [],
+      "relatedSegmentIds": [],
+      "relatedSourceIds": [],
+      "severity": "error",
+      "suggestionCode": "inspect-console-error"
+    }
+  ],
+  "metrics": {
+    "arrivalFailureCount": 0,
+    "arrivalSuccessCount": 100,
+    "clearanceFailureCount": 0,
+    "clearanceSuccessCount": 100,
+    "consoleErrorCount": 1,
+    "consoleWarningCount": 0,
+    "editHashMatch": true,
+    "pathFailureCount": 0,
+    "pathSuccessCount": 100,
+    "reachedCheckpoints": 55,
+    "reachedFloors": 2,
+    "reachedRooms": 13,
+    "requiredCheckpoints": 55,
+    "requiredFloors": 2,
+    "requiredRooms": 13,
+    "requiredStairs": 1,
+    "traversedStairs": 1
+  },
+  "schemaVersion": "0.1.0",
+  "source": {
+    "architecturePlanSha256": "91a51142e062074da55ee8431184389820c826af588995b13c4b874ff133ad84",
+    "playtestPlanSchemaVersion": "0.1.0",
+    "playtestPlanSha256": "4f441eb9359b17d6fb7fd0c041fcd10cfa5acac904b7faeaf67fe9aad3dbd21c",
+    "playtestRunReportSchemaVersion": "0.1.0",
+    "playtestRunReportSha256": "6c50e624916180c1eeecd1957657823e7d02205394935df1238db7027e3608a6",
+    "projectId": "project-cliffwatch-mansion",
+    "robloxManifestSha256": "e2d317df935c1c192a7a2d18a46233c1e1b3ae17d9c115927563c8c05511ea9f"
+  },
+  "status": "fail"
+}

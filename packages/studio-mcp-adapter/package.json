@@ -1,6 +1,6 @@
 {
   "name": "@worldwright/studio-mcp-adapter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Sandbox-only Roblox Studio MCP transaction adapter for Worldwright.",
   "type": "module",
@@ -33,11 +33,13 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "studio-mcp": "tsx src/cli.ts",
     "live:smoke": "tsx scripts/live-smoke.ts",
-    "live:batch-smoke": "tsx scripts/live-batch-smoke.ts"
+    "live:batch-smoke": "tsx scripts/live-batch-smoke.ts",
+    "live:playtest-smoke": "tsx scripts/live-playtest-smoke.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.29.0",
     "@sinclair/typebox": "0.34.38",
+    "@worldwright/playtest-critic": "workspace:*",
     "@worldwright/roblox-compiler": "workspace:*",
     "ajv": "8.17.1",
     "zod": "3.25.76"

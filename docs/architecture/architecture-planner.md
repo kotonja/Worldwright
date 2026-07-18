@@ -122,7 +122,10 @@ The planner implements only `double_loaded_spine`. A global candidate fixes:
 - the deterministic choice for any unequal one-cell band split.
 
 The aligned stair core is placed at the rear, opposite the entrance end, on the same side and in the
-same local rectangle on every floor.
+same local rectangle on every floor. It is shifted away from the corridor wall by exactly one
+`defaultDoorWidth`, retaining a floor-level access lane inside the stair hall. The centered
+corridor-to-hall opening enters that lane, which provides a clear side route to the first or final
+tread instead of forcing entry onto a raised mid-run step.
 
 For each floor and global candidate, rooms begin in this canonical order:
 

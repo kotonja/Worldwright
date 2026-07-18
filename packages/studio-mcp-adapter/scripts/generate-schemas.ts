@@ -18,6 +18,10 @@ import {
   StudioTransportReportSchema,
 } from '../src/report-contract-schema.js';
 import {
+  StudioPlaytestProbeRequestSchema,
+  StudioPlaytestProbeResponseSchema,
+} from '../src/playtest/contract-schema.js';
+import {
   StudioSandboxLeaseRecordSchema,
   StudioSandboxLeaseRequestSchema,
   StudioSandboxLeaseResponseSchema,
@@ -30,6 +34,20 @@ export interface StudioSchemaArtifact {
 }
 
 export const studioSchemaArtifacts: readonly StudioSchemaArtifact[] = [
+  {
+    label: 'Studio playtest probe request',
+    path: fileURLToPath(
+      new URL('../schema/studio-playtest-probe-request-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioPlaytestProbeRequestSchema,
+  },
+  {
+    label: 'Studio playtest probe response',
+    path: fileURLToPath(
+      new URL('../schema/studio-playtest-probe-response-0.1.0.schema.json', import.meta.url),
+    ),
+    schema: StudioPlaytestProbeResponseSchema,
+  },
   {
     label: 'Studio sandbox lease record',
     path: fileURLToPath(

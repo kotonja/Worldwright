@@ -3,12 +3,12 @@
 Worldwright is an AI World Architect for compiling human intent and references into coherent,
 editable, testable, and performance-aware Roblox worlds.
 
-> **Status:** Milestones 0 through 3 are complete. Milestone 4 is the current implementation:
-> deterministic chunked Studio mutation with reconnectable, observation-gated compensation after an
-> uncertain MCP response. **It may read or mutate managed project state only in a new unsaved local
-> place (`PlaceId == 0`, `GameId == 0`), stopped in Edit mode, and selected by its exact Studio ID.
-> Every nonempty transaction also claims one private Workspace sandbox lease so reconnect and
-> compensation remain bound to that exact unsaved DataModel; the Studio ID alone is insufficient.**
+> **Status:** Milestones 0 through 4 are complete. Milestone 5 is the current implementation: a
+> deterministic, architectural build-test-evaluate loop that derives a source-bound traversal plan,
+> observes one solo playtest, and produces the first narrow Critic report. **Live work remains
+> restricted to a new unsaved local place (`PlaceId == 0`, `GameId == 0`) selected by its exact
+> Studio ID. Play may begin only after the desired Manifest is an exact no-op in the leased
+> DataModel, and Stop must be followed by an exact lease-bound Edit snapshot hash check.**
 
 ## Product principles
 
@@ -122,12 +122,39 @@ old 400-call mutation phase. Chunking reduces that forward create to 13 bounded 
 observation and exact-prefix classification preserve the existing safety model if an acknowledgment
 is lost.
 
+Milestone 5 adds the private `@worldwright/playtest-critic` package and a separate playtest boundary
+to the Studio adapter:
+
+- strict `0.1.0` Playtest Plan, Playtest Run Report, and Critic Report contracts;
+- deterministic quarter-turn checkpoint geometry and iterative breadth-first routes derived only
+  from explicit Architecture Plan circulation;
+- source, Manifest, root, semantic-container, and geometry binding before a plan is accepted;
+- a fixed non-jumping character profile, PathfindingService preflight, one navigation request per
+  segment, and independent arrival, floor, survival, support, and clearance evidence;
+- playtest-only capability discovery and fixed `identity_probe`, `character_setup`, `player_state`,
+  `path_probe`, and `clearance_probe` Server actions;
+- bounded console differencing and private viewport evidence without raw logs, image bytes, Studio
+  identity, or lease identity in strict reports;
+- observed-state start and stop handling with no blind retry, followed by an exact post-play Edit
+  snapshot and final Manifest no-op check; and
+- a pure deterministic architectural Critic that localizes path, navigation, clearance, circulation,
+  stair, console, evidence, stop, and integrity findings without generating a repair.
+
+The closed Architecture Plan and Manifest contracts carry hashes for different WorldSpec stages.
+Milestone 5 therefore proves both exact artifacts and exhaustive supported structural
+correspondence, but cannot cryptographically prove authored-Plan-to-derived-Manifest provenance
+without an additional trusted input or additive provenance field.
+
+This Critic is functional and architectural. It does not score beauty, style, lighting, textures,
+furnishing, reference fidelity, gameplay fun, performance under load, or publish readiness.
+
 ## Not implemented yet
 
 There is no Studio plugin, Forge interface, ChangeHistoryService integration, published-place
-mutation, Play-mode automation, gameplay or traversal evaluation, or visual critique. Atlas
-orchestration, learned or reference-image architectural generation, asset routing or generation, The
-Critic, and a polished Reference-to-Mansion vertical slice remain future work.
+mutation, arbitrary Play-mode automation, visual critique, image understanding, or automatic repair.
+Atlas orchestration, learned or reference-image architectural generation, asset routing or
+generation, the visual Critic, and a polished Reference-to-Mansion vertical slice remain future
+work.
 
 The repository makes no external generation or AI calls and contains no production service,
 database, authentication, telemetry, analytics, or deployment integration.
@@ -143,14 +170,20 @@ database, authentication, telemetry, analytics, or deployment integration.
 |   |   |-- 0002-declarative-roblox-manifest-and-transactions.md
 |   |   |-- 0003-deterministic-orthogonal-architecture-planning.md
 |   |   |-- 0004-use-studio-mcp-for-the-first-live-adapter.md
-|   |   `-- 0005-chunk-studio-mutations-and-recover-by-observation.md
+|   |   |-- 0005-chunk-studio-mutations-and-recover-by-observation.md
+|   |   `-- 0006-observe-playtests-before-automatic-repair.md
 |   |-- architecture/
 |   |   |-- architecture-planner.md
 |   |   |-- roblox-compiler.md
 |   |   |-- studio-mcp-adapter.md
 |   |   |-- studio-transaction-batching.md
-|   |   `-- system-overview.md
+|   |   |-- system-overview.md
+|   |   `-- playtest-observation-and-critic.md
 |   |-- architecture-planner/0.1.0.md
+|   |-- playtest-critic/
+|   |   |-- 0.1.0.md
+|   |   |-- evidence-model.md
+|   |   `-- traversal-model.md
 |   |-- product/vision.md
 |   |-- roblox-compiler/0.1.0.md
 |   |-- studio-mcp-adapter/
@@ -166,6 +199,12 @@ database, authentication, telemetry, analytics, or deployment integration.
 |   |   |-- scripts/              # Schema, fixture, and compiled-CLI checks
 |   |   |-- src/                  # Profile, solver, geometry, evaluation, emission, CLI
 |   |   `-- test/                 # Contract, solver, geometry, pipeline, and CLI tests
+|   |-- playtest-critic/
+|   |   |-- fixtures/             # Generated plans, run reports, and Critic reports
+|   |   |-- schema/               # Generated plan, run-report, and Critic schemas
+|   |   |-- scripts/              # Schema, fixture, and compiled-CLI checks
+|   |   |-- src/                  # Source binding, traversal planning, reports, Critic, CLI
+|   |   `-- test/                 # Contract, geometry, route, pipeline, scale, and CLI tests
 |   |-- roblox-compiler/
 |   |   |-- fixtures/             # Canonical WorldSpec, manifest, snapshot, and plan examples
 |   |   |-- schema/               # Generated directive and compiler-contract schemas
@@ -210,29 +249,32 @@ version.
 
 ## Commands
 
-| Command                        | Purpose                                                                                            |
-| ------------------------------ | -------------------------------------------------------------------------------------------------- |
-| `pnpm format`                  | Format supported files with Prettier.                                                              |
-| `pnpm format:check`            | Check formatting without writing changes.                                                          |
-| `pnpm lint`                    | Run ESLint.                                                                                        |
-| `pnpm typecheck`               | Build dependencies, then type-check all workspace packages.                                        |
-| `pnpm test`                    | Build dependencies, then run all Vitest suites.                                                    |
-| `pnpm build`                   | Compile all workspace packages with `tsc`.                                                         |
-| `pnpm test:dist`               | Build and smoke-test compiled CLIs and their documented exit codes.                                |
-| `pnpm schema:generate`         | Regenerate schemas for every package that owns schema artifacts.                                   |
-| `pnpm schema:check`            | Check all generated schemas for drift.                                                             |
-| `pnpm fixture:generate`        | Regenerate deterministic artifacts for every fixture-owning package.                               |
-| `pnpm fixture:check`           | Fail when any generated fixture artifact differs from its deterministic generator output.          |
-| `pnpm worldspec`               | Run the WorldSpec CLI.                                                                             |
-| `pnpm roblox-compiler`         | Run the offline Roblox compiler CLI.                                                               |
-| `pnpm architecture-planner`    | Run the offline architectural blockout planner CLI.                                                |
-| `pnpm studio-mcp`              | Run the bounded local Studio MCP adapter CLI.                                                      |
-| `pnpm studio:live-smoke`       | Run explicit real-Studio acceptance in an unsaved sandbox; excluded from `pnpm check` and CI.      |
-| `pnpm studio:batch-live-smoke` | Review or run Milestone 4 batch and reconnect acceptance; excluded from `pnpm check` and CI.       |
-| `pnpm check`                   | Run formatting, lint, build, type, tests, schema and fixture drift, and distribution smoke checks. |
+| Command                           | Purpose                                                                                            |
+| --------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `pnpm format`                     | Format supported files with Prettier.                                                              |
+| `pnpm format:check`               | Check formatting without writing changes.                                                          |
+| `pnpm lint`                       | Run ESLint.                                                                                        |
+| `pnpm typecheck`                  | Build dependencies, then type-check all workspace packages.                                        |
+| `pnpm test`                       | Build dependencies, then run all Vitest suites.                                                    |
+| `pnpm build`                      | Compile all workspace packages with `tsc`.                                                         |
+| `pnpm test:dist`                  | Build and smoke-test compiled CLIs and their documented exit codes.                                |
+| `pnpm schema:generate`            | Regenerate schemas for every package that owns schema artifacts.                                   |
+| `pnpm schema:check`               | Check all generated schemas for drift.                                                             |
+| `pnpm fixture:generate`           | Regenerate deterministic artifacts for every fixture-owning package.                               |
+| `pnpm fixture:check`              | Fail when any generated fixture artifact differs from its deterministic generator output.          |
+| `pnpm worldspec`                  | Run the WorldSpec CLI.                                                                             |
+| `pnpm roblox-compiler`            | Run the offline Roblox compiler CLI.                                                               |
+| `pnpm architecture-planner`       | Run the offline architectural blockout planner CLI.                                                |
+| `pnpm playtest-critic`            | Plan deterministic traversal or evaluate a strict run report.                                      |
+| `pnpm studio-mcp`                 | Run the bounded local Studio MCP adapter CLI.                                                      |
+| `pnpm studio:live-smoke`          | Run explicit real-Studio acceptance in an unsaved sandbox; excluded from `pnpm check` and CI.      |
+| `pnpm studio:batch-live-smoke`    | Review or run Milestone 4 batch and reconnect acceptance; excluded from `pnpm check` and CI.       |
+| `pnpm studio:playtest-live-smoke` | Review or run Milestone 5 playtest acceptance; excluded from `pnpm check` and CI.                  |
+| `pnpm check`                      | Run formatting, lint, build, type, tests, schema and fixture drift, and distribution smoke checks. |
 
 The root fixture commands cover generated artifacts owned by the Roblox compiler, Architecture
-Planner, and Studio MCP Adapter. Authored fixture inputs remain unchanged and are never generated.
+Planner, Playtest Critic, and Studio MCP Adapter. Authored fixture inputs remain unchanged and are
+never generated.
 
 CI runs `pnpm check` with Node.js 22 for pull requests, pushes to `main`, and manual dispatches. It
 uses fake MCP clients and requires no Studio installation. Generated `dist` directories remain
@@ -310,6 +352,28 @@ cliffwatch-mansion-program.worldspec.json
 See the [Architecture Planner v0.1 reference](docs/architecture-planner/0.1.0.md) for its supported
 profile, coordinate model, contracts, diagnostics, security boundary, and limitations.
 
+## Playtest Critic CLI
+
+Derive the deterministic Cliffwatch traversal plan from the validated Architecture Plan and its
+exact compiled Manifest:
+
+```sh
+pnpm playtest-critic plan packages/architecture-planner/fixtures/plans/cliffwatch-mansion.architecture-plan.json --manifest packages/architecture-planner/fixtures/manifest/cliffwatch-mansion-blockout.manifest.json
+pnpm playtest-critic plan packages/architecture-planner/fixtures/plans/cliffwatch-mansion.architecture-plan.json --manifest packages/architecture-planner/fixtures/manifest/cliffwatch-mansion-blockout.manifest.json --output cliffwatch.playtest-plan.json
+```
+
+Evaluate a strict run report through the pure deterministic Critic:
+
+```sh
+pnpm playtest-critic evaluate --plan packages/playtest-critic/fixtures/plans/cliffwatch.playtest-plan.json --run-report packages/playtest-critic/fixtures/run-reports/cliffwatch-pass.playtest-run.json
+pnpm playtest-critic evaluate --plan cliffwatch.playtest-plan.json --run-report run.playtest-run.json --output run.critic.json
+```
+
+Planning derives world positions only from the Architecture Plan's exact quarter-turn coordinate
+model and follows only explicit doors, open stair-hall connections, and stair runs. Evaluation reads
+strict structured evidence; it does not connect to Studio, inspect images, generate a Change Set, or
+apply a repair. See the [Playtest Critic v0.1 reference](docs/playtest-critic/0.1.0.md).
+
 ## Studio MCP adapter CLI
 
 Start with a new unsaved Roblox Studio baseplate, enable Studio's built-in MCP server, leave Studio
@@ -376,6 +440,26 @@ classify the exact observed prefix, compensate under that same lease to the cano
 verify its complete hash. A missing, malformed, or different lease blocks classification and all
 compensation. A viewport capture is evidence only, not a visual-quality claim.
 
+Milestone 5 has a separate review-first playtest sequence. It is excluded from `pnpm check` and CI,
+requires the complete reviewed sequence hash, and accepts the private Studio and sandbox-lease
+identity only at runtime:
+
+```sh
+pnpm studio:playtest-live-smoke -- --review
+pnpm studio:playtest-live-smoke -- --studio-id <exact-studio-id> --sandbox-lease-id <private-64-lowercase-hex> --confirm <full-reviewed-playtest-sequence-sha256> --confirm-plan <exact-playtest-plan-sha256> --confirm-change-set <complete-change-set-sha256>
+```
+
+The review command prints all three required hashes without printing a Studio ID, sandbox lease, or
+local path.
+
+The controller first proves the exact desired Manifest is already present in the leased unsaved
+DataModel. It then starts one solo simulation, proves Server-side project identity, traverses the
+confirmed plan with path preflight and one navigation request per segment, and always resolves Stop
+through observed state. Success additionally requires the exact pre-play and post-play lease-bound
+Edit snapshot hashes to match and the final Manifest reconciliation to remain a no-op. Raw console
+messages, image bytes, Studio identity, and lease identity stay under the ignored
+`.worldwright/live-milestone-5/` evidence directory.
+
 ## Documentation
 
 - [Product vision](docs/product/vision.md)
@@ -384,14 +468,17 @@ compensation. A viewport capture is evidence only, not a visual-quality claim.
 - [Architecture planner](docs/architecture/architecture-planner.md)
 - [Studio MCP adapter architecture](docs/architecture/studio-mcp-adapter.md)
 - [Studio transaction batching and reconnectable recovery](docs/architecture/studio-transaction-batching.md)
+- [Playtest observation and the architectural Critic](docs/architecture/playtest-observation-and-critic.md)
 - [ADR 0001: WorldSpec is the canonical cross-system contract](docs/adr/0001-worldspec-as-canonical-contract.md)
 - [ADR 0002: Use a declarative Roblox manifest and transactional reconciliation](docs/adr/0002-declarative-roblox-manifest-and-transactions.md)
 - [ADR 0003: Use deterministic orthogonal planning before learned architectural generation](docs/adr/0003-deterministic-orthogonal-architecture-planning.md)
 - [ADR 0004: Use Roblox Studio MCP for the first live adapter](docs/adr/0004-use-studio-mcp-for-the-first-live-adapter.md)
 - [ADR 0005: Chunk Studio mutations and recover uncertain transport by observation](docs/adr/0005-chunk-studio-mutations-and-recover-by-observation.md)
+- [ADR 0006: Observe and evaluate playtests before automatic repair](docs/adr/0006-observe-playtests-before-automatic-repair.md)
 - [WorldSpec v0.1 reference](docs/worldspec/0.1.0.md)
 - [Roblox compiler v0.1 reference](docs/roblox-compiler/0.1.0.md)
 - [Architecture Planner v0.1 reference](docs/architecture-planner/0.1.0.md)
+- [Playtest Critic v0.1 reference](docs/playtest-critic/0.1.0.md)
 - [Studio MCP Adapter v0.1 reference](docs/studio-mcp-adapter/0.1.0.md)
 - [Studio MCP Adapter v0.2 reference](docs/studio-mcp-adapter/0.2.0.md)
 - [Studio MCP transaction recovery runbook](docs/studio-mcp-adapter/recovery.md)
@@ -413,15 +500,16 @@ compensation. A viewport capture is evidence only, not a visual-quality claim.
 5. **Chunked Studio transactions and reconnectable recovery** - partition a complete authorized
    Change Set into deterministic bounded chunks, poison uncertain clients, reconnect only to the
    exact Studio target and transaction-leased unsaved DataModel, classify lease-bound fresh state by
-   exact prefix, and compensate conservatively to a verified base (Milestone 4, current
-   implementation).
+   exact prefix, and compensate conservatively to a verified base (Milestone 4, complete).
 6. **Live playtest observation and critique** - exercise traversal and interactions under separate
-   authorization, collect structured evidence, and introduce The Critic without confusing a
-   successful transaction with quality evaluation.
+   authorization, collect structured architectural evidence, and introduce the first narrow Critic
+   without confusing a successful transaction with quality evaluation (Milestone 5, current
+   implementation).
 7. **Reference understanding** - extract evidence and style signals from images, plans, sketches,
    heightmaps, text, and existing places while preserving provenance.
 8. **Reference-to-Mansion vertical slice** - integrate the system to produce and iteratively improve
    a complete mansion, interior, site, landscaping, lighting, interactions, and traversal.
 
-Roadmap items after chunked Studio recovery describe direction, not current capability. Playtesting,
-character navigation, console evaluation, and The Critic remain future work.
+Roadmap items after live architectural playtest observation describe direction, not current
+capability. Visual evaluation, image understanding, automatic repair, and localized regeneration
+remain future work.

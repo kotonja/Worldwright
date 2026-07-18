@@ -13,6 +13,14 @@ text-to-random-parts or text-to-mesh toy.
   `worldwright.architecture` WorldSpec entity or relationship attribute.
 - **Architecture Plan** is the separate, versioned, reviewable spatial contract produced by the
   Milestone 2 offline planner. It is derived from, and integrity-bound to, a canonical WorldSpec.
+- **Playtest Plan** is the strict, versioned Milestone 5 traversal contract derived
+  deterministically from one validated Architecture Plan and its exact compiled Roblox Manifest. Its
+  complete hash is the live play authorization unit.
+- **Playtest Run Report** is the strict, sanitized observation record for one confirmed plan. It
+  contains structured path, arrival, character, clearance, console, capture, stop, coverage, and
+  Edit-integrity evidence, never raw logs, image bytes, Studio IDs, or sandbox-lease identity.
+- **Critic Report** is the deterministic result of evaluating one exact Playtest Plan and Run
+  Report. Findings are localized review evidence and never authorize or contain an automatic repair.
 - **Roblox Manifest** is the complete desired Worldwright-managed Roblox state compiled from a
   WorldSpec document.
 - **Roblox Scene Snapshot** is observed managed state for one project and includes markers for
@@ -38,7 +46,8 @@ text-to-random-parts or text-to-mesh toy.
 - **Studio Apply Receipt** is the strict, sanitized record of an observed Studio transaction
   outcome. It is not mutation authorization, a digital signature, or visual-quality proof.
 - **Forge** is the future Roblox Studio creator interface.
-- **The Critic** is the future evaluation and localized-repair system.
+- **The Critic** begins in Milestone 5 with narrow architectural reachability, survival, clearance,
+  console, and Edit-integrity evaluation. Visual evaluation and automatic repair remain future work.
 
 Do not describe future systems as implemented.
 
@@ -81,6 +90,15 @@ Do not describe future systems as implemented.
   with every compiler contract or behavior change.
 - `docs/architecture-planner/0.1.0.md` documents the published planner contracts and behavior.
   Update it with every architecture directive, plan, solver, geometry, or emission change.
+- `packages/playtest-critic/src/plan/contract-schema.ts`, `run/contract-schema.ts`, and
+  `critic/contract-schema.ts` are the canonical TypeBox sources for the Playtest Plan, Playtest Run
+  Report, and Critic Report. Their generated `packages/playtest-critic/schema/*.schema.json`
+  artifacts must never be hand-edited.
+- `packages/playtest-critic/src/plan/source.ts`, `coordinates.ts`, `manifest-correspondence.ts`,
+  `planner.ts`, and `trusted.ts` own strict source validation and binding, exact quarter-turn
+  coordinate derivation, manifest correspondence, deterministic checkpoint and route construction,
+  and trusted-source reconstruction. `src/critic/rules.ts` and `evaluate.ts` own the pure Critic
+  rules and deterministic localized findings.
 - `packages/studio-mcp-adapter/src/contract-schema.ts` is the source for the Studio Apply Receipt
   and fixed Studio bridge schemas and their schema-derived static types;
   `src/bridge/protocol-schema.ts` exposes the bridge-specific boundary. Corresponding
@@ -114,6 +132,11 @@ Do not describe future systems as implemented.
   unmanaged-root observation, compiler snapshot conversion, and the implementation of the compiler
   sequential, optional batch, and optional pre-mutation preparation adapter interfaces. Transaction
   safety remains in the compiler's shared transaction engine.
+- `packages/studio-mcp-adapter/src/playtest/contract-schema.ts` is the canonical source for the
+  separate fixed Studio playtest-probe request and response contracts. The other files in
+  `src/playtest/` own the playtest-only capability handshake, fixed Server programs, exact-session
+  state machine, one-shot Client navigation, bounded console/capture evidence, and post-play Edit
+  verification. Keep this additive protocol separate from the closed Studio Bridge `0.1.0`.
 - `docs/studio-mcp-adapter/0.1.0.md` documents the published adapter, bridge, receipt, CLI, sandbox,
   security, and limitation baseline. `docs/studio-mcp-adapter/0.2.0.md` documents batch, reconnect,
   progress, report, compatibility, and current limitation behavior. Update the applicable reference
@@ -152,6 +175,8 @@ Use the root scripts:
   `pnpm roblox-compiler compile ...`.
 - `pnpm architecture-planner <command>` - run the offline planner CLI, for example
   `pnpm architecture-planner build ...`.
+- `pnpm playtest-critic <command>` - derive a deterministic Playtest Plan or evaluate a strict Run
+  Report through the pure architectural Critic.
 - `pnpm studio-mcp <command>` - run the bounded Studio adapter CLI, for example
   `pnpm studio-mcp probe`.
 - `pnpm studio:live-smoke -- --review` - print the offline reviewed live-sequence envelope and its
@@ -164,6 +189,12 @@ Use the root scripts:
 - `pnpm studio:batch-live-smoke -- --studio-id <id> --confirm <full-reviewed-sequence-sha256>` - run
   that exact separate Milestone 4 real-Studio acceptance flow. This command is intentionally
   excluded from `pnpm check` and CI.
+- `pnpm studio:playtest-live-smoke -- --review` - print the complete offline reviewed Milestone 5
+  playtest-sequence envelope, sequence hash, exact Playtest Plan hash, and complete Change Set hash
+  without connecting to Studio.
+- `pnpm studio:playtest-live-smoke -- --studio-id <id> --sandbox-lease-id <private-id> --confirm <full-reviewed-playtest-sequence-sha256> --confirm-plan <exact-playtest-plan-sha256> --confirm-change-set <complete-change-set-sha256>` -
+  run that exact separate Milestone 5 real-Studio acceptance flow. It is intentionally excluded from
+  `pnpm check` and CI.
 - `pnpm check` - run formatting, linting, build, type checks, tests, schema and fixture drift
   checks, and compiled-distribution smoke tests for all packages.
 
@@ -207,6 +238,34 @@ Use the root scripts:
 - Emit only the existing closed Roblox directive, class, material, shape, and property allowlists.
   Do not introduce scripts, asset IDs, content URLs, arbitrary classes, or property escape hatches.
 - Keep planning and emission pure, bounded, non-mutating, offline, and free of network access.
+
+## Playtest planning and Critic rules
+
+- Accept only a valid Architecture Plan and its exact compiled Manifest. Bind both canonical hashes,
+  project and root identity, source hashes, managed count, every semantic container, and required
+  wall, opening, corridor, stair-hall, and stair-run geometry. Fail closed on missing, stale, or
+  unrelated structure, and never mutate either input.
+- Derive all checkpoints from Architecture Plan clear-space geometry through the planner's exact
+  quarter-turn transform. Do not inspect Studio to invent targets, use display names as identity, or
+  place checkpoints in walls, glass, slabs, steps, blocked openings, or another floor's vertical
+  zone.
+- Build routes only from explicit circulation edges. Visit targets in the documented deterministic
+  order and use iterative breadth-first search with code-point-sorted neighbors. Never infer an edge
+  from rectangle contact, recurse with route depth, use random/time/locale ordering, or discard a
+  repeated corridor or stair traversal needed by the route.
+- Treat the complete normalized Playtest Plan hash as the only live play confirmation. Reject
+  prefixes, implicit approval, Manifest or Change Set hashes, and force/yes bypasses.
+- Keep Playtest Run Reports strict and sanitized. Raw console messages, paths, stack traces, image
+  bytes, Studio IDs, place names, user/account identity, sandbox lease IDs, and local evidence paths
+  may exist only in ignored local evidence and must never enter fixtures, normal CLI JSON, commits,
+  or PR bodies.
+- Keep Critic evaluation pure, deterministic, source-bound, non-mutating, and offline. Recompute
+  coverage and metrics from segment evidence, localize findings to stable semantic IDs, sort them by
+  the published order, and return pass only when every hard rule and warning rule agrees with the
+  report. Never generate executable repair instructions, a Change Set, a new plan, or any automatic
+  mutation.
+- A viewport capture is evidence only. Milestone 5 performs no image understanding, reference
+  comparison, aesthetic scoring, visual-quality claim, or publish-readiness judgment.
 
 ## Roblox compiler and transaction rules
 
@@ -347,6 +406,34 @@ Use the root scripts:
 - Do not call ChangeHistoryService. The MCP bridge is not a plugin, Studio undo is not transaction
   isolation, and a future Forge history recording cannot replace snapshot verification.
 
+- Keep playtest tools optional for the core transaction adapter. A playtest controller must validate
+  the exact runtime schemas for `start_stop_play`, `get_console_output`, `character_navigation`,
+  `screen_capture`, and Server-capable `execute_luau` in addition to the existing exact-session
+  tools. Never guess fields or expose a generic tool invoker.
+- Before Play, require exact Studio selection, zero PlaceId/GameId, stopped Edit, an exact private
+  sandbox lease, one lease-bound complete snapshot, desired Manifest reconciliation with zero
+  operations, and the full confirmed Playtest Plan hash. Prove the running Server simulation has the
+  same lease, project, root, source hash, and managed count before setup, navigation, or Stop is
+  attributed to Worldwright.
+- Generate only the separate fixed `identity_probe`, `character_setup`, `player_state`,
+  `path_probe`, and `clearance_probe` Server programs. Character setup may pivot exactly one ready
+  solo character and zero its velocities; it must not create Instances, change health, anchor the
+  character, alter managed architecture, write attributes, or modify the lease.
+- For every segment, run one fixed PathfindingService preflight, issue at most one exact-position
+  `character_navigation` call, and independently poll bounded Server player state for arrival,
+  survival, fall, velocity, and floor evidence before one read-only clearance probe. Never blindly
+  retry an uncertain Start, navigation, or Stop call.
+- Attempt Stop in a finally path only after exact play identity is proved. Resolve uncertainty
+  through a new default local-stdio client, exact Studio reselection, observed state, and a fresh
+  identity probe before any observed-state-justified second Stop. After Edit returns, require the
+  exact lease-bound pre/post snapshot hash match and a final zero-operation Manifest reconciliation.
+- Keep the compiler transaction reconnect limit separate from playtest cleanup. One playtest
+  controller owns non-resettable ordinary-run, pre-Stop identity-recovery, and Stop-outcome-
+  resolution states. The two cleanup states are each capped at two local-stdio replacement attempts,
+  so earlier Start, traversal, navigation, capture, or console recovery cannot consume mandatory
+  Stop capacity. Cleanup may replace at most four clients across those phases, may send at most two
+  Stop commands, and must never send Stop into an unverified run.
+
 ## Tests and documentation
 
 - Every behavior change requires focused tests and corresponding documentation.
@@ -359,6 +446,16 @@ Use the root scripts:
   generated-ID collisions.
 - Planner integration requires a complete source-to-plan-to-derived-WorldSpec-to-manifest-to-change-
   set-to-simulated-snapshot test, including deterministic hashes and exact result verification.
+- Playtest planning requires focused tests for Architecture Plan/Manifest binding, all quarter-turn
+  transforms, safe room/opening/corridor/stair checkpoints, generated-ID collision handling,
+  source-reordering stability, deterministic BFS tie-breaking, repeated corridor/stair traversal,
+  disconnected targets, strict validation, canonical hashes, non-mutation, the complete Cliffwatch
+  pipeline, and a bounded three-floor scale fixture.
+- Run Report and Critic behavior requires tests for strict tagged evidence, exact source and segment
+  binding, independently derived coverage,
+  path/navigation/death/fall/floor/support/head/body/console/Stop/Edit-integrity rules, warning-only
+  status, deterministic finding IDs and order, exact metrics, privacy rejection, canonical
+  normalization, and no repair content.
 - Transaction behavior requires tests for success, no-op, stale rejection before mutation, failures
   before and after mutation, verification mismatch, verified rollback, rollback failure,
   unmanaged-descendant protection, deterministic attempted-operation order, every exact progress
@@ -373,6 +470,12 @@ Use the root scripts:
   progress CLI exit codes, confirmation, operation/payload bounds, lease contracts, compare-and-set
   rotation, lease-bound batches and snapshots, same-ID/different-DataModel rejection, preparation
   ordering, no-op zero-claim behavior, and sanitization. CI must not require Studio.
+- Playtest adapter behavior additionally requires fake-MCP coverage for every required/missing or
+  incompatible tool, fixed probe framing and inert encoding, exact lease/project/root/source/count
+  identity, one ready character, bounded setup, path and jump outcomes, one-shot navigation and
+  independent arrival, uncertainty without blind retry, floor/fall/death, support and clearance,
+  bounded console differencing, private JPEG evidence, verified Stop uncertainty, and exact
+  post-play Edit restoration. The core transaction adapter must still work without playtest tools.
 - A live Studio success claim requires an actual run against one unsaved local Edit-mode sandbox,
   exact canonical snapshot hash comparisons, actual chunk and mutation-execute call counts, at most
   16 forward mutation calls for the 400-create Cliffwatch transition, verified no-op and update
@@ -380,6 +483,12 @@ Use the root scripts:
   reconnect with same-call lease-bound observation, exact-prefix classification, verified
   compensation, and untracked evidence with no shareable lease identifier. Fake-client tests do not
   prove live acceptance.
+- A Milestone 5 live success claim additionally requires that exact leased Cliffwatch sandbox to
+  reconcile as a no-op, one confirmed solo Play start, fixed Server identity proof, one ready
+  character, path preflight and at most one navigation request for every planned segment,
+  independent arrival at all 13 rooms and both floors, stair traversal, survival, support and
+  clearance, bounded console/capture evidence, safe Stop, the exact lease-bound pre/post Edit hash,
+  a final no-op, and a validated pass or explicitly reviewed pass-with-warnings Critic Report.
 - Before claiming completion, run `pnpm check`. Also run a narrower command while iterating when it
   gives faster feedback.
 - Report every failed or skipped check honestly. Never claim a command passed unless it ran
@@ -392,7 +501,9 @@ Use the root scripts:
 - Do not add an AI provider, another live Roblox integration, Forge plugin, external generation
   provider, database, authentication system, or production service without an explicit milestone
   authorizing it. Milestone 4 authorizes only deterministic chunking and reconnectable recovery
-  within the bounded local Studio MCP adapter described above.
+  within the bounded local Studio MCP adapter described above. Milestone 5 authorizes only the
+  separate fixed, bounded, lease-bound solo-play observation and pure architectural Critic described
+  above; it does not authorize repair, publishing, visual AI, arbitrary input, or another transport.
 - WorldSpec is data only. Never accept or introduce arbitrary executable code, provider credentials,
   or chain-of-thought fields.
 - Roblox compiler contracts are data only. Never introduce scripts, dynamic evaluation, arbitrary
@@ -400,6 +511,9 @@ Use the root scripts:
 - Architecture contracts are data only. Never accept executable source, provider credentials, unsafe
   numeric values, unbounded user-controlled search, hidden source mutation, or emission against a
   stale source hash.
+- Playtest and Critic contracts are data only. Never accept arbitrary Luau, MCP arguments, player or
+  account identity, raw logs, image bytes, local paths, credentials, repair instructions, or
+  unbounded routes, evidence, waits, or polling.
 - Studio bridge and receipt contracts are data only. Never accept arbitrary Luau, executable Roblox
   Instances, arbitrary MCP payloads, credentials, logs, image bytes, machine paths, or environment
   dumps.
@@ -417,6 +531,10 @@ changes preserve complete Change Set authorization, deterministic ordering and b
 poisoning, exact-ID reconnect, same-DataModel sandbox leasing, lease-bound observation and mutation,
 exact-prefix classification, no blind retry, no automatic resume, strict identity-free transport
 reporting, and actual live call-count evidence; the diff contains no unrelated files, tracked live
-evidence, or secrets; and implemented versus future Studio, playtesting, Forge, and Critic scope is
-stated accurately. If any required check or real live acceptance cannot run or fails, leave a clear
-record instead of declaring the live milestone complete.
+evidence, or secrets; playtest changes preserve source binding, deterministic explicit-circulation
+routes, full-plan confirmation, fixed probes, exact play identity, one navigation request per
+segment, independent arrival, bounded private evidence, safe Stop, exact post-play Edit integrity,
+pure deterministic findings, and no automatic repair; and implemented versus future Studio,
+playtesting, Forge, and Critic scope is stated accurately. If any required check or real live
+acceptance cannot run or fails, leave a clear record instead of declaring the live milestone
+complete.

@@ -1,0 +1,6382 @@
+{
+  "consoleEvidence": {
+    "baselineEvidenceSha256": "117eb34b8e9b8d1c8f5cf258e1f869d27a6ad8e359a0a186841a151047465dd8",
+    "entries": [
+      {
+        "classificationCode": "console-error",
+        "dataModelSource": "Server",
+        "evidenceId": "evidence-console-error-0001",
+        "isNew": true,
+        "messageSha256": "24dcd3b61b324c07b03c6387b40456f856919f7803670f40a3241b25c0fbde7d",
+        "severity": "error"
+      }
+    ],
+    "evidenceComplete": true,
+    "finalEvidenceSha256": "cc16b552051e746d07550f16daae504d165fdac6a0a4ac70431878d49e36a1c0",
+    "newErrorCount": 1,
+    "newWarningCount": 0
+  },
+  "coverage": {
+    "missedCheckpointIds": [],
+    "missedFloorIds": [],
+    "missedRoomIds": [],
+    "missedStairRunIds": [],
+    "reachedCheckpointCount": 55,
+    "reachedFloorCount": 2,
+    "reachedRoomCount": 13,
+    "requiredCheckpointCount": 55,
+    "requiredFloorCount": 2,
+    "requiredRoomCount": 13,
+    "requiredStairRunCount": 1,
+    "traversedStairRunCount": 1
+  },
+  "criticVersion": "0.1.0",
+  "editIntegrity": {
+    "exactMatch": true,
+    "finalManifestNoopOperationCount": 0,
+    "postPlayEditSnapshotSha256": "b399e37bfe4234f94279c61c630a128e6a37ee99ff3fa460cbf690d5dba836a4",
+    "prePlayEditSnapshotSha256": "b399e37bfe4234f94279c61c630a128e6a37ee99ff3fa460cbf690d5dba836a4"
+  },
+  "environment": {
+    "editBaseSnapshotSha256": "b399e37bfe4234f94279c61c630a128e6a37ee99ff3fa460cbf690d5dba836a4",
+    "exactStudioSelected": true,
+    "gameId": 0,
+    "managedNodeCount": 400,
+    "placeId": 0,
+    "playDataModelsUsed": [
+      "Client",
+      "Edit",
+      "Server"
+    ],
+    "sandboxLeaseVerified": true
+  },
+  "schemaVersion": "0.1.0",
+  "segmentResults": [
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -255.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -255.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-exterior-30166f89e55490bce030",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -255.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 4.25,
+        "waypointCount": 2,
+        "waypointDigestSha256": "135dd744afe425230a4510c5939a0bbbb24f2b77e48e3a0ceeb5ed5b70b878f6"
+      },
+      "segmentId": "pt-segment-097b506120dad9ecb2c6",
+      "sequence": 0,
+      "toCheckpointId": "pt-threshold-a9bfadb38c3b135d1328",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-a9bfadb38c3b135d1328",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16.00195300580526,
+        "waypointCount": 2,
+        "waypointDigestSha256": "3e43a419bc3c0f1438fa9dca794523098008362f2535e91fee7f8d533536d1a8"
+      },
+      "segmentId": "pt-segment-f91319ae72d71bae5857",
+      "sequence": 1,
+      "toCheckpointId": "pt-room-00e3d8bbdc6cbddc8c69",
+      "traversal": "door",
+      "viewportEvidenceId": "evidence-viewport-4596163d98877ddb"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -223.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -223.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-00e3d8bbdc6cbddc8c69",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -223.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16.00195300580526,
+        "waypointCount": 2,
+        "waypointDigestSha256": "b67eefb3ba89bfeba01b7143591aa5bf375ac43f3fd815dafb6df6df2e771896"
+      },
+      "segmentId": "pt-segment-fa629ca8e17d9da4cdb5",
+      "sequence": 2,
+      "toCheckpointId": "pt-threshold-e68ef673dd3bb7ef421e",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -217.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -217.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-e68ef673dd3bb7ef421e",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.75,
+          "y": 67,
+          "z": -217.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "dee7a4186e10d2e55e72879de207c80d329206868c55204b5a22edca6bab6283"
+      },
+      "segmentId": "pt-segment-bf13596542fac843d5a5",
+      "sequence": 3,
+      "toCheckpointId": "pt-threshold-38017d5819cfde0ea397",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -196
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -196
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-38017d5819cfde0ea397",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -196
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 21.50145343924452,
+        "waypointCount": 2,
+        "waypointDigestSha256": "9916eabe62e018ff45639162fc8a7523d304810cd93bdcd87eec54badf6ec641"
+      },
+      "segmentId": "pt-segment-6b25a79809bc7f84e92d",
+      "sequence": 4,
+      "toCheckpointId": "pt-room-34c0e24aebc5a8b37b1e",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -196
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -196
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-34c0e24aebc5a8b37b1e",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -196
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "5862f4041fa5f8501c95beada651130aeb0138fb810f975d842c63a22f47df4b"
+      },
+      "segmentId": "pt-segment-edf6b65418037d417a14",
+      "sequence": 5,
+      "toCheckpointId": "pt-threshold-0f47be5009f48ba6f990",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -196
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -196
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-0f47be5009f48ba6f990",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -196
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "a4e13972ace4819e1764f2668367e3642ed701aca5e8e453379582b279a87cc1"
+      },
+      "segmentId": "pt-segment-a6d77c66b328340348e6",
+      "sequence": 6,
+      "toCheckpointId": "pt-corridor-door-5f2af3207aa2d5782a55",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-5f2af3207aa2d5782a55",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16.194134740701646,
+        "waypointCount": 2,
+        "waypointDigestSha256": "05a5b3fbde3b2c6bb62b9d2266c539eeeae27bd14ef30aefad74d6160ec1cd7f"
+      },
+      "segmentId": "pt-segment-cff1d1ece31f0961d8ce",
+      "sequence": 7,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 57.55432216610669,
+        "waypointCount": 2,
+        "waypointDigestSha256": "e93c20cdbf5146deb272eb83584c46840fd127e86ef562fa43258b38f5de0719"
+      },
+      "segmentId": "pt-segment-b0cdc0fd5491387f3208",
+      "sequence": 8,
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "f759975203ff74044ca87bbbe5ff53beb3cfed194bd3be69c7aab8fa5c6992a9"
+      },
+      "segmentId": "pt-segment-48e16bd10906a2054988",
+      "sequence": 9,
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "e4aaf8484ea8671e93893c39c553924c4051e5ca9f56628b531093fa7620bbb9"
+      },
+      "segmentId": "pt-segment-38a7e04ee0a7025a42fb",
+      "sequence": 10,
+      "toCheckpointId": "pt-room-94042af14807184b573b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-94042af14807184b573b",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "83e7b92efd19bf8329d6d8708c08510013f24a5862c4aacc4fe213c6a9df7738"
+      },
+      "segmentId": "pt-segment-adf6587541d8bb5012d9",
+      "sequence": 11,
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "825c80dd9077597813c640c8ed660642cebe61a59336384ea8fcda191da889eb"
+      },
+      "segmentId": "pt-segment-bc25c265617e8595f6cd",
+      "sequence": 12,
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 57.55432216610669,
+        "waypointCount": 2,
+        "waypointDigestSha256": "81dc0cbb115f69607b8ea1715b0a49e0e1b42275dcb08d9ddad349546dc98831"
+      },
+      "segmentId": "pt-segment-2894a3c84611c311bd75",
+      "sequence": 13,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -157
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -157
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -157
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 23.135470602518552,
+        "waypointCount": 2,
+        "waypointDigestSha256": "83dc4f8f6917ec1414f007e059920a82104df84ea4ea8afb82347816bda0ffbd"
+      },
+      "segmentId": "pt-segment-692ba9bc7db55929c5aa",
+      "sequence": 14,
+      "toCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -157
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -157
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -157
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "fe2daca4a45adfd586fa0c15b3d4f01acc4b355fb9ad6890b45eeb0fa0b2d114"
+      },
+      "segmentId": "pt-segment-4ba480cae2129796f47e",
+      "sequence": 15,
+      "toCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -157
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -157
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -157
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "de7b3c7170d667f29f7037fd41ac48c69f59e43ffca632d34b11ed626e9820b6"
+      },
+      "segmentId": "pt-segment-9cd8ba69c7b66fd5ab72",
+      "sequence": 16,
+      "toCheckpointId": "pt-room-e0d8bae31431d1dbdb19",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -157
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -157
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-e0d8bae31431d1dbdb19",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -157
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "0bde0b83ccfcde78deb309f24142a8d9c24d68ac50e15ba4c77638b2459ff0fb"
+      },
+      "segmentId": "pt-segment-5847e6ea209f1040a6b3",
+      "sequence": 17,
+      "toCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -157
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -157
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f5ff7ce6ff8b289f7f77",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -157
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "aea6a6a24bbbfcdc93cb187dd56da9a6953bf0e4197bd86fab406a26991530b9"
+      },
+      "segmentId": "pt-segment-5ca83a7df8f5860497cd",
+      "sequence": 18,
+      "toCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-84d1efd5ab620c094445",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 23.135470602518552,
+        "waypointCount": 2,
+        "waypointDigestSha256": "cf9cf7020a12714afe7e6fcd82af6330e9f2bd26c2f85793125b9d95417e622f"
+      },
+      "segmentId": "pt-segment-10dcb779818c6b44939a",
+      "sequence": 19,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -151
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -151
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -151
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 29.107559155655764,
+        "waypointCount": 2,
+        "waypointDigestSha256": "9c8887c325fe65cb4f14656c807a0e8a11cef842c9b6edca9f50ea9f19408a49"
+      },
+      "segmentId": "pt-segment-83f469ba35153067b3ef",
+      "sequence": 20,
+      "toCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -151
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -151
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -151
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "ee321b63fd7d6b60198a31cb5f51f03c2095dbf5a1995a5ae45bd3f45d14e189"
+      },
+      "segmentId": "pt-segment-3fb20a45f003a3a418f7",
+      "sequence": 21,
+      "toCheckpointId": "pt-threshold-c634897bddc407334253",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -151
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -151
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-c634897bddc407334253",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.5,
+          "y": 67,
+          "z": -151
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "29ddc80cb03e97047270996d556f5c1c717b3d1d67ae0ebde5866cd538b2d94d"
+      },
+      "segmentId": "pt-segment-3077bb4618b1fe501cd6",
+      "sequence": 22,
+      "toCheckpointId": "pt-room-0fb5a11fcf5e4901c072",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -151
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -151
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-0fb5a11fcf5e4901c072",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -151
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "02b9bd2fddafb574d46df93a5b7938a4dfb8ef2f51444a73af5225f2cd3fd709"
+      },
+      "segmentId": "pt-segment-cdb740b7f813676527d9",
+      "sequence": 23,
+      "toCheckpointId": "pt-threshold-c634897bddc407334253",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -151
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -151
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-c634897bddc407334253",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -151
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "78443bac81191f3d7cc4b7096f538dc20d45f4946860b5662a9ef84035052741"
+      },
+      "segmentId": "pt-segment-1d97141209044ec06cf8",
+      "sequence": 24,
+      "toCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-101f55558bc94e7e047d",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 29.107559155655764,
+        "waypointCount": 2,
+        "waypointDigestSha256": "d9acf675463f229b8bef7788b976b8ae631e67876c90ef4efbc9d03b49dd84df"
+      },
+      "segmentId": "pt-segment-c7dd78bc981853e57798",
+      "sequence": 25,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 17.182840277439585,
+        "waypointCount": 2,
+        "waypointDigestSha256": "e9fcab94f2f2408c5761a8e41c2ad11b0c862b3f2b0abaf303f3e65f6eedb465"
+      },
+      "segmentId": "pt-segment-a6e1e960648f3b4cb364",
+      "sequence": 26,
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "a74cbf971c5e0bceb39be345be66afdd29cd4d3541f6866fc7ad3aaf87cee6e1"
+      },
+      "segmentId": "pt-segment-d254a3550760e18c6f6a",
+      "sequence": 27,
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -197
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -197
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -197
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "dfa10a4305ca8a01f8c90709aad76eb38949a1cf25ff99dc2bb3cb5206cf5a8d"
+      },
+      "segmentId": "pt-segment-fc07e0cd32b6c0050968",
+      "sequence": 28,
+      "toCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "4364e3e138cc40fbe6623cc51c3bb6d05ca27cb40a90549647f6cfa7bea0f606"
+      },
+      "segmentId": "pt-segment-bffab15b7dfedba53958",
+      "sequence": 29,
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "4cb51d6a9dc8f054ccbeed7f6f69d0514df933999e1ad82bb65c6fe4aab64548"
+      },
+      "segmentId": "pt-segment-cc915e1ab3d92513baee",
+      "sequence": 30,
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 17.182840277439585,
+        "waypointCount": 2,
+        "waypointDigestSha256": "bdd86404f3e23333bdf15e1b229f1a99655c2bf08e35c1c68914c9e6e1679a37"
+      },
+      "segmentId": "pt-segment-d6c88ea8bd29f9e893e9",
+      "sequence": 31,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -119
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -119
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -119
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 61.05120801425635,
+        "waypointCount": 2,
+        "waypointDigestSha256": "3a7e6bdebbaf70c35ba0c7fbd1d014461dbb44d690c1fde6066ff4d15d342e42"
+      },
+      "segmentId": "pt-segment-baea1fa88cc9596cfd01",
+      "sequence": 32,
+      "toCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -119
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -119
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -119
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "b41c19dc3a32ecbc8cc09f4f2aed6c85f52e5d765067fd1d288b95429e7630f0"
+      },
+      "segmentId": "pt-segment-859d5b21399b1cafed58",
+      "sequence": 33,
+      "toCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -119
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -119
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -119
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "146b5d6966a0744d7e88e75152f331bbcf91c8fb71a12f19a490ee8904ec9480"
+      },
+      "segmentId": "pt-segment-1cad8297351067e76612",
+      "sequence": 34,
+      "toCheckpointId": "pt-room-3354dec30903d716740f",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -119
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -119
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-3354dec30903d716740f",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -119
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "6589b6145749926dd27ace8b8e66f1f4dd8de063d90de7dd2356e9e61a200040"
+      },
+      "segmentId": "pt-segment-29f2b8c43cd0d570695b",
+      "sequence": 35,
+      "toCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -119
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -119
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-6bb151fd984ae3a8be5c",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -119
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "8d03bf2edf0c5ced025c09eb4ec49d518991775f5f0347267ad6c25c0708dc52"
+      },
+      "segmentId": "pt-segment-1bd7d18dd142b244facb",
+      "sequence": 36,
+      "toCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-a8d9a0d0508d596cb8f3",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 61.05120801425635,
+        "waypointCount": 2,
+        "waypointDigestSha256": "22b05eca50c79097de6f971328016a254bcf8e4b2b1e7dcfc0e723bb427f92b8"
+      },
+      "segmentId": "pt-segment-aeeac9d09aa984d338b4",
+      "sequence": 37,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 59.552497848536966,
+        "waypointCount": 2,
+        "waypointDigestSha256": "03e66f51b96cb6ed5297226166164ef786486042203ba21af1b76626e7fc8e50"
+      },
+      "segmentId": "pt-segment-463516cfaa55f7f2cf5b",
+      "sequence": 38,
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 59.552497848536966,
+        "waypointCount": 2,
+        "waypointDigestSha256": "b60ebc9d2aa0fc8d9793b26db991932491da05f21e591e4bc99c891f0223f011"
+      },
+      "segmentId": "pt-segment-f2148fc4223b31d5d5fb",
+      "sequence": 39,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 64.5619857191521,
+        "waypointCount": 2,
+        "waypointDigestSha256": "57681fb7ba95eac99ee613ee1693b8b605e41170934ea0e7adc03d738996289a"
+      },
+      "segmentId": "pt-segment-045ed4dae3f5f7c8ba21",
+      "sequence": 40,
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "open",
+      "viewportEvidenceId": "evidence-viewport-04f355eb3a5017e4"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 338,
+          "y": 68,
+          "z": -128
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 338,
+          "y": 68,
+          "z": -128
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 338,
+          "y": 68,
+          "z": -128
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 15.337861650177967,
+        "waypointCount": 2,
+        "waypointDigestSha256": "a75ccf0c72a2daeb0a8eebcd01d831b14f43407c7d43a3d9613ccec2cfe6d344"
+      },
+      "segmentId": "pt-segment-de96f31a2059473d404d",
+      "sequence": 41,
+      "toCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 15.337861650177967,
+        "waypointCount": 2,
+        "waypointDigestSha256": "e302ee27441169a193fea0dcf1062f92c668e0e2006b4e867d6e6b4de1ec999d"
+      },
+      "segmentId": "pt-segment-489f7995bca2766a88f9",
+      "sequence": 42,
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "stair",
+      "viewportEvidenceId": "evidence-viewport-04f355eb3a5017e4"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 64.5619857191521,
+        "waypointCount": 2,
+        "waypointDigestSha256": "36bb730312a454f8ff3dd78ff52257d6ceeacdd5a2483c5132411dad256dae5b"
+      },
+      "segmentId": "pt-segment-cca7fc690e9f37ce8a36",
+      "sequence": 43,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "open",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 59.552497848536966,
+        "waypointCount": 2,
+        "waypointDigestSha256": "5aff8e90b097d479a28c34b6e8c32d0b3a65e1dca27adc467f5af1ee0453f04d"
+      },
+      "segmentId": "pt-segment-2d6acddb562d3566e3c8",
+      "sequence": 44,
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "d28c42fa3ee1d8782b39523db49c9053d299e3f432ac08a4333442d150e9392e"
+      },
+      "segmentId": "pt-segment-2014863b6cbf06ffceb0",
+      "sequence": 45,
+      "toCheckpointId": "pt-threshold-00203090ef2bf694daba",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-00203090ef2bf694daba",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 67,
+          "z": -239.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "ae5a40f830f125bb30e40c32c021a5f3563051d9c6e2036a7188d13382dc635b"
+      },
+      "segmentId": "pt-segment-1b3694bfb4d0dd83d970",
+      "sequence": 46,
+      "toCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-aeaadeb44af15f0030fe",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 59.552497848536966,
+        "waypointCount": 2,
+        "waypointDigestSha256": "4f8059600fc407ce2f7e961deee6aa72623351c3bf17ee4c1542951713f42564"
+      },
+      "segmentId": "pt-segment-24d0bcb31f17cc1629b8",
+      "sequence": 47,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -197
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 17.182840277439585,
+        "waypointCount": 2,
+        "waypointDigestSha256": "931cbc4448c4ba4cffd1b31e39ff7a8245d8972b58e23ef63561bfb581e3b9e7"
+      },
+      "segmentId": "pt-segment-5e831348514b641313f8",
+      "sequence": 48,
+      "toCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-75b15660d8af13e68c97",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -197
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "789d5b5f9241cbc3782f4bb5dab3d32b9f017befe1c360cb9eebb74cb038860b"
+      },
+      "segmentId": "pt-segment-32ed53320eb333b0a070",
+      "sequence": 49,
+      "toCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -197
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -197
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-f9f00655483fbfaece19",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -197
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "1e2a2a4c8d4cbd01054716d92e282b889a8ad1c6d5d62645ee5f79e55b230c30"
+      },
+      "segmentId": "pt-segment-f9436e96853a7b2365fa",
+      "sequence": 50,
+      "toCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.25,
+          "y": 67,
+          "z": -213.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.25,
+          "y": 67,
+          "z": -213.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-3feb1c7d4d47b3cb20cf",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.25,
+          "y": 67,
+          "z": -213.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16.50189383070925,
+        "waypointCount": 2,
+        "waypointDigestSha256": "2a5a328cf6f5bf2925a1c0e0a75f1e55c465fb91bdfca8e2efbeaf866e8caf52"
+      },
+      "segmentId": "pt-segment-ab432eb64cf9c9f6e7f0",
+      "sequence": 51,
+      "toCheckpointId": "pt-threshold-b01826ad61d4613ae65b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.25,
+          "y": 67,
+          "z": -219.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.25,
+          "y": 67,
+          "z": -219.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-b01826ad61d4613ae65b",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.25,
+          "y": 67,
+          "z": -219.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "c48c3cf07510745fed63c95134f4448638a6629cef9a6e0f9eeeb43632a73c39"
+      },
+      "segmentId": "pt-segment-922056336b0b8a397839",
+      "sequence": 52,
+      "toCheckpointId": "pt-threshold-fea3d932615e68bf7553",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-fea3d932615e68bf7553",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 18.001736027394692,
+        "waypointCount": 2,
+        "waypointDigestSha256": "bd52f16fd729669a56e346aa6a14a0b9c6c9f7ea1365a297ffef8708c8ce3a53"
+      },
+      "segmentId": "pt-segment-a61fd2733e7e1c6ed11c",
+      "sequence": 53,
+      "toCheckpointId": "pt-room-94042af14807184b573b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-94042af14807184b573b",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "32a925d9ff1b232a3edeb69113511918db5611a3cc7a29b5234a0040b8ddb375"
+      },
+      "segmentId": "pt-segment-f797e880b3d8151e8028",
+      "sequence": 54,
+      "toCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-829a120dea7e506fec45",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 67,
+          "z": -237.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "d8c62e5adbc1b2504e238804c6cd24dcedc4d37f1a1abb992ef70d7e197bb9e3"
+      },
+      "segmentId": "pt-segment-e964f500433e099a1ee0",
+      "sequence": 55,
+      "toCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-dd894c56d1472e519aa8",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 67,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 57.55432216610669,
+        "waypointCount": 2,
+        "waypointDigestSha256": "a80a09c71fff06fad99cf8e869b3f0af1cb9c4fc1e1e5e38d1ee6efd29e6e58c"
+      },
+      "segmentId": "pt-segment-251633e24bed54a60fd4",
+      "sequence": 56,
+      "toCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-f380388760d54b81"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 67,
+          "z": -116
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 64.5619857191521,
+        "waypointCount": 2,
+        "waypointDigestSha256": "dadf3f2142dad1738de9d32b3578af6c377c8a95e2f27ac1934cb75c74bd3927"
+      },
+      "segmentId": "pt-segment-16c14ca3bfa86eda6b61",
+      "sequence": 57,
+      "toCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "traversal": "open",
+      "viewportEvidenceId": "evidence-viewport-04f355eb3a5017e4"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 338,
+          "y": 68,
+          "z": -128
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 338,
+          "y": 68,
+          "z": -128
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 0,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 0
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-ground",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-hall-2577b130ad62c393d982",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 338,
+          "y": 68,
+          "z": -128
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 15.337861650177967,
+        "waypointCount": 2,
+        "waypointDigestSha256": "14a85aafc9c9b35ee433002febb9fc83075d1ed24d03acc3e5ef30400b5cc7c9"
+      },
+      "segmentId": "pt-segment-221522f3d35c340f8a56",
+      "sequence": 58,
+      "toCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 338,
+          "y": 87,
+          "z": -104
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 338,
+          "y": 87,
+          "z": -104
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-landing-lower-be01fc21e7f00aac1107",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 338,
+          "y": 87,
+          "z": -104
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 30.610455730027933,
+        "waypointCount": 2,
+        "waypointDigestSha256": "e89f148f18c5f899ba5768eaaeaf5dbda9bf284c32901244d2f336946734648d"
+      },
+      "segmentId": "pt-segment-0b3e902763a7f5623c09",
+      "sequence": 59,
+      "toCheckpointId": "pt-landing-upper-be01fc21e7f00aac1107",
+      "traversal": "stair"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -116
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -116
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-landing-upper-be01fc21e7f00aac1107",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -116
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 15.305227865013967,
+        "waypointCount": 2,
+        "waypointDigestSha256": "3bdc6020e99327cc5b31f3edb16945a27bbf51a1541f647c02f0ccf3ccd61eec"
+      },
+      "segmentId": "pt-segment-d6acb8876feb602ffd33",
+      "sequence": 60,
+      "toCheckpointId": "pt-hall-1b39ca3e3ca81d33f9e9",
+      "traversal": "stair",
+      "viewportEvidenceId": "evidence-viewport-234b74526b6d34df"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-hall-1b39ca3e3ca81d33f9e9",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 64.5619857191521,
+        "waypointCount": 2,
+        "waypointDigestSha256": "020e99149cbabb03bd04d3a45591a11ba6b40e858109ae46d1370c6d904a0f9a"
+      },
+      "segmentId": "pt-segment-8f73fc5ed02516346cd1",
+      "sequence": 61,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "open",
+      "viewportEvidenceId": "evidence-viewport-380339043b6094fa"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 51.56064390598705,
+        "waypointCount": 2,
+        "waypointDigestSha256": "7ede57eaf296576469c2f172fd6778ff5ccfffbef61e723e3d5b43e9581b4a5f"
+      },
+      "segmentId": "pt-segment-d1d0b24d8fd8334d9b9b",
+      "sequence": 62,
+      "toCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "097f0b0a4d95cba3e391c03524e3b907de77d749de1cc2f009a6ba9f3f58cabb"
+      },
+      "segmentId": "pt-segment-c8d964e247e9fd0aa9c9",
+      "sequence": 63,
+      "toCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "90226cb5eedf3cd1bc0b095b43f8d7435f30ff3d78ab99641a48631f0c039fa9"
+      },
+      "segmentId": "pt-segment-13eb63a7d07be123eae2",
+      "sequence": 64,
+      "toCheckpointId": "pt-room-094573d2142793d7ea4d",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-094573d2142793d7ea4d",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "230c671cad8d55edd2f07bf3de4258097f8761436b0d67a66b3daa502e3401a0"
+      },
+      "segmentId": "pt-segment-6ee5feaa00884537a0ad",
+      "sequence": 65,
+      "toCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-ec0ab684497be36b2b03",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -231.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "bd4fce4bcaa4c2597f0f670dbeff4ca2597306a94d70107f2e62708025928704"
+      },
+      "segmentId": "pt-segment-701279d3cbbec3b51041",
+      "sequence": 66,
+      "toCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-00fb51af2b64bba68592",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 51.56064390598705,
+        "waypointCount": 2,
+        "waypointDigestSha256": "12c195d5b51fa5af4f1ced98a6ce8264cb0a9ba8f0ef4d3d9256ea041af4a115"
+      },
+      "segmentId": "pt-segment-58607e2a81a991293912",
+      "sequence": 67,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-380339043b6094fa"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 3.5355339059327378,
+        "waypointCount": 2,
+        "waypointDigestSha256": "41f7857b0998e7bf10ab19abfc5f210bc4db8eeaeb27de8d6c460f2b1e237d9d"
+      },
+      "segmentId": "pt-segment-594dc99cc51308ec681e",
+      "sequence": 68,
+      "toCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "01417f550537efa2dc200213b4aec409c75a2d92bebd1b8525a23b2e596e0fe3"
+      },
+      "segmentId": "pt-segment-6274d02151926b2491cf",
+      "sequence": 69,
+      "toCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "ef510a80e05e5f85b37e8920c9aa79988db87dfb7723492435487e1d04c6fb5a"
+      },
+      "segmentId": "pt-segment-fedf9fc39457417a0f17",
+      "sequence": 70,
+      "toCheckpointId": "pt-room-a4d6e14310c58d94c6e2",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-a4d6e14310c58d94c6e2",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "c7dd888ec4b818f38bc76c008007e3d6ea36268d4a0bff64fa0a0dae079332fd"
+      },
+      "segmentId": "pt-segment-11ff237d8e39e95f9601",
+      "sequence": 71,
+      "toCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-4d183f2a18ce13a23457",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -177.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "5d7d117e4eefca8d319d1fa664fd0c8151344643c06740ed79764a8b77de9269"
+      },
+      "segmentId": "pt-segment-82e9d06a0e3aaf154a9f",
+      "sequence": 72,
+      "toCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-13aa8edba73ccd40ada3",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 3.5355339059327378,
+        "waypointCount": 2,
+        "waypointDigestSha256": "1358d4975ccdd6ecf362f1557cd4b956ba7f2e39fa367bbe35c141d114cc19aa"
+      },
+      "segmentId": "pt-segment-8430591d1e97dcbde24c",
+      "sequence": 73,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-380339043b6094fa"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 11.76860229593982,
+        "waypointCount": 2,
+        "waypointDigestSha256": "daa4fd048e30d5ab52935f23f8b6aada581420333e0229e89176e0c316c467e4"
+      },
+      "segmentId": "pt-segment-263d26515b53fbd92d98",
+      "sequence": 74,
+      "toCheckpointId": "pt-corridor-door-06c4de0f7ce68202543d",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-06c4de0f7ce68202543d",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "8893553c1432baeb190b86d470e041c0e2356ea37bcf3024c6da05feb7ff11f7"
+      },
+      "segmentId": "pt-segment-a7f9092c388135bafdd0",
+      "sequence": 75,
+      "toCheckpointId": "pt-threshold-94dec9a9e5de3e241f42",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-94dec9a9e5de3e241f42",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -191.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "c51cb9bb88009be4a88e1b8ca9d0d39a42f979f80f75448b7d170b32d3351300"
+      },
+      "segmentId": "pt-segment-135dd97147f43c62b709",
+      "sequence": 76,
+      "toCheckpointId": "pt-room-cbb2d3d792956cce6bd6",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.75,
+          "y": 87,
+          "z": -207.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 87,
+          "z": -207.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-cbb2d3d792956cce6bd6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.75,
+          "y": 87,
+          "z": -207.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16.00195300580526,
+        "waypointCount": 2,
+        "waypointDigestSha256": "e08d3068a323c3e3e5059fffd06e131f5cf93243cc0c67409ee499996b14f485"
+      },
+      "segmentId": "pt-segment-f140f616807cfb10bf06",
+      "sequence": 77,
+      "toCheckpointId": "pt-threshold-2eb7c645b7299218bbc9",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.75,
+          "y": 87,
+          "z": -213.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.75,
+          "y": 87,
+          "z": -213.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-2eb7c645b7299218bbc9",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.75,
+          "y": 87,
+          "z": -213.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "e5598b3f771a827b1e558e625bbcc628c1f137a4725da63f919b5627ec69cfba"
+      },
+      "segmentId": "pt-segment-4447f7d5cbd4979180f0",
+      "sequence": 78,
+      "toCheckpointId": "pt-threshold-29e7c6b7384d15dee849",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-29e7c6b7384d15dee849",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 21.001488042517366,
+        "waypointCount": 2,
+        "waypointDigestSha256": "98206f11389ae804ec258b3476f0feef7a9575af82f421d38efa8de358e7c015"
+      },
+      "segmentId": "pt-segment-a450064715e7d8a44056",
+      "sequence": 79,
+      "toCheckpointId": "pt-room-ed9971f3ebbc40058e8e",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-ed9971f3ebbc40058e8e",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "d75949f70090a892d00088d489acbb868e56befd26a5213aa89e60d81bc73e89"
+      },
+      "segmentId": "pt-segment-a07c61a6689f7b576fae",
+      "sequence": 80,
+      "toCheckpointId": "pt-threshold-0a658967c1cf5228e0c6",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-0a658967c1cf5228e0c6",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -234.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "db98cdb8545b0140d90f5f6947c792a6b86cc047ebdf4ba8a98e4c4c54822cc5"
+      },
+      "segmentId": "pt-segment-c74fd889684196e861f8",
+      "sequence": 81,
+      "toCheckpointId": "pt-corridor-door-ff6f32ebad46f7f236f1",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-ff6f32ebad46f7f236f1",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 54.55730931781735,
+        "waypointCount": 2,
+        "waypointDigestSha256": "8a306497c4b36c84fef7916de2c72d0507ffd24979579e03796760a228922706"
+      },
+      "segmentId": "pt-segment-61adbdc7271b635bb2a5",
+      "sequence": 82,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-380339043b6094fa"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 54.057839394485605,
+        "waypointCount": 2,
+        "waypointDigestSha256": "1e9b7cf8a336d03b94c3c6918284642c28b15e374dbd5d90d125d449a3236698"
+      },
+      "segmentId": "pt-segment-e1615df3f35bb0f1daae",
+      "sequence": 83,
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "e0e282bc9c0d9cdf1e4dd83b9810a7b8d1a17fbd98075936a1551894d4e6501d"
+      },
+      "segmentId": "pt-segment-9e19a342f5d113a6796f",
+      "sequence": 84,
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -126
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -126
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -126
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "f7f8017301b8ca4789920f2041c239366f44ff8e27037a29f19740e356b78932"
+      },
+      "segmentId": "pt-segment-9a754ff064720eff861a",
+      "sequence": 85,
+      "toCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "84443d26ce12a53413b3d19630f453955022c57ac272865fe5266483e83fe4b2"
+      },
+      "segmentId": "pt-segment-8b647289dc67af6357b2",
+      "sequence": 86,
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "5396d25e0e0568ec2b92b77a63a7f6a82ce835f20aea4d4b8d1dd250823fa1e5"
+      },
+      "segmentId": "pt-segment-1c56d903e04bf20b4f9c",
+      "sequence": 87,
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 54.057839394485605,
+        "waypointCount": 2,
+        "waypointDigestSha256": "9b5bea9e7e94218133d6d278cff548ff29b2521196a7d3b32cf57983fbabbeb4"
+      },
+      "segmentId": "pt-segment-492724459be10221136c",
+      "sequence": 88,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-380339043b6094fa"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 28.60943900183993,
+        "waypointCount": 2,
+        "waypointDigestSha256": "0266144ca7c753f65f628eb0aeee2b3364af07c4810acf66385dd5fe12efbf8c"
+      },
+      "segmentId": "pt-segment-e6374d86de9b591d550a",
+      "sequence": 89,
+      "toCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "61a2ea18e17f6871a63ed6f22e5914ce60379a1a011c0383cf32b49988186477"
+      },
+      "segmentId": "pt-segment-116c9d55785e6c75b942",
+      "sequence": 90,
+      "toCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 344.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "db2de4d79fe30d3e453cd2d536782cd26d9676be2d287b2203c7a5f12bfbcc94"
+      },
+      "segmentId": "pt-segment-b2d291a96e2231f80eba",
+      "sequence": 91,
+      "toCheckpointId": "pt-room-4174a3773febf6902d1c",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-4174a3773febf6902d1c",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 328.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "ee90344efce767f3eaec3618f09cc38ed159c19454858a2c11d2197b863b0ee5"
+      },
+      "segmentId": "pt-segment-ee24f2bad08bc6621025",
+      "sequence": 92,
+      "toCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-d5e0e210906425ebd5f2",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 322.5,
+          "y": 87,
+          "z": -151.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "3f8aa1598a8c41a87fa47ea8bc4505dc58c13091032276d7ed2e19d0b49d1e00"
+      },
+      "segmentId": "pt-segment-fbb1698779fa8d9ab729",
+      "sequence": 93,
+      "toCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-3f5a60f3b43d6f6eca7d",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 320,
+          "y": 87,
+          "z": -180
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 28.60943900183993,
+        "waypointCount": 2,
+        "waypointDigestSha256": "8f275bee0aa60c8f0484620bb41f3ef11ca5bf98e88b6b0dcc86e74836d121e2"
+      },
+      "segmentId": "pt-segment-a4d20fbe6b3f64260b2f",
+      "sequence": 94,
+      "toCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "traversal": "corridor",
+      "viewportEvidenceId": "evidence-viewport-380339043b6094fa"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 317.5,
+          "y": 87,
+          "z": -126
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 54.057839394485605,
+        "waypointCount": 2,
+        "waypointDigestSha256": "8af8442027bfbed51dc688202aa9af4cc6e9e4053fd66b6d04bc63735c6e03a0"
+      },
+      "segmentId": "pt-segment-2a87f77ef017490a4e72",
+      "sequence": 95,
+      "toCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "traversal": "corridor"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-corridor-door-5f0e3119b05998c0aceb",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 311.5,
+          "y": 87,
+          "z": -126
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "da7437818b1eeca8259dd290dbf84bb451072f61508fc45f82abe442f24a4087"
+      },
+      "segmentId": "pt-segment-98f586e6bd0c5e6b6e5c",
+      "sequence": 96,
+      "toCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -126
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -126
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-41823333384441ed77a5",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.5,
+          "y": 87,
+          "z": -126
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 16,
+        "waypointCount": 2,
+        "waypointDigestSha256": "60906f8824e9957d888b2857c42dc27b227580fb0053e2b657ba05dffd6a9142"
+      },
+      "segmentId": "pt-segment-afa1ecf682b4b14f0eca",
+      "sequence": 97,
+      "toCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.25,
+          "y": 87,
+          "z": -147.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.25,
+          "y": 87,
+          "z": -147.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-room-30b9d34214d4c33af87b",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.25,
+          "y": 87,
+          "z": -147.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 21.50145343924452,
+        "waypointCount": 2,
+        "waypointDigestSha256": "edf63cd469643f764f8c6318fdfc69d9d56b880bd8205c655073df753fc1da36"
+      },
+      "segmentId": "pt-segment-139ba7dc24dc32a8d6b7",
+      "sequence": 98,
+      "toCheckpointId": "pt-threshold-05a5934ced18112765f5",
+      "traversal": "door"
+    },
+    {
+      "arrival": {
+        "horizontalError": 0,
+        "observedPosition": {
+          "x": 295.25,
+          "y": 87,
+          "z": -153.5
+        },
+        "status": "reached",
+        "targetPosition": {
+          "x": 295.25,
+          "y": 87,
+          "z": -153.5
+        },
+        "verticalError": 0
+      },
+      "character": {
+        "alive": true,
+        "expectedLevel": 1,
+        "fallDetected": false,
+        "health": 100,
+        "humanoidState": "running",
+        "maximumHealth": 100,
+        "observed": true,
+        "observedLevel": 1
+      },
+      "clearance": {
+        "bodyClear": true,
+        "headClear": true,
+        "managedBlockerIds": [],
+        "observed": true,
+        "supportEntityId": "floor-upper",
+        "supported": true,
+        "unmanagedBlockerCount": 0
+      },
+      "failureCodes": [],
+      "fromCheckpointId": "pt-threshold-05a5934ced18112765f5",
+      "navigation": {
+        "acknowledgmentCertain": true,
+        "finalPosition": {
+          "x": 295.25,
+          "y": 87,
+          "z": -153.5
+        },
+        "finalVelocityMagnitude": 0,
+        "horizontalError": 0,
+        "independentlyReached": true,
+        "requestedOnce": true,
+        "verticalError": 0
+      },
+      "path": {
+        "jumpWaypointCount": 0,
+        "status": "success",
+        "totalPathDistance": 6,
+        "waypointCount": 2,
+        "waypointDigestSha256": "15fe79f7036225e5d70a071d98446bcf86b869b74bc85bf321b0279c7d2df906"
+      },
+      "segmentId": "pt-segment-3ccc1170b275e1a7dbd9",
+      "sequence": 99,
+      "toCheckpointId": "pt-threshold-5a5308ba1b5044d22926",
+      "traversal": "door",
+      "viewportEvidenceId": "evidence-viewport-c8648a43b4512c63"
+    }
+  ],
+  "setup": {
+    "attempted": true,
+    "excludedFromScoring": true,
+    "failureCode": "none",
+    "requestedPosition": {
+      "x": 344.75,
+      "y": 67,
+      "z": -259.75
+    },
+    "succeeded": true,
+    "verifiedPosition": {
+      "x": 344.75,
+      "y": 67,
+      "z": -259.75
+    }
+  },
+  "source": {
+    "architecturePlanSha256": "91a51142e062074da55ee8431184389820c826af588995b13c4b874ff133ad84",
+    "manifestRootNodeId": "world-cliffwatch",
+    "manifestSourceWorldSpecSha256": "cc8a24bd1220a301851c7e66fa5f6ecf5c2c03fdde6e854f0bf0da7a5ad07ebe",
+    "playtestPlanSha256": "4f441eb9359b17d6fb7fd0c041fcd10cfa5acac904b7faeaf67fe9aad3dbd21c",
+    "projectId": "project-cliffwatch-mansion",
+    "robloxManifestSha256": "e2d317df935c1c192a7a2d18a46233c1e1b3ae17d9c115927563c8c05511ea9f"
+  },
+  "start": {
+    "acknowledgmentCertain": true,
+    "characterReady": true,
+    "failureCode": "none",
+    "identityProbePassed": true,
+    "observedPlayRunning": true,
+    "requested": true
+  },
+  "stop": {
+    "acknowledgmentCertain": true,
+    "failureCode": "none",
+    "identityVerifiedBeforeSecondStop": false,
+    "observedEditRestored": true,
+    "requested": true
+  },
+  "summary": {
+    "allRequiredCoverageReached": true,
+    "arrivalFailures": 0,
+    "characterSurvived": true,
+    "clearanceFailures": 0,
+    "consoleErrors": 1,
+    "consoleWarnings": 0,
+    "editIntegrityPassed": true,
+    "pathFailures": 0,
+    "segmentsAttempted": 100,
+    "segmentsPlanned": 100,
+    "segmentsReached": 100,
+    "status": "completed"
+  },
+  "viewportEvidence": [
+    {
+      "byteLength": 1052,
+      "checkpointId": "pt-hall-2577b130ad62c393d982",
+      "evidenceId": "evidence-viewport-04f355eb3a5017e4",
+      "mediaType": "image/jpeg",
+      "sha256": "a02627f913f74c142c5f70a5433ee1336ca730d30cd26f69dcf7b75496a9d775"
+    },
+    {
+      "byteLength": 1052,
+      "checkpointId": "pt-hall-1b39ca3e3ca81d33f9e9",
+      "evidenceId": "evidence-viewport-234b74526b6d34df",
+      "mediaType": "image/jpeg",
+      "sha256": "40282801cfbb41689c94f7af4383044cb8b33d23e4ae95a5716369bcaab0ef25"
+    },
+    {
+      "byteLength": 1056,
+      "checkpointId": "pt-corridor-6b3a51ffbaae625e6fd4",
+      "evidenceId": "evidence-viewport-380339043b6094fa",
+      "mediaType": "image/jpeg",
+      "sha256": "538ee2f2182b691218c2f1eb4d06225dfdff2b6a8e5166129f47164636f9bfd7"
+    },
+    {
+      "byteLength": 1052,
+      "checkpointId": "pt-room-00e3d8bbdc6cbddc8c69",
+      "evidenceId": "evidence-viewport-4596163d98877ddb",
+      "mediaType": "image/jpeg",
+      "sha256": "20dc7b6b371528530eb9cac8deef84a217fb9f0ccba3a309962689c105b8cca6"
+    },
+    {
+      "byteLength": 1056,
+      "checkpointId": "pt-exterior-30166f89e55490bce030",
+      "evidenceId": "evidence-viewport-5553858e4d933952",
+      "mediaType": "image/jpeg",
+      "sha256": "c0bb28a7c244cbf5919afe5fc196e638d2a9afc1f596c2eafcd03bbb09bfc984"
+    },
+    {
+      "byteLength": 1057,
+      "checkpointId": "pt-threshold-5a5308ba1b5044d22926",
+      "evidenceId": "evidence-viewport-c8648a43b4512c63",
+      "mediaType": "image/jpeg",
+      "sha256": "ad0ef884f4e303ffdbcddf312b9660c6b0e25416621db57e7fb9cf4a8328d5ed"
+    },
+    {
+      "byteLength": 1056,
+      "checkpointId": "pt-corridor-bb9892f0eb69d2e3f8c6",
+      "evidenceId": "evidence-viewport-f380388760d54b81",
+      "mediaType": "image/jpeg",
+      "sha256": "2e8069d342b5c1692b0699b2ae5af21d8be98588a2aa861d5bb66dd0978190ad"
+    }
+  ]
+}

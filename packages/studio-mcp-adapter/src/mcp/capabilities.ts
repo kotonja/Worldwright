@@ -24,7 +24,14 @@ export const OPTIONAL_STUDIO_MCP_TOOLS = [
 
 export type RequiredStudioMcpToolName = (typeof REQUIRED_STUDIO_MCP_TOOLS)[number];
 export type OptionalStudioMcpToolName = (typeof OPTIONAL_STUDIO_MCP_TOOLS)[number];
-export type AllowedStudioMcpToolName = RequiredStudioMcpToolName | OptionalStudioMcpToolName;
+export type PlaytestStudioMcpToolName =
+  | 'start_stop_play'
+  | 'get_console_output'
+  | 'character_navigation';
+export type AllowedStudioMcpToolName =
+  | RequiredStudioMcpToolName
+  | OptionalStudioMcpToolName
+  | PlaytestStudioMcpToolName;
 export type ExecuteLuauSourceField = 'code' | 'source';
 
 export interface StudioMcpCapabilities {

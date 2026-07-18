@@ -42,12 +42,31 @@ export const STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES = [
 
 export type StudioBridgeV01DiagnosticCode = (typeof STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES)[number];
 
-/** Host diagnostics include additive protocols without widening Bridge 0.1 wire schemas. */
-export const STUDIO_DIAGNOSTIC_CODES = [
+/** Frozen diagnostic set serialized by the published additive Milestone 4 protocols. */
+export const STUDIO_PROTOCOL_V0_1_DIAGNOSTIC_CODES = [
   ...STUDIO_BRIDGE_V0_1_DIAGNOSTIC_CODES,
   'studio.sandbox_lease_conflict',
   'studio.sandbox_lease_invalid',
   'studio.sandbox_identity_mismatch',
+] as const;
+
+export type StudioProtocolV01DiagnosticCode =
+  (typeof STUDIO_PROTOCOL_V0_1_DIAGNOSTIC_CODES)[number];
+
+/** Host diagnostics include additive behavior without widening published wire schemas. */
+export const STUDIO_DIAGNOSTIC_CODES = [
+  ...STUDIO_PROTOCOL_V0_1_DIAGNOSTIC_CODES,
+  'studio.playtest_capability_unavailable',
+  'studio.playtest_identity_mismatch',
+  'studio.playtest_character_unavailable',
+  'studio.playtest_path_failed',
+  'studio.playtest_clearance_failed',
+  'studio.playtest_state_invalid',
+  'studio.playtest_start_uncertain',
+  'studio.playtest_navigation_uncertain',
+  'studio.playtest_stop_uncertain',
+  'studio.playtest_console_incomplete',
+  'studio.playtest_probe_invalid',
 ] as const;
 
 export type StudioDiagnosticCode = (typeof STUDIO_DIAGNOSTIC_CODES)[number];

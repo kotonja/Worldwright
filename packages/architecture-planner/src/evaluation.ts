@@ -437,6 +437,7 @@ export function evaluateSolvedLayout(
       if (profile.stair !== undefined && layout.stairSide !== undefined) {
         const coreLengthCells = profile.stair.directive.coreLength / gridSize;
         const coreWidthCells = profile.stair.directive.coreWidth / gridSize;
+        const accessLaneCells = profile.building.defaultDoorWidth / gridSize;
         const rearAtNegative = profile.building.entranceEnd === 'positive';
         const expectedCore: ArchitectureGridRectangle =
           layout.corridorAxis === 'x'
@@ -446,16 +447,22 @@ export function evaluateSolvedLayout(
                   : expectedCorridor.x + expectedCorridor.width - coreLengthCells,
                 z:
                   layout.stairSide === 'negative'
-                    ? expectedCorridor.z - interiorWallCells - coreWidthCells
-                    : expectedCorridor.z + expectedCorridor.depth + interiorWallCells,
+                    ? expectedCorridor.z - interiorWallCells - accessLaneCells - coreWidthCells
+                    : expectedCorridor.z +
+                      expectedCorridor.depth +
+                      interiorWallCells +
+                      accessLaneCells,
                 width: coreLengthCells,
                 depth: coreWidthCells,
               }
             : {
                 x:
                   layout.stairSide === 'negative'
-                    ? expectedCorridor.x - interiorWallCells - coreWidthCells
-                    : expectedCorridor.x + expectedCorridor.width + interiorWallCells,
+                    ? expectedCorridor.x - interiorWallCells - accessLaneCells - coreWidthCells
+                    : expectedCorridor.x +
+                      expectedCorridor.width +
+                      interiorWallCells +
+                      accessLaneCells,
                 z: rearAtNegative
                   ? expectedCorridor.z
                   : expectedCorridor.z + expectedCorridor.depth - coreLengthCells,
@@ -467,7 +474,7 @@ export function evaluateSolvedLayout(
             architectureDiagnostic(
               'architecture.stair_infeasible',
               '/floors',
-              'The stair core must occupy the configured aligned rear rectangle and touch the corridor.',
+              'The stair core must occupy the configured aligned rear rectangle behind its corridor access lane.',
               floor.floorId,
             ),
           );

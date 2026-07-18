@@ -52,6 +52,37 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(@types/node@22.15.30)(tsx@4.20.3)
 
+  packages/playtest-critic:
+    dependencies:
+      '@sinclair/typebox':
+        specifier: 0.34.38
+        version: 0.34.38
+      '@worldwright/architecture-planner':
+        specifier: workspace:*
+        version: link:../architecture-planner
+      '@worldwright/roblox-compiler':
+        specifier: workspace:*
+        version: link:../roblox-compiler
+      ajv:
+        specifier: 8.17.1
+        version: 8.17.1
+    devDependencies:
+      '@types/node':
+        specifier: 22.15.30
+        version: 22.15.30
+      '@worldwright/worldspec':
+        specifier: workspace:*
+        version: link:../worldspec
+      prettier:
+        specifier: 3.6.2
+        version: 3.6.2
+      tsx:
+        specifier: 4.20.3
+        version: 4.20.3
+      vitest:
+        specifier: 3.2.4
+        version: 3.2.4(@types/node@22.15.30)(tsx@4.20.3)
+
   packages/roblox-compiler:
     dependencies:
       '@sinclair/typebox':
@@ -82,6 +113,9 @@ importers:
       '@sinclair/typebox':
         specifier: 0.34.38
         version: 0.34.38
+      '@worldwright/playtest-critic':
+        specifier: workspace:*
+        version: link:../playtest-critic
       '@worldwright/roblox-compiler':
         specifier: workspace:*
         version: link:../roblox-compiler

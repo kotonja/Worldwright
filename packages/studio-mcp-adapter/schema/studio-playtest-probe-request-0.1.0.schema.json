@@ -1,0 +1,770 @@
+{
+  "$id": "urn:worldwright:studio-playtest-probe-request:0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "identity": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "rootNodeId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "manifestSourceWorldSpecSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "expectedManagedNodeCount": {
+              "minimum": 1,
+              "maximum": 2048,
+              "type": "integer"
+            },
+            "sandboxLease": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "schemaVersion": {
+                  "const": "0.1.0",
+                  "type": "string"
+                },
+                "leaseId": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "projectId": {
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "changeSetHash": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schemaVersion",
+                "leaseId",
+                "projectId",
+                "changeSetHash"
+              ]
+            },
+            "playtestPlanSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "projectId",
+            "rootNodeId",
+            "manifestSourceWorldSpecSha256",
+            "expectedManagedNodeCount",
+            "sandboxLease",
+            "playtestPlanSha256"
+          ]
+        },
+        "action": {
+          "const": "identity_probe",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "identity",
+        "action"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "identity": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "rootNodeId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "manifestSourceWorldSpecSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "expectedManagedNodeCount": {
+              "minimum": 1,
+              "maximum": 2048,
+              "type": "integer"
+            },
+            "sandboxLease": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "schemaVersion": {
+                  "const": "0.1.0",
+                  "type": "string"
+                },
+                "leaseId": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "projectId": {
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "changeSetHash": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schemaVersion",
+                "leaseId",
+                "projectId",
+                "changeSetHash"
+              ]
+            },
+            "playtestPlanSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "projectId",
+            "rootNodeId",
+            "manifestSourceWorldSpecSha256",
+            "expectedManagedNodeCount",
+            "sandboxLease",
+            "playtestPlanSha256"
+          ]
+        },
+        "action": {
+          "const": "character_setup",
+          "type": "string"
+        },
+        "setupPosition": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "y": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "z": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "identity",
+        "action",
+        "setupPosition"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "identity": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "rootNodeId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "manifestSourceWorldSpecSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "expectedManagedNodeCount": {
+              "minimum": 1,
+              "maximum": 2048,
+              "type": "integer"
+            },
+            "sandboxLease": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "schemaVersion": {
+                  "const": "0.1.0",
+                  "type": "string"
+                },
+                "leaseId": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "projectId": {
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "changeSetHash": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schemaVersion",
+                "leaseId",
+                "projectId",
+                "changeSetHash"
+              ]
+            },
+            "playtestPlanSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "projectId",
+            "rootNodeId",
+            "manifestSourceWorldSpecSha256",
+            "expectedManagedNodeCount",
+            "sandboxLease",
+            "playtestPlanSha256"
+          ]
+        },
+        "action": {
+          "const": "player_state",
+          "type": "string"
+        },
+        "floors": {
+          "minItems": 1,
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "floorId": {
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "level": {
+                "minimum": -128,
+                "maximum": 128,
+                "type": "integer"
+              },
+              "finishedFloorElevation": {
+                "minimum": -1000000,
+                "maximum": 1000000,
+                "type": "number"
+              }
+            },
+            "required": [
+              "floorId",
+              "level",
+              "finishedFloorElevation"
+            ]
+          }
+        },
+        "agent": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "radius": {
+              "const": 2,
+              "type": "number"
+            },
+            "height": {
+              "const": 5,
+              "type": "number"
+            },
+            "canJump": {
+              "const": false,
+              "type": "boolean"
+            },
+            "canClimb": {
+              "const": false,
+              "type": "boolean"
+            },
+            "waypointSpacing": {
+              "const": 4,
+              "type": "number"
+            },
+            "arrivalHorizontalTolerance": {
+              "const": 4,
+              "type": "number"
+            },
+            "arrivalVerticalTolerance": {
+              "const": 5,
+              "type": "number"
+            },
+            "maximumHorizontalSpeed": {
+              "const": 32,
+              "type": "number"
+            },
+            "maximumFallBelowFloor": {
+              "const": 12,
+              "type": "number"
+            },
+            "rootHeightAboveFinishedFloor": {
+              "const": 3,
+              "type": "number"
+            }
+          },
+          "required": [
+            "radius",
+            "height",
+            "canJump",
+            "canClimb",
+            "waypointSpacing",
+            "arrivalHorizontalTolerance",
+            "arrivalVerticalTolerance",
+            "maximumHorizontalSpeed",
+            "maximumFallBelowFloor",
+            "rootHeightAboveFinishedFloor"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "identity",
+        "action",
+        "floors",
+        "agent"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "identity": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "rootNodeId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "manifestSourceWorldSpecSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "expectedManagedNodeCount": {
+              "minimum": 1,
+              "maximum": 2048,
+              "type": "integer"
+            },
+            "sandboxLease": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "schemaVersion": {
+                  "const": "0.1.0",
+                  "type": "string"
+                },
+                "leaseId": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "projectId": {
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "changeSetHash": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schemaVersion",
+                "leaseId",
+                "projectId",
+                "changeSetHash"
+              ]
+            },
+            "playtestPlanSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "projectId",
+            "rootNodeId",
+            "manifestSourceWorldSpecSha256",
+            "expectedManagedNodeCount",
+            "sandboxLease",
+            "playtestPlanSha256"
+          ]
+        },
+        "action": {
+          "const": "path_probe",
+          "type": "string"
+        },
+        "fromCheckpointId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "targetCheckpointId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "fromWorldPosition": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "y": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "z": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        "targetWorldPosition": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "x": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "y": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            "z": {
+              "minimum": -1000000,
+              "maximum": 1000000,
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        "agent": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "radius": {
+              "const": 2,
+              "type": "number"
+            },
+            "height": {
+              "const": 5,
+              "type": "number"
+            },
+            "canJump": {
+              "const": false,
+              "type": "boolean"
+            },
+            "canClimb": {
+              "const": false,
+              "type": "boolean"
+            },
+            "waypointSpacing": {
+              "const": 4,
+              "type": "number"
+            },
+            "arrivalHorizontalTolerance": {
+              "const": 4,
+              "type": "number"
+            },
+            "arrivalVerticalTolerance": {
+              "const": 5,
+              "type": "number"
+            },
+            "maximumHorizontalSpeed": {
+              "const": 32,
+              "type": "number"
+            },
+            "maximumFallBelowFloor": {
+              "const": 12,
+              "type": "number"
+            },
+            "rootHeightAboveFinishedFloor": {
+              "const": 3,
+              "type": "number"
+            }
+          },
+          "required": [
+            "radius",
+            "height",
+            "canJump",
+            "canClimb",
+            "waypointSpacing",
+            "arrivalHorizontalTolerance",
+            "arrivalVerticalTolerance",
+            "maximumHorizontalSpeed",
+            "maximumFallBelowFloor",
+            "rootHeightAboveFinishedFloor"
+          ]
+        },
+        "maximumRetainedWaypoints": {
+          "minimum": 1,
+          "maximum": 128,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "identity",
+        "action",
+        "fromCheckpointId",
+        "targetCheckpointId",
+        "fromWorldPosition",
+        "targetWorldPosition",
+        "agent",
+        "maximumRetainedWaypoints"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "0.1.0",
+          "type": "string"
+        },
+        "identity": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "rootNodeId": {
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "manifestSourceWorldSpecSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "expectedManagedNodeCount": {
+              "minimum": 1,
+              "maximum": 2048,
+              "type": "integer"
+            },
+            "sandboxLease": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "schemaVersion": {
+                  "const": "0.1.0",
+                  "type": "string"
+                },
+                "leaseId": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "projectId": {
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "changeSetHash": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schemaVersion",
+                "leaseId",
+                "projectId",
+                "changeSetHash"
+              ]
+            },
+            "playtestPlanSha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "projectId",
+            "rootNodeId",
+            "manifestSourceWorldSpecSha256",
+            "expectedManagedNodeCount",
+            "sandboxLease",
+            "playtestPlanSha256"
+          ]
+        },
+        "action": {
+          "const": "clearance_probe",
+          "type": "string"
+        },
+        "checkpointId": {
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "expectedFinishedFloorElevation": {
+          "minimum": -1000000,
+          "maximum": 1000000,
+          "type": "number"
+        },
+        "agent": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "radius": {
+              "const": 2,
+              "type": "number"
+            },
+            "height": {
+              "const": 5,
+              "type": "number"
+            },
+            "canJump": {
+              "const": false,
+              "type": "boolean"
+            },
+            "canClimb": {
+              "const": false,
+              "type": "boolean"
+            },
+            "waypointSpacing": {
+              "const": 4,
+              "type": "number"
+            },
+            "arrivalHorizontalTolerance": {
+              "const": 4,
+              "type": "number"
+            },
+            "arrivalVerticalTolerance": {
+              "const": 5,
+              "type": "number"
+            },
+            "maximumHorizontalSpeed": {
+              "const": 32,
+              "type": "number"
+            },
+            "maximumFallBelowFloor": {
+              "const": 12,
+              "type": "number"
+            },
+            "rootHeightAboveFinishedFloor": {
+              "const": 3,
+              "type": "number"
+            }
+          },
+          "required": [
+            "radius",
+            "height",
+            "canJump",
+            "canClimb",
+            "waypointSpacing",
+            "arrivalHorizontalTolerance",
+            "arrivalVerticalTolerance",
+            "maximumHorizontalSpeed",
+            "maximumFallBelowFloor",
+            "rootHeightAboveFinishedFloor"
+          ]
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "identity",
+        "action",
+        "checkpointId",
+        "expectedFinishedFloorElevation",
+        "agent"
+      ]
+    }
+  ]
+}

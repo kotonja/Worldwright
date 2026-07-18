@@ -277,7 +277,9 @@ describe('slab rectangle subtraction and aligned straight stairs', () => {
       riserHeight: 1,
       clearWidth: 10,
     });
-    expect(runs[0]!.treadDepth).toBe(1.3);
+    expect(runs[0]!.treadDepth).toBe(1.1);
+    expect(runs[0]!.landing.lower.width).toBe(4);
+    expect(runs[0]!.landing.upper.width).toBe(4);
     expect(runs[0]!.landing.lower).not.toEqual(runs[0]!.landing.upper);
   });
 
